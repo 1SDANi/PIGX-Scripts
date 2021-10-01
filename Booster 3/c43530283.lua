@@ -1,0 +1,37 @@
+--勇気の砂時計
+--Hourglass of Courage
+local s,id=GetID()
+function s.initial_effect(c)
+	--Increase its ATK
+	local e1=Effect.CreateEffect(c)
+	e1:SetDescription(aux.Stringid(id,0))
+	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
+	e1:SetCategory(CATEGORY_ATKCHANGE)
+	e1:SetCode(EVENT_PHASE+PHASE_STANDBY)
+	e1:SetRange(LOCATION_MZONE)
+	e1:SetProperty(EFFECT_FLAG_NO_TURN_RESET)
+	e1:SetCountLimit(1)
+	e1:SetCondition(s.atkcon)
+	e1:SetOperation(s.atkop)
+	c:RegisterEffect(e1)
+end
+function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
+	return tp==Duel.GetTurnPlayer()
+end
+function s.atkop(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	local e1=Effect.CreateEffect(c)
+	e1:SetType(EFFECT_TYPE_SINGLE)
+	e1:SetCode(EFFECT_SET_ATTACK_FINAL)
+	e1:SetProperty(EFFECT_FLAG_COPY_INHERIT)
+	e1:SetReset(RESET_EVENT+RESETS_STANDARD_DISABLE)
+	e1:SetValue(c:GetAttack()*2)
+	c:RegisterEffect(e1)
+	local e2=Effect.CreateEffect(c)
+	e2:SetType(EFFECT_TYPE_SINGLE)
+	e2:SetCode(EFFECT_SET_DEFENSE_FINAL)
+	e2:SetProperty(EFFECT_FLAG_COPY_INHERIT)
+	e2:SetReset(RESET_EVENT+RESETS_STANDARD_DISABLE)
+	e2:SetValue(c:GetDefense()*2)
+	c:RegisterEffect(e2)
+end
