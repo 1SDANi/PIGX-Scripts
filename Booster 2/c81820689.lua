@@ -17,8 +17,7 @@ function s.cftg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.cfop(e,tp,eg,ep,ev,re,r,rp)
 	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
-	Duel.Hint(HINT_SELECTMSG,p,HINTMSG_CONFIRM)
-	local g=Duel.SelectMatchingCard(p,nil,p,0,LOCATION_HAND,1,1,nil)
+	local g=Duel.GetFieldGroup(1-p,0,LOCATION_HAND)
 	if #g>0 then
 		Duel.ConfirmCards(p,g)
 		Duel.ShuffleHand(1-p)
