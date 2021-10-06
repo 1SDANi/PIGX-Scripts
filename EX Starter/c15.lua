@@ -94,7 +94,7 @@ if not SealedDuel then
 				Duel.Hint(HINT_SELECTMSG,p,aux.Stringid(id,2))
 				local fg=Duel.GetFieldGroup(p,0xff,0)
 				local extra=Duel.GetFieldGroup(p,LOCATION_EXTRA,0)
-				local exclude=fg:Select(p,0,#fg-40-#extra,nil)
+				local exclude=fg:Select(p,0,#fg-30-#extra,nil)
 				if exclude then
 					Duel.SendtoDeck(exclude,nil,-2,REASON_RULE)
 				end
