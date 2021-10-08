@@ -1558,6 +1558,7 @@ function Card.IsEvenScale(c)
 	return c:GetScale() % 2 == 0
 end
 
+Duel.LoadScript("card_counter_constants.lua")
 Duel.LoadScript("cards_specific_functions.lua")
 Duel.LoadScript("proc_fusion.lua")
 Duel.LoadScript("proc_fusion_spell.lua")
