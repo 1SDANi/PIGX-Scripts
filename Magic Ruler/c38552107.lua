@@ -7,6 +7,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_EQUIP)
 	e1:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE)
 	e1:SetCode(EFFECT_CANNOT_BE_EFFECT_TARGET)
+	e1:SetValue(aux.tgoval)
 	c:RegisterEffect(e1)
 	--Atk up
 	local e2=Effect.CreateEffect(c)

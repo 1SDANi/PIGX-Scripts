@@ -1,10 +1,10 @@
---サイバーポッド
---Cyber Jar
+--カオスポッド
+--Chaos Jar
 local s,id=GetID()
 function s.initial_effect(c)
 	--flip
 	local e1=Effect.CreateEffect(c)
-	e1:SetCategory(CATEGORY_DESTROY+CATEGORY_SPECIAL_SUMMON)
+	e1:SetCategory(CATEGORY_TODECK+CATEGORY_SPECIAL_SUMMON+CATEGORY_TOHAND+CATEGORY_TOGRAVE)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_FLIP)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.operation)
@@ -14,16 +14,16 @@ function s.initial_effect(c)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	local g=Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_MZONE,LOCATION_MZONE,nil)
-	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,#g,0,0)
+	local g=Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_MZONE,LOCATION_MZONE,e:GetHandler())
+	Duel.SetOperationInfo(0,CATEGORY_TODECK,g,#g,0,0)
 end
 function s.spchk(c,e,tp)
 	return (c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP_ATTACK) 
 		or c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEDOWN_DEFENSE))
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_MZONE,LOCATION_MZONE,nil)
-	Duel.Destroy(g,REASON_EFFECT)
+	local g=Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_MZONE,LOCATION_MZONE,e:GetHandler())
+	Duel.SendtoDeck(g,nil,0,REASON_EFFECT)
 	Duel.BreakEffect()
 	local p=Duel.GetTurnPlayer()
 	local g1=Duel.GetDecktopGroup(p,5)
@@ -43,7 +43,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 			if tc:IsCanBeSpecialSummoned(e,0,p,false,false,POS_FACEDOWN_DEFENSE) then pos=pos+POS_FACEDOWN_DEFENSE end
 			if lv>0 and lv<=4 and pos~=0 then
 				Duel.SpecialSummonStep(tc,0,p,p,false,false,pos)
-			elseif tc:IsAbleToDeck() then
+			elseif tc:IsAbleToGrave() then
 				hg:AddCard(tc)
 			else gg:AddCard(tc) end
 		end
@@ -59,14 +59,14 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 			if tc:IsCanBeSpecialSummoned(e,0,1-p,false,false,POS_FACEDOWN_DEFENSE) then pos=pos+POS_FACEDOWN_DEFENSE end
 			if lv>0 and lv<=4 and pos~=0 then
 				Duel.SpecialSummonStep(tc,0,1-p,1-p,false,false,pos)
-			elseif tc:IsAbleToDeck() then
+			elseif tc:IsAbleToGrave() then
 				hg:AddCard(tc)
 			else gg:AddCard(tc) end
 		end
 	end
 	Duel.SpecialSummonComplete()
 	if #hg>0 then
-		Duel.SendtoDeck(hg,nil,0,REASON_EFFECT)
+		Duel.SendtoGrave(hg,nil,0,REASON_EFFECT)
 	end
 	if #gg>0 then
 		Duel.SendtoDeck(gg,REASON_EFFECT)
