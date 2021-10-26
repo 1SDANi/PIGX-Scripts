@@ -75,7 +75,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.repval(e,re,r,rp)
-	return r&REASON_BATTLE~=0
+	return r&REASON_BATTLE~=0 or r&REASON_EFFECT~=0
 end
 function s.damcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
