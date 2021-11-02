@@ -1,5 +1,5 @@
 --硫酸のたまった落とし穴
---Acid Trap Hole
+--Acid Pitfall
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate(summon)
@@ -18,12 +18,16 @@ function s.initial_effect(c)
 	e3:SetCode(EVENT_SPSUMMON_SUCCESS)
 	c:RegisterEffect(e3)
 end
+function s.filter(c,e,tp)
+	return c:GetReasonPlayer()==tp and c:IsFacedown() and c:IsOnField() and c:IsCanBeEffectTarget(e)
+end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if not eg then return false end
-	local tc=eg:GetFirst()
+	local sg=eg:Filter(s.filter,nil,e,1-tp)
+	local tc=sg:GetFirst()
 	if chkc then return chkc==tc end
-	if chk==0 then return ep~=tp and tc:IsFacedown() and tc:IsOnField() and tc:IsCanBeEffectTarget(e) end
-	Duel.SetTargetCard(eg)
+	if chk==0 then return #sg==1 end
+	Duel.SetTargetCard(tc)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,tc,1,0,0)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)

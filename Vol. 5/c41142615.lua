@@ -16,7 +16,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_HANDES,nil,0,PLAYER_ALL,1)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	local i=Duel.DiscardHand(tp,aux.TRUE,1,math.min(2,Duel.GetFieldGroup(tp,0,LOCATION_HAND)),REASON_EFFECT+REASON_DISCARD)
+	local i=Duel.DiscardHand(tp,aux.TRUE,1,math.min(2,Duel.GetFieldGroupCount(tp,0,LOCATION_HAND)),REASON_EFFECT+REASON_DISCARD)
 	if i>0 then
 		Duel.DiscardHand(1-tp,aux.TRUE,i,i,REASON_EFFECT+REASON_DISCARD)
 	end

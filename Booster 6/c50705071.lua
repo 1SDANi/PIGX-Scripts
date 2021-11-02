@@ -6,7 +6,7 @@ function s.initial_effect(c)
 	Fusion.AddProcMix(c,true,true,s.filter1,s.filter2)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 end
-s.listed_names={46411259}
+s.listed_names={CARD_METAMORPHOSIS}
 function s.filter1(c,fc,sumtype,tp)
 	return c:IsRace(RACE_FIEND,fc,sumtype,tp) and c:GetLevel()>=7
 end

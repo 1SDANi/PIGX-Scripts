@@ -14,9 +14,9 @@ function s.initial_effect(c)
 	e1:SetOperation(s.thop)
 	c:RegisterEffect(e1)
 end
-s.listed_names={CARD_POLYMERIZATION}
+s.listed_names={CARD_FUSION}
 function s.filter(c)
-	return c:IsCode(CARD_POLYMERIZATION) and c:IsAbleToHand()
+	return c:IsCode(CARD_FUSION) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.filter(chkc) end
