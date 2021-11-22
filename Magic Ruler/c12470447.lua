@@ -26,5 +26,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetProperty(EFFECT_FLAG_SET_AVAILABLE)
 	e1:SetCode(EFFECT_CANNOT_CHANGE_POSITION)
 	e1:SetTargetRange(LOCATION_MZONE,LOCATION_MZONE)
-	Duel.RegisterEffect(e1,tp)
+	for tc in aux.Next(g) do
+		tc:RegisterEffect(e1)
+	end
 end

@@ -1,11 +1,13 @@
---大王目玉
---Big Eye
+--リグラス・リーパー
+--Rigorous Reaver
 local s,id=GetID()
 function s.initial_effect(c)
-	--sort the top deck
+	--flip
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
+	e1:SetCategory(CATEGORY_HANDES)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_FLIP)
+	e1:SetTarget(s.target)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
 	--draw
@@ -20,11 +22,17 @@ function s.initial_effect(c)
 	e2:SetOperation(s.op)
 	c:RegisterEffect(e2)
 end
+function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return true end
+	Duel.SetOperationInfo(0,CATEGORY_HANDES,nil,0,PLAYER_ALL,1)
+end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
-	local ct=math.min(5,Duel.GetFieldGroupCount(tp,LOCATION_DECK,0))
-	if ct==0 then return end
-	local ac=ct==1 and ct or Duel.AnnounceNumberRange(tp,1,ct)
-	Duel.SortDecktop(tp,tp,ct)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DISCARD)
+	local g1=Duel.SelectMatchingCard(tp,aux.TRUE,tp,LOCATION_HAND,0,1,1,nil)
+	Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_DISCARD)
+	local g2=Duel.SelectMatchingCard(1-tp,aux.TRUE,1-tp,LOCATION_HAND,0,1,1,nil)
+	g1:Merge(g2)
+	Duel.SendtoGrave(g1,REASON_DISCARD+REASON_EFFECT)
 end
 function s.cond(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsLocation(LOCATION_GRAVE) and (r&REASON_EFFECT+REASON_BATTLE)~=0
