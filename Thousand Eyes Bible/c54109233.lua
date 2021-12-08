@@ -27,8 +27,10 @@ function s.initial_effect(c)
 	c:RegisterEffect(e4)
 	--Destroy
 	local e5=Effect.CreateEffect(c)
+	e5:SetDescription(aux.Stringid(id,0))
 	e5:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_SINGLE)
 	e5:SetCode(EVENT_LEAVE_FIELD)
+	e5:SetCondition(s.condition)
 	e5:SetOperation(s.activate)
 	c:RegisterEffect(e5)
 end
@@ -58,6 +60,9 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Destroy(e:GetHandler(),REASON_EFFECT)
+end
+function s.condition(e,tp,eg,ep,ev,re,r,rp)
+	return e:GetHandler():IsPreviousPosition(POS_FACEUP) and e:GetHandler():IsPreviousLocation(LOCATION_ONFIELD)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local e1=Effect.CreateEffect(e:GetHandler())

@@ -31,16 +31,19 @@ end
 --register effect of return to hand for Spirit monsters
 function Auxiliary.EnableSpiritReturn(c,event1,...)
 	local e1=Effect.CreateEffect(c)
-	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
-	e1:SetCode(event1)
-	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
-	e1:SetOperation(Auxiliary.SpiritReturnReg)
+	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
+	e1:SetDescription(1105)
+	e1:SetCategory(CATEGORY_TOHAND)
+	e1:SetCode(EVENT_PHASE+PHASE_END)
+	e1:SetRange(LOCATION_MZONE)
+	e1:SetCountLimit(1)
+	e1:SetCondition(Auxiliary.SpiritReturnCondition)
+	e1:SetTarget(Auxiliary.SpiritReturnTarget)
+	e1:SetOperation(Auxiliary.SpiritReturnOperation)
 	c:RegisterEffect(e1)
-	for i,event in ipairs{...} do
-		local e2=e1:Clone()
-		e2:SetCode(event)
-		c:RegisterEffect(e2)
-	end
+	local e2=e1:Clone()
+	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
+	c:RegisterEffect(e2)
 end
 function Auxiliary.SpiritReturnReg(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

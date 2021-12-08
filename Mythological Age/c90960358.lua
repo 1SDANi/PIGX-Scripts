@@ -1,5 +1,5 @@
---ブルーアイズ・トゥーン・ドラゴン
---Blue-Eyes Toon Dragon
+--トゥーン・ブラック・マジシャン・ガール
+--Toon Dark Magician Girl
 local s,id=GetID()
 function s.initial_effect(c)
 	--special summon
@@ -26,10 +26,22 @@ function s.initial_effect(c)
 	e2:SetTarget(s.target)
 	e2:SetOperation(s.operation)
 	c:RegisterEffect(e2)
+	--atkup
+	local e4=Effect.CreateEffect(c)
+	e4:SetType(EFFECT_TYPE_SINGLE)
+	e4:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
+	e4:SetCode(EFFECT_UPDATE_ATTACK)
+	e4:SetRange(LOCATION_MZONE)
+	e4:SetValue(s.val)
+	c:RegisterEffect(e4)
+end
+s.listed_series={0xa2}
+function s.val(e,c)
+	return Duel.GetMatchingGroupCount(Card.IsSetCard,c:GetControler(),LOCATION_GRAVE,0,nil,0xa2)*500
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.CheckReleaseGroupCost(tp,nil,2,false,nil,nil) end
-	local sg=Duel.SelectReleaseGroupCost(tp,nil,2,2,false,nil,nil)
+	if chk==0 then return Duel.CheckReleaseGroupCost(tp,nil,1,false,nil,nil) end
+	local sg=Duel.SelectReleaseGroupCost(tp,nil,1,1,false,nil,nil)
 	Duel.Release(sg,REASON_COST)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
