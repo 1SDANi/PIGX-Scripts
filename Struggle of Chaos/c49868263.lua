@@ -17,7 +17,7 @@ function s.initial_effect(c)
 end
 function s.efilter(e,re,rp)
 	return (re:GetHandler():IsType(TYPE_TRAP) or re:GetHandler():IsType(TYPE_SPELL)) and
-		re:GetControler()~=e:GetHandler():GetControler()
+		re:GetHandler():GetControler()~=e:GetHandler():GetControler()
 end
 function s.contactfil(tp)
 	return Duel.GetMatchingGroup(Card.IsAbleToGraveAsCost,tp,LOCATION_ONFIELD,0,nil)

@@ -24,7 +24,7 @@ function s.initial_effect(c)
 end
 function s.efilter(e,re,rp)
 	return (re:GetHandler():IsType(TYPE_SPELL) or re:GetHandler():IsType(TYPE_TRAP))
-		and re:GetControler()~=e:GetHandler():GetControler()
+		and re:GetHandler():GetControler()~=e:GetHandler():GetControler()
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return tp==Duel.GetTurnPlayer() and Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)>0

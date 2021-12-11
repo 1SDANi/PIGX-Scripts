@@ -21,8 +21,10 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	end
 	if opt==-1 then return end
 	Duel.SetTargetParam(opt)
-	local g=Duel.GetMatchingGroup(Card.IsFacedown,tp,0,LOCATION_MZONE,nil)
-	Duel.SetOperationInfo(0,CATEGORY_POSITION,g,#g,0,0)
+	if opt==2 or opt==0 then
+		local g=Duel.GetMatchingGroup(Card.IsFacedown,tp,0,LOCATION_MZONE,nil)
+		Duel.SetOperationInfo(0,CATEGORY_POSITION,g,#g,0,0)
+	end
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

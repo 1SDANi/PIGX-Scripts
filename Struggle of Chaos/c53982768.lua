@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.efilter(e,re,rp)
-	return re:GetHandler():IsType(TYPE_SPELL) and re:GetControler()~=e:GetHandler():GetControler()
+	return re:GetHandler():IsType(TYPE_SPELL) and re:GetHandler():GetControler()~=e:GetHandler():GetControler()
 end
 function s.actcon(e)
 	local ph=Duel.GetCurrentPhase()
