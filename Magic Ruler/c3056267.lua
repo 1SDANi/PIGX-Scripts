@@ -34,6 +34,6 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) and tc and tc:IsRelateToEffect(e) then
-		Duel.SwapControl(c,tc,PHASE_END,1)
+		Duel.SwapControl(c,tc)
 	end
 end

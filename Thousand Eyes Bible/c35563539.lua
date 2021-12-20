@@ -22,11 +22,9 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 		return ftg==nil or ftg(e,tp,eg,ep,ev,re,r,rp,chk)
 	end
 	local p=Duel.GetChainInfo(ev,CHAININFO_TARGET_PLAYER)
-	Debug.Message(p)
 	Duel.SetTargetPlayer(1-p)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
-	Debug.Message(p)
 	Duel.ChangeTargetPlayer(ev,p)
 end

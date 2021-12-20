@@ -77,8 +77,6 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		rg:Clear()
 		return
 	end
-	Debug.Message(gc2)
-	Debug.Message(ft2)
 	if gc2>0 and ft2>0 then
 		if #sg2>ft2 then
 			Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_SPSUMMON)

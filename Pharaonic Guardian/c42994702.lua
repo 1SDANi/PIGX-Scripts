@@ -21,7 +21,7 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) and c:IsFaceup() and Duel.ChangePosition(c,POS_FACEDOWN_DEFENSE) then
-		local fg=Duel.GetFieldGroup(tp,LOCATION_MZONE,0)
+		local fg=Duel.GetMatchingGroup(Card.IsFacedown,tp,LOCATION_MZONE,0,nil)
 		Duel.ShuffleSetCard(fg)
 	end
 end

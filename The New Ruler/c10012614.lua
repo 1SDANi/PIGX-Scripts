@@ -1,5 +1,5 @@
---連合軍
---Allied Force
+--勇気の旗印
+--Banner of Courage
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -13,16 +13,13 @@ function s.initial_effect(c)
 	e2:SetCode(EFFECT_UPDATE_ATTACK)
 	e2:SetRange(LOCATION_SZONE)
 	e2:SetTargetRange(LOCATION_MZONE,0)
-	e2:SetTarget(s.tg)
+	e2:SetTarget(aux.TRUE)
 	e2:SetValue(s.val)
 	c:RegisterEffect(e2)
 	local e3=e2:Clone()
 	e3:SetCode(EFFECT_UPDATE_DEFENSE)
 	c:RegisterEffect(e3)
 end
-function s.tg(e,c)
-	return c:IsRace(RACE_WARRIOR)
-end
 function s.val(e,c)
-	return Duel.GetMatchingGroupCount(aux.TRUE,c:GetControler(),LOCATION_MZONE,0,nil)*500
+	return Duel.GetMatchingGroupCount(aux.TRUE,c:GetControler(),LOCATION_MZONE,0,nil)*200
 end
