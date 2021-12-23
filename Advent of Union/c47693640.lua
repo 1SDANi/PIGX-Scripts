@@ -1,17 +1,7 @@
---オプション
---Option
+--ゾンビタイガー
+--Zombie Tiger
 local s,id=GetID()
 function s.initial_effect(c)
-	--equip
-	local e0=Effect.CreateEffect(c)
-	e0:SetDescription(aux.Stringid(id,0))
-	e0:SetType(EFFECT_TYPE_IGNITION)
-	e0:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e0:SetCategory(CATEGORY_EQUIP)
-	e0:SetRange(LOCATION_HAND)
-	e0:SetTarget(s.eqtg)
-	e0:SetOperation(s.eqop)
-	c:RegisterEffect(e0)
 	--equip
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -22,20 +12,15 @@ function s.initial_effect(c)
 	e1:SetTarget(s.eqtg)
 	e1:SetOperation(s.eqop)
 	c:RegisterEffect(e1)
-	--Atk up
+	--atk up
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_EQUIP)
-	e2:SetCode(EFFECT_EXTRA_ATTACK)
-	e2:SetRange(LOCATION_SZONE)
-	e2:SetValue(s.val)
+	e2:SetCode(EFFECT_UPDATE_ATTACK)
+	e2:SetValue(1000)
 	c:RegisterEffect(e2)
-	--indestructible effect
-	local e3=Effect.CreateEffect(c)
-	e3:SetType(EFFECT_TYPE_SINGLE)
-	e3:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
-	e3:SetRange(LOCATION_MZONE)
-	e3:SetCode(EFFECT_INDESTRUCTABLE_EFFECT)
-	e3:SetValue(1)
+	--def up
+	local e3=e2:Clone()
+	e3:SetCode(EFFECT_UPDATE_DEFENSE)
 	c:RegisterEffect(e3)
 	--Destruction replacement effect
 	local e4=Effect.CreateEffect(c)
@@ -44,16 +29,36 @@ function s.initial_effect(c)
 	e4:SetCode(EFFECT_DESTROY_SUBSTITUTE)
 	e4:SetValue(s.repval)
 	c:RegisterEffect(e4)
+	--handes
+	local e5=Effect.CreateEffect(c)
+	e5:SetDescription(aux.Stringid(id,1))
+	e5:SetCategory(CATEGORY_HANDES)
+	e5:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
+	e5:SetRange(LOCATION_SZONE)
+	e5:SetCode(EVENT_BATTLE_DESTROYING)
+	e5:SetCondition(s.hdcon)
+	e5:SetTarget(s.hdtg)
+	e5:SetOperation(s.hdop)
+	c:RegisterEffect(e5)
 end
-s.listed_names={10992251,id}
+function s.hdcon(e,tp,eg,ep,ev,re,r,rp)
+	return eg:GetFirst()==e:GetHandler():GetEquipTarget()
+end
+function s.hdtg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return true end
+	Duel.SetOperationInfo(0,CATEGORY_HANDES,0,0,1-tp,1)
+end
+function s.hdop(e,tp,eg,ep,ev,re,r,rp)
+	local g=Duel.GetFieldGroup(tp,0,LOCATION_HAND)
+	if #g==0 then return end
+	local sg=g:RandomSelect(1-tp,1)
+	Duel.SendtoGrave(sg,REASON_DISCARD+REASON_EFFECT)
+end
 function s.repval(e,re,r,rp)
 	return (r&REASON_BATTLE+REASON_EFFECT)~=0
 end
-function s.val(e,c)
-	return #c:GetEquipGroup():Filter(Card.IsCode,nil,id)
-end
 function s.filter(c)
-	return c:IsFaceup() and c:IsCode(10992251)
+	return c:IsFaceup() and c:IsRace(RACE_ZOMBIE)
 end
 function s.eqtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) and s.filter(chkc) end

@@ -51,7 +51,6 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetTargetCards(e)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)+1
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then c=1 end
 	if #g==0 or ft<#g then return end
 	if Duel.Release(e:GetHandler(),REASON_COST) then
 		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)

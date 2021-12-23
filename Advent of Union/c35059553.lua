@@ -1,5 +1,5 @@
---狭き通路
---Narrow Pass
+--カイザーコロシアム
+--Kaiser Colosseum
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -26,8 +26,8 @@ function s.initial_effect(c)
 	
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetFieldGroupCount(tp,LOCATION_MZONE,0)<=2
+	return Duel.GetFieldGroupCount(tp,LOCATION_MZONE,0)<=Duel.GetFieldGroupCount(tp,0,LOCATION_MZONE)
 end
 function s.sumlimit(e,c,sp,st)
-	return Duel.GetFieldGroupCount(sp,LOCATION_MZONE,0)>=2
+	return Duel.GetFieldGroupCount(sp,LOCATION_MZONE,0)>=Duel.GetFieldGroupCount(tp,0,LOCATION_MZONE)
 end

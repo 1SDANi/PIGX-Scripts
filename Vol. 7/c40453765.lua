@@ -26,8 +26,8 @@ end
 function s.value(e,c)
 	return Duel.GetMatchingGroupCount(s.filter,c:GetControler(),LOCATION_MZONE,0,nil)*1000
 end
-function s.spcon(e,c)
-	if c==nil then return true end
+function s.spcon(e,tp,eg,ep,ev,re,r,rp,chk)
+	local c=e:GetHandler()
 	return Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0
 		and Duel.IsExistingMatchingCard(s.filter,c:GetControler(),LOCATION_MZONE,0,1,nil)
 end
