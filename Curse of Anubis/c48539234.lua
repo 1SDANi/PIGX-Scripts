@@ -8,11 +8,11 @@ function s.initial_effect(c)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetHintTiming(0,TIMING_STANDBY_PHASE)
 	c:RegisterEffect(e1)
-	--Indes
+	--Draw
 	local e3=Effect.CreateEffect(c)
 	e3:SetCategory(CATEGORY_DRAW)
 	e3:SetDescription(aux.Stringid(id,0))
-	e3:SetCode(EVENT_CHAINING)
+	e3:SetCode(EVENT_TO_HAND)
 	e3:SetRange(LOCATION_SZONE)
 	e3:SetType(EFFECT_TYPE_QUICK_F)
 	e3:SetProperty(EFFECT_FLAG_DELAY)

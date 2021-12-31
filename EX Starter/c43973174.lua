@@ -16,8 +16,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,e:GetHandler()) end
 	Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST+REASON_DISCARD)
 end
-function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return s.thtg(e,tp,eg,ep,ev,re,r,rp,0,chkc) end
+function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	--Special Summon up to 2 Dragon monsters from your hand
 	local b1=s.sptg(e,tp,eg,ep,ev,re,r,rp,0)
 	--Add 1 "Lord of Dragons" from your Deck to your hand
