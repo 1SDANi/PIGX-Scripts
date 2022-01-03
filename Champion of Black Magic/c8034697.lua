@@ -25,7 +25,7 @@ function s.initial_effect(c)
 	e2:SetValue(s.attackup)
 	c:RegisterEffect(e2)
 	--attackup
-	local e2second=e2:Clone
+	local e2second=e2:Clone()
 	e2second:SetCode(EFFECT_UPDATE_DEFENSE)
 	c:RegisterEffect(e2second)
 	--destroy

@@ -22,7 +22,7 @@ function s.operaion(e,tp,eg,ep,ev,re,r,rp)
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
 	e2:SetCode(EFFECT_SET_BASE_DEFENSE)
-	e2:SetValue(c:GetBaseAttack()*2)
+	e2:SetValue(c:GetBaseDefense()*2)
 	e2:SetReset(RESET_EVENT+RESETS_STANDARD_DISABLE+RESET_PHASE+PHASE_END)
 	c:RegisterEffect(e2,true)
 end

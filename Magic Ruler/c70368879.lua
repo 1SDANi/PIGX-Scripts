@@ -16,5 +16,6 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,PLAYER_ALL,1)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	Duel.Draw(PLAYER_ALL,1,REASON_EFFECT)
+	Duel.Draw(tp,1,REASON_EFFECT)
+	Duel.Draw(1-tp,1,REASON_EFFECT)
 end
