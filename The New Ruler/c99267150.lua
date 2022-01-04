@@ -53,7 +53,7 @@ function s.regop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetCode(EFFECT_CANNOT_BE_EFFECT_TARGET)
 		e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 		e1:SetRange(LOCATION_MZONE)
-		e1:SetValue(s.efilter)
+		e1:SetValue(aux.tgoval)
 		c:RegisterEffect(e1)
 		c:RegisterFlagEffect(0,RESET_EVENT+RESETS_STANDARD,EFFECT_FLAG_CLIENT_HINT,1,0,aux.Stringid(id,0))
 	end
@@ -127,9 +127,6 @@ end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local sg=Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,e:GetHandler())
 	Duel.Destroy(sg,REASON_EFFECT)
-end
-function s.efilter(e,re,rp)
-	return re:GetHandler():GetControler()~=e:GetHandler():GetControler()
 end
 function s.tglimit(e,c)
 	return c and c:IsAttribute(e:GetHandler():GetAttribute())

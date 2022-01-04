@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.efilter(e,re,rp)
-	return re:GetHandler():IsType(TYPE_TRAP) and re:GetHandler():GetControler()~=e:GetHandler():GetControler()
+	return re:GetHandler():IsType(TYPE_TRAP) and aux.tgoval(e,re,rp)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,e:GetHandler()) end

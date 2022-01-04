@@ -33,7 +33,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e6)
 end
 function s.efilter(e,re,rp)
-	return re:GetHandler():IsType(TYPE_TRAP) and re:GetHandler():GetControler()~=e:GetHandler():GetControler()
+	return re:GetHandler():IsType(TYPE_TRAP) and aux.tgoval(e,re,rp)
 end
 function s.atkcon(e)
 	local tp=e:GetHandlerPlayer()

@@ -23,5 +23,5 @@ function s.initial_effect(c)
 end
 function s.efilter(e,re,rp)
 	return (re:GetHandler():IsType(TYPE_SPELL) or re:GetHandler():IsType(TYPE_TRAP))
-		and re:GetHandler():GetControler()~=e:GetHandler():GetControler()
+		and aux.tgoval(e,re,rp)
 end

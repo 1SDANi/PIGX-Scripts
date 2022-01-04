@@ -27,5 +27,5 @@ function s.econ(e)
 end
 function s.efilter(e,te)
 	return te and te:IsActiveType(TYPE_SPELL) and not te:GetHandler():IsCode(CARD_UMI) and
-		te:GetHandler():IsControler(1-e:GetHandler():GetControler())
+		aux.tgoval(e,re,rp)
 end

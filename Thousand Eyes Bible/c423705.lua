@@ -23,7 +23,7 @@ function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local tg=Duel.GetTargetCards(e)
-	if Duel.Destroy(tg,REASON_EFFECT)>0 Duel.SelectYesNo(tp,aux.Stringid(id,1)) and
+	if Duel.Destroy(tg,REASON_EFFECT)>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) and
 			Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,nil) and
 			Duel.IsExistingMatchingCard(aux.TRUE,tp,0,LOCATION_ONFIELD,1,nil) then
 		if Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST+REASON_DISCARD)>0 then

@@ -19,13 +19,13 @@ function s.filter(c)
 	return c:IsType(TYPE_TRAP+TYPE_SPELL)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsPlayerCanDiscardDeck(1-tp,2)
+	if chk==0 then return Duel.IsPlayerCanDiscardDeck(1-tp,5)
 		or Duel.IsExistingMatchingCard(aux.TRUE,tp,0,LOCATION_SZONE,1,nil) end
 	local op=0
 	if Duel.IsExistingMatchingCard(aux.TRUE,tp,0,LOCATION_SZONE,1,nil)
-		and Duel.IsPlayerCanDiscardDeck(1-tp,2) then
+		and Duel.IsPlayerCanDiscardDeck(1-tp,5) then
 		op=Duel.SelectOption(tp,aux.Stringid(id,1),aux.Stringid(id,2))
-	elseif Duel.IsPlayerCanDiscardDeck(1-tp,2) then
+	elseif Duel.IsPlayerCanDiscardDeck(1-tp,5) then
 		Duel.SelectOption(tp,aux.Stringid(id,2))
 		op=1
 	else

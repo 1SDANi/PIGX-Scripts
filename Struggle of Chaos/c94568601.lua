@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.efilter(e,re,rp)
-	return re:GetHandler():IsType(TYPE_TRAP) and re:GetHandler():GetControler()~=e:GetHandler():GetControler()
+	return re:GetHandler():IsType(TYPE_TRAP) and aux.tgoval(e,re,rp)
 end
 function s.atcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
