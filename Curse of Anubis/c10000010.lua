@@ -23,13 +23,13 @@ function s.initial_effect(c)
 	e3:SetCode(EFFECT_CANNOT_DISABLE_SUMMON)
 	e3:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
 	c:RegisterEffect(e3)
-	--indestructible effect
+	--cannot be target
 	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_SINGLE)
+	e4:SetCode(EFFECT_CANNOT_BE_EFFECT_TARGET)
 	e4:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e4:SetRange(LOCATION_MZONE)
-	e4:SetCode(EFFECT_INDESTRUCTABLE_EFFECT)
-	e4:SetValue(1)
+	e4:SetValue(aux.tgoval)
 	c:RegisterEffect(e4)
 	--One Turn Kill
 	local e6=Effect.CreateEffect(c)

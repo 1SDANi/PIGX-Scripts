@@ -21,7 +21,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc==tg end
 	if chk==0 then return tg:IsOnField() and tg:IsCanBeEffectTarget(e) end
 	Duel.SetTargetCard(tg)
-	local rec=tg:GetAttack()*4
+	local rec=tg:GetAttack()
 	Duel.SetTargetParam(rec)
 	Duel.SetOperationInfo(0,CATEGORY_RECOVER,nil,0,tp,rec)
 end

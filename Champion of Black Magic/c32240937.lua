@@ -23,7 +23,7 @@ function s.initial_effect(c)
 	e5:SetCode(EFFECT_CANNOT_BE_EFFECT_TARGET)
 	e5:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e5:SetRange(LOCATION_MZONE)
-	e5:SetValue(s.efilter)
+	e5:SetValue(aux.tgoval)
 	c:RegisterEffect(e5)
 	--attack all
 	local e6=Effect.CreateEffect(c)
@@ -31,9 +31,6 @@ function s.initial_effect(c)
 	e6:SetCode(EFFECT_ATTACK_ALL)
 	e6:SetValue(1)
 	c:RegisterEffect(e6)
-end
-function s.efilter(e,re,rp)
-	return re:GetHandler():IsType(TYPE_TRAP) and aux.tgoval(e,re,rp)
 end
 function s.atkcon(e)
 	local tp=e:GetHandlerPlayer()

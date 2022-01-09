@@ -14,14 +14,10 @@ function s.initial_effect(c)
 	e2:SetCode(EVENT_TOSS_COIN_NEGATE)
 	e2:SetProperty(EFFECT_FLAG_DELAY)
 	e2:SetCountLimit(1)
-	e2:SetCondition(s.coincon)
 	e2:SetOperation(s.coinop)
 	c:RegisterEffect(e2)
 end
 s.toss_coin=true
-function s.coincon(e,tp,eg,ep,ev,re,r,rp)
-	return ep==tp
-end
 function s.coinop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.SelectEffectYesNo(tp,e:GetHandler()) then
 		Duel.Hint(HINT_CARD,0,id)
