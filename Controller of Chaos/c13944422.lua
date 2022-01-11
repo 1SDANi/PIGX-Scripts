@@ -1,5 +1,5 @@
---雷仙人
---The Immortal of Thunder
+--グラナドラ
+--Granadora
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -36,8 +36,8 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	Duel.SetTargetPlayer(tp)
-	Duel.SetTargetParam(5000)
-	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,0,0,tp,5000)
+	Duel.SetTargetParam(2000)
+	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,0,0,tp,2000)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
@@ -46,8 +46,8 @@ end
 function s.tg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	Duel.SetTargetPlayer(tp)
-	Duel.SetTargetParam(3000)
-	Duel.SetOperationInfo(0,CATEGORY_RECOVER,nil,0,tp,3000)
+	Duel.SetTargetParam(1000)
+	Duel.SetOperationInfo(0,CATEGORY_RECOVER,nil,0,tp,1000)
 end
 function s.op(e,tp,eg,ep,ev,re,r,rp)
 	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)

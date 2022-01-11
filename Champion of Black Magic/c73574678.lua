@@ -2,7 +2,7 @@
 --Amazoness Blowgunner
 local s,id=GetID()
 function s.initial_effect(c)
-	--Targeted monster cannot attack or change its battle position
+	--Targeted monster loses 500 ATK/DEF
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_IGNITION)
