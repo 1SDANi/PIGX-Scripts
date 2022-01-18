@@ -22,25 +22,6 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	if not c or not c:IsRelateToEffect(e) then return end
-	local res=(Duel.GetCurrentPhase()==PHASE_STANDBY and Duel.GetTurnPlayer()==tp) and 2 or 1
-	local turn_asc=(Duel.GetCurrentPhase()<PHASE_STANDBY and Duel.GetTurnPlayer()==tp) and 0 or (Duel.GetTurnPlayer()==tp) and 2 or 1
-	local e1=Effect.CreateEffect(c)
-	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
-	e1:SetCode(EVENT_PHASE+PHASE_STANDBY)
-	e1:SetCountLimit(1)
-	e1:SetReset(RESET_PHASE+PHASE_STANDBY+RESET_SELF_TURN,res)
-	e1:SetLabel(turn_asc+Duel.GetTurnCount())
-	e1:SetCondition(s.spcon)
-	e1:SetOperation(s.spop)
-	Duel.RegisterEffect(e1,tp)
-	c:CreateEffectRelation(e1)
-end
-function s.spcon(e,tp)
-	return Duel.GetTurnCount()==e:GetLabel() and Duel.GetTurnPlayer()==tp
-end
-function s.spop(e,tp,eg,ep,ev,re,r,rp)
-	local c=e:GetHandler()
 	if c:IsLocation(LOCATION_GRAVE) and c:IsRelateToEffect(e) then
 		Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)
 	end

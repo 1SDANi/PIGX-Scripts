@@ -33,7 +33,6 @@ function s.tg(e,tp,eg,ep,ev,re,r,rp,chk)
 	end
 end
 function s.op(e,tp,eg,ep,ev,re,r,rp)
-	local c=e:GetHandler()
 	if Duel.GetCurrentPhase()==PHASE_DAMAGE and e:GetHandler()==Duel.GetAttackTarget() then
 		Duel.Destroy(Duel.GetAttacker(),REASON_EFFECT)
 	end
