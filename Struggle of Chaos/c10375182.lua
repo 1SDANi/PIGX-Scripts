@@ -24,7 +24,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function s.ccon(e)
-	return Duel.IsExistingMatchingCard(Card.IsRace,tp,LOCATION_MZONE,0,1,nil,RACE_WARRIOR)
+	return Duel.IsExistingMatchingCard(Card.IsRace,e:GetHandler():GetControler(),LOCATION_MZONE,0,1,nil,RACE_WARRIOR)
 end
 function s.tg1(e,c)
 	return c:IsRace(RACE_WARRIOR)

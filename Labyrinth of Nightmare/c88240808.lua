@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.rmtarget)
 	e1:SetValue(LOCATION_REMOVED)
 	c:RegisterEffect(e1)
-	--destroy
+	--banish
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_DESTROY)

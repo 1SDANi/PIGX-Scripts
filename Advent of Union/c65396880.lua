@@ -24,7 +24,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 		Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_ONFIELD,0,1,nil,58538870) and
 		Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_ONFIELD,0,1,nil,12143771) and
 		Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_ONFIELD,0,1,nil,85936485)
-	local b2=not b1 and Due.IsExistingMatchingCard(s.spfilter,tp,LOCATION_DECK,0,1,nil,e,tp) and
+	local b2=not b1 and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_DECK,0,1,nil,e,tp) and
 		Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 	if chk==0 then return b1 or b2 end
 	if b1 then

@@ -48,7 +48,7 @@ function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	else return false end
 end
 function s.value(e,c)
-	return c:IsLocation(LOCATION_MZONE) and c:IsFaceup() and c:IsRace(RACE_WARRIOR)
+	return c:IsLocation(LOCATION_MZONE) and c:IsFaceup() and c:IsCode(35975813)
 		and not c:IsReason(REASON_REPLACE) and c:IsControler(e:GetHandlerPlayer())
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
