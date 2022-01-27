@@ -14,7 +14,7 @@ function s.initial_effect(c)
 end
 s.listed_names={14778250,75622825}
 function s.cfilter(c,ft,ct)
-	return c:IsFaceup() and c:IsCode(14778250) and c:IsAbleToGraveAsCost() and (ft>=ct or c:GetSequence()<5)
+	return c:IsCode(14778250) and (ft>=ct or c:GetSequence()<5)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)

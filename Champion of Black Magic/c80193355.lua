@@ -33,8 +33,9 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetTargetCards(e)
 	if #g==0 then return end
-	Duel.SendtoHand(g,nil,REASON_EFFECT)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local sg=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_HAND,0,1,1,nil,e,tp,g)
-	Duel.SpecialSummon(sg,0,tp,tp,false,false,POS_FACEUP)
+	if Duel.SendtoHand(g,nil,REASON_EFFECT)>0 then
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
+		local sg=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_HAND,0,1,1,nil,e,tp,g)
+		Duel.SpecialSummon(sg,0,tp,tp,false,false,POS_FACEUP)
+	end
 end

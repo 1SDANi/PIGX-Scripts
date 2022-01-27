@@ -22,6 +22,6 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetCode(EFFECT_HAND_LIMIT)
 	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e1:SetTargetRange(1,0)
-	e1:SetValue(7)
+	e1:SetValue(12)
 	Duel.RegisterEffect(e1,p)
 end

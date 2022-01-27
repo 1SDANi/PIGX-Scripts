@@ -4,8 +4,10 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
 	local e0=Effect.CreateEffect(c)
+	e0:SetDescription(aux.Stringid(id,1))
 	e0:SetType(EFFECT_TYPE_ACTIVATE)
 	e0:SetCode(EVENT_FREE_CHAIN)
+	e0:SetTarget(aux.NOT(s.tg))
 	c:RegisterEffect(e0)
 	--Activate
 	local e1=Effect.CreateEffect(c)
@@ -74,6 +76,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 			e2:SetCost(s.cost)
 			e2:SetTarget(s.target)
 			e2:SetOperation(s.operation)
+			e2:SetLabelObject(tc)
 			token:RegisterEffect(e2)
 		end
 		Duel.SpecialSummonComplete()
@@ -84,7 +87,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Destroy(e:GetHandler(),REASON_COST)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	local eq=e:GetHandler():GetEquipTarget()
+	local eq=e:GetLabelObject()
 	local atk=eq:GetAttack()
 	if chk==0 then return eq end
 	Duel.SetTargetPlayer(1-tp)

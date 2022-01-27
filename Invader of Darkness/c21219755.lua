@@ -34,5 +34,6 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if tc:IsRelateToEffect(e) and tc:IsFaceup() and Duel.Destroy(tc,REASON_EFFECT)~=0 then
 		Duel.Damage(tp,1000,REASON_EFFECT)
 		Duel.Damage(1-tp,1000,REASON_EFFECT)
+		Duel.RDComplete()
 	end
 end

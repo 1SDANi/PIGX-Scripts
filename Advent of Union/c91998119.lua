@@ -59,8 +59,8 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return true end
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)+1
-	if chk==0 then return Duel.IsExistingTarget(s.ctfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp) end
-	local g=Duel.GetMatchingGroup(s.ctfilter,tp,LOCATION_GRAVE,0,nil,e,tp)
+	if chk==0 then return Duel.IsExistingTarget(s.ctfilter,tp,LOCATION_REMOVED,0,1,nil,e,tp) end
+	local g=Duel.GetMatchingGroup(s.ctfilter,tp,LOCATION_REMOVED,0,nil,e,tp)
 	local c=ft
 	if c>3 then c=3 end
 	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then c=1 end
@@ -76,8 +76,8 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 end
 function s.contactfil(tp)
-	return Duel.GetMatchingGroup(Card.IsAbleToGraveAsCost,tp,LOCATION_ONFIELD,0,nil)
+	return Duel.GetMatchingGroup(Card.IsAbleToRemoveAsCost,tp,LOCATION_ONFIELD,0,nil)
 end
 function s.contactop(g)
-	Duel.SendtoGrave(g,REASON_COST+REASON_MATERIAL)
+	Duel.Remove(g,POS_FACEUP,REASON_COST+REASON_MATERIAL)
 end
