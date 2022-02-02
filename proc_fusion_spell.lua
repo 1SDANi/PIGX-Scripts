@@ -94,7 +94,7 @@ function(fusfilter,matfilter,extrafil,extraop,gc2,stage2,exactcount,value,locati
 				local gc=gc2
 				gc=type(gc)=="function" and gc(e,tp,eg,ep,ev,re,r,rp,chk) or gc
 				gc=type(gc)=="Card" and Group.FromCards(gc) or gc
-				matfilter=matfilter or Card.IsAbleToGrave
+				matfilter=matfilter or aux.TRUE
 				stage2 = stage2 or aux.TRUE
 				if chk==0 then
 					local mg1=Duel.GetFusionMaterial(tp):Filter(matfilter,nil,e,tp,0)
@@ -188,7 +188,7 @@ function (fusfilter,matfilter,extrafil,extraop,gc2,stage2,exactcount,value,locat
 				local gc=gc2
 				gc=type(gc)=="function" and gc(e,tp,eg,ep,ev,re,r,rp,chk) or gc
 				gc=type(gc)=="Card" and Group.FromCards(gc) or gc
-				matfilter=matfilter or Card.IsAbleToGrave
+				matfilter=matfilter or aux.TRUE
 				stage2 = stage2 or aux.TRUE
 				local checkAddition
 				local mg1=Duel.GetFusionMaterial(tp):Filter(matfilter,nil,e,tp,1)
@@ -314,7 +314,7 @@ end
 function Fusion.OnFieldMat(filter,...)
 	if type(filter) == "Card" then
 		--filter is actually the card parameter
-		return filter:IsOnField() and filter:IsAbleToGrave()
+		return filter:IsOnField()
 	end
 	local funs={filter,...}
 	return function (c,...)
@@ -332,7 +332,7 @@ end
 function Fusion.InHandMat(filter,...)
 	if type(filter) == "Card" then
 		--filter is actually the card parameter
-		return filter:IsLocation(LOCATION_HAND) and filter:IsAbleToGrave()
+		return filter:IsLocation(LOCATION_HAND)
 	end
 	local funs={filter,...}
 	return function (c,...)

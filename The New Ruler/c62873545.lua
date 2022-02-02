@@ -87,7 +87,7 @@ function s.atkval(e,c)
 	return Duel.GetMatchingGroupCount(aux.FilterFaceupFunction(Card.IsRace,RACE_DRAGON),c:GetControler(),LOCATION_MZONE,0,c)*500
 end
 function s.contactfil(tp)
-	return Duel.GetMatchingGroup(Card.IsAbleToGraveAsCost,tp,LOCATION_ONFIELD,0,nil)
+	return Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)
 end
 function s.contactop(g)
 	Duel.SendtoGrave(g,REASON_COST+REASON_MATERIAL)

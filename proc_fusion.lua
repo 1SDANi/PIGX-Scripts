@@ -830,10 +830,7 @@ function Fusion.SelectMixRepUnfix(c,tp,mg,sg,mustg,fc,sub,sub2,minc,maxc,chkf,..
 	mg:Merge(rg)
 	return res
 end
-
-
-
-function Fusion.AddContactProc(c,group,op,sumcon,condition,sumtype,desc,cannotBeLizard)
+function Fusion.AddContactProc(c,group,op,sumcon,condition,sumtype,settype,setcode,opc,desc,cannotBeLizard)
 	if c:IsStatus(STATUS_COPYING_EFFECT) then return end
 	local mt=c.__index
 	local t={}
@@ -843,40 +840,34 @@ function Fusion.AddContactProc(c,group,op,sumcon,condition,sumtype,desc,cannotBe
 	t[c]=true
 	mt.contactfus=t
 	local e1=Effect.CreateEffect(c)
-	e1:SetType(EFFECT_TYPE_FIELD)
+	if not settype then
+		e1:SetType(EFFECT_TYPE_IGNITION)
+	else
+		e1:SetType(settype)
+		e1:SetCode(setcode)
+	end
 	if not desc then
 		e1:SetDescription(2)
 	else
 		e1:SetDescription(desc)
 	end
-	e1:SetCode(EFFECT_SPSUMMON_PROC)
 	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE)
 	e1:SetRange(LOCATION_EXTRA)
 	if sumtype then
 		e1:SetValue(sumtype)
 	end
 	e1:SetCondition(Fusion.ContactCon(group,condition))
-	e1:SetTarget(Fusion.ContactTg(group))
-	e1:SetOperation(Fusion.ContactOp(op))
+	e1:SetTarget(Fusion.ContactTg(opc))
+	e1:SetOperation(Fusion.ContactOp(op,group))
 	c:RegisterEffect(e1)
-	if sumcon then
-		--spsummon condition
-		local e2=Effect.CreateEffect(c)
-		e2:SetType(EFFECT_TYPE_SINGLE)
-		e2:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
-		e2:SetCode(EFFECT_SPSUMMON_CONDITION)
-		if type(sumcon)=='function' then
-			e2:SetValue(sumcon)
-		end
-		c:RegisterEffect(e2)
-	end
 	--lizard check
 	if cannotBeLizard~=false then
 		Auxiliary.addLizardCheck(c)
 	end
 end
 function Fusion.ContactCon(f,fcon)
-	return function(e,c)
+	return function(e,tp,eg,ep,ev,re,r,rp,chk)
+		local c=e:GetHandler()
 		if c==nil then return true end
 		local m=f(e:GetHandlerPlayer())
 		local chkf=c:GetControler()|FUSPROC_CONTACTFUS
@@ -884,23 +875,24 @@ function Fusion.ContactCon(f,fcon)
 	end
 end
 function Fusion.ContactTg(f)
-	return function(e,tp,eg,ep,ev,re,r,rp)
-		local m=f(tp)
-		local chkf=tp|FUSPROC_CONTACTFUS
-		local sg=Duel.SelectFusionMaterial(tp,e:GetHandler(),m,nil,chkf)
-		if #sg>0 then
-			sg:KeepAlive()
-			e:SetLabelObject(sg)
-			return true
-		else return false end
+	return function(e,tp,eg,ep,ev,re,r,rp,chk)
+		local id=e:GetHandler():GetCode()
+		if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
+			and e:GetHandler():IsCanBeSpecialSummoned(e,0,tp,false,false) and
+			(not f or e:GetHandler():GetFlagEffect(id-1)==0) end
+		e:GetHandler():RegisterFlagEffect(id-1,RESET_CHAIN,0,1)
+		Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,c,1,0,0)
 	end
 end
-function Fusion.ContactOp(f)
+function Fusion.ContactOp(op,f)
 	return function(e,tp,eg,ep,ev,re,r,rp,c)
-		local g=e:GetLabelObject()
-		c:SetMaterial(g)
-		f(g,tp,c)
-		g:DeleteGroup()
+		local m=f(tp)
+		local sg=Duel.SelectFusionMaterial(tp,e:GetHandler(),m,nil,chkf)
+		e:GetHandler():SetMaterial(sg)
+		op(sg)
+		Duel.BreakEffect()
+		Duel.SpecialSummon(e:GetHandler(),SUMMON_TYPE_FUSION,tp,tp,false,false,POS_FACEUP)
+		e:GetHandler():CompleteProcedure()
 	end
 end
 --Fusion monster, name + name

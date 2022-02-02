@@ -21,7 +21,7 @@ end
 s.material_setcode=0x1b
 s.listed_names={id}
 function s.contactfil(tp)
-	return Duel.GetMatchingGroup(Card.IsAbleToGraveAsCost,tp,LOCATION_ONFIELD,0,nil)
+	return Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)
 end
 function s.contactop(g)
 	Duel.SendtoGrave(g,REASON_COST+REASON_MATERIAL)

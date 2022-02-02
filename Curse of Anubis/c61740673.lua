@@ -42,8 +42,8 @@ function s.disoperation(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.mtop(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.CheckLPCost(tp,1000) then
-		Duel.PayLPCost(tp,1000)
+	if Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,e:GetHandler()) then
+		Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST+REASON_DISCARD)
 	else
 		Duel.Destroy(e:GetHandler(),REASON_COST)
 	end

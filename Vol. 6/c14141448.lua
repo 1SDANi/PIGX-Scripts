@@ -30,7 +30,7 @@ function s.filter(c,fc,sumtype,tp)
 	return c:IsRace(RACE_INSECT,fc,sumtype,tp) and c:GetLevel()>=6
 end
 function s.contactfil(tp)
-	return Duel.GetMatchingGroup(Card.IsAbleToGraveAsCost,tp,LOCATION_ONFIELD,0,nil)
+	return Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)
 end
 function s.contactop(g)
 	Duel.SendtoGrave(g,REASON_COST+REASON_MATERIAL)

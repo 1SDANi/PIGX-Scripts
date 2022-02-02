@@ -8,7 +8,7 @@ function s.initial_effect(c)
 end
 s.listed_names={CARD_METAMORPHOSIS}
 function s.contactfil(tp)
-	return Duel.GetMatchingGroup(Card.IsAbleToGraveAsCost,tp,LOCATION_ONFIELD,0,nil)
+	return Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)
 end
 function s.contactop(g)
 	Duel.SendtoGrave(g,REASON_COST+REASON_MATERIAL)

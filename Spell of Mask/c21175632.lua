@@ -47,7 +47,7 @@ function s.filter2(c,fc,sumtype,tp)
 	return (c:IsRace(RACE_FAIRY,fc,sumtype,tp) and (c:IsAttribute(ATTRIBUTE_DARK,fc,sumtype,tp)))
 end
 function s.contactfil(tp)
-	return Duel.GetMatchingGroup(Card.IsAbleToGraveAsCost,tp,LOCATION_ONFIELD,0,nil)
+	return Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)
 end
 function s.contactop(g)
 	Duel.SendtoGrave(g,REASON_COST+REASON_MATERIAL)

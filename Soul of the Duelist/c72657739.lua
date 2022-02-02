@@ -1,5 +1,5 @@
 --怨念のキラードール
---Demonic Doll of Demise
+--Demon Doll of Demise
 local s,id=GetID()
 function s.initial_effect(c)
 	--register
@@ -12,7 +12,7 @@ function s.initial_effect(c)
 end
 function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	if c:IsReason(REASON_EFFECT) and re:GetActiveType()==TYPE_CONTINUOUS+TYPE_SPELL then
+	if c:IsReason(REASON_EFFECT) then
 		local e1=Effect.CreateEffect(c)
 		e1:SetDescription(aux.Stringid(id,0))
 		e1:SetCategory(CATEGORY_SPECIAL_SUMMON)

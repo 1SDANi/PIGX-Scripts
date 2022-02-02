@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.spfilter(c,e,tp)
-	return c:IsType(TYPE_SPELL+TYPE_TRAP) and Duel.IsPlayerCanSpecialSummonMonster(tp,c:GetCode(),nil,TYPE_MONSTER+TYPE_EFFECT+TYPE_FLIP,0,0,0,0,0,POS_FACEUP_DEFENSE)
+	return c:IsType(TYPE_SPELL+TYPE_TRAP) and Duel.IsPlayerCanSpecialSummonMonster(tp,c:GetCode(),nil,TYPE_MONSTER+TYPE_EFFECT,0,0,1,RACE_SPELLCASTER,ATTRIBUTE_DARK,POS_FACEUP_DEFENSE)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT)
@@ -30,42 +30,27 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local sg=g:Select(tp,2,2,nil)
 	local fid=e:GetHandler():GetFieldID()
+	local i=0
 	for tg in aux.Next(sg) do
-		local e1=Effect.CreateEffect(tg)
-		e1:SetType(EFFECT_TYPE_SINGLE)
-		e1:SetCode(EFFECT_CHANGE_TYPE)
-		e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
-		e1:SetValue(TYPE_FLIP+TYPE_EFFECT+TYPE_MONSTER)
-		e1:SetReset(RESET_EVENT+0x47c0000)
-		tg:RegisterEffect(e1,true)
-		local e2=e1:Clone()
-		e2:SetCode(EFFECT_REMOVE_RACE)
-		e2:SetValue(RACE_ALL)
-		tg:RegisterEffect(e2,true)
-		local e3=e1:Clone()
-		e3:SetCode(EFFECT_REMOVE_ATTRIBUTE)
-		e3:SetValue(0xff)
-		tg:RegisterEffect(e3,true)
-		local e4=e1:Clone()
-		e4:SetCode(EFFECT_SET_BASE_ATTACK)
-		e4:SetValue(0)
-		tg:RegisterEffect(e4,true)
-		local e5=e1:Clone()
-		e5:SetCode(EFFECT_SET_BASE_DEFENSE)
-		e5:SetValue(0)
-		tg:RegisterEffect(e5,true)
-		tg:RegisterFlagEffect(id,RESET_EVENT+0x47c0000+RESET_PHASE+PHASE_BATTLE,0,1,fid)
-		tg:SetStatus(STATUS_NO_LEVEL,true)
-		--flip
-		local e1=Effect.CreateEffect(tg)
-		e1:SetCategory(CATEGORY_DESTROY)
-		e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
-		e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_FLIP)
-		e1:SetTarget(s.destg)
-		e1:SetOperation(s.desop)
-		tg:RegisterEffect(e1)
+		--destroy
+		local e6=Effect.CreateEffect(tg)
+		e6:SetDescription(aux.Stringid(id,1))
+		e6:SetCategory(CATEGORY_DESTROY)
+		e6:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
+		e6:SetRange(LOCATION_MZONE)
+		e6:SetCode(EVENT_PHASE+PHASE_END)
+		e6:SetCountLimit(1)
+		e6:SetTarget(s.destg)
+		e6:SetOperation(s.desop)
+		tg:RegisterEffect(e6)
+		tg:AddMonsterAttribute(TYPE_EFFECT,ATTRIBUTE_DARK,RACE_SPELLCASTER,1,0,0)
+		if Duel.SpecialSummonStep(tg,0,tp,tp,true,false,POS_FACEUP_DEFENSE) then
+			i = i + 1
+		end
+		tg:AddMonsterAttributeComplete()
+		Duel.SpecialSummonComplete()
 	end
-	if Duel.SpecialSummon(sg,0,tp,tp,true,false,POS_FACEUP_DEFENSE)==2 then
+	if i==2 then
 		local fg=Duel.GetFieldGroup(tp,LOCATION_MZONE,0)
 		if #fg>0 then
 			Duel.ChangePosition(fg,POS_FACEDOWN_DEFENSE)
@@ -79,7 +64,8 @@ function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,e:GetHandler(),1,0,0)
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
-	if e:GetHandler():IsRelateToEffect(e) then
-		Duel.Destroy(e:GetHandler(),REASON_EFFECT)
+	local c=e:GetHandler()
+	if c:IsRelateToEffect(e) and c:IsFaceup() then
+		Duel.Destroy(c,REASON_EFFECT)
 	end
 end

@@ -13,6 +13,8 @@ function s.initial_effect(c)
 	e2:SetCode(EFFECT_TRAP_ACT_IN_SET_TURN)
 	e2:SetProperty(EFFECT_FLAG_SET_AVAILABLE+EFFECT_FLAG_BOTH_SIDE)
 	e2:SetRange(LOCATION_SZONE)
+	e2:SetCountLimit(1)
+	e2:SetCondition(s.condition)
 	e2:SetTargetRange(LOCATION_SZONE,LOCATION_SZONE)
 	c:RegisterEffect(e2)
 	--spsummon

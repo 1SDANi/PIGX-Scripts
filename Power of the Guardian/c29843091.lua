@@ -1,6 +1,5 @@
 --おジャマトリオ
 --Ojama Trio
-
 local s,id=GetID()
 function s.initial_effect(c)
 	--Special summon 3 tokens to opponent's field
@@ -38,7 +37,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			token:RegisterEffect(e3,true)
 			local e4=e3:Clone()
 			e4:SetCode(EFFECT_UNRELEASABLE_NONSUM)
-			c:RegisterEffect(e4,true)
+			token:RegisterEffect(e4,true)
 			--Cannot be used as fusion material
 			local e5=Effect.CreateEffect(e:GetHandler())
 			e5:SetDescription(3309)

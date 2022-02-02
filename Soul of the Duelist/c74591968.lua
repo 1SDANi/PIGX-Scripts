@@ -1,5 +1,5 @@
---ミスティック・ソードマン LV4
---Mystic Swordsman LV4
+--ミスティック・ソードマン LV6
+--Mystic Swordsman LV6
 local s,id=GetID()
 function s.initial_effect(c)
 	--direct attack

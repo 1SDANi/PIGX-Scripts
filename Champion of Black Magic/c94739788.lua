@@ -2,26 +2,19 @@
 --Awakening
 local s,id=GetID()
 function s.initial_effect(c)
-	Duel.EnableGlobalFlag(GLOBALFLAG_BRAINWASHING_CHECK)
-	--Activate
-	local e1=Effect.CreateEffect(c)
-	e1:SetType(EFFECT_TYPE_ACTIVATE)
-	e1:SetCode(EVENT_FREE_CHAIN)
-	c:RegisterEffect(e1)
 	--
 	local e2=Effect.CreateEffect(c)
-	e2:SetType(EFFECT_TYPE_FIELD)
-	e2:SetProperty(EFFECT_FLAG_SET_AVAILABLE)
-	e2:SetRange(LOCATION_SZONE)
-	e2:SetTargetRange(LOCATION_MZONE,LOCATION_MZONE)
-	e2:SetTarget(s.target)
-	e2:SetOperation(s.activate)
-	c:RegisterEffect(e2)
+	e1:SetCategory(CATEGORY_CONTROL)
+	e1:SetType(EFFECT_TYPE_ACTIVATE)
+	e1:SetCode(EVENT_FREE_CHAIN)
+	e1:SetTarget(s.target)
+	e1:SetOperation(s.activate)
+	c:RegisterEffect(e1)
 end
 function s.filter(c)
 	return c:IsControlerCanBeChanged() and not c:IsControler(c:GetOwner())
 end
-function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
+function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_MZONE,LOCATION_MZONE,1,nil) end
 	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_MZONE,LOCATION_MZONE,nil)
 	Duel.SetOperationInfo(0,CATEGORY_CONTROL,g,#g,0,0)

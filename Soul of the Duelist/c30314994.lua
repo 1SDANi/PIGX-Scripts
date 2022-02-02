@@ -26,13 +26,13 @@ function s.initial_effect(c)
 	e2:SetValue(1)
 	c:RegisterEffect(e2)
 end
+function s.filter(c,att)
+	return c:IsFaceup() and c:IsAttribute(att)
+end
 function s.atkcon(e)
-	return Duel.IsExistingMatchingCard(aux.FilterFaceupFunction(Card.IsAttribute,ATTRIBUTE_FIRE),ctlcon,LOCATION_MZONE,0,1,e:GetHandler())
+	return Duel.IsExistingMatchingCard(s.filter,ctlcon,LOCATION_MZONE,0,1,e:GetHandler(),ATTRIBUTE_FIRE)
 end
 function s.atcon(e,tp,eg,ep,ev,re,r,rp)
 	return aux.bdocon(e,tp,eg,ep,ev,re,r,rp) and e:GetHandler():CanChainAttack()
-		and Duel.IsExistingMatchingCard(aux.FilterFaceupFunction(Card.IsAttribute,ATTRIBUTE_WIND),tp,LOCATION_MZONE,0,1,e:GetHandler())
-end
-function s.atop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.ChainAttack()
+		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_MZONE,0,1,e:GetHandler(),ATTRIBUTE_WIND)
 end
