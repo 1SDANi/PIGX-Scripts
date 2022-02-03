@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.costfilter(c)
-	return c:IsAttribute(ATTRIBUTE_DARK) and c:IsAttackBelow(1000)
+	return c:IsAttribute(ATTRIBUTE_DARK) and c:IsAttackBelow(1500)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.CheckReleaseGroupCost(tp,s.costfilter,1,false,nil,nil) end
@@ -41,32 +41,10 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local conf=Duel.GetFieldGroup(tp,0,LOCATION_MZONE+LOCATION_HAND)
-	local ct=0
 	if #conf>0 then
 		Duel.ConfirmCards(tp,conf)
 		local dg=conf:Filter(s.filter,nil)
-		ct=Duel.Destroy(dg,REASON_EFFECT)
+		Duel.Destroy(dg,REASON_EFFECT)
 		Duel.ShuffleHand(1-tp)
-	end
-	local g=Duel.GetMatchingGroup(s.filter,1-tp,LOCATION_DECK,0,nil)
-	if e:IsHasType(EFFECT_TYPE_ACTIVATE) then
-		local e1=Effect.CreateEffect(e:GetHandler())
-		e1:SetType(EFFECT_TYPE_FIELD)
-		e1:SetCode(EFFECT_CHANGE_DAMAGE)
-		e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
-		e1:SetTargetRange(0,1)
-		e1:SetValue(0)
-		e1:SetReset(RESET_PHASE+PHASE_END,2)
-		Duel.RegisterEffect(e1,tp)
-		local e2=e1:Clone()
-		e2:SetCode(EFFECT_NO_EFFECT_DAMAGE)
-		e2:SetReset(RESET_PHASE+PHASE_END,2)
-		Duel.RegisterEffect(e2,tp)
-		local e3=Effect.CreateEffect(e:GetHandler())
-		e3:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_CLIENT_HINT)
-		e3:SetDescription(aux.Stringid(id,1))
-		e3:SetReset(RESET_PHASE+PHASE_END,2)
-		e3:SetTargetRange(0,1)
-		Duel.RegisterEffect(e3,tp)
 	end
 end

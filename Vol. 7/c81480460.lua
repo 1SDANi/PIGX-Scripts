@@ -16,7 +16,7 @@ function s.initial_effect(c)
 end
 s.toss_coin=true
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_ONFIELD) and chkc:IsControler(1-tp) end
+	if chkc then return chkc:IsOnField() and chkc:IsControler(1-tp) end
 	if chk==0 then return Duel.IsExistingTarget(aux.TRUE,tp,0,LOCATION_ONFIELD,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
 	local g=Duel.SelectTarget(tp,aux.TRUE,tp,0,LOCATION_ONFIELD,1,1,nil)
@@ -25,8 +25,8 @@ end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) then
-		local c1=Duel.TossCoin(tp,1)
-		if c1<1 then return end
+		local c1,c2,c3=Duel.TossCoin(tp,3)
+		if c1+c2+c3<1 then return end
 		Duel.Destroy(tc,REASON_EFFECT)
 	end
 end

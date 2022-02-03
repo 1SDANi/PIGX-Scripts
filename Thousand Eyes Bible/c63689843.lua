@@ -12,6 +12,7 @@ function s.initial_effect(c)
 	e1:SetOperation(s.recop)
 	c:RegisterEffect(e1)
 end
+s.listed_names={id}
 function s.rectg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return ep==tp end
 	Duel.SetTargetPlayer(1-tp)

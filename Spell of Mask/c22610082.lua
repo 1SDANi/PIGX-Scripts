@@ -2,12 +2,11 @@
 --The Mask of Remnants
 local s,id=GetID()
 function s.initial_effect(c)
-	aux.AddEquipProcedure(c,1,aux.CheckStealEquip,s.eqlimit,nil,s.target,s.operation)
+	aux.AddEquipProcedure(c,1,aux.CheckStealEquip,s.eqlimit,s.cost,s.target,s.operation)
 	--control
 	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_EQUIP)
 	e4:SetCode(EFFECT_SET_CONTROL)
-	e4:SetCost(s.cost)
 	e4:SetValue(s.ctval)
 	c:RegisterEffect(e4)
 end

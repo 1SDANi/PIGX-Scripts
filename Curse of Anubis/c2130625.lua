@@ -13,6 +13,7 @@ function s.initial_effect(c)
 	e1:SetOperation(s.recop)
 	c:RegisterEffect(e1)
 end
+s.listed_names={id}
 function s.reccon(e,tp,eg,ep,ev,re,r,rp)
 	return ep==tp
 end
