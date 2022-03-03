@@ -17,16 +17,13 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:SetLabel(100)
 	return true
 end
-function s.rfilter(c)
-	return not c:IsType(TYPE_TOKEN)
-end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
 		if e:GetLabel()~=100 then return false end
 		e:SetLabel(0)
-		return Duel.CheckReleaseGroupCost(tp,s.rfilter,1,false,nil,nil)
+		return Duel.CheckReleaseGroupCost(tp,aux.TRUE,1,false,nil,nil)
 	end
-	local rg=Duel.SelectReleaseGroupCost(tp,s.rfilter,1,1<<52,false,nil,nil)
+	local rg=Duel.SelectReleaseGroupCost(tp,aux.TRUE,1,1<<52,false,nil,nil)
 	e:SetLabel(#rg)
 	Duel.Release(rg,REASON_COST)
 end

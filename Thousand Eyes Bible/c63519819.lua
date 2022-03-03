@@ -44,6 +44,7 @@ function s.initial_effect(c)
 	e6:SetRange(LOCATION_MZONE)
 	c:RegisterEffect(e6)
 end
+s.material_race={RACE_PSYCHIC}
 s.listed_names={CARD_METAMORPHOSIS}
 function s.contactfil(tp)
 	return Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)

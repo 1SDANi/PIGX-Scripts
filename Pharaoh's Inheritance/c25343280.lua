@@ -20,11 +20,11 @@ function s.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
 	e2:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e2:SetRange(LOCATION_MZONE)
-	e2:SetCode(EFFECT_SET_ATTACK)
+	e2:SetCode(EFFECT_SET_BASE_ATTACK)
 	e2:SetValue(s.atkval)
 	c:RegisterEffect(e2)
 	local e3=e2:Clone()
-	e3:SetCode(EFFECT_SET_DEFENSE)
+	e3:SetCode(EFFECT_SET_BASE_DEFENSE)
 	e3:SetValue(s.defval)
 	c:RegisterEffect(e3)
 	--cannot be battle target
@@ -54,6 +54,7 @@ function s.initial_effect(c)
 	e6:SetValue(aux.tgoval)
 	c:RegisterEffect(e6)
 end
+s.material_race={RACE_ZOMBIE}
 function s.tg(e,c)
 	return c:IsFaceup() and c:IsRace(RACE_ZOMBIE) and c~=e:GetHandler()
 end

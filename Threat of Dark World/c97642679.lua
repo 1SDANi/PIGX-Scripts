@@ -1,5 +1,5 @@
 --闇の支配者－ゾーク
---Dark Master - Zorc
+--Servant of Zorc
 local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableReviveLimit()

@@ -1,5 +1,5 @@
 --機動砦のギア・ゴーレム
---Ancient Gear Moving Fortress
+--Antique Gear Moving Fortress
 local s,id=GetID()
 function s.initial_effect(c)
 	--Direct attack

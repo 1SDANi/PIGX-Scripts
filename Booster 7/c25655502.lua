@@ -21,6 +21,8 @@ function s.initial_effect(c)
 	e2:SetOperation(s.operation)
 	c:RegisterEffect(e2)
 end
+s.material_race={RACE_PSYCHIC}
+s.material_type={TYPE_TOON}
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetAttackTarget()==e:GetHandler() or Duel.GetAttacker()==e:GetHandler() end
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,e:GetHandler(),1,0,0)

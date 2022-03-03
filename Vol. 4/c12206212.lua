@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e1:SetValue(CARD_HARPY_LADY)
 	c:RegisterEffect(e1)
 end
-s.material_setcode=0x64
+s.material_setcode={0x64}
 s.listed_names={CARD_HARPIE_LADY}
 function s.contactfil(tp)
 	return Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)

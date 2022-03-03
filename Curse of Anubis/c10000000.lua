@@ -54,13 +54,13 @@ function s.initial_effect(c)
 	--atk/def
 	local e8=Effect.CreateEffect(c)
 	e8:SetType(EFFECT_TYPE_SINGLE)
-	e8:SetCode(EFFECT_UPDATE_ATTACK)
+	e8:SetCode(EFFECT_SET_BASE_ATTACK)
 	e8:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e8:SetRange(LOCATION_MZONE)
 	e8:SetValue(s.adval)
 	c:RegisterEffect(e8)
 	local e9=e8:Clone()
-	e9:SetCode(EFFECT_UPDATE_DEFENSE)
+	e9:SetCode(EFFECT_SET_BASE_DEFENSE)
 	c:RegisterEffect(e9)
 end
 function s.adval(e,c)
@@ -69,8 +69,9 @@ end
 function s.tgcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_SPECIAL) and e:GetHandler():GetPreviousLocation()~=0
 end
-function s.tgtg(e,tp,eg,ep,ev,re,r,rp)
+function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
+	if chk==0 then return true end
 	if c:IsSummonType(SUMMON_TYPE_SPECIAL) then
 		if c:IsPreviousLocation(LOCATION_GRAVE) then
 			Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,c,1,0,0)
@@ -99,8 +100,8 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.mdcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local dg=Duel.GetMatchingGroup(aux.TRUE,tp,0,LOCATION_ONFIELD,nil)
-	if chk==0 then return Duel.CheckReleaseGroupCost(tp,nil,2,false,aux.ReleaseCheckTarget,nil,dg) end
-	local g=Duel.SelectReleaseGroupCost(tp,nil,2,2,false,aux.ReleaseCheckTarget,nil,dg)
+	if chk==0 then return Duel.CheckReleaseGroupCost(tp,aux.TRUE,2,false,aux.ReleaseCheckTarget,nil,dg) end
+	local g=Duel.SelectReleaseGroupCost(tp,aux.TRUE,2,2,false,aux.ReleaseCheckTarget,nil,dg)
 	Duel.Release(g,REASON_COST)
 end
 function s.mdtg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -113,8 +114,9 @@ function s.mdop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Destroy(g,REASON_EFFECT)
 end
 function s.descost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.CheckReleaseGroupCost(tp,nil,1,false,aux.ReleaseCheckTarget,nil) end
-	local g=Duel.SelectReleaseGroupCost(tp,nil,1,1,false,aux.ReleaseCheckTarget,nil)
+	local dg=Duel.GetMatchingGroup(aux.TRUE,tp,0,LOCATION_ONFIELD,nil)
+	if chk==0 then return Duel.CheckReleaseGroupCost(tp,aux.TRUE,1,false,aux.ReleaseCheckTarget,nil,dg) end
+	local g=Duel.SelectReleaseGroupCost(tp,aux.TRUE,1,1,false,aux.ReleaseCheckTarget,nil,dg)
 	Duel.Release(g,REASON_COST)
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)

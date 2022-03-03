@@ -17,6 +17,8 @@ function s.initial_effect(c)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
 end
+s.material_race={RACE_FAIRY}
+s.material_attribute={ATTRIBUTE_LIGHT,ATTRIBUTE_DARK}
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,nil) and
 		e:GetHandler():IsReleasable() end

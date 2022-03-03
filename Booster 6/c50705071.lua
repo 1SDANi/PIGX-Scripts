@@ -7,6 +7,8 @@ function s.initial_effect(c)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 end
 s.listed_names={CARD_METAMORPHOSIS}
+s.material_race={RACE_MACHINE,RACE_FIEND}
+s.material_type={TYPE_NORMAL}
 function s.filter1(c,fc,sumtype,tp)
 	return c:IsRace(RACE_FIEND,fc,sumtype,tp) and c:GetLevel()>=7
 end

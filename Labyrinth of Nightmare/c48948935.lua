@@ -24,6 +24,7 @@ function s.initial_effect(c)
 	e2:SetOperation(s.eqop)
 	c:RegisterEffect(e2)
 end
+s.listed_names={22610082}
 function s.spfilter(c,tp)
 	return c:IsRace(RACE_FIEND) and (c:IsControler(tp) or c:IsFaceup())
 end

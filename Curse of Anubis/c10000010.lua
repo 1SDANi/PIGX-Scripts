@@ -54,20 +54,21 @@ function s.initial_effect(c)
 	--atk/def
 	local e8=Effect.CreateEffect(c)
 	e8:SetType(EFFECT_TYPE_SINGLE)
-	e8:SetCode(EFFECT_UPDATE_ATTACK)
+	e8:SetCode(EFFECT_SET_BASE_ATTACK)
 	e8:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e8:SetRange(LOCATION_MZONE)
 	e8:SetValue(s.adval)
 	c:RegisterEffect(e8)
 	local e9=e8:Clone()
-	e9:SetCode(EFFECT_UPDATE_DEFENSE)
+	e9:SetCode(EFFECT_SET_BASE_DEFENSE)
 	c:RegisterEffect(e9)
 end
 function s.tgcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_SPECIAL) and e:GetHandler():GetPreviousLocation()~=0
 end
-function s.tgtg(e,tp,eg,ep,ev,re,r,rp)
+function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
+	if chk==0 then return true end
 	if c:IsSummonType(SUMMON_TYPE_SPECIAL) then
 		if c:IsPreviousLocation(LOCATION_GRAVE) then
 			Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,c,1,0,0)
@@ -95,7 +96,7 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.adval(e,c)
-	return Duel.GetLP(tp)
+	return Duel.GetLP(e:GetHandler():GetControler())
 end
 function s.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLP(tp)>100 end

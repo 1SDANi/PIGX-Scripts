@@ -15,6 +15,7 @@ function s.initial_effect(c)
 	e1:SetValue(s.valcon)
 	c:RegisterEffect(e1)
 end
+s.material_setcode={0x11c}
 function s.valcon(e,re,r,rp)
 	return (r&REASON_BATTLE+REASON_EFFECT)~=0
 end

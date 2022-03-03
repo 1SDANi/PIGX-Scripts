@@ -1,5 +1,5 @@
 --生還の宝札
---Card of Safe Return
+--Treasures from Hell
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

@@ -1,6 +1,5 @@
 --灼熱の試練
 local s,id=GetID()
-local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
 	local e1=Effect.CreateEffect(c)

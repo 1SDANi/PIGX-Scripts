@@ -18,6 +18,7 @@ function s.initial_effect(c)
 	e3:SetOperation(s.thop)
 	c:RegisterEffect(e3)
 end
+s.material_setcode={0x10a2,0xa2}
 s.listed_names={CARD_METAMORPHOSIS}
 function s.contactfil(tp)
 	return Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)

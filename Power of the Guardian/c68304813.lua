@@ -1,4 +1,5 @@
 --冥界の宝札
+--Treasure from Beyond
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

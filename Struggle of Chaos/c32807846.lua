@@ -38,12 +38,12 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			e2:SetCode(EFFECT_CANNOT_ACTIVATE)
 			e2:SetTargetRange(1,0)
 			e2:SetValue(s.aclimit)
-			e2:SetLabelObject(e1)
+			e2:SetLabel(tc:GetCode())
 			e2:SetReset(RESET_PHASE+PHASE_END,2)
 			Duel.RegisterEffect(e2,tp)
 		end
 	end
 end
 function s.aclimit(e,re,tp)
-	return not re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:GetHandler():IsCode(e:GetLabelObject():GetLabel())
+	return not re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:GetHandler():IsCode(e:GetLabel())
 end

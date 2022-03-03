@@ -23,6 +23,10 @@ function s.initial_effect(c)
 	e2:SetTargetRange(0,LOCATION_MZONE)
 	e2:SetValue(-100)
 	c:RegisterEffect(e2)
+	--def down
+	local e22=e2:Clone()
+	e22:SetCode(EFFECT_UPDATE_DEFENSE)
+	c:RegisterEffect(e22)
 	--register summon
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)

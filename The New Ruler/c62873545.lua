@@ -35,6 +35,8 @@ function s.initial_effect(c)
 	e3:SetOperation(s.desrepop)
 	c:RegisterEffect(e3)
 end
+s.material_race={RACE_DRAGON,RACE_WARRIOR}
+s.material_type={TYPE_FUSION,TYPE_RITUAL}
 function s.repfilter(c,e)
 	return c:IsFaceup() and c:IsRace(RACE_DRAGON)
 		and c:IsDestructable(e) and not c:IsStatus(STATUS_DESTROY_CONFIRMED+STATUS_BATTLE_DESTROYED)

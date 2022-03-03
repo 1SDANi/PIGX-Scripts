@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
 end
-s.listed_names={66073051,CARD_SANCTUARY_SKY}
+s.listed_names={CARD_SANCTUARY_SKY}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION) and Duel.IsEnvironment(CARD_SANCTUARY_SKY)
 end

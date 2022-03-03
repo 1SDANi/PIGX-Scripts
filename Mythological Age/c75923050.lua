@@ -37,6 +37,7 @@ function s.initial_effect(c)
 	e2:SetOperation(s.spop)
 	c:RegisterEffect(e2)
 end
+s.material_race={RACE_MACHINE}
 s.listed_names={38916461,1412158,92421852}
 function s.valcheck(e,c)
 	if c:GetMaterial():IsExists(Card.IsCode,1,nil,38916461) then

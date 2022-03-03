@@ -45,13 +45,13 @@ function s.initial_effect(c)
 	--atk/def
 	local e6=Effect.CreateEffect(c)
 	e6:SetType(EFFECT_TYPE_SINGLE)
-	e6:SetCode(EFFECT_UPDATE_ATTACK)
+	e6:SetCode(EFFECT_SET_BASE_ATTACK)
 	e6:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e6:SetRange(LOCATION_MZONE)
 	e6:SetValue(s.adval)
 	c:RegisterEffect(e6)
 	local e7=e6:Clone()
-	e7:SetCode(EFFECT_UPDATE_DEFENSE)
+	e7:SetCode(EFFECT_SET_BASE_DEFENSE)
 	c:RegisterEffect(e7)
 	--atkdown
 	local e8=Effect.CreateEffect(c)
@@ -75,8 +75,9 @@ end
 function s.tgcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_SPECIAL) and e:GetHandler():GetPreviousLocation()~=0
 end
-function s.tgtg(e,tp,eg,ep,ev,re,r,rp)
+function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
+	if chk==0 then return true end
 	if c:IsSummonType(SUMMON_TYPE_SPECIAL) then
 		if c:IsPreviousLocation(LOCATION_GRAVE) then
 			Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,c,1,0,0)

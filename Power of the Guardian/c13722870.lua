@@ -22,7 +22,8 @@ function s.initial_effect(c)
 	e2:SetValue(1)
 	c:RegisterEffect(e2)
 end
-s.material_setcode=0x10a2
+s.material_setcode={0x10a2,0xa2}
+s.material_attribute={ATTRIBUTE_FIRE}
 s.listed_names={49217579}
 function s.spfilter(c,e,tp)
 	return c:IsCode(49217579) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,true,true)

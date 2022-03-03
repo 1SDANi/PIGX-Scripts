@@ -1,5 +1,5 @@
 --ラストバトル！
---Last Turn
+--Final Battle
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -22,7 +22,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 		Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)==0 and
 		Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)==0
 end
-function s.rmtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
+function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
 	local c=e:GetHandler()
 	local a=Duel.GetAttacker()

@@ -7,6 +7,7 @@ function s.initial_effect(c)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 end
 s.listed_names={CARD_METAMORPHOSIS}
+s.material_race={RACE_BEAST,RACE_PLANT}
 function s.contactfil(tp)
 	return Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)
 end

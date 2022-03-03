@@ -2,7 +2,7 @@
 --Homunculus the Alchemic Being
 local s,id=GetID()
 function s.initial_effect(c)
-	--Attribute Fire
+	--Attributes
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_SINGLE)
 	e0:SetProperty(EFFECT_FLAG_SINGLE_RANGE)

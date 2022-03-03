@@ -7,6 +7,8 @@ function s.initial_effect(c)
 	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsRace,RACE_REPTILE),s.filter)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 end
+s.material_race={RACE_REPTILE+RACE_ELEMENTAL}
+s.material_attribute={ATTRIBUTE_WATER}
 function s.filter(c,fc,sumtype,tp)
 	return (c:IsRace(RACE_ELEMENTAL,fc,sumtype,tp) and (c:IsAttribute(ATTRIBUTE_WATER,fc,sumtype,tp)))
 end

@@ -25,7 +25,7 @@ function s.targ(e,tp,eg,ep,ev,re,r,rp,chk)
 	local a=Duel.GetAttacker()
 	local q=e:GetHandler():GetEquipTarget()
 	if chk ==0 then	return (a==q and d~=nil and d:IsRace(RACE_DRAGON)) or 
-		(d~=nil and d==q and a:IsRace(RACE_DRAGON)) end
+		(a~=nil and d==q and a:IsRace(RACE_DRAGON)) end
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,t,1,0,0)
 end
 function s.op(e,tp,eg,ep,ev,re,r,rp)
@@ -35,7 +35,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	if a==q and d~=nil and d:IsRace(RACE_DRAGON) and d:IsRelateToBattle() then
 		Duel.Destroy(d,REASON_EFFECT)
 	end
-	if d~=nil and d==q and a:IsRace(RACE_DRAGON) and a:IsRelateToBattle() then
+	if a~=nil and d==q and a:IsRace(RACE_DRAGON) and a:IsRelateToBattle() then
 		Duel.Destroy(a,REASON_EFFECT)
 	end
 end

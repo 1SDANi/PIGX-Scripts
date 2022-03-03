@@ -17,23 +17,27 @@ function s.initial_effect(c)
 	e2:SetTarget(aux.TargetBoolFunction(Card.IsRace,RACE_FAIRY))
 	e2:SetValue(1)
 	c:RegisterEffect(e2)
-	--battle indes
-	local e1=Effect.CreateEffect(c)
-	e1:SetType(EFFECT_TYPE_FIELD)
-	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
-	e1:SetRange(LOCATION_FZONE)
-	e1:SetCode(EFFECT_INDESTRUCTABLE)
-	e1:SetTargetRange(LOCATION_MZONE,LOCATION_MZONE)
-	e1:SetTarget(aux.TargetBoolFunction(Card.IsRace,RACE_FAIRY))
-	e1:SetCost(s.cost)
-	e1:SetValue(s.valcon)
-	c:RegisterEffect(e1)
-end
-function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():GetFlagEffect(id+tp)==0 end
-	e:GetHandler():RegisterFlagEffect(id+tp,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,0,1)
+	--indes
+	local e3=Effect.CreateEffect(c)
+	e3:SetType(EFFECT_TYPE_FIELD)
+	e3:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
+	e3:SetRange(LOCATION_FZONE)
+	e3:SetCode(EFFECT_INDESTRUCTABLE)
+	e3:SetTargetRange(LOCATION_MZONE,LOCATION_MZONE)
+	e3:SetTarget(s.tg)
+	e3:SetValue(s.valcon)
+	c:RegisterEffect(e3)
 end
 function s.valcon(e,re,r,rp)
 	return (r&REASON_BATTLE)~=0 or (r&REASON_EFFECT)~=0
+end
+function s.tg(e,c)
+	if e:GetHandler():GetFlagEffect(id+c:GetControler())~=0 then
+		return false
+	end
+	if c:IsRace(RACE_FAIRY) then
+		e:GetHandler():RegisterFlagEffect(id+c:GetControler(),RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,0,1)
+		return true
+	end
 end
 

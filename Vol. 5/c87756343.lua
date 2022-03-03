@@ -19,6 +19,7 @@ function s.initial_effect(c)
 	e1:SetOperation(Fusion.SummonEffOP(table.unpack(params)))
 	c:RegisterEffect(e1)
 end
+s.material_race={RACE_INSECT}
 s.listed_names={CARD_METAMORPHOSIS}
 function s.fextra(e,tp,mg)
 	if not Duel.IsPlayerAffectedByEffect(tp,69832741) then

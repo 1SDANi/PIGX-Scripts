@@ -4,11 +4,14 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--self destroy
 	local e1=Effect.CreateEffect(c)
-	e1:SetType(EFFECT_TYPE_SINGLE)
-	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE+EFFECT_FLAG_DELAY)
+	e1:SetDescription(aux.Stringid(id,0))
+	e1:SetCategory(CATEGORY_DESTROY)
+	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
 	e1:SetRange(LOCATION_MZONE)
-	e1:SetCode(EFFECT_SELF_DESTROY)
-	e1:SetCondition(s.sdcon)
+	e1:SetCode(EVENT_PHASE+PHASE_END)
+	e1:SetCountLimit(1)
+	e1:SetTarget(s.destg)
+	e1:SetOperation(s.desop)
 	c:RegisterEffect(e1)
 	--cannot be battle target
 	local e2=Effect.CreateEffect(c)
@@ -20,7 +23,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 	--equip
 	local e4=Effect.CreateEffect(c)
-	e4:SetDescription(aux.Stringid(id,0))
+	e4:SetDescription(aux.Stringid(id,1))
 	e4:SetCategory(CATEGORY_EQUIP)
 	e4:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e4:SetProperty(EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DELAY)
@@ -39,9 +42,16 @@ s.listed_names={95515060}
 function s.sdfilter(c)
 	return c:IsFaceup() and c:IsCode(95515060)
 end
-function s.sdcon(e)
-	return not e:GetHandler():IsStatus(STATUS_BATTLE_DESTROYED) and Duel.GetCurrentPhase()==PHASE_END
-		and not Duel.IsExistingMatchingCard(s.sdfilter,e:GetHandler():GetControler(),LOCATION_ONFIELD,0,1,nil)
+function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return not e:GetHandler():IsStatus(STATUS_BATTLE_DESTROYED) and Duel.GetCurrentPhase()==PHASE_END
+		and not Duel.IsExistingMatchingCard(s.sdfilter,e:GetHandler():GetControler(),LOCATION_ONFIELD,0,1,nil) end
+	Duel.SetOperationInfo(0,CATEGORY_DESTROY,e:GetHandler(),1,0,0)
+end
+function s.desop(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	if c:IsRelateToEffect(e) and c:IsFaceup() then
+		Duel.Destroy(c,REASON_EFFECT)
+	end
 end
 function s.filter(c,ec)
 	return c:IsType(TYPE_EQUIP) and c:CheckEquipTarget(ec) and c:IsCode(95515060)

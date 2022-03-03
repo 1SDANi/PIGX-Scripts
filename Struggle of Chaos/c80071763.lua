@@ -15,6 +15,7 @@ function s.initial_effect(c)
 	e2:SetValue(s.efilter)
 	c:RegisterEffect(e2)
 end
+s.material_setcode={0x6d}
 function s.efilter(e,re,rp)
 	return re:GetHandler():IsType(TYPE_SPELL) and aux.tgoval(e,re,rp)
 end

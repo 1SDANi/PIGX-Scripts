@@ -40,7 +40,7 @@ function s.aclimit(e,re,tp)
 	return re:IsActiveType(TYPE_MONSTER)
 end
 function s.actcon(e)
-	return Duel.GetAttacker()==e:GetHandler() and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_MZONE,0,1,e:GetHandler(),ATTRIBUTE_EARTH)
+	return Duel.GetAttacker()==e:GetHandler() and Duel.IsExistingMatchingCard(s.filter,e:GetHandler():GetControler(),LOCATION_MZONE,0,1,e:GetHandler(),ATTRIBUTE_EARTH)
 end
 function s.atcon(e,tp,eg,ep,ev,re,r,rp)
 	return aux.bdocon(e,tp,eg,ep,ev,re,r,rp) and e:GetHandler():CanChainAttack()

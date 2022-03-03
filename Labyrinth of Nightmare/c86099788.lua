@@ -24,6 +24,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.splimit)
 	c:RegisterEffect(e2)
 end
+s.material_race={RACE_WARRIOR,RACE_FIEND}
 function s.splimit(e,c,tp,sumtp,sumpos)
 	return (sumtp&SUMMON_TYPE_FUSION)==SUMMON_TYPE_FUSION
 end

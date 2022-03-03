@@ -31,7 +31,7 @@ function s.filter(c,att)
 	return c:IsFaceup() and c:IsAttribute(att)
 end
 function s.atkcon(e)
-	return Duel.IsExistingMatchingCard(s.filter,ctlcon,LOCATION_MZONE,0,1,e:GetHandler(),ATTRIBUTE_FIRE)
+	return Duel.IsExistingMatchingCard(s.filter,e:GetHandler():GetControler(),LOCATION_MZONE,0,1,e:GetHandler(),ATTRIBUTE_FIRE)
 end
 function s.atcon(e,tp,eg,ep,ev,re,r,rp)
 	return aux.bdocon(e,tp,eg,ep,ev,re,r,rp) and e:GetHandler():CanChainAttack()

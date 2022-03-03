@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	e2:SetOperation(s.operation)
 	c:RegisterEffect(e2)
 end
-s.material_setcode=0x2066
+s.material_setcode={0x2066}
 s.listed_names={99785935,39256679,11549357}
 function s.contactfil(tp)
 	return Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)

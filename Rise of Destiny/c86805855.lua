@@ -15,6 +15,9 @@ function s.initial_effect(c)
 	e4:SetTarget(s.desreptg)
 	c:RegisterEffect(e4)
 end
+s.material_race={RACE_DRAGON}
+s.material_attribute={ATTRIBUTE_DARK}
+s.material_type={TYPE_UNION}
 function s.repfilter(c)
 	return c:IsRace(RACE_DRAGON) and c:IsAttribute(ATTRIBUTE_DARK) and c:IsType(TYPE_UNION)
 		and c:IsAbleToRemove() and aux.SpElimFilter(c,true)

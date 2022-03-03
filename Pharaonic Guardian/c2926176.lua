@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.cfilter(c)
-	return c:IsOnField() and c:IsType(TYPE_SPELL+TYPE_TRAP)
+	return c:IsOnField() and c:IsType(TYPE_SPELL+TYPE_TRAP+TYPE_MONSTER)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	if not re:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then return end

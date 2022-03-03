@@ -430,6 +430,48 @@ function Auxiliary.IsMaterialListSetCard(c,...)
 	end
 	return false
 end
+function Auxiliary.IsMaterialListRace(c,...)
+	if not c.material_race then return false end
+	local races={...}
+	for _,race in ipairs(races) do
+		if type(c.material_race)=='table' then
+			for _,v in ipairs(c.material_race) do
+				if v==race then return true end
+			end
+		else
+			if c.material_race==race then return true end
+		end
+	end
+	return false
+end
+function Auxiliary.IsMaterialListType(c,...)
+	if not c.material_type then return false end
+	local types={...}
+	for _,typee in ipairs(types) do
+		if type(c.material_type)=='table' then
+			for _,v in ipairs(c.material_type) do
+				if v==typee then return true end
+			end
+		else
+			if c.material_type==typee then return true end
+		end
+	end
+	return false
+end
+function Auxiliary.IsMaterialListAttribute(c,...)
+	if not c.material_attribute then return false end
+	local attributes={...}
+	for _,attribute in ipairs(attributes) do
+		if type(c.material_attribute)=='table' then
+			for _,v in ipairs(c.material_attribute) do
+				if v==attribute then return true end
+			end
+		else
+			if c.material_attribute==attribute then return true end
+		end
+	end
+	return false
+end
 function Auxiliary.IsCodeListed(c,...)
 	if not c.listed_names then return false end
 	local codes={...}

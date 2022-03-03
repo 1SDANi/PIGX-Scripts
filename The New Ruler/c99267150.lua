@@ -40,6 +40,8 @@ function s.initial_effect(c)
 	e4:SetOperation(s.regop)
 	c:RegisterEffect(e4)
 end
+s.material_race=RACE_DRAGON
+s.material_attribute={ATTRIBUTE_DARK}
 function s.regcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION)
 end

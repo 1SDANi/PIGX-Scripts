@@ -7,7 +7,9 @@ function s.initial_effect(c)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 end
 s.listed_names={CARD_METAMORPHOSIS}
-s.material_setcode=0x3b
+s.material_setcode={0x3b}
+s.material_race={RACE_MACHINE}
+s.material_type={TYPE_NORMAL}
 function s.filter(c,fc,sumtype,tp)
 	return (c:IsRace(RACE_MACHINE,fc,sumtype,tp) and c:IsType(TYPE_NORMAL) or c:IsCode(68540058))
 end
