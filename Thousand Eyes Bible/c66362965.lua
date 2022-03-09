@@ -12,10 +12,10 @@ function s.initial_effect(c)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
 end
-function s.spcon(e,c)
-	if c==nil then return true end
-	return Duel.GetLocationCount(c:GetControler(),LOCATION_ONFIELD)>0
-		and Duel.GetFieldGroupCount(c:GetControler(),0,LOCATION_ONFIELD,nil)-Duel.GetFieldGroupCount(c:GetControler(),LOCATION_ONFIELD,0,nil)>=2
+function s.spcon(e,tp,eg,ep,ev,re,r,rp,chk)
+	local c=e:GetHandler()
+	return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
+		and Duel.GetFieldGroupCount(tp,0,LOCATION_ONFIELD,nil)-Duel.GetFieldGroupCount(tp,LOCATION_ONFIELD,0,nil)>=2
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()

@@ -23,7 +23,7 @@ function s.spfilter(c,e,tp)
 	return c:IsReason(REASON_FUSION) and c:IsType(TYPE_MONSTER) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.cfilter(c,e,tp)
-	return c:IsRace(RACE_MACHINE) and c:IsControler(tp) and c:IsLocation(LOCATION_GRAVE) and c:IsReason(REASON_BATTLE+REASON_EFFECT)
+	return c:IsControler(tp) and c:IsLocation(LOCATION_GRAVE) and c:IsReason(REASON_BATTLE+REASON_EFFECT)
 		and (c:GetPreviousTypeOnField()&RACE_FUSION)~=0
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)

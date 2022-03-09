@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	e2:SetCondition(s.subcon)
 	c:RegisterEffect(e2)
 end
-s.listed_names={CARD_POLYMERIZATION}
+s.listed_names={CARD_FUSION}
 function s.subcon(e)
 	return e:GetHandler():IsLocation(LOCATION_HAND+LOCATION_ONFIELD+LOCATION_GRAVE)
 end
@@ -29,7 +29,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SendtoGrave(c,REASON_COST+REASON_DISCARD)
 end
 function s.filter(c)
-	return c:IsCode(CARD_POLYMERIZATION) and c:IsAbleToHand()
+	return c:IsCode(CARD_FUSION) and c:IsAbleToHand()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil) end

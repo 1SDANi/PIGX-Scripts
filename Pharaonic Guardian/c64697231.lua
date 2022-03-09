@@ -20,11 +20,11 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetFieldGroupCount(tp,0,LOCATION_HAND)>0 end
-	Duel.SetTargetPlayer(tp)
+	Duel.SetTargetPlayer(1-tp)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
-	local g=Duel.GetFieldGroup(p,0,LOCATION_HAND)
+	local g=Duel.GetFieldGroup(p,LOCATION_HAND,0)
 	if #g>0 then
 		local sg=g:RandomSelect(ep,1)
 		Duel.SendtoDeck(sg,nil,2,REASON_EFFECT)

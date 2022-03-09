@@ -21,7 +21,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
-	if Duel.IsExistingMatchingCard(Duel.IsType,1-p,LOCATION_HAND,0,1,nil,TYPE_TRAP) and
+	if Duel.IsExistingMatchingCard(Duel.IsType,1-p,LOCATION_HAND,0,1,nil,TYPE_TRAP) and Duel.IsPlayerCanDraw(1-p,2) and
 		Duel.SelectYesNo(1-p,aux.Stringid(id,1)) and
 			Duel.DiscardHand(1-p,Card.IsType,1,1,REASON_DISCARD,nil,TYPE_TRAP)>0 then
 		Duel.Draw(1-p,d,REASON_EFFECT)

@@ -1,5 +1,5 @@
 --XYZ－ドラゴン・キャノン
---XYZ-Dragon Cannon
+--XYZ-Head Dragon Tank
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 	--destroy
 	local e3=Effect.CreateEffect(c)
-	e3:SetDescription(aux.Stringid(id,0))
+	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_DESTROY)
 	e3:SetType(EFFECT_TYPE_IGNITION)
 	e3:SetProperty(EFFECT_FLAG_CARD_TARGET)

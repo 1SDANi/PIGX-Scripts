@@ -76,6 +76,47 @@ function Fusion.AddProcMix(c,sub,insf,...)
 	c:RegisterEffect(e1)
 	return {e1}
 end
+function Fusion.AddProcMixWithDescription(c,desc,sub,insf,...)
+	if c:IsStatus(STATUS_COPYING_EFFECT) then return end
+	local val={...}
+	local fun={}
+	local mat={}
+	for i=1,#val do
+		if type(val[i])=='function' then
+			fun[i]=function(c,fc,sub,sub2,mg,sg,tp,contact,sumtype) return (val[i](c,fc,sumtype,tp,sub,mg,sg,contact) or (sub2 and c:IsHasEffect(511002961))) and not c:IsHasEffect(6205579) end
+		elseif type(val[i])=='table' then
+			fun[i]=Fusion.ParseMaterialTable(val[i],mat)
+		else
+			local addmat=true
+			fun[i]=function(c,fc,sub,sub2,mg,sg,tp,contact,sumtype) return c:IsSummonCode(fc,sumtype,fc:GetControler(),val[i]) or (sub and c:CheckFusionSubstitute(fc)) or (sub2 and c:IsHasEffect(511002961)) end
+			for index, value in ipairs(mat) do
+				if value==val[i] then
+					addmat=false
+				end
+			end
+			if addmat then table.insert(mat,val[i]) end
+		end
+	end
+	if c.material_count==nil then
+		local mt=c:GetMetatable()
+		if #mat>0 then
+			mt.material_count=#mat
+			mt.material=mat
+		end
+		--for cards that check number of required materials (Ultra Poly/ Ancient Gear Chaos Fusion)
+		mt.min_material_count=#val
+		mt.max_material_count=#val
+	end
+	local e1=Effect.CreateEffect(c)
+	e1:SetType(EFFECT_TYPE_SINGLE)
+	e1:SetDescription(desc)
+	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
+	e1:SetCode(EFFECT_FUSION_MATERIAL)
+	e1:SetCondition(Fusion.ConditionMix(insf,sub,table.unpack(fun)))
+	e1:SetOperation(Fusion.OperationMix(insf,sub,table.unpack(fun)))
+	c:RegisterEffect(e1)
+	return {e1}
+end
 function Fusion.ConditionMix(insf,sub,...)
 	--g:Material group(nil for Instant Fusion)
 	--gc:Material already used
@@ -870,7 +911,7 @@ function Fusion.ContactCon(f,fcon)
 		local c=e:GetHandler()
 		if c==nil then return true end
 		local m=f(e:GetHandlerPlayer())
-		local chkf=c:GetControler()|FUSPROC_CONTACTFUS
+		local chkf=c:GetControler()
 		return c:CheckFusionMaterial(m,nil,chkf) and (not fcon or fcon(e:GetHandlerPlayer()))
 	end
 end

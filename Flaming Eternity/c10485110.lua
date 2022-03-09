@@ -5,12 +5,12 @@ function s.initial_effect(c)
 	--fusion material
 	c:EnableReviveLimit()
 	Fusion.AddProcMixN(c,true,true,37721209,1)
-	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	--Destroy all cards on the field
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_DESTROY)
-	e1:SetType(EFFECT_TYPE_IGNITION)
+	e1:SetCode(EVENT_SPSUMMON_SUCCESS)
+	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
 	e1:SetProperty(EFFECT_FLAG_DELAY)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetCondition(s.condition)
@@ -20,7 +20,7 @@ function s.initial_effect(c)
 end
 s.listed_names={CARD_UMI}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsEnvironment(CARD_UMI)
+	return Duel.IsEnvironment(CARD_UMI) and e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION)
 end
 function s.filter(c)
 	return not c:IsCode(CARD_UMI)
