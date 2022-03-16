@@ -25,15 +25,15 @@ function s.initial_effect(c)
 end
 s.listed_series={0x3008}
 s.listed_names={79979666}
-function s.filter(c)
+function s.bfilter(c)
 	return c:IsCode(79979666) and c:IsFaceup() and c:IsCanChangePosition()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return false end
-	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,LOCATION_MZONE,0,1,nil,e,tp) 
-		and Duel.IsExistingTarget(Card.IsAbleToRemove,tp,0,LOCATION_MZONE,1,nil,e,tp) end
+	if chkc then return s.bfilter(chkc) and chkc:IsControler(tp) and chkc:IsType(TYPE_MONSTERR) end
+	if chk==0 then return Duel.IsExistingTarget(s.bfilter,tp,LOCATION_MZONE,0,1,nil) 
+		and Duel.IsExistingTarget(Card.IsAbleToRemove,tp,0,LOCATION_MZONE,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_POSCHANGE)
-	local g1=Duel.SelectTarget(tp,s.filter,tp,LOCATION_MZONE,0,1,1,nil,e,tp)
+	local g1=Duel.SelectTarget(tp,s.bfilter,tp,LOCATION_MZONE,0,1,1,nil,e,tp)
 	Duel.SetOperationInfo(0,CATEGORY_POSITION,g1,1,0,0)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
 	local g2=Duel.SelectTarget(tp,Card.IsAbleToRemove,tp,0,LOCATION_MZONE,1,1,nil)
@@ -46,11 +46,11 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local ex1,tg1=Duel.GetOperationInfo(0,CATEGORY_POSITION)
 	local ex2,tg2=Duel.GetOperationInfo(0,CATEGORY_REMOVE)
 	if tg1:GetFirst() and tg1:GetFirst():IsRelateToEffect(e) and
-		Duel.ChangePosition(tc,POS_FACEUP_DEFENSE,POS_FACEUP_DEFENSE,POS_FACEUP_ATTACK,POS_FACEUP_ATTACK)~=0
+		Duel.ChangePosition(tg1:GetFirst(),POS_FACEUP_DEFENSE,POS_FACEUP_DEFENSE,POS_FACEUP_ATTACK,POS_FACEUP_ATTACK)
 		and tg2:GetFirst() and tg2:GetFirst():IsRelateToEffect(e) then
 		Duel.Remove(tg2,POS_FACEUP,REASON_EFFECT)
 		Duel.BreakEffect()
-		if Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
+		if Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 			local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_HAND,0,1,1,nil,e,tp)
 			if #g>0 then

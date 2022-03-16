@@ -23,14 +23,10 @@ function s.initial_effect(c)
 	e3:SetCode(EVENT_MSET)
 	c:RegisterEffect(e3)
 end
-function s.cfilter(c)
-	return (c:GetPreviousTypeOnField()&TYPE_MONSTER)==TYPE_MONSTER
-end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	local tc=eg:GetFirst()
 	local mg=tc:GetMaterial()
-	return tc:IsSummonType(SUMMON_TYPE_TRIBUTE) and tc:IsSummonPlayer(tp) and mg 
-		and mg:FilterCount(s.cfilter,nil)>=1
+	return tc:IsSummonType(SUMMON_TYPE_TRIBUTE) and tc:IsSummonPlayer(tp)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

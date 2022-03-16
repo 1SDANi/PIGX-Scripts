@@ -23,22 +23,19 @@ function s.initial_effect(c)
 	e4:SetType(EFFECT_TYPE_FIELD)
 	e4:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e4:SetRange(LOCATION_MZONE)
-	e4:SetCode(EFFECT_INDESTRUCTABLE)
+	e4:SetCode(EFFECT_INDESTRUCTABLE_EFFECT)
 	e4:SetTargetRange(LOCATION_SZONE,0)
 	e4:SetCountLimit(1)
 	e4:SetTarget(s.tg)
-	e4:SetValue(s.valcon)
+	e4:SetValue(1)
 	c:RegisterEffect(e4)
 end
 function s.tg(e,c)
 	return c:IsType(TYPE_SPELL) and c:IsType(TYPE_CONTINUOUS)
 end
-function s.valcon(e,re,r,rp)
-	return (r&REASON_EFFECT)~=0
-end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(1-tp) end
-	if chk==0 then return true end
+	if chk==0 then return Duel.IsExistingTarget(aux.TRUE,tp,0,LOCATION_MZONE,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
 	local g=Duel.SelectTarget(tp,aux.TRUE,tp,0,LOCATION_MZONE,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,#g,0,0)

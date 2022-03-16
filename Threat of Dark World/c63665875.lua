@@ -2,7 +2,7 @@
 --Goblin Zombie
 local s,id=GetID()
 function s.initial_effect(c)
-	--handes
+	--deckdes
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_DECKDES)

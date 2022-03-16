@@ -26,7 +26,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.dfilter,tp,LOCATION_MZONE,0,nil)
 	if #g==0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
-	local dg=g:Select(tp,1,ct,nil)
+	local dg=g:Select(tp,1,99,nil)
 	Duel.HintSelection(dg)
 	local ct=Duel.Destroy(dg,REASON_EFFECT)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)

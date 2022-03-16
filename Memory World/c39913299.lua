@@ -5,6 +5,7 @@ function s.initial_effect(c)
 	local e1=Fusion.CreateSummonEff(c,aux.FilterBoolFunction(Card.IsCode,10000040),s.filter1,s.filter2,nil,nil,nil,nil,SUMMON_TYPE_FUSION,nil,nil,nil,nil,nil,nil,nil,nil,nil,10000040)
 	e1:SetCondition(s.condition)
 	c:RegisterEffect(e1)
+	if not TrueNameTable then TrueNameTable={} end
 	aux.GlobalCheck(s,function()
 		local ge1=Effect.CreateEffect(c)
 		ge1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
@@ -16,25 +17,28 @@ function s.initial_effect(c)
 		ge2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 		ge2:SetProperty(EFFECT_FLAG_DELAY)
 		ge2:SetCode(EVENT_SUMMON_SUCCESS)
+		ge2:SetLabelObject(TrueNameTable)
 		ge2:SetOperation(s.checkop2)
 		Duel.RegisterEffect(ge2,0)
 		local ge3=Effect.CreateEffect(c)
 		ge3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 		ge3:SetProperty(EFFECT_FLAG_DELAY)
 		ge3:SetCode(EVENT_FLIP_SUMMON_SUCCESS)
+		ge3:SetLabelObject(TrueNameTable)
 		ge3:SetOperation(s.checkop2)
 		Duel.RegisterEffect(ge3,0)
 		local ge4=Effect.CreateEffect(c)
 		ge4:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 		ge4:SetProperty(EFFECT_FLAG_DELAY)
 		ge4:SetCode(EVENT_SPSUMMON_SUCCESS)
+		ge4:SetLabelObject(TrueNameTable)
 		ge4:SetOperation(s.checkop2)
 		Duel.RegisterEffect(ge4,0)
 	end)
 end
 s.listed_names={14731897,10000040}
 function s.filter1(c,e,tp)
-	return c:IsAbleToRemove() and Duel.GetFlagEffect(tp,c:GetCode())~=0
+	return c:IsAbleToRemove() and TrueNameTable[c:GetCode()]~=nil
 end
 function s.filter2(e,tp)
 	if not Duel.IsPlayerAffectedByEffect(tp,69832741) then
@@ -53,8 +57,8 @@ function s.checkop2(e,tp,eg,ep,ev,re,r,rp)
 	local code=tc:GetCode()
 	for tc in aux.Next(eg) do
 		code=tc:GetCode()
-		if Duel.GetFlagEffect(rp,code)==0 then
-			Duel.RegisterFlagEffect(rp,code,0,0,1)
+		if e:GetLabelObject()[code]==nil then
+			e:GetLabelObject()[code]=1
 		end
 	end
 end

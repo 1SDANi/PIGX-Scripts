@@ -77,7 +77,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return Duel.IsExistingTarget(s.ctfilter,tp,LOCATION_REMOVED,0,1,nil,e,tp) end
 	local g=Duel.GetMatchingGroup(s.ctfilter,tp,LOCATION_REMOVED,0,nil,e,tp)
 	local c=ft
-	if c>2 then c=2 end
+	if c>5 then c=5 end
 	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then c=1 end
 	if #g==0 then return end
 	local sg=aux.SelectUnselectGroup(g,e,tp,1,c,s.ctcheck,1,tp,HINTMSG_SPSUMMON)

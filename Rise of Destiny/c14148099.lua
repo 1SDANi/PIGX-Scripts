@@ -17,6 +17,7 @@ function s.initial_effect(c)
 	e1:SetCode(EVENT_SPSUMMON_SUCCESS)
 	c:RegisterEffect(e12)
 	local e2=Effect.CreateEffect(c)
+	e2:SetCategory(CATEGORY_COIN)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 	e2:SetCode(EFFECT_DESTROY_REPLACE)
 	e2:SetRange(LOCATION_MZONE)
@@ -24,6 +25,7 @@ function s.initial_effect(c)
 	e2:SetOperation(s.repop)
 	c:RegisterEffect(e2)
 end
+s.toss_coin=true
 function s.addct(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	Duel.SetOperationInfo(0,CATEGORY_COUNTER,nil,3,0,0x1f)
@@ -36,8 +38,13 @@ end
 function s.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return (r&REASON_REPLACE+REASON_RULE)==0
 		and e:GetHandler():GetCounter(0x1f)>0 end
+	Duel.SetOperationInfo(0,CATEGORY_COIN,nil,0,tp,1)
 	return true
 end
 function s.repop(e,tp,eg,ep,ev,re,r,rp,chk)
-	e:GetHandler():RemoveCounter(tp,0x1f,1,REASON_EFFECT)
+	local coin=Duel.SelectOption(tp,60,61)
+	local res=Duel.TossCoin(tp,1)
+	if coin==res then
+		e:GetHandler():RemoveCounter(tp,0x1f,1,REASON_EFFECT)
+	end
 end

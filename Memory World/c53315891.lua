@@ -78,14 +78,6 @@ function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 		if cdef<0 then cdef=0 end
 		atk=atk+catk
 		def=def+cdef
-		local code=tc:GetOriginalCode()
-		local cid=c:CopyEffect(code,RESET_EVENT+RESETS_STANDARD,1)
-		c:RegisterFlagEffect(code,RESET_EVENT+RESETS_STANDARD,0,0)
-		local e0=Effect.CreateEffect(c)
-		e0:SetCode(id)
-		e0:SetLabel(code)
-		e0:SetReset(RESET_EVENT+RESETS_STANDARD)
-		c:RegisterEffect(e0,true)
 	end
 	if atk~=0 then
 		local e1=Effect.CreateEffect(c)

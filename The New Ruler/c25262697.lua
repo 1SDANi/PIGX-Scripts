@@ -13,7 +13,6 @@ function s.initial_effect(c)
 	e1:SetOperation(s.posop)
 	c:RegisterEffect(e1)
 end
-s.listed_names={CARD_NECROVALLEY}
 function s.filter(c)
 	return c:IsCanChangePosition()
 end
