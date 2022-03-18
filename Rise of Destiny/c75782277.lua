@@ -42,12 +42,12 @@ function s.initial_effect(c)
 		Duel.RegisterEffect(ge2,0)
 	end)
 end
-s.listed_names={CARD_HARPIE_LADY}
+s.listed_names={CARD_HARPY_LADY}
 function s.check(e,tp,eg,ep,ev,re,r,rp)
 	local g1=Group.CreateGroup()
 	local g2=Group.CreateGroup()
 	for tc in aux.Next(eg) do
-		if tc:IsFaceup() and tc:IsCode(CARD_HARPIE_LADY) then
+		if tc:IsFaceup() and tc:IsCode(CARD_HARPY_LADY) then
 			if tc:IsControler(0) then g1:AddCard(tc) else g2:AddCard(tc) end
 		end
 	end

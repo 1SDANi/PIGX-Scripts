@@ -14,12 +14,12 @@ function s.initial_effect(c)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
 end
-s.listed_series={0x46,0x3008}
+s.listed_series={0x46,0x8}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsLocation(LOCATION_GRAVE) and (r&REASON_EFFECT+REASON_BATTLE)~=0
 end
 function s.filter1(c)
-	return c:IsSetCard(0x3008) and c:IsAbleToHand()
+	return c:IsSetCard(0x8) and c:IsAbleToHand() and c:IsType(TYPE_MONSTER)
 end
 function s.filter2(c)
 	return c:IsSetCard(0x46) and c:IsAbleToHand()

@@ -18,5 +18,5 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.value(e,c)
-	return Duel.GetFieldGroupCount(c:GetControler(),LOCATION_REMOVED,0)*400
+	return Duel.GetFieldGroupCount(c:GetControler(),LOCATION_REMOVED,0)*500
 end

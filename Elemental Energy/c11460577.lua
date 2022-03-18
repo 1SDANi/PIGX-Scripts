@@ -1,5 +1,5 @@
 --エトワール・サイバー
---Etoile Cyber
+--Cyber Etoile
 local s,id=GetID()
 function s.initial_effect(c)
 	local e1=Effect.CreateEffect(c)

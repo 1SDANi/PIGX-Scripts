@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	e2:SetCode(EFFECT_DISABLE)
 	c:RegisterEffect(e2)
 end
-s.listed_names={CARD_HARPIE_LADY}
+s.listed_names={CARD_HARPY_LADY}
 function s.disable(e,c)
 	return c:IsType(TYPE_EFFECT) and c:IsType(TYPE_FLIP) or 
 	((c:GetOriginalType()&TYPE_EFFECT)==TYPE_EFFECT and (c:GetOriginalType()&TYPE_FLIP)==TYPE_FLIP)

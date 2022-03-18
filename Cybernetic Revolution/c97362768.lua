@@ -42,7 +42,7 @@ function s.posop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.cs(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToGraveAsCost() and c:IsDiscardable() end
+	if chk==0 then return c:IsDiscardable() end
 	Duel.SendtoGrave(c,REASON_COST+REASON_DISCARD)
 end
 function s.afilter(c)

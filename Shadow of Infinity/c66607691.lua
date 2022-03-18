@@ -13,7 +13,7 @@ function s.initial_effect(c)
 end
 s.fit_monster={4162088}
 function s.filter(c,e,tp,m)
-	local cd=c:GetCode()
+	local cd=c:GetOriginalCode()
 	if cd~=4162088 or not c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,true,true) then return false end
 	if m:IsContains(c) then
 		m:RemoveCard(c)
