@@ -15,7 +15,6 @@ function s.initial_effect(c)
 	e0:SetOperation(s.tgop)
 	c:RegisterEffect(e0)
 	--summon with 3 tribute
-	local e1=aux.AddNormalSummonProcedure(c,true,false,3,3)
 	local e2=aux.AddNormalSetProcedure(c)
 	--summon
 	local e3=Effect.CreateEffect(c)

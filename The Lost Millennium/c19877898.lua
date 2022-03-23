@@ -3,7 +3,6 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--summon with 3 tribute
-	local e01=aux.AddNormalSummonProcedure(c,true,false,3,3)
 	local e02=aux.AddNormalSetProcedure(c)
 	--Register summon by "LV" monster
 	local e0=Effect.CreateEffect(c)
@@ -59,7 +58,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 		and Duel.IsExistingMatchingCard(s.filter1,tp,LOCATION_DECK+LOCATION_HAND,0,1,nil,e,tp) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND)
 end
-function s.spop(e,tp,eg,ep,ev,re,r,rp)
+function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	if ft<=0 then return end
 	if ft>2 then ft=2 end

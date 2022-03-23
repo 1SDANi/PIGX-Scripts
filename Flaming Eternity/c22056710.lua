@@ -12,12 +12,17 @@ function s.initial_effect(c)
 	e3:SetType(EFFECT_TYPE_IGNITION)
 	e3:SetCountLimit(1)
 	e3:SetRange(LOCATION_MZONE)
+	e3:SetCost(s.cost)
 	e3:SetTarget(s.sptg)
 	e3:SetOperation(s.spop)
 	c:RegisterEffect(e3)
 end
 s.listed_names={CARD_METAMORPHOSIS}
 s.material_setcode={0x8e}
+function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,e:GetHandler()) end
+	Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST+REASON_DISCARD)
+end
 function s.filter(c,e,tp)
 	return c:IsRace(RACE_ZOMBIE) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
@@ -39,5 +44,5 @@ function s.contactfil(tp)
 	return Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)
 end
 function s.contactop(g)
-	Duel.SendtoGrave(g,REASON_COST+REASON_MATERIAL)
+	Duel.SendtoGrave(g,REASON_COST+REASON_MATERIAL+REASON_FUSION)
 end

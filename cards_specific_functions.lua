@@ -213,15 +213,28 @@ end
 function Auxiliary.NeosReturnSubstituteFilter(c)
 	return c:IsCode(14088859) and c:IsAbleToRemoveAsCost()
 end
+function Auxiliary.NeosReturnFilter(c,e,tp,fusc,mg)
+	return c:IsControler(tp) and c:IsLocation(LOCATION_DECK)
+		and (c:GetReason()&0x40008)==0x40008 and c:GetReasonCard()==fusc
+		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+end
 function Auxiliary.NeosReturnOperation(c,extraop)
 	return function(e,tp,eg,ep,ev,re,r,rp)
 		local c=e:GetHandler()
+		local mg=c:GetMaterial()
+		local ct=#mg
+		local sumtype=c:GetSummonType()
 		if not c:IsRelateToEffect(e) or c:IsFacedown() then return end
 		local sc=Duel.GetFirstMatchingCard(Auxiliary.NecroValleyFilter(Auxiliary.NeosReturnSubstituteFilter),tp,LOCATION_GRAVE,0,nil)
 		if sc and Duel.SelectYesNo(tp,aux.Stringid(14088859,0)) then
 			Duel.Remove(sc,POS_FACEUP,REASON_COST)
 		else
-			Duel.SendtoDeck(c,nil,2,REASON_EFFECT)
+			if Duel.SendtoDeck(c,nil,2,REASON_EFFECT)>0 and (sumtype&SUMMON_TYPE_FUSION)==SUMMON_TYPE_FUSION
+			and ct>0 and ct<=Duel.GetLocationCount(tp,LOCATION_MZONE)
+			and mg:FilterCount(Auxiliary.NeosReturnFilter,nil,e,tp,c,mg)==ct
+			and (ct==1 or (not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT))) then
+				Duel.SpecialSummon(mg,0,tp,tp,false,false,POS_FACEUP)
+			end
 		end
 		if c:IsLocation(LOCATION_EXTRA) then
 			if extraop then

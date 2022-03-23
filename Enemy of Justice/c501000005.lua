@@ -3,7 +3,6 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--summon with 3 tribute
-	local e1=aux.AddNormalSummonProcedure(c,true,false,3,3)
 	local e2=aux.AddNormalSetProcedure(c)
 	--atkup
 	local e3=Effect.CreateEffect(c)

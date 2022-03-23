@@ -24,7 +24,7 @@ function s.contactfil(tp)
 	return Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)
 end
 function s.contactop(g)
-	Duel.SendtoGrave(g,REASON_COST+REASON_MATERIAL)
+	Duel.SendtoGrave(g,REASON_COST+REASON_MATERIAL+REASON_FUSION)
 end
 function s.ctfilter(c,e,tp)
 	return c:IsSetCard(0x1b) and c:IsCanBeSpecialSummoned(e,0,tp,false,false) and not c:IsCode(id)

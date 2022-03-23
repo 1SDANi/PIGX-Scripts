@@ -50,7 +50,7 @@ function s.contactfil(tp)
 	return Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)
 end
 function s.contactop(g)
-	Duel.SendtoGrave(g,REASON_COST+REASON_MATERIAL)
+	Duel.SendtoGrave(g,REASON_COST+REASON_MATERIAL+REASON_FUSION)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,e:GetHandler()) end

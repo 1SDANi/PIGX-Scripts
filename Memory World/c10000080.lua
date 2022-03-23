@@ -11,5 +11,5 @@ function s.contactfil(tp)
 	return Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,nil)
 end
 function s.contactop(g)
-	Duel.SendtoGrave(g,REASON_COST+REASON_MATERIAL)
+	Duel.SendtoGrave(g,REASON_COST+REASON_MATERIAL+REASON_FUSION)
 end

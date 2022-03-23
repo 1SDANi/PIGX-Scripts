@@ -41,12 +41,6 @@ end
 function s.valcon(e,re,r,rp)
 	return (r&REASON_BATTLE)~=0 or (r&REASON_EFFECT)~=0
 end
-function s.contactfil(tp)
-	return Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)
-end
-function s.contactop(g)
-	Duel.SendtoGrave(g,REASON_COST+REASON_MATERIAL)
-end
 function s.tg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local t=Duel.GetAttackTarget()
 	if t==e:GetHandler() then t=Duel.GetAttacker() end
@@ -64,4 +58,10 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	t:RegisterEffect(e1)
 	local e2=e1:Clone()
 	a:RegisterEffect(e2)
+end
+function s.contactfil(tp)
+	return Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)
+end
+function s.contactop(g)
+	Duel.SendtoGrave(g,REASON_COST+REASON_MATERIAL+REASON_FUSION)
 end

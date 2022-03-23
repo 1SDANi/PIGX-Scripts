@@ -29,9 +29,32 @@ function s.initial_effect(c)
 	local e6=e4:Clone()
 	e6:SetCode(EVENT_SPSUMMON_SUCCESS)
 	c:RegisterEffect(e6)
+	--atk
+	local e7=Effect.CreateEffect(c)
+	e7:SetType(EFFECT_TYPE_SINGLE)
+	e7:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
+	e7:SetRange(LOCATION_MZONE)
+	e7:SetCode(EFFECT_SET_ATTACK)
+	e7:SetValue(s.atkval)
+	c:RegisterEffect(e7)
+	local e8=e7:Clone()
+	e8:SetCode(EFFECT_SET_DEFENSE)
+	e8:SetValue(s.defval)
+	c:RegisterEffect(e8)
 end
 s.listed_series={0x8}
 s.listed_names={id}
+function s.vfilter(c)
+	return c:IsFaceup() and c:IsSetCard(0x8) and not c:IsCode(id)
+end
+function s.atkval(e,c)
+	local g=Duel.GetMatchingGroup(s.vfilter,c:GetControler(),LOCATION_MZONE,0,c)
+	return g:GetSum(Card.GetBaseAttack)
+end
+function s.defval(e,c)
+	local g=Duel.GetMatchingGroup(s.vfilter,c:GetControler(),LOCATION_MZONE,0,c)
+	return g:GetSum(Card.GetBaseDefense)
+end
 function s.indop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsPosition(POS_FACEUP_ATTACK) then
@@ -52,42 +75,22 @@ function s.indop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.spfilter(c,e,tp)
-	return c:IsSetCard(0x8) and c:IsCanBeSpecialSummoned(e,0,tp,false,false) and not c:IsCode(id)
+	return c:IsSetCard(0x8) and c:IsCanBeSpecialSummoned(e,0,tp,false,false) and c:IsLevelBelow(4)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp) end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-	local tg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_GRAVE,0,nil,e,tp)
-	if ft<=0 or #tg==0 then return end
+	if ft<=0 then return end
+	if ft>2 then ft=2 end
 	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=tg:Select(tp,ft,ft,nil)
-	if #g>0 and Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)>0 then
-		local atk=0
-		local def=0
-		local tc=g:GetFirst()
-		for tc in aux.Next(g) do
-			atk=atk+tc:GetAttack()
-			def=def+tc:GetDefense()
-		end
-		--atk,def
-		local e2=Effect.CreateEffect(e:GetHandler())
-		e2:SetType(EFFECT_TYPE_SINGLE)
-		e2:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
-		e2:SetRange(LOCATION_MZONE)
-		e2:SetTargetRange(LOCATION_MZONE,0)
-		e2:SetCode(EFFECT_SET_BASE_ATTACK)
-		e2:SetValue(s.val)
-		e2:SetLabel(atk)
-		e:GetHandler():RegisterEffect(e2)
-		local e3=e2:Clone()
-		e3:SetCode(EFFECT_SET_BASE_DEFENSE)
-		e3:SetLabel(def)
-		e:GetHandler():RegisterEffect(e3)
+	local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_GRAVE,0,1,ft,nil,e,tp)
+	if #g>0 then
+		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 	end
 end
 function s.val(e,c)

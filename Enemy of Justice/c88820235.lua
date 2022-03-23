@@ -4,8 +4,8 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
 	c:EnableReviveLimit()
-	Fusion.AddProcMixWithDescription(c,aux.Stringid(id,1),true,true,41436536,20721928)
 	Fusion.AddProcMixWithDescription(c,aux.Stringid(id,2),true,true,21844576,58932615,20721928)
+	Fusion.AddProcMixWithDescription(c,aux.Stringid(id,1),true,true,41436536,20721928)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	--indes
 	local e2=Effect.CreateEffect(c)
@@ -34,5 +34,5 @@ function s.contactfil(tp)
 	return Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)
 end
 function s.contactop(g)
-	Duel.SendtoGrave(g,REASON_COST+REASON_MATERIAL)
+	Duel.SendtoGrave(g,REASON_COST+REASON_MATERIAL+REASON_FUSION)
 end

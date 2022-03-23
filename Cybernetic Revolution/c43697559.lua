@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
-	e2:SetCategory(CATEGORY_ATKCHANGE)
+	e2:SetCategory(CATEGORY_ATKCHANGE+CATEGORY_DEFCHANGE)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e2:SetCode(EVENT_CHAINING)
 	e2:SetRange(LOCATION_MZONE)
@@ -43,7 +43,6 @@ end
 function s.cn(e,tp,eg,ep,ev,re,r,rp)
 	return re:IsActiveType(TYPE_TRAP) and re:IsHasType(EFFECT_TYPE_ACTIVATE) and rp==tp
 end
-
 function s.tg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(1-tp) and chkc:IsLocation(LOCATION_MZONE) and chkc:IsFaceup() end
 	if chk==0 then return Duel.IsExistingTarget(Card.IsFaceup(),tp,0,LOCATION_MZONE,1,nil) and rp==tp end

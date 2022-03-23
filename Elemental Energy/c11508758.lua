@@ -2,7 +2,7 @@
 --Mutant Highbrain
 local s,id=GetID()
 function s.initial_effect(c)
-	--Targeted monster loses 500 ATK/DEF
+	--Take control
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_IGNITION)
