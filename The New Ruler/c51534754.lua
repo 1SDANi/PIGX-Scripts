@@ -28,7 +28,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local rc=Duel.GetFirstTarget()
 	if rc:IsRelateToEffect(e) then
 		if Duel.Destroy(rc,REASON_EFFECT)>0 and 
-			Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)>0 then
+			Duel.SpecialSummon(e:GetHandler(),0,tp,tp,false,false,POS_FACEUP)>0 then
 			--Banish it if it leaves the field
 			local e1=Effect.CreateEffect(c)
 			e1:SetDescription(3300)

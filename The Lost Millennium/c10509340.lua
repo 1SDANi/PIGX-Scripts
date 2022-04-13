@@ -2,7 +2,7 @@
 --Antique Gear Beast
 local s,id=GetID()
 function s.initial_effect(c)
-	--destroy
+	--floodgate
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	e3:SetCode(EFFECT_CANNOT_ACTIVATE)
 	e3:SetRange(LOCATION_MZONE)
 	e3:SetTargetRange(0,1)
-	e3:SetValue(s.actlimit)
+	e3:SetValue(s.aclimit)
 	e3:SetCondition(s.actcon)
 	c:RegisterEffect(e3)
 end
@@ -40,7 +40,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e1:SetCode(EFFECT_CANNOT_ACTIVATE)
 	e1:SetTargetRange(0,1)
-	e1:SetValue(s.aclimit)
+	e1:SetValue(s.actlimit)
 	e1:SetReset(RESET_PHASE+PHASE_END)
 	Duel.RegisterEffect(e1,tp)
 	local e3=Effect.CreateEffect(e:GetHandler())

@@ -22,7 +22,7 @@ function s.initial_effect(c)
 	e3:SetRange(LOCATION_SZONE)
 	e3:SetOperation(s.acop)
 	c:RegisterEffect(e3)
-	--draw
+	--damage
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,0))
 	e4:SetCategory(CATEGORY_DAMAGE)
@@ -36,7 +36,7 @@ function s.initial_effect(c)
 end
 s.counter_place_list={COUNTER_SPELL}
 function s.drcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():GetCounter(0xd)>=4
+	return e:GetHandler():GetCounter(COUNTER_SPELL)>=4
 end
 function s.drcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() end

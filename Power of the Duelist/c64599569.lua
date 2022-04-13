@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableReviveLimit()
 	--fusion material
-	Fusion.AddProcMixRep(c,true,true,aux.FilterBoolFunctionEx(Card.IsRace,RACE_MACHINE),1,99,CARD_CYBER_DRAGON)
+	Fusion.AddProcMixRep(c,true,true,s.fil,1,99)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	--atk
 	local e1=Effect.CreateEffect(c)
@@ -25,6 +25,13 @@ function s.initial_effect(c)
 	e3:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e3:SetValue(s.count)
 	c:RegisterEffect(e3)
+end
+s.material_setcode={0x93,0x1093}
+s.material_race={RACE_MACHINE}
+function s.fil(c,fc,sumtype,tp,sub,mg,sg,contact)
+	if contact then sumtype=0 end
+	return c:IsRace(RACE_MACHINE,fc,sumtype,tp) and (not contact or c:IsType(TYPE_MONSTER,fc,sumtype,tp)) and
+		c:IsCode(CARD_CYBER_DRAGON) or (not sg or sg:IsExists(Card.IsCode,1,c,CARD_CYBER_DRAGON))
 end
 function s.val(e,c)
 	local g=e:GetHandler():GetMaterial()

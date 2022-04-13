@@ -2,7 +2,6 @@
 --Silent Magician LV8
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
 	--Register summon by a "LV" monster
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_SINGLE)
@@ -44,6 +43,9 @@ s.LVset=0xe8
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetFlagEffect(id+1)>0
 end
+function s.bdop(e,tp,eg,ep,ev,re,r,rp)
+	e:GetHandler():RegisterFlagEffect(id+1,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,0,1)
+end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsReleasable() end
 	Duel.Release(e:GetHandler(),REASON_COST)
@@ -74,5 +76,5 @@ function s.regop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.condition(e)
 	local c=e:GetHandler()
-	return not (c:GetFlagEffect(id+1)>0)
+	return c:GetFlagEffect(id)>0
 end

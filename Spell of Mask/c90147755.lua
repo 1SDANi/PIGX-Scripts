@@ -29,7 +29,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	end
 	local rg=g:RandomSelect(tp,3)
 	local i=Duel.Remove(rg,POS_FACEDOWN,REASON_COST)
-	Duel.SetTargetPlayer(tp)
+	Duel.SetTargetPlayer(1-tp)
 	Duel.SetTargetParam(i*500)
 	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,tp,i*500)
 end

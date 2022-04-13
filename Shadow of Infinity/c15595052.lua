@@ -16,12 +16,10 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,nil) and
-		e:GetHandler():IsReleasable() and Duel.CheckReleaseGroupCost(tp,nil,1,false,nil,e:GetHandler()) end
+	if chk==0 then return e:GetHandler():IsReleasable() and Duel.CheckReleaseGroupCost(tp,nil,1,false,nil,e:GetHandler()) end
 	local sg=Duel.SelectReleaseGroupCost(tp,nil,1,1,false,nil,e:GetHandler())
 	sg:Merge(e:GetHandler())
 	Duel.Release(sg,REASON_COST)
-	Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST+REASON_DISCARD)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(aux.TRUE,tp,0,LOCATION_MZONE,1,nil) end

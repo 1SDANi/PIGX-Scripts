@@ -3,6 +3,12 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableReviveLimit()
+	--battle indestructable
+	local e0=Effect.CreateEffect(c)
+	e0:SetType(EFFECT_TYPE_SINGLE)
+	e0:SetCode(EFFECT_INDESTRUCTABLE_BATTLE)
+	e0:SetValue(1)
+	c:RegisterEffect(e0)
 	--special summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -32,6 +38,7 @@ function s.initial_effect(c)
 	e3:SetLabel(0)
 	c:RegisterEffect(e3)
 	e2:SetLabelObject(e3)
+	c:RegisterFlagEffect(id,0,EFFECT_FLAG_CLIENT_HINT,1,0,e3:GetLabel())
 end
 s.listed_names={7634581}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
@@ -73,7 +80,7 @@ function s.rdop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,e:GetHandler()) end
-	Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST+REASON_DISCARD)
+	Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST+REASON_DISCARD,e:GetHandler())
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()

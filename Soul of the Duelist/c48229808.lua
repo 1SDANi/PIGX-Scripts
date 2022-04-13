@@ -55,7 +55,7 @@ function s.aclimit(e,re,tp)
 end
 function s.condition(e)
 	local c=e:GetHandler()
-	return not (c:GetFlagEffect(id+1)>0)
+	return c:GetFlagEffect(id)>0
 end
 function s.bdop(e,tp,eg,ep,ev,re,r,rp)
 	if ep~=tp and Duel.GetAttackTarget()==nil then

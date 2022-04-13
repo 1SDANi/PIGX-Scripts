@@ -14,7 +14,7 @@ end
 s.listed_series={0x303,0x304}
 function s.filter(c,e,tp,m)
 	if not (c:IsSetCard(0x303) and c:IsSetCard(0x304) and c:IsType(TYPE_RITUAL) and c:IsType(TYPE_MONSTER)) 
-	or not c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,true,true) then return false end
+	or not c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,true,true) or c:IsHasEffect(EFFECT_SPSUMMON_CONDITION) then return false end
 	if m:IsContains(c) then
 		m:RemoveCard(c)
 		result=m:CheckWithSumGreater(Card.GetRitualLevel,c:GetLevel(),c)

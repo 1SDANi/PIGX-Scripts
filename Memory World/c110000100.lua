@@ -16,7 +16,6 @@ function s.initial_effect(c)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
-	e1:SetCost(s.cs)
 	e1:SetTarget(s.tg)
 	e1:SetOperation(s.op)
 	c:RegisterEffect(e1)
@@ -46,13 +45,14 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 s.listed_names={48179391}
+s.listed_series={0x305}
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return c:IsDiscardable() end
 	Duel.SendtoGrave(c,REASON_COST+REASON_DISCARD)
 end
 function s.afilter(c)
-	return c:IsCode(48179391) and c:IsAbleToHand()
+	return c:IsSetCard(0x305) and c:IsAbleToHand()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.afilter,tp,LOCATION_DECK,0,1,nil) end
@@ -67,27 +67,15 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp,chk)
 	end
 end
 function s.filter(c)
-	return c:IsCode(1000002) and c:IsFaceup()
-end
-function s.cs(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_CONFIRM)
-	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,1,nil)
-	e:SetLabel(g:GetFirst():GetOriginalCode())
-	Duel.SendtoGrave(g,REASON_EFFECT)
+	return c:IsCode(48179391) and c:IsFaceup()
 end
 function s.tg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return true end
-	Duel.SetTargetParam(e:GetLabel())
-	e:SetLabel(0)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil) end
 end
 function s.op(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	local ac=Duel.GetChainInfo(0,CHAININFO_TARGET_PARAM)
-	local bt=eg:GetFirst()
-	if ac==0 then return end
 	if c:IsFaceup() and c:IsRelateToEffect(e) then
-		c:CopyEffect(ac,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,1)
+		c:CopyEffect(48179391,RESET_EVENT+RESETS_STANDARD,1)
 	end
 end
 function s.rectg(e,tp,eg,ep,ev,re,r,rp,chk)

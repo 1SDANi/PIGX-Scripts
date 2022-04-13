@@ -1,7 +1,6 @@
 --大地讃頌
 --Nature Worship
 local s,id=GetID()
-local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
 	local e1=Effect.CreateEffect(c)
@@ -14,7 +13,8 @@ function s.initial_effect(c)
 end
 function s.filter(c,e,tp,m)
 	if not c:IsAttribute(ATTRIBUTE_EARTH) or not c:IsType(TYPE_RITUAL)
-	or not c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,true,true) then return false end
+	or not c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,true,true) or
+	c:IsHasEffect(EFFECT_SPSUMMON_CONDITION) then return false end
 	if m:IsContains(c) then
 		m:RemoveCard(c)
 		result=m:CheckWithSumGreater(Card.GetRitualLevel,c:GetLevel(),c)

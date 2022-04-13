@@ -2,6 +2,11 @@
 --The Seal of Orichalcos
 local s,id=GetID()
 function s.initial_effect(c)
+	--Activate
+	local e0=Effect.CreateEffect(c)
+	e0:SetType(EFFECT_TYPE_ACTIVATE)
+	e0:SetCode(EVENT_FREE_CHAIN)
+	c:RegisterEffect(e0)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetRange(LOCATION_FZONE)
@@ -49,42 +54,61 @@ function s.initial_effect(c)
 	e6:SetTargetRange(1,1)
 	e6:SetValue(s.efilter)
 	c:RegisterEffect(e6)
+	--search
+	local e7=Effect.CreateEffect(c)
+	e7:SetDescription(aux.Stringid(id,1))
+	e7:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
+	e7:SetType(EFFECT_TYPE_IGNITION)
+	e7:SetRange(LOCATION_HAND)
+	e7:SetCost(s.cost)
+	e7:SetTarget(s.target)
+	e7:SetOperation(s.operation)
+	c:RegisterEffect(e7)
 end
 s.listed_names={1784686,11082056,46232525}
+s.listed_series={0x305}
+function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
+	local c=e:GetHandler()
+	if chk==0 then return c:IsDiscardable() end
+	Duel.SendtoGrave(c,REASON_COST+REASON_DISCARD)
+end
+function s.afilter(c)
+	return c:IsSetCard(0x305) and c:IsAbleToHand()
+end
+function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.afilter,tp,LOCATION_DECK,0,1,nil) end
+	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
+end
+function s.operation(e,tp,eg,ep,ev,re,r,rp,chk)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
+	local g=Duel.SelectMatchingCard(tp,s.afilter,tp,LOCATION_DECK,0,1,1,nil)
+	if #g>0 then
+		Duel.SendtoHand(g,nil,REASON_EFFECT)
+		Duel.ConfirmCards(1-tp,g)
+	end
+end
 function s.efilter(e,re,tp)
-	return re:GetHandler():IsType(TYPE_FIELD) and re:IsHasType(EFFECT_TYPE_ACTIVATE)
+	return re:GetHandler():IsType(TYPE_FIELD) and re:IsHasType(EFFECT_TYPE_ACTIVATE) and not re:GetHandler():IsSetCard(0x305)
 end
 function s.limit(e,re,tp)
 	return re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:GetHandler():IsCode(1784686,11082056,46232525)
 end
 function s.group(c,tp)
 	local seq=c:GetSequence()
-	local g=Group.CreateGroup()
+	local ct=0
 	local function optadd(loc,seq,player)
 		if not player then player=tp end
 		local c=Duel.GetFieldCard(player,loc,seq)
-		if c then g:AddCard(c) end
+		if not c then ct=ct+1 end
 	end
 	if seq+1<=4 then optadd(LOCATION_MZONE,seq+1) end
 	if seq-1>=0 then optadd(LOCATION_MZONE,seq-1) end
-	if seq<5 then
-		if seq==1 then
-			optadd(LOCATION_MZONE,5)
-		end
-		if seq==3 then
-			optadd(LOCATION_MZONE,6)
-		end
-	elseif seq==5 then
-		optadd(LOCATION_MZONE,1)
-	elseif seq==6 then
-		optadd(LOCATION_MZONE,3)
-	end
-	return g
+	return ct>0
 end
 function s.con(e)
-	return Duel.IsExistingMatchingCard(s.group,e:GetHandler():GetControler(),LOCATION_MZONE,0,1,nil,tp)
+	return Duel.IsExistingMatchingCard(aux.NOT(s.group),e:GetHandler():GetControler(),LOCATION_MZONE,0,1,nil,e:GetHandler():GetControler())
 end
 function s.tg(e,c)
 	if not c:IsInMainMZone() then return false end
-	return #(s.group(c:GetSequence(),tp))>0
+	return s.group(c,e:GetHandler():GetControler())
 end
