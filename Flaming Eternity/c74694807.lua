@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_SINGLE)
 	e2:SetProperty(EFFECT_FLAG_DELAY)
-	e2:SetCode(EVENT_LEAVE_FIELD)
+	e2:SetCode(EVENT_DESTROYED)
 	e2:SetOperation(s.rmop)
 	c:RegisterEffect(e2)
 end

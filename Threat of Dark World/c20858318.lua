@@ -15,7 +15,7 @@ function s.cfilter(c)
 	return c:IsFaceup() and c:IsSetCard(0x1a)
 end
 function s.filter(c)
-	return c:IsFaceup() and c:IsSetCard(0x1a) and c:IsCanAttack()
+	return c:IsFaceup() and c:IsSetCard(0x1a) and c:IsCanAttack() and not c:IsHasEffect(EFFECT_DIRECT_ATTACK)
 end
 function s.con(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_MZONE,0,nil)
@@ -25,6 +25,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(filter,tp,LOCATION_MZONE,0,nil)
 	local tc=g:GetFirst()
 	for tc in aux.Next(og) do
+		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_DIRECT_ATTACK)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)

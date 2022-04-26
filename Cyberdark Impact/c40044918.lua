@@ -19,11 +19,12 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 s.listed_series={0x8}
+s.listed_names={id}
 function s.ctfilter(c)
 	return c:IsFaceup() and c:IsSetCard(0x8)
 end
 function s.schfilter(c)
-	return c:IsSetCard(0x8) and c:IsType(TYPE_MONSTER) and c:IsAbleToHand()
+	return c:IsSetCard(0x8) and c:IsType(TYPE_MONSTER) and c:IsAbleToHand() and not c:IsCode(id)
 end
 function s.desfilter(c)
 	return c:IsType(TYPE_SPELL+TYPE_TRAP)

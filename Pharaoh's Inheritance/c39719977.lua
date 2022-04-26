@@ -20,7 +20,7 @@ function s.filter2(c,code)
 	return c:IsFaceup() and c:IsType(TYPE_NORMAL) and c:IsCode(code)
 end
 function s.filter3(c)
-	return c:IsFaceup() and c:IsType(TYPE_NORMAL)
+	return c:IsFaceup() and c:IsType(TYPE_NORMAL) and not c:IsHasEffect(EFFECT_DIRECT_ATTACK)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_MZONE,0,3,nil,tp)

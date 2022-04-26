@@ -52,6 +52,9 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD_DISABLE+RESET_PHASE+PHASE_END)
 		e1:SetValue(ct*500)
 		c:RegisterEffect(e1)
+		local e2=e1:Clone()
+		e1:SetCode(EFFECT_UPDATE_DEFENSE)
+		c:RegisterEffect(e2)
 	end
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)

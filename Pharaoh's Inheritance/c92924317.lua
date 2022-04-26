@@ -11,6 +11,20 @@ function s.initial_effect(c)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
+	--Destroy
+	local e2=Effect.CreateEffect(c)
+	e2:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_SINGLE)
+	e2:SetProperty(EFFECT_FLAG_DELAY)
+	e2:SetCode(EVENT_DESTROYED)
+	e2:SetOperation(s.desop)
+	c:RegisterEffect(e2)
+end
+function s.desop(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	local tc=c:GetFirstCardTarget()
+	if c:IsReason(REASON_DESTROY) and tc and tc:IsLocation(LOCATION_MZONE) then
+		Duel.Destroy(tc,REASON_EFFECT)
+	end
 end
 function s.spfilter(c,e,tp)
 	return c:IsCanBeSpecialSummoned(e,0,tp,false,false) and c:IsType(TYPE_NORMAL)

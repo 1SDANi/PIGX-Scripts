@@ -24,6 +24,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 s.listed_series={0x36}
+s.listed_names={id}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsLocation(LOCATION_GRAVE) and (r&REASON_EFFECT+REASON_BATTLE)~=0
 end
@@ -43,7 +44,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.filter(c)
-	return c:IsCode(0x36) and c:IsAbleToHand()
+	return c:IsCode(0x36) and c:IsAbleToHand() and not c:IsCode(id)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

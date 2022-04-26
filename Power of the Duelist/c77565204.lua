@@ -14,7 +14,9 @@ function s.initial_effect(c)
 	--Destroy
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_SINGLE)
+	e2:SetProperty(EFFECT_FLAG_DELAY)
 	e2:SetCode(EVENT_LEAVE_FIELD)
+	e2:SetCondition(s.condition)
 	e2:SetOperation(s.desop)
 	c:RegisterEffect(e2)
 	--negate
@@ -46,8 +48,20 @@ function s.cond(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetTurnCount()==e:GetLabelObject():GetLabel()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,2,e:GetHandler()) end
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,2,e:GetHandler()) and
+		Duel.GetActivityCount(tp,ACTIVITY_NORMALSUMMON)==0 end
 	Duel.DiscardHand(tp,Card.IsDiscardable,2,2,REASON_COST+REASON_DISCARD)
+	--oath effects
+	local e1=Effect.CreateEffect(e:GetHandler())
+	e1:SetType(EFFECT_TYPE_FIELD)
+	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_OATH)
+	e1:SetCode(EFFECT_CANNOT_SUMMON)
+	e1:SetReset(RESET_PHASE+PHASE_END)
+	e1:SetTargetRange(1,0)
+	Duel.RegisterEffect(e1,tp)
+	local e2=e1:Clone()
+	e2:SetCode(EFFECT_CANNOT_MSET)
+	Duel.RegisterEffect(e2,tp)
 end
 function s.filter1(c,e)
 	return c:IsCanBeFusionMaterial() and c:IsAbleToGrave()
@@ -128,10 +142,26 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetValue(s.eqlimit)
 		e1:SetLabelObject(tc)
 		c:RegisterEffect(e1)
+		local e2=Effect.CreateEffect(c)
+		e2:SetDescription(aux.Stringid(id,2))
+		e2:SetType(EFFECT_TYPE_FIELD)
+		e2:SetCode(EFFECT_CANNOT_SPECIAL_SUMMON)
+		e2:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_OATH+EFFECT_FLAG_CLIENT_HINT)
+		e2:SetTargetRange(1,0)
+		e2:SetTarget(s.splimit)
+		e2:SetReset(RESET_PHASE+PHASE_END)
+		Duel.RegisterEffect(e2,tp)
 	end
+end
+function s.splimit(e,c,sump,sumtype,sumpos,targetp)
+	return c:IsLocation(LOCATION_EXTRA) and not c:IsRace(RACE_FIEND)
 end
 function s.eqlimit(e,c)
 	return e:GetLabelObject()==c
+end
+function s.condition(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	return c:IsPreviousPosition(POS_FACEUP) and not c:IsLocation(LOCATION_DECK)
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

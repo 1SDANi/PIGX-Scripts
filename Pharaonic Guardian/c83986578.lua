@@ -31,7 +31,6 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	if not c:IsRelateToEffect(e) or c:IsFacedown() then return end
 	local g=eg:Filter(s.filter,nil,e)
 	if #g>0 then
 		Duel.Destroy(g,REASON_EFFECT)

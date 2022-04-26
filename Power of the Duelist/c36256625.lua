@@ -52,7 +52,8 @@ function s.poscon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local a=Duel.GetAttacker()
 	local t=Duel.GetAttackTarget()
-	return (c==a or c==t) or (c~=a and a:IsAttackPos()) or (t and c~=t and t:IsAttackPos())
+	return (c==a or c==t) and
+		((a:IsAttackPos() and a:IsLocation(LOCATION_MZONE)) or (t and t:IsAttackPos() and t:IsLocation(LOCATION_MZONE)))
 end
 function s.posop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

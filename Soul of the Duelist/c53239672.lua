@@ -17,6 +17,6 @@ function s.initial_effect(c)
 	e2:SetCondition(s.condition)
 	c:RegisterEffect(e2)
 end
-function s.condition(e)
+function s.condition(e,tp)
 	return Duel.GetFieldGroupCount(e:GetHandlerPlayer(),LOCATION_MZONE,0)>0
 end

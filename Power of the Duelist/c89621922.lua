@@ -16,5 +16,5 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.val(e,c)
-	return Duel.GetMatchingGroupCount(Card.IsType,c:GetControler(),0,LOCATION_ONFIELD,nil,TYPE_SPELL+TYPE_TRAP)*500
+	return Duel.GetMatchingGroupCount(Card.IsType,c:GetControler(),LOCATION_ONFIELD,LOCATION_ONFIELD,nil,TYPE_SPELL+TYPE_TRAP)*500
 end

@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.costfilter(c)
-	return c:IsAttribute(ATTRIBUTE_DARK) and c:IsAttackAbove(1500)
+	return c:IsAttribute(ATTRIBUTE_DARK) and c:IsAttackAbove(1500) and c:IsFaceup()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.CheckReleaseGroupCost(tp,s.costfilter,1,false,nil,nil) end

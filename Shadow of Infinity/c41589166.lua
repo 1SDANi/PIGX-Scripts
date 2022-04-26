@@ -23,8 +23,37 @@ function s.initial_effect(c)
 	e2:SetTarget(s.desreptg)
 	e2:SetOperation(s.desrepop)
 	c:RegisterEffect(e2)
+	--special summon
+	local e3=Effect.CreateEffect(c)
+	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
+	e3:SetType(EFFECT_TYPE_IGNITION)
+	e3:SetRange(LOCATION_HAND)
+	e3:SetCondition(s.spcon)
+	e3:SetTarget(s.sptg)
+	e3:SetOperation(s.spop)
+	c:RegisterEffect(e3)
 end
 s.listed_series={0x3d}
+function s.spfilter(c)
+	return c:IsFaceup() and c:IsSetCard(0x3d)
+end
+function s.spcon(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
+		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_MZONE,0,3,nil)
+end
+function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
+	local c=e:GetHandler()
+	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
+		and c:IsCanBeSpecialSummoned(e,0,tp,false,false) end
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,c,1,0,0)
+end
+function s.spop(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	if c:IsRelateToEffect(e) then
+		Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)
+	end
+end
 function s.discon(e,tp,eg,ep,ev,re,r,rp)
 	return not e:GetHandler():IsStatus(STATUS_BATTLE_DESTROYED)
 		and ep==1-tp and re:IsHasType(EFFECT_TYPE_ACTIVATE) and Duel.IsChainNegatable(ev)
@@ -63,12 +92,10 @@ function s.desreptg(e,tp,eg,ep,ev,re,r,rp,chk)
 		e:SetLabelObject(g:GetFirst())
 		g:GetFirst():SetStatus(STATUS_DESTROY_CONFIRMED,true)
 		return true
-	else
-		return false
-	end
+	else return false end
 end
 function s.desrepop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=e:GetLabelObject()
 	tc:SetStatus(STATUS_DESTROY_CONFIRMED,false)
-	Duel.Release(tc,REASON_EFFECT+REASON_REPLACE)
+	Duel.Destroy(tc,REASON_EFFECT+REASON_REPLACE)
 end

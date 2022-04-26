@@ -1,5 +1,5 @@
 --突撃ライノス
---Rampaging Rhyno
+--Rampaging Rhino
 local s,id=GetID()
 function s.initial_effect(c)
 	--move

@@ -14,7 +14,9 @@ function s.initial_effect(c)
 	--Destroy
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_SINGLE)
+	e2:SetProperty(EFFECT_FLAG_DELAY)
 	e2:SetCode(EVENT_LEAVE_FIELD)
+	e2:SetCondition(s.condition)
 	e2:SetOperation(s.desop)
 	c:RegisterEffect(e2)
 end
@@ -46,6 +48,10 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetValue(s.eqlimit)
 		c:RegisterEffect(e1)
 	end
+end
+function s.condition(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	return c:IsPreviousPosition(POS_FACEUP) and not c:IsLocation(LOCATION_DECK)
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=e:GetHandler():GetFirstCardTarget()

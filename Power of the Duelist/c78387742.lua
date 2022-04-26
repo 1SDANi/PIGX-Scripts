@@ -48,5 +48,5 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.retop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.SendtoHand(e:GetHandler(),nil,REASON_EFFECT)
+	Duel.SendtoDeck(tc,nil,2,REASON_EFFECT)
 end

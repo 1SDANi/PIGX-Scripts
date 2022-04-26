@@ -74,7 +74,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsReason(REASON_DESTROY)
+	return e:GetHandler():IsSummonType(SUMMON_TYPE_TRIBUTE)
 end
 function s.spfilter(c,e,tp,rc)
 	return c:IsLocation(LOCATION_GRAVE) and c:IsReason(REASON_SUMMON) and c:GetReasonCard()==rc and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
