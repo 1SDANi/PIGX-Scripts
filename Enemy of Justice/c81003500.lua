@@ -5,6 +5,7 @@ function s.initial_effect(c)
 	--fusion material
 	c:EnableReviveLimit()
 	Fusion.AddProcMix(c,true,true,86188410,89252153)
+	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	--destroy
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
@@ -77,4 +78,10 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 			end
 		end
 	end
+end
+function s.contactfil(tp)
+	return Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)
+end
+function s.contactop(g)
+	Duel.SendtoGrave(g,REASON_COST+REASON_MATERIAL+REASON_FUSION)
 end

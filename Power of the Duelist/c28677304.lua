@@ -1,5 +1,5 @@
 --E・HERO ブラック・ネオス
---Elemental HERO Panther Neos
+--Elemental HERO Shadow Neos
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material

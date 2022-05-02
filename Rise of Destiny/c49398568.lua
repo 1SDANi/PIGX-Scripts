@@ -17,7 +17,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return re:GetActiveType()==TYPE_SPELL and re:IsHasType(EFFECT_TYPE_ACTIVATE) and rp==tp
 end
 function s.cfilter(c)
-	return c:IsDiscardable() and c:IsAbleToGraveAsCost()
+	return c:IsDiscardable()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local hg=Duel.GetFieldGroup(tp,LOCATION_HAND,0)

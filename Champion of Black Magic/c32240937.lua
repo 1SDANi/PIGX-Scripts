@@ -3,7 +3,16 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--summon with 3 tribute
-	local e2=aux.AddNormalSetProcedure(c)
+	local e1=aux.AddNormalSetProcedure(c)
+	--Control
+	local e2=Effect.CreateEffect(c)
+	e2:SetDescription(aux.Stringid(id,0))
+	e2:SetCategory(CATEGORY_CONTROL)
+	e2:SetType(EFFECT_TYPE_IGNITION)
+	e2:SetRange(LOCATION_MZONE)
+	e2:SetTarget(s.cttg)
+	e2:SetOperation(s.ctop)
+	c:RegisterEffect(e2)
 	--atk limit
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE)

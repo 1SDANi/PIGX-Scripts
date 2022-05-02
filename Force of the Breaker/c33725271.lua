@@ -17,17 +17,17 @@ function s.filter(c)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_GRAVE) and s.filter(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,LOCATION_GRAVE,0,2,nil) end
+	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,LOCATION_GRAVE,0,5,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_GRAVE,0,2,2,nil)
-	Duel.SetOperationInfo(0,CATEGORY_TODECK,g,2,0,0)
-	Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,1)
+	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_GRAVE,0,5,5,nil)
+	Duel.SetOperationInfo(0,CATEGORY_TODECK,g,5,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,3)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS)
 	local sg=g:Filter(Card.IsRelateToEffect,nil,e)
 	if #sg>0 and Duel.SendtoDeck(sg,nil,2,REASON_EFFECT) then
 		Duel.ShuffleDeck(tp)
-		Duel.Draw(tp,1,REASON_EFFECT)
+		Duel.Draw(tp,3,REASON_EFFECT)
 	end
 end

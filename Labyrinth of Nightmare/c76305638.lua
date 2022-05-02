@@ -1,5 +1,5 @@
 --岩の精霊 タイタン
---Titan the Earth Soul
+--Titan the Earth Spirit
 local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableReviveLimit()

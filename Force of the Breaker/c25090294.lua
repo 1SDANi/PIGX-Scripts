@@ -13,9 +13,12 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 s.listed_names={51085303,62107981}
+function s.filter(c)
+	return c:IsDiscardable() and ((not s.tgfilter(c)) or Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_HAND+LOCATION_DECK+LOCATION_ONFIELD,0,1,c))
+end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,e:GetHandler()) end
-	Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST+REASON_DISCARD)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_HAND,0,1,e:GetHandler()) end
+	Duel.DiscardHand(tp,s.filter,1,1,REASON_COST+REASON_DISCARD)
 end
 function s.filter(c,e,tp)
 	return c:IsCode(51085303) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,true,true)

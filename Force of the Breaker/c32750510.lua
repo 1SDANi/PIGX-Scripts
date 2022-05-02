@@ -33,7 +33,7 @@ function s.initial_effect(c)
 	e3:SetOperation(s.desop)
 	c:RegisterEffect(e3)
 end
-s.counter_list={0x1015}
+s.counter_list={COUNTER_ICE}
 function s.filter(c)
 	return c:IsFaceup() and c:IsAttribute(ATTRIBUTE_WATER)
 end
@@ -55,15 +55,15 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsCanAddCounter(0x1015,1) end
-	if chk==0 then return Duel.IsExistingTarget(Card.IsCanAddCounter,tp,LOCATION_MZONE,LOCATION_MZONE,1,nil,0x1015,1) end
+	if chkc then return chkc:IsCanAddCounter(COUNTER_ICE,1) end
+	if chk==0 then return Duel.IsExistingTarget(Card.IsCanAddCounter,tp,LOCATION_MZONE,LOCATION_MZONE,1,nil,COUNTER_ICE,1) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
-	Duel.SelectTarget(tp,Card.IsCanAddCounter,tp,LOCATION_MZONE,LOCATION_MZONE,1,1,nil,0x1015,1)
+	Duel.SelectTarget(tp,Card.IsCanAddCounter,tp,LOCATION_MZONE,LOCATION_MZONE,1,1,nil,COUNTER_ICE,1)
 	Duel.SetOperationInfo(0,CATEGORY_COUNTER,nil,1,0,0)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
-	if tc and tc:IsRelateToEffect(e) and tc:IsCanAddCounter(0x1015,1) and tc:AddCounter(0x1015,1) then
+	if tc and tc:IsRelateToEffect(e) and tc:IsCanAddCounter(COUNTER_ICE,1) and tc:AddCounter(COUNTER_ICE,1) then
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_CANNOT_ATTACK)

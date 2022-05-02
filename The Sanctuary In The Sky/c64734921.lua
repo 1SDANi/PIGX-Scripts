@@ -9,6 +9,7 @@ function s.initial_effect(c)
 	e1:SetProperty(EFFECT_FLAG_DELAY)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e1:SetCode(EVENT_SUMMON_SUCCESS)
+	e1:SetCost(s.cost)
 	e1:SetTarget(s.tg)
 	e1:SetOperation(s.op)
 	c:RegisterEffect(e1)
@@ -29,6 +30,10 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 s.listed_names={39552864,CARD_SANCTUARY_SKY}
+function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,e:GetHandler()) end
+	Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST+REASON_DISCARD)
+end
 function s.filter(c,e,tp)
 	return c:IsCode(39552864) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end

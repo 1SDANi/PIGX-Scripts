@@ -17,7 +17,6 @@ function s.initial_effect(c)
 	e1:SetCode(EVENT_ATTACK_ANNOUNCE)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetCondition(s.condition)
-	e1:SetTarget(s.target)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
 end
@@ -29,10 +28,7 @@ function s.contactop(g)
 	Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_COST+REASON_MATERIAL+REASON_FUSION)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler()==Duel.GetAttacker() or e:GetHandler()==Duel.GetAttackTarget()
-end
-function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return true end
+	return e:GetHandler()==Duel.GetAttacker() or e:GetHandler()==Duel.GetAttackTarget() and e:GetHandler():IsRelateToEffect(e)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local a=Duel.GetAttacker()

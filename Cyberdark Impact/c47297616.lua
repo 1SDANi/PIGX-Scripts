@@ -29,7 +29,7 @@ function s.initial_effect(c)
 	--Special summon
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,4))
-	e4:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_DESTROY)
+	e4:SetCategory(CATEGORY_DESTROY)
 	e4:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
 	e4:SetCode(EVENT_TO_GRAVE)
 	e4:SetProperty(EFFECT_FLAG_CARD_TARGET)
@@ -82,6 +82,7 @@ function s.opdisable(e,tp,eg,ep,ev,re,r,rp)
 		if re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:GetHandler():IsRelateToEffect(re) then
 			Duel.SendtoGrave(eg,REASON_EFFECT)
 		end
+		Duel.BreakEffect
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetProperty(EFFECT_FLAG_COPY_INHERIT)
@@ -101,22 +102,12 @@ end
 function s.cdspsum(e)
 	return e:GetHandler():IsReason(REASON_DESTROY)
 end
-function s.tgspsum(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp)
-		and chkc:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP,tp) end
-	if chk==0 then return true end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectTarget(tp,Card.IsCanBeSpecialSummoned,tp,LOCATION_GRAVE,0,1,1,nil,e,0,tp,false,false,POS_FACEUP,tp)
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,0,0)
+function s.tgspsum(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.IsExistingMatchingCard(aux.TRUE,tp,LOCATION_ONFIELD,0,1,nil) end
 	local dg=Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,dg,#dg,0,0)
 end
 function s.opspsum(e,tp,eg,ep,ev,re,r,rp)
 	local dg=Duel.GetMatchingGroup(nil,tp,LOCATION_ONFIELD,0,nil)
 	Duel.Destroy(dg,REASON_EFFECT)
-	local tc=Duel.GetFirstTarget()
-	if tc and tc:IsRelateToEffect(e) then
-		Duel.BreakEffect()
-		Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)
-	end
 end

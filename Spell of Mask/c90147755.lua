@@ -1,5 +1,5 @@
 --炎の女暗殺者
---Chthonian Assassin
+--Hell Assassin
 local s,id=GetID()
 function s.initial_effect(c)
 	--flip

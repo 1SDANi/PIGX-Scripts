@@ -119,7 +119,7 @@ function s.checkop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.filter(c)
-	return c:IsType(TYPE_MONSTER) and c:IsType(TYPE_TOKEN)
+	return c:IsType(TYPE_MONSTER) and not c:IsType(TYPE_EFFECT)
 end
 function s.filter2(c)
 	return c:IsType(TYPE_MONSTER) and not c:IsType(TYPE_EFFECT)

@@ -1,5 +1,5 @@
 --地獄の暴走召喚
---Inferno Reckless Summon
+--Hell Reckless Summon
 local s,id=GetID()
 function s.initial_effect(c)
 	local e1=Effect.CreateEffect(c)

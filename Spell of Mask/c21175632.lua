@@ -7,7 +7,7 @@ function s.initial_effect(c)
 	Fusion.AddProcMix(c,true,true,s.filter1,s.filter2)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	local e1=Effect.CreateEffect(c)
-	e1:SetCategory(CATEGORY_DESTROY)
+	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_QUICK_O)
 	e1:SetHintTiming(0,TIMING_END_PHASE)
 	e1:SetCode(EVENT_FREE_CHAIN)
@@ -20,10 +20,8 @@ end
 s.material_race={RACE_FAIRY}
 s.material_attribute={ATTRIBUTE_LIGHT,ATTRIBUTE_DARK}
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,nil) and
-		e:GetHandler():IsReleasable() end
+	if chk==0 then return e:GetHandler():IsReleasable() end
 	Duel.Release(e:GetHandler(),REASON_COST)
-	Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST+REASON_DISCARD)
 end
 function s.filter(c,e,tp)
 	return c:IsCanBeSpecialSummoned(e,0,tp,false,false)

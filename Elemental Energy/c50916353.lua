@@ -1,5 +1,5 @@
 --地獄戦士
---Chthonian Soldier
+--Hell Soldier
 local s,id=GetID()
 function s.initial_effect(c)
 	--reflect battle dam

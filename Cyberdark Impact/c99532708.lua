@@ -12,7 +12,6 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 s.counter_list={COUNTER_A}
-s.listed_series={0xc}
 function s.distg(e,c)
-	return c:GetCounter(COUNTER_A)>0 and not c:IsSetCard(0xc)
+	return c:GetCounter(COUNTER_A)>0
 end
