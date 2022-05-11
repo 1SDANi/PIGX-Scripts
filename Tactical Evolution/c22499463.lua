@@ -15,8 +15,9 @@ function s.initial_effect(c)
 	e3:SetOperation(s.operation)
 	c:RegisterEffect(e3)
 end
+s.counter_list={COUNTER_VENOM}
 function s.filter(c)
-	return c:HasLevel() and c:IsCanAddCounter(COUNTER_A,c:GetLevel())
+	return c:HasLevel() and c:IsCanAddCounter(COUNTER_VENOM,c:GetLevel())
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,0,LOCATION_MZONE,1,nil) end
@@ -31,6 +32,7 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local lv=1
+	local g=Duel.GetMatchingGroup(s.filter,tp,0,LOCATION_MZONE,nil)
 	local tc=g:GetFirst()
 	for tc in aux.Next(g) do
 		lv=tc:GetLevel()

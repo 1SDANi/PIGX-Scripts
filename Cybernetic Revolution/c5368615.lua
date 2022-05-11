@@ -1,5 +1,5 @@
 --スチームジャイロイド
---Steam Gyroid
+--Super Vehicroid Steam Gyroid
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material

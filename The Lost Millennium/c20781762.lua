@@ -22,7 +22,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.cfilter(c)
-	return c:IsRace(RACE_ELEMENTAL) and c:IsAttribute(ATTRIBUTE_EARTH)
+	return c:IsAttribute(ATTRIBUTE_EARTH)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

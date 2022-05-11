@@ -10,9 +10,13 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
 	e1:SetProperty(EFFECT_FLAG_DELAY)
 	e1:SetCode(EVENT_BATTLE_DAMAGE)
+	e1:SetCondition(s.cn)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
+end
+function s.cn(e,tp,eg,ep,ev,re,r,rp)
+	return ep~=tp
 end
 function s.filter(c)
 	return c:IsCanChangePosition()

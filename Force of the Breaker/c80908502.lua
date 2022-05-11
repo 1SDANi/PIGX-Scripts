@@ -26,7 +26,7 @@ function s.dfilter(c)
 	return c:IsSetCard(0xf6) and c:IsFaceup()
 end
 function s.descon(e)
-	return not Duel.IsExistingMatchingCard(s.dfilter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil)
+	return not Duel.IsExistingMatchingCard(s.dfilter,e:GetHandler():GetControler(),LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil)
 		and not Duel.IsEnvironment(63035430) and not Duel.IsEnvironment(47596607) and not Duel.IsEnvironment(53527835) and not Duel.IsEnvironment(75041269)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)

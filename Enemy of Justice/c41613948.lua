@@ -2,7 +2,7 @@
 --Destiny HERO - Devilguy
 local s,id=GetID()
 function s.initial_effect(c)
-	--Banish itself and a monster
+	--Banish
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_REMOVE)

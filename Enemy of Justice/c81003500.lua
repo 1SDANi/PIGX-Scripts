@@ -1,5 +1,5 @@
 --E・HERO ネクロイド・シャーマン
---Elemental HERO Necroid Shaman
+--Elemental HERO Wildshade
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material

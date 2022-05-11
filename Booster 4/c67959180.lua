@@ -28,7 +28,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetCode(EFFECT_SET_ATTACK_FINAL)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD_DISABLE)
 		if opt~=coin then
-			e1:SetValue(c:GetAttack()*2)
+			e1:SetValue(math.ceil(c:GetAttack()/2))
 		else
 			e1:SetValue(c:GetAttack()*2)
 		end

@@ -2,6 +2,14 @@
 --White Night Dragon
 local s,id=GetID()
 function s.initial_effect(c)
+	--disable
+	local e1=Effect.CreateEffect(c)
+	e1:SetType(EFFECT_TYPE_FIELD)
+	e1:SetRange(LOCATION_MZONE)
+	e1:SetTargetRange(LOCATION_MZONE,LOCATION_MZONE)
+	e1:SetCode(EFFECT_DISABLE)
+	e1:SetTarget(s.distg)
+	c:RegisterEffect(e1)
 	--cannot be target
 	local e5=Effect.CreateEffect(c)
 	e5:SetType(EFFECT_TYPE_SINGLE)
@@ -21,7 +29,7 @@ function s.initial_effect(c)
 end
 s.counter_list={COUNTER_ICE}
 function s.distg(e,c)
-	return c:GetCounter(COUNTER_ICE)>0
+	return c:GetCounter(COUNTER_ICE)>0 and c:GetControler ~= e:GetHandler():GetControler()
 end
 function s.atlimit(e,c)
 	return c~=e:GetHandler()

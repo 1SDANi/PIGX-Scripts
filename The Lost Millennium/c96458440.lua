@@ -26,7 +26,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	local d=Duel.GetAttackTarget()
 	if d==e:GetHandler():GetEquipTarget() then d=Duel.GetAttacker() end
-	local dam=d:GetDefense()+d:GetAttack()
+	local dam=d:GetAttack()
 	Duel.SetTargetPlayer(1-tp)
 	Duel.SetTargetParam(dam)
 	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,dam)

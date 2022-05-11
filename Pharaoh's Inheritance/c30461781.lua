@@ -1,5 +1,5 @@
 --八汰烏の骸
---Legacy of Yata-Garasu
+--Legacy of Yatagarasu
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate

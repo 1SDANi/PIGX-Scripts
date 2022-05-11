@@ -27,6 +27,7 @@ function s.initial_effect(c)
 	e3:SetOperation(s.operation)
 	c:RegisterEffect(e3)
 end
+s.counter_list={COUNTER_A}
 function s.filter(c)
 	return c:HasLevel() and c:IsCanAddCounter(COUNTER_A,c:GetLevel())
 end
@@ -40,6 +41,7 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local lv=tc:GetLevel()
+	local g=Duel.SelectTarget(tp,s.filter,tp,0,LOCATION_MZONE,1,1,nil)
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:HasLevel() and tc:IsRelateToEffect(e) and tc:IsCanAddCounter(COUNTER_A,lv) and tc:AddCounter(COUNTER_A,lv) then
 		local e1=Effect.CreateEffect(c)
