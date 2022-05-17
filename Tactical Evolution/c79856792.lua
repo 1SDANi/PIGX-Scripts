@@ -83,7 +83,7 @@ function s.atcon(e,tp,eg,ep,ev,re,r,rp)
 	return phase~=PHASE_DAMAGE or not Duel.IsDamageCalculated()
 end
 function s.afilter(c)
-	return c:IsFaceup() and c:IsSetCard(0x1034) and c:IsType(TYPE_UNION) and c:IsAbleToGraveAsCost()
+	return c:IsFaceup() and c:IsSetCard(0x1034) and c:IsType(TYPE_UNION) and c:IsDestructable()
 end
 function s.atcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.afilter,tp,LOCATION_ONFIELD,0,1,nil) end
@@ -100,6 +100,9 @@ function s.atop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetValue(e:GetLabel()*1000)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD)
 		c:RegisterEffect(e1)
+		local e2=e1:Clone()
+		e2:SetCode(EFFECT_UPDATE_DEFENSE)
+		c:RegisterEffect(e2)
 	end
 end
 function s.cfilter(c)

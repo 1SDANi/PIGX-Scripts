@@ -29,7 +29,7 @@ s.material_race={RACE_MACHINE}
 function s.fil(c,fc,sumtype,tp,sub,mg,sg,contact)
 	if contact then sumtype=0 end
 	return c:IsRace(RACE_MACHINE,fc,sumtype,tp) and (not contact or c:IsType(TYPE_MONSTER,fc,sumtype,tp)) and
-		c:IsCode(CARD_CYBER_DRAGON) or (not sg or sg:IsExists(Card.IsCode,1,c,CARD_CYBER_DRAGON))
+		(c:IsCode(CARD_CYBER_DRAGON) or (not sg or sg:IsExists(Card.IsCode,1,c,CARD_CYBER_DRAGON)))
 end
 function s.val(e,c)
 	local g=e:GetHandler():GetMaterial()

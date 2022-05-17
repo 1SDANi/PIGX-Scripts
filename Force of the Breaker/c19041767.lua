@@ -21,6 +21,7 @@ function s.initial_effect(c)
 	e2:SetTarget(aux.TargetBoolFunction(Card.IsType,TYPE_GEMINI))
 	c:RegisterEffect(e2)
 end
+s.listed_card_types={TYPE_GEMINI}
 function s.valcon(e,re,r,rp)
 	return (r&REASON_BATTLE)~=0 or (r&REASON_EFFECT)~=0
 end

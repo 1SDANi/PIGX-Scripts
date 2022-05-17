@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e2:SetCountLimit(1)
 	e2:SetCost(s.thcost)
 	e2:SetTarget(s.thtg)
-	e2:SetOperation(s.thtg)
+	e2:SetOperation(s.thop)
 	c:RegisterEffect(e2)
 end
 function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -34,7 +34,7 @@ function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local g=Duel.SelectTarget(tp,s.filter,tp,0,LOCATION_ONFIELD,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,g,1,0,0)
 end
-function s.thtg(e,tp,eg,ep,ev,re,r,rp)
+function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsRelateToEffect(e) then
 		Duel.SendtoHand(tc,nil,REASON_EFFECT)

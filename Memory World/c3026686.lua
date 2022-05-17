@@ -28,22 +28,22 @@ function s.initial_effect(c)
 end
 s.listed_series={0x122}
 s.listed_names={id}
-function s.filter(c)
+function s.filter1(c)
 	return c:IsFaceup() and c:IsMonster()
 end
 function s.val(e,c)
-	return Duel.GetMatchingGroupCount(s.filter,c:GetControler(),LOCATION_REMOVED,LOCATION_REMOVED,nil)*200
+	return Duel.GetMatchingGroupCount(s.filter1,c:GetControler(),LOCATION_REMOVED,LOCATION_REMOVED,nil)*200
 end
-function s.filter(c)
+function s.filter2(c)
 	return c:IsSetCard(0x122) and c:IsType(TYPE_MONSTER) and c:IsAbleToHand() and not c:IsCode(id)
 end
 function s.tg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.filter2,tp,LOCATION_DECK,0,1,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
 end
 function s.op(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_DECK,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,s.filter2,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 then
 		Duel.SendtoHand(g,nil,REASON_EFFECT)
 		Duel.ConfirmCards(1-tp,g)

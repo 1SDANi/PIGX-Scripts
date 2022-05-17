@@ -1,5 +1,5 @@
 --マーメイド・ナイト
---Mermaid Knight
+--Atlantean Knight
 local s,id=GetID()
 function s.initial_effect(c)
 	local e1=Effect.CreateEffect(c)

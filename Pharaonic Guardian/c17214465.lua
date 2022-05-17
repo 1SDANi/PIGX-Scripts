@@ -1,5 +1,5 @@
 --海神の巫女
---Sea Priestess
+--Atlantean Priestess
 local s,id=GetID()
 function s.initial_effect(c)
 	--field

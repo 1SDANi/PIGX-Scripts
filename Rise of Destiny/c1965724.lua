@@ -10,7 +10,7 @@ function s.initial_effect(c)
 	--reg
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
-	e2:SetProperty(EFFECT_FLAG_DELAY)
+	e2:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_DAMAGE_STEP)
 	e2:SetRange(LOCATION_SZONE)
 	e2:SetCode(EVENT_DESTROYED)
 	e2:SetCondition(s.regcon)

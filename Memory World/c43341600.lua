@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.drcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsPreviousPosition(POS_FACEDOWN) (not e:GetHandler():IsLocation(LOCATION_DECK))
+	return e:GetHandler():IsPreviousPosition(POS_FACEDOWN)
 end
 function s.drtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

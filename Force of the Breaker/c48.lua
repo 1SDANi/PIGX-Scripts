@@ -63,13 +63,13 @@ if not SealedDuel then
 		end
 		for p=z,o do
 			for team=1,counts[p] do
-				for i=1,12 do
+				for i=1,15 do
 					local packnum=1
-					for i=1,5 do
+					for i=1,6 do
 						local rarity
-						if i==4 then
+						if i==4 or i==5 then
 							rarity=2
-						elseif i<5 then
+						elseif i<6 then
 							rarity=1
 						else
 							rarity=Duel.GetRandomNumber(1,3)
@@ -92,7 +92,7 @@ if not SealedDuel then
 				Duel.Hint(HINT_SELECTMSG,p,aux.Stringid(id,2))
 				local fg=Duel.GetFieldGroup(p,0xff,0)
 				local extra=Duel.GetFieldGroup(p,LOCATION_EXTRA,0)
-				local exclude=fg:Select(p,0,#fg-30-#extra,nil)
+				local exclude=fg:Select(p,#fg-60-#extra,#fg-60-#extra,nil)
 				if exclude then
 					Duel.SendtoDeck(exclude,nil,-2,REASON_RULE)
 				end

@@ -79,24 +79,9 @@ function s.opdisable(e,tp,eg,ep,ev,re,r,rp)
 		return
 	end
 	if Duel.NegateActivation(ev) then
-		if re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:GetHandler():IsRelateToEffect(re) then
+		if c:UpdateAttack(-500,nil)==-500 and c:UpdateDefense(-500,nil)==-500 and re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:GetHandler():IsRelateToEffect(re) then
 			Duel.SendtoGrave(eg,REASON_EFFECT)
 		end
-		Duel.BreakEffect
-		local e1=Effect.CreateEffect(c)
-		e1:SetType(EFFECT_TYPE_SINGLE)
-		e1:SetProperty(EFFECT_FLAG_COPY_INHERIT)
-		e1:SetReset(RESET_EVENT+RESETS_STANDARD_DISABLE)
-		e1:SetCode(EFFECT_UPDATE_ATTACK)
-		e1:SetValue(-500)
-		c:RegisterEffect(e1)
-		local e2=Effect.CreateEffect(c)
-		e2:SetType(EFFECT_TYPE_SINGLE)
-		e2:SetProperty(EFFECT_FLAG_COPY_INHERIT)
-		e2:SetReset(RESET_EVENT+RESETS_STANDARD_DISABLE)
-		e2:SetCode(EFFECT_UPDATE_DEFENSE)
-		e2:SetValue(-500)
-		c:RegisterEffect(e2)
 	end
 end
 function s.cdspsum(e)

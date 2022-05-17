@@ -66,7 +66,7 @@ function s.regop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return c:IsPreviousPosition(POS_FACEUP) and not c:IsLocation(LOCATION_DECK) and e:GetLabelObject():GetLabel()==1
+	return c:IsPreviousPosition(POS_FACEUP) and e:GetLabelObject():GetLabel()==1
 end
 function s.spfilter(c,e,tp)
 	return c:IsCode(40591390) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)

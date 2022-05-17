@@ -1,5 +1,5 @@
 --創世神
---The Creator
+--The Ancient Soldier of Atum
 local s,id=GetID()
 function s.initial_effect(c)
 	--spsummon

@@ -15,6 +15,8 @@ function s.initial_effect(c)
 	e1:SetCode(EFFECT_GEMINI_STATUS)
 	c:RegisterEffect(e1)
 end
+s.listed_card_types={TYPE_GEMINI}
+s.material_type={TYPE_GEMINI}
 function s.contactfil(tp)
 	return Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)
 end

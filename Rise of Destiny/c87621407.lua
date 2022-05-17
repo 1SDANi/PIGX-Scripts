@@ -25,7 +25,7 @@ end
 s.listed_names={8715625}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return c:IsPreviousPosition(POS_FACEUP) and not c:IsLocation(LOCATION_DECK)
+	return c:IsPreviousPosition(POS_FACEUP)
 end
 function s.filter(c)
 	return c:IsFaceup() and c:IsCode(8715625)
