@@ -3,7 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableReviveLimit()
-	Fusion.AddProcMix(c,true,true,34022290,aux.FilterBoolFunctionEx(Card.IsSetCard,0x52))
+	Fusion.AddProcMix(c,true,true,34022290,s.fusfilter)
 	--special summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -55,6 +55,9 @@ function s.initial_effect(c)
 end
 s.listed_names={34022290,81954378}
 s.material_setcode={0x52}
+function s.fusfilter(c)
+	return c:IsSetCard(0x52) and c:IsType(TYPE_MONSTER)
+end
 function s.sdfilter(c)
 	return c:IsFaceup() and c:IsCode(81954378)
 end

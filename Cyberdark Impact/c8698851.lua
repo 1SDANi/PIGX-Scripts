@@ -24,7 +24,7 @@ s.listed_series={0xc008}
 function s.cfilter(c)
 	return c:IsLocation(LOCATION_MZONE) and c:IsFaceup() and c:IsSetCard(0xc008) and c:IsControler(tp)
 end
-function s.condition(e,tp,eg,ep,ev,re,r,rp)
+function s.condition1(e,tp,eg,ep,ev,re,r,rp)
 	local tc=eg:GetFirst()
 	return tc:IsControler(tp) and tc:IsFaceup() and tc:IsSetCard(0xc008)
 end

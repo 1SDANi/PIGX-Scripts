@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
 	c:EnableReviveLimit()
-	Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0xf),2)
+	Fusion.AddProcMixN(c,true,true,s.fusfilter,2)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	--disable field
 	local e1=Effect.CreateEffect(c)
@@ -15,6 +15,9 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 s.material_setcode={0xf}
+function s.fusfilter(c)
+	return c:IsSetCard(0xf) and c:IsType(TYPE_MONSTER)
+end
 function s.disop(e,tp)
 	local c=Duel.GetLocationCount(1-tp,LOCATION_MZONE,PLAYER_NONE,0)
 	if c==0 then return end

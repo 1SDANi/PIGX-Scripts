@@ -3,7 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	Fusion.AddProcMixRep(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0x1a),1,99)
+	Fusion.AddProcMixRep(c,true,true,s.fusfilter,1,99)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
@@ -15,6 +15,9 @@ function s.initial_effect(c)
 end
 s.material_setcode={0x1a}
 s.listed_series={0x1a}
+function s.fusfilter(c)
+	return c:IsSetCard(0x1a) and c:IsType(TYPE_MONSTER)
+end
 function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION)
 end

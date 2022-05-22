@@ -2,7 +2,7 @@
 --Hellfire Emperor
 local s,id=GetID()
 function s.initial_effect(c)
-	--spsummon
+	--destroy
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_DESTROY)

@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableReviveLimit()
 	--fusion material
-	Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0x36),3)
+	Fusion.AddProcMixN(c,true,true,s.fusfilter,3)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 	e1:SetCode(EVENT_SPSUMMON_SUCCESS)
@@ -27,6 +27,9 @@ function s.initial_effect(c)
 end
 s.material_setcode={0x36}
 s.listed_series={0x36}
+function s.fusfilter(c)
+	return c:IsSetCard(0x36) and c:IsType(TYPE_MONSTER)
+end
 function s.ctfilter(c,e,tp)
 	return c:IsSetCard(0x36) and c:IsCanBeSpecialSummoned(e,0,tp,false,false) and not c:IsCode(id)
 end

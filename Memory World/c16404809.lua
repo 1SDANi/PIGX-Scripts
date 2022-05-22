@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
 	c:EnableReviveLimit()
-	Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0xa4),5)
+	Fusion.AddProcMixN(c,true,true,s.fusfilter,5)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	--Draw
 	local e1=Effect.CreateEffect(c)
@@ -21,6 +21,9 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 s.material_setcode={0xa4}
+function s.fusfilter(c)
+	return c:IsSetCard(0xa4) and c:IsType(TYPE_MONSTER)
+end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION) and e:GetHandler():GetMaterialCount()==5
 end

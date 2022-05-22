@@ -93,21 +93,19 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) then
-		if Duel.SpecialSummonStep(c,SUMMON_TYPE_RITUAL,tp,tp,true,true,POS_FACEUP) then
+		if Duel.SpecialSummon(c,SUMMON_TYPE_RITUAL,tp,tp,true,true,POS_FACEUP) then
+			local atk = e:GetLabel()*1000
+			if atk<0 then atk=0 end
 			--atk,def
-			local e2=Effect.CreateEffect(c)
-			e2:SetType(EFFECT_TYPE_SINGLE)
-			e2:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
-			e2:SetRange(LOCATION_MZONE)
-			e2:SetTargetRange(LOCATION_MZONE,0)
-			e2:SetCode(EFFECT_SET_BASE_ATTACK)
-			e2:SetReset(RESET_EVENT+RESETS_STANDARD_DISABLE)
-			e2:SetValue(e:GetLabel()*1000)
-			c:RegisterEffect(e2)
-			local e3=e2:Clone()
-			e3:SetCode(EFFECT_SET_BASE_DEFENSE)
-			c:RegisterEffect(e3)
-			c:CompleteProcedure()
+			local e4=Effect.CreateEffect(c)
+			e4:SetType(EFFECT_TYPE_SINGLE)
+			e4:SetCode(EFFECT_SET_BASE_ATTACK)
+			e4:SetReset(RESET_EVENT+RESETS_STANDARD_DISABLE)
+			e4:SetValue(atk)
+			c:RegisterEffect(e4)
+			local e5=e4:Clone()
+			e5:SetCode(EFFECT_SET_BASE_DEFENSE)
+			c:RegisterEffect(e5)
 		end
 	end
 end

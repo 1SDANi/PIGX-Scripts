@@ -19,6 +19,9 @@ function s.initial_effect(c)
 	aux.AddEREquipLimit(c,s.eqcon,s.eqval,s.equipop,e1)
 end
 s.material_setcode={0x16}
+function s.fusfilter(c)
+	return c:IsSetCard(0x16) and c:IsType(TYPE_MONSTER)
+end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION)
 end

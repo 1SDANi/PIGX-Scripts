@@ -3,13 +3,16 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
 	c:EnableReviveLimit()
-	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0x3b),s.filter)
+	Fusion.AddProcMix(c,true,true,s.fusfilter,s.filter)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 end
 s.listed_names={CARD_METAMORPHOSIS}
 s.material_setcode={0x3b}
 s.material_race={RACE_MACHINE}
 s.material_type={TYPE_NORMAL}
+function s.fusfilter(c)
+	return c:IsSetCard(0x3b) and c:IsType(TYPE_MONSTER)
+end
 function s.filter(c,fc,sumtype,tp)
 	return (c:IsRace(RACE_MACHINE,fc,sumtype,tp) and c:IsType(TYPE_NORMAL) or c:IsCode(68540058))
 end

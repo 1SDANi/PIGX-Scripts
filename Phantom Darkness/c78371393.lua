@@ -19,10 +19,9 @@ function s.initial_effect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
-	e2:SetProperty(EFFECT_FLAG_DELAY)
+	e2:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_DAMAGE_STEP)
 	e2:SetCode(EVENT_LEAVE_FIELD)
 	e2:SetCondition(s.condition)
-	e2:SetCost(s.cost)
 	e2:SetTarget(s.target)
 	e2:SetOperation(s.operation)
 	c:RegisterEffect(e2)
@@ -34,11 +33,6 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.costfilter(c)
 	return ((not c:IsLocation(LOCATION_REMOVED)) or c:IsFaceup()) and c:IsType(TYPE_MONSTER) and c:IsSetCard(0x40)
-end
-function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND+LOCATION_DECK+LOCATION_GRAVE+LOCATION_EXTRA+LOCATION_ONFIELD+LOCATION_REMOVED,0,1,nil) end
-	local sg=Duel.GetMatchingGroup(s.costfilter,tp,0,LOCATION_HAND+LOCATION_DECK+LOCATION_GRAVE+LOCATION_EXTRA+LOCATION_ONFIELD+LOCATION_REMOVED,nil)
-	Duel.Remove(sg,POS_FACEDOWN,REASON_EFFECT)
 end
 function s.filter(c,e,tp)
 	return c:IsCode(4779091) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)

@@ -23,7 +23,7 @@ function s.initial_effect(c)
 	e2:SetTarget(aux.TargetBoolFunction(Card.IsType,TYPE_NORMAL))
 	e2:SetValue(aux.TargetBoolFunction(Card.IsAttribute,ATTRIBUTE_DIVINE))
 	c:RegisterEffect(e2)
-	--double tribute
+	--triple tribute
 	local e3=e2:Clone()
 	e3:SetCode(EFFECT_TRIPLE_TRIBUTE)
 	e3:SetTargetRange(LOCATION_MZONE,LOCATION_MZONE)

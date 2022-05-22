@@ -3,7 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableReviveLimit()
-	Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0x8e),2)
+	Fusion.AddProcMixN(c,true,true,s.fusfilter,2)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	--special summon
 	local e3=Effect.CreateEffect(c)
@@ -19,6 +19,9 @@ function s.initial_effect(c)
 end
 s.listed_names={CARD_METAMORPHOSIS}
 s.material_setcode={0x8e}
+function s.fusfilter(c)
+	return c:IsSetCard(0x8e) and c:IsType(TYPE_MONSTER)
+end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,e:GetHandler()) end
 	Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST+REASON_DISCARD)

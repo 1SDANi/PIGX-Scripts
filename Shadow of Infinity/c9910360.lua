@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
 	c:EnableReviveLimit()
-	Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0x12),3)
+	Fusion.AddProcMixN(c,true,true,s.fusfilter,3)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	--atk
 	local e1=Effect.CreateEffect(c)
@@ -16,12 +16,15 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 s.material_setcode={0x12}
+function s.fusfilter(c)
+	return c:IsSetCard(0x12) and c:IsType(TYPE_MONSTER)
+end
 function s.filter(c)
 	return c:IsFaceup() and c:IsSetCard(0x12)
 end
 function s.val(e,c)
 	local g=Duel.GetMatchingGroup(s.filter,c:GetControler(),LOCATION_MZONE,0,nil)
-	return #g*1000
+	return #g*2000
 end
 function s.contactfil(tp)
 	return Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)

@@ -28,6 +28,15 @@ function s.initial_effect(c)
 	e2:SetValue(s.repval)
 	e2:SetOperation(s.repop)
 	c:RegisterEffect(e2)
+	--Destroy replace
+	local e5=Effect.CreateEffect(c)
+	e5:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_SINGLE)
+	e5:SetCode(EFFECT_DESTROY_REPLACE)
+	e5:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
+	e5:SetRange(LOCATION_FZONE)
+	e5:SetTarget(s.desreptg)
+	e5:SetOperation(s.desrepop)
+	c:RegisterEffect(e5)
 end
 s.listed_series={0x19}
 function s.repfilter(c,tp)

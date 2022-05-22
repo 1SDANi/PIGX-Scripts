@@ -43,7 +43,6 @@ function s.initial_effect(c)
 	e5:SetTargetRange(LOCATION_MZONE,LOCATION_MZONE)
 	e5:SetTarget(aux.TargetBoolFunction(Card.IsType,TYPE_TRAP))
 	c:RegisterEffect(e5)
-	aux.DoubleSnareValidity(c,LOCATION_MZONE)
 end
 function s.disop(e,tp,eg,ep,ev,re,r,rp)
 	local tl=Duel.GetChainInfo(ev,CHAININFO_TRIGGERING_LOCATION)

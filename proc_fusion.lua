@@ -918,8 +918,7 @@ end
 function Fusion.ContactTg(f)
 	return function(e,tp,eg,ep,ev,re,r,rp,chk)
 		local id=e:GetHandler():GetCode()
-		if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-			and e:GetHandler():IsCanBeSpecialSummoned(e,0,tp,false,false) and
+		if chk==0 then return  e:GetHandler():IsCanBeSpecialSummoned(e,0,tp,false,false) and
 			(not f or e:GetHandler():GetFlagEffect(id-1)==0) end
 		e:GetHandler():RegisterFlagEffect(id-1,RESET_CHAIN,0,1)
 		Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,c,1,0,0)

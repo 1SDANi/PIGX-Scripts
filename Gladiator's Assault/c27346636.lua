@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
 	c:EnableReviveLimit()
-	Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0x19),2,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_FIRE),1)
+	Fusion.AddProcMixN(c,true,true,s.fusfilter,2,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_FIRE),1)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	--special summon
 	local e1=Effect.CreateEffect(c)
@@ -32,16 +32,21 @@ function s.initial_effect(c)
 	e2:SetOperation(s.disop)
 	c:RegisterEffect(e2)
 end
+s.listed_series={0x19}
+s.material_setcode={0x19}
+function s.fusfilter(c)
+	return c:IsSetCard(0x19) and c:IsType(TYPE_MONSTER)
+end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetBattledGroupCount()>0
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsAbleToDeckAsCost() end
+	if chk==0 then return c:IsAbleToDeckOrExtraAsCost() end
 	Duel.SendtoDeck(c,nil,2,REASON_COST)
 end
 function s.filter(c,e,tp)
-	return not c:IsCode(id) and c:IsLevelBelow(6) and c:IsSetCard(0x19) and c:IsCanBeSpecialSummoned(e,102,tp,false,false)
+	return c:IsLevelBelow(6) and c:IsSetCard(0x19) and c:IsCanBeSpecialSummoned(e,102,tp,false,false)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>-1
