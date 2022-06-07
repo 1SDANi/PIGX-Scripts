@@ -27,9 +27,9 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 			Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,nil) and
 			Duel.IsExistingMatchingCard(aux.TRUE,tp,0,LOCATION_ONFIELD,1,nil) then
 		if Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST+REASON_DISCARD)>0 then
+			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
 			local g=Duel.SelectMatchingCard(tp,nil,tp,0,LOCATION_ONFIELD,1,1,nil)
 			if #g>0 then
-				Duel.HintSelection(g)
 				Duel.Destroy(g,REASON_EFFECT)
 			end
 		end

@@ -1,5 +1,5 @@
---カップ・オブ・エース
---Cup of Ace
+--エース・オブ・ソード
+--Ace of Sword
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -13,13 +13,16 @@ function s.initial_effect(c)
 end
 s.toss_coin=true
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsPlayerCanDraw(tp,2) end
+	if chk==0 then return Duel.IsExistingMatchingCard(aux.TRUE,tp,0,LOCATION_MZONE,1,nil) end
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local res=Duel.TossCoin(tp,1)
-	if res==1 then Duel.Draw(tp,2,REASON_EFFECT)
-	elseif Duel.IsExistingMatchingCard(Duel.IsType,1-tp,LOCATION_HAND,0,1,nil,TYPE_SPELL) and Duel.IsPlayerCanDraw(1-tp,2) and
+	if res==1 then
+		local sg1=Duel.GetMatchingGroup(aux.TRUE,tp,0,LOCATION_MZONE,e:GetHandler())
+		Duel.Destroy(sg1,REASON_EFFECT)
+	elseif Duel.IsExistingMatchingCard(Duel.IsType,1-tp,LOCATION_HAND,0,1,nil,TYPE_SPELL) and Duel.IsExistingMatchingCard(aux.TRUE,tp,LOCATION_MZONE,0,1,nil) and
 			Duel.SelectYesNo(1-tp,aux.Stringid(id,0)) and Duel.DiscardHand(1-tp,Card.IsType,1,1,REASON_DISCARD,nil,TYPE_SPELL)>0 then
-		Duel.Draw(1-tp,2,REASON_EFFECT)
+		local sg2=Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_MZONE,0,e:GetHandler())
+		Duel.Destroy(sg2,REASON_EFFECT)
 	end
 end

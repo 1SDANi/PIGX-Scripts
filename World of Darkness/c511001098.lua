@@ -1,5 +1,5 @@
---カップ・オブ・エース
---Cup of Ace
+--ペンタクル・オブ・エース
+--Pentacle of Ace
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -13,13 +13,13 @@ function s.initial_effect(c)
 end
 s.toss_coin=true
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsPlayerCanDraw(tp,2) end
+	if chk==0 then return Duel.IsPlayerCanDraw(tp,1) end
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local res=Duel.TossCoin(tp,1)
-	if res==1 then Duel.Draw(tp,2,REASON_EFFECT)
-	elseif Duel.IsExistingMatchingCard(Duel.IsType,1-tp,LOCATION_HAND,0,1,nil,TYPE_SPELL) and Duel.IsPlayerCanDraw(1-tp,2) and
+	if res==1 then Duel.Draw(tp,1,REASON_EFFECT)
+	elseif Duel.IsExistingMatchingCard(Duel.IsType,1-tp,LOCATION_HAND,0,1,nil,TYPE_SPELL) and Duel.IsPlayerCanDraw(1-tp,1) and
 			Duel.SelectYesNo(1-tp,aux.Stringid(id,0)) and Duel.DiscardHand(1-tp,Card.IsType,1,1,REASON_DISCARD,nil,TYPE_SPELL)>0 then
-		Duel.Draw(1-tp,2,REASON_EFFECT)
+		Duel.Draw(1-tp,1,REASON_EFFECT)
 	end
 end
