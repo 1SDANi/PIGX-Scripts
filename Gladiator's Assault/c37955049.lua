@@ -5,7 +5,7 @@ function s.initial_effect(c)
 	--atkup
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,0))
-	e3:SetCategory(CATEGORY_ATKCHANGE)
+	e3:SetCategory(CATEGORY_ATKDEFCHANGE)
 	e3:SetType(EFFECT_TYPE_IGNITION)
 	e3:SetCountLimit(1)
 	e3:SetRange(LOCATION_MZONE)

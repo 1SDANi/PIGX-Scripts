@@ -11,10 +11,10 @@ function s.initial_effect(c)
 	e0:SetTarget(s.desreptg)
 	e0:SetOperation(s.desrepop)
 	c:RegisterEffect(e0)
-	--bounce
+	--special summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_TOHAND)
+	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetRange(LOCATION_SZONE)

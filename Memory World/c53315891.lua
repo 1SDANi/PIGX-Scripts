@@ -3,7 +3,6 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
 	Fusion.AddProcMixN(c,true,true,80019195,nil,2)
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_SINGLE)

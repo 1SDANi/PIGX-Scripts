@@ -3,7 +3,6 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--Must be properly summoned before reviving
-	c:EnableReviveLimit()
 	--Contact fusion procedure
 	Fusion.AddProcMix(c,true,true,CARD_NEOS,17732278)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
@@ -29,6 +28,9 @@ function s.contactop(g)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler()==Duel.GetAttacker() or e:GetHandler()==Duel.GetAttackTarget() and e:GetHandler():IsRelateToEffect(e)
+end
+function s.filter(c)
+	return c:IsAttackPos()
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local a=Duel.GetAttacker()

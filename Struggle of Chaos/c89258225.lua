@@ -5,7 +5,7 @@ function s.initial_effect(c)
 	--destroy
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_ATKCHANGE+CATEGORY_DEFCHANGE)
+	e1:SetCategory(CATEGORY_ATKDEFCHANGE+CATEGORY_ATKDEFCHANGE)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetRange(LOCATION_MZONE)

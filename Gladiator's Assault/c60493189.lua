@@ -3,8 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
-	Fusion.AddProcMix(c,true,true,20721928,59793705)
+	Fusion.AddProcMix(c,true,true,80908502,59793705)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	--destroy
 	local e1=Effect.CreateEffect(c)
@@ -42,4 +41,10 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	if t~=nil and t:IsRelateToBattle() and not t:IsAttackPos() and Duel.Destroy(t,REASON_EFFECT)>0 then
 		Duel.ChainAttack()
 	end
+end
+function s.contactfil(tp)
+	return Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)
+end
+function s.contactop(g)
+	Duel.SendtoGrave(g,REASON_COST+REASON_MATERIAL+REASON_FUSION)
 end

@@ -24,6 +24,7 @@ function s.initial_effect(c)
 	e4:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e4:SetCode(EFFECT_CANNOT_DRAW)
 	e4:SetTargetRange(1,1)
+	e4:SetCondition(s.con)
 	c:RegisterEffect(e4)
 end
 function s.sumcon(e)

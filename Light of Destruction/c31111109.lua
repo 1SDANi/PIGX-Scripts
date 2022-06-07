@@ -3,7 +3,6 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
 	Fusion.AddProcMixN(c,false,false,CARD_NEOS,1,s.ffilter,6)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	local e0=Effect.CreateEffect(c)
@@ -29,12 +28,13 @@ function s.initial_effect(c)
 	c:RegisterEffect(e5)
 end
 s.material_setcode={0x8,0x3008,0x9,0x1f}
+s.listed_names={CARD_NEOS}
 function s.effcon(e)
 	return e:GetHandler():GetSummonType()==SUMMON_TYPE_FUSION
 end
 function s.ffilter(c,fc,sumtype,tp,sub,mg,sg)
-	return c:IsSetCard(0x1f,fc,sumtype,tp)  and c:GetAttribute(fc,sumtype,tp)~=0 and
-		(not sg or not sg:IsExists(s.fusfilter,1,c,c:GetAttribute(fc,sumtype,tp),fc,sumtype,tp))
+	return (c:IsSetCard(0x1f,fc,sumtype,tp) and c:IsType(TYPE_MONSTER+TYPE_UNION)) and (c:GetAttribute(fc,sumtype,tp)~=0 or c:IsCode(CARD_NEOS)) and
+		(not sg or not (not sg or sg:IsExists(Card.IsCode,1,c,CARD_NEOS)))
 end
 function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION)
@@ -79,8 +79,8 @@ function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.contactfil(tp)
-	return Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)
+	return Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD+LOCATION_GRAVE,0,nil)
 end
 function s.contactop(g)
-	Duel.SendtoGrave(g,REASON_COST+REASON_MATERIAL+REASON_FUSION)
+	Duel.SendtoDeck(g,REASON_COST+REASON_MATERIAL+REASON_FUSION)
 end

@@ -3,8 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
-	Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0x19),1,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_WIND),1)
+	Fusion.AddProcMixN(c,true,true,s.fusfilter,1,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_WIND),1)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	--spsummon
 	local e1=Effect.CreateEffect(c)
@@ -31,6 +30,9 @@ function s.initial_effect(c)
 end
 s.listed_series={0x19}
 s.material_setcode={0x19}
+function s.fusfilter(c)
+	return c:IsSetCard(0x19) and c:IsType(TYPE_MONSTER+TYPE_UNION)
+end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,e:GetHandler()) end
 	Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST+REASON_DISCARD)

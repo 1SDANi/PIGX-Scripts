@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	--atk/def
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,1))
-	e4:SetCategory(CATEGORY_ATKCHANGE)
+	e4:SetCategory(CATEGORY_ATKDEFCHANGE)
 	e4:SetType(EFFECT_TYPE_IGNITION)
 	e4:SetRange(LOCATION_MZONE)
 	e4:SetCountLimit(1)

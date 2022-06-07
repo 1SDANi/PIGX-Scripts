@@ -3,7 +3,6 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
 	Fusion.AddProcMixN(c,true,true,s.fusfilter,2)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	--disable field
@@ -16,7 +15,7 @@ function s.initial_effect(c)
 end
 s.material_setcode={0xf}
 function s.fusfilter(c)
-	return c:IsSetCard(0xf) and c:IsType(TYPE_MONSTER)
+	return c:IsSetCard(0xf) and c:IsType(TYPE_MONSTER+TYPE_UNION)
 end
 function s.disop(e,tp)
 	local c=Duel.GetLocationCount(1-tp,LOCATION_MZONE,PLAYER_NONE,0)

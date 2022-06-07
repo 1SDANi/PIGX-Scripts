@@ -2,7 +2,6 @@
 --Dark Magician Knight
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
 	--des
 	local e2=Effect.CreateEffect(c)
 	e2:SetCategory(CATEGORY_DESTROY)

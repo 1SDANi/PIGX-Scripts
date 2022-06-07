@@ -65,14 +65,13 @@ function s.poscon(e,tp,eg,ep,ev,re,r,rp)
 		((a:IsAttackPos() and a:IsLocation(LOCATION_MZONE)) or (t and t:IsAttackPos() and t:IsLocation(LOCATION_MZONE)))
 end
 function s.posop(e,tp,eg,ep,ev,re,r,rp)
-	local c=e:GetHandler()
-	local t=Duel.GetAttacker()
-	if t==c then t=Duel.GetAttackTarget() end
+	local a=Duel.GetAttacker()
+	local t=Duel.GetAttackTarget()
 	if t and t:IsAttackPos() and t:IsLocation(LOCATION_MZONE) then
 		Duel.ChangePosition(t,POS_FACEUP_DEFENSE)
 	end
-	if c:IsAttackPos() and c:IsLocation(LOCATION_MZONE) then
-		Duel.ChangePosition(c,POS_FACEUP_DEFENSE)
+	if a:IsAttackPos() and a:IsLocation(LOCATION_MZONE) then
+		Duel.ChangePosition(a,POS_FACEUP_DEFENSE)
 	end
 end
 function s.desreptg(e,tp,eg,ep,ev,re,r,rp,chk)

@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	--atk
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,2))
-	e2:SetCategory(CATEGORY_ATKCHANGE)
+	e2:SetCategory(CATEGORY_ATKDEFCHANGE)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e2:SetProperty(EFFECT_FLAG_DELAY)
 	e2:SetCode(EVENT_DESTROYED)
@@ -66,7 +66,7 @@ function s.ftarget(e,c)
 	return c:IsSetCard(0x301)
 end
 function s.val(e,c)
-	return Duel.GetMatchingGroupCount(aux.FilterFaceupFunction(Card.IsSetCard,0x301),c:GetControler(),LOCATION_MZONE,0,e:GetHandler())*500
+	return Duel.GetMatchingGroupCount(aux.FilterFaceupFunction(Card.IsSetCard,0x301),c:GetControler(),LOCATION_MZONE,0,e:GetHandler())*1000
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsLocation(LOCATION_GRAVE) and (r&REASON_EFFECT+REASON_BATTLE)~=0

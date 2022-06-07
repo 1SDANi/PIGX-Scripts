@@ -25,7 +25,7 @@ function s.initial_effect(c)
 	--atk
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,2))
-	e4:SetCategory(CATEGORY_ATKCHANGE)
+	e4:SetCategory(CATEGORY_ATKDEFCHANGE)
 	e4:SetType(EFFECT_TYPE_IGNITION)
 	e4:SetRange(LOCATION_MZONE)
 	e4:SetCost(s.atkcost)

@@ -2,7 +2,6 @@
 --Orichalcos Shunoros
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
 	--connot special summon
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_SINGLE)
@@ -22,7 +21,7 @@ function s.initial_effect(c)
 	--lose ATK
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
-	e2:SetCategory(CATEGORY_ATKCHANGE+CATEGORY_DEFCHANGE)
+	e2:SetCategory(CATEGORY_ATKDEFCHANGE+CATEGORY_ATKDEFCHANGE)
 	e2:SetProperty(EFFECT_FLAG_DELAY)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
 	e2:SetCode(EVENT_BATTLED)

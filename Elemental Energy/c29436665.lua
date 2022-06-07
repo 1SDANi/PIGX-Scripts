@@ -2,7 +2,6 @@
 --Dark Executioner
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
 	Fusion.AddProcMix(c,true,true,46986414)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	--damage

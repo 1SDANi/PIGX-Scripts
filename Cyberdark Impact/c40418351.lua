@@ -3,7 +3,6 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
 	Fusion.AddProcMixN(c,true,true,s.fusfilter,3)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	--equip
@@ -50,7 +49,7 @@ function s.initial_effect(c)
 end
 s.material_setcode={0x93,0x4093}
 function s.fusfilter(c)
-	return c:IsSetCard(0x4093) and c:IsType(TYPE_MONSTER)
+	return c:IsSetCard(0x4093) and c:IsType(TYPE_MONSTER+TYPE_UNION)
 end
 function s.atkval(e,c)
 	return Duel.GetMatchingGroupCount(aux.TRUE,e:GetHandlerPlayer(),LOCATION_GRAVE,0,nil)*100

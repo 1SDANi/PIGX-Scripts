@@ -3,7 +3,6 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
 	Fusion.AddProcMix(c,false,false,CARD_NEOS,s.fusfilter)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	--send monsters to deck
@@ -41,7 +40,7 @@ s.listed_series={0x2034}
 s.listed_names={CARD_NEOS}
 s.material_setcode={0x8,0x3008,0x9,0x34,0x2034}
 function s.fusfilter(c)
-	return c:IsSetCard(0x2034) and c:IsType(TYPE_MONSTER)
+	return c:IsSetCard(0x2034) and c:IsType(TYPE_MONSTER+TYPE_UNION)
 end
 function s.tdtg1(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToDeck,tp,0,LOCATION_MZONE,1,nil) end

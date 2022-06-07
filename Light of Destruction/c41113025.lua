@@ -5,7 +5,7 @@ function s.initial_effect(c)
 	--Banish 1 Normal Trap and increase ATK
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_REMOVE+CATEGORY_ATKCHANGE)
+	e1:SetCategory(CATEGORY_REMOVE+CATEGORY_ATKDEFCHANGE)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetRange(LOCATION_MZONE)

@@ -3,8 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
-	Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0x16),3)
+	Fusion.AddProcMixN(c,true,true,s.fusfilter,3)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -13,6 +12,7 @@ function s.initial_effect(c)
 	e1:SetCode(EVENT_SPSUMMON_SUCCESS)
 	e1:SetProperty(EFFECT_FLAG_DELAY)
 	e1:SetCondition(s.condition)
+	e1:SetCost(s.cost)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
@@ -20,10 +20,14 @@ function s.initial_effect(c)
 end
 s.material_setcode={0x16}
 function s.fusfilter(c)
-	return c:IsSetCard(0x16) and c:IsType(TYPE_MONSTER)
+	return c:IsSetCard(0x16) and c:IsType(TYPE_MONSTER+TYPE_UNION)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION)
+end
+function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,e:GetHandler()) end
+	Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST+REASON_DISCARD)
 end
 function s.eqcon(e,tp,eg,ep,ev,re,r,rp)
 	local g=e:GetHandler():GetEquipGroup():Filter(s.eqfilter,nil)

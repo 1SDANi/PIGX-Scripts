@@ -3,7 +3,6 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
 	Fusion.AddProcMix(c,true,true,10000000,10000010,10000020)
 	--spsummon condition
 	local e0=Effect.CreateEffect(c)

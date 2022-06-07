@@ -1,7 +1,6 @@
 --Superstrike Dragonarmor
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
 	Fusion.AddProcMix(c,true,true,84565800,aux.FilterBoolFunction(Card.IsRace,RACE_MACHINE))
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	--equip

@@ -2,7 +2,6 @@
 --Legendary Knight Timaeus
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
 	--perform a fusion summon
 	local params = {aux.TRUE}
 	local e2=Effect.CreateEffect(c)

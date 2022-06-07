@@ -2,7 +2,6 @@
 --Chimeratech Fortress Dragon
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
 	--fusion material
 	Fusion.AddProcMixRep(c,true,true,s.fil,1,99)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)

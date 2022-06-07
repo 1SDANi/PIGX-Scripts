@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	--atkup
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
-	e3:SetCategory(CATEGORY_ATKCHANGE)
+	e3:SetCategory(CATEGORY_ATKDEFCHANGE)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
 	e3:SetCode(EVENT_BATTLE_DESTROYING)
 	e3:SetCondition(s.atkcon)

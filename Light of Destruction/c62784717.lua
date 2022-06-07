@@ -18,25 +18,17 @@ function s.initial_effect(c)
 	local e3=e1:Clone()
 	e3:SetCode(EVENT_FLIP_SUMMON_SUCCESS)
 	c:RegisterEffect(e3)
-	--summon cost
 	local e4=Effect.CreateEffect(c)
-	e4:SetType(EFFECT_TYPE_FIELD)
-	e4:SetCode(EFFECT_SUMMON_COST)
+	e4:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
+	e4:SetProperty(EFFECT_FLAG_DELAY)
+	e4:SetCode(EVENT_SUMMON_SUCCESS)
 	e4:SetRange(LOCATION_MZONE)
-	e4:SetTargetRange(0,LOCATION_ALL)
 	e4:SetCondition(s.heads)
-	e4:SetCost(s.costchk)
-	e4:SetOperation(s.costop)
+	e4:SetOperation(s.operation)
 	c:RegisterEffect(e4)
-	--summon cost
-	local e5=Effect.CreateEffect(c)
-	e5:SetType(EFFECT_TYPE_FIELD)
-	e5:SetCode(EFFECT_SPSUMMON_COST)
-	e5:SetRange(LOCATION_MZONE)
-	e5:SetTargetRange(0,LOCATION_ALL)
-	e5:SetCondition(s.tails)
-	e5:SetCost(s.costchk)
-	e5:SetOperation(s.costop)
+	local e5=e4:Clone()
+	e4:SetCode(EVENT_SPSUMMON_SUCCESS)
+	e4:SetCondition(s.tails)
 	c:RegisterEffect(e5)
 end
 s.toss_coin=true
@@ -46,13 +38,14 @@ end
 function s.tails(e)
 	return e:GetHandler():GetFlagEffectLabel(36690018)==0
 end
-function s.costchk(e,te_or_c,tp)
-	local ct=#{Duel.GetPlayerEffect(tp,id)}
-	return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,ct,e:GetHandler())
-end
-function s.costop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.Hint(HINT_CARD,0,id)
-	Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST+REASON_DISCARD)
+function s.operation(e,tp,eg,ep,ev,re,r,rp)
+	local e1=Effect.CreateEffect(e:GetHandler())
+	e1:SetType(EFFECT_TYPE_FIELD)
+	e1:SetCode(EFFECT_CANNOT_ATTACK_ANNOUNCE)
+	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
+	e1:SetReset(RESET_PHASE+PHASE_END)
+	e1:SetTargetRange(0,1)
+	Duel.RegisterEffect(e1,tp)
 end
 function s.cointg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

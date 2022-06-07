@@ -2,7 +2,6 @@
 --Guardian Deathscythe
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
 	Fusion.AddProcMix(c,true,true,34022290,s.fusfilter)
 	--special summon
 	local e1=Effect.CreateEffect(c)
@@ -56,7 +55,7 @@ end
 s.listed_names={34022290,81954378}
 s.material_setcode={0x52}
 function s.fusfilter(c)
-	return c:IsSetCard(0x52) and c:IsType(TYPE_MONSTER)
+	return c:IsSetCard(0x52) and c:IsType(TYPE_MONSTER+TYPE_UNION)
 end
 function s.sdfilter(c)
 	return c:IsFaceup() and c:IsCode(81954378)

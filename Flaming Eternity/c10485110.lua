@@ -3,7 +3,6 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
 	Fusion.AddProcMixN(c,true,true,37721209,1)
 	--Destroy all cards on the field
 	local e1=Effect.CreateEffect(c)

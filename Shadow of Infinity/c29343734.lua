@@ -2,7 +2,6 @@
 --Elemental HERO Elixir
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
 	Fusion.AddProcMixN(c,true,true,s.filter1,1,s.filter2,4)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	local e0=Effect.CreateEffect(c)
@@ -39,14 +38,6 @@ function s.initial_effect(c)
 	e4:SetCondition(s.regcon)
 	e4:SetOperation(s.regop)
 	c:RegisterEffect(e4)
-	--cannot be target
-	local e5=Effect.CreateEffect(c)
-	e5:SetType(EFFECT_TYPE_SINGLE)
-	e5:SetCode(EFFECT_CANNOT_BE_EFFECT_TARGET)
-	e5:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
-	e5:SetRange(LOCATION_MZONE)
-	e5:SetValue(aux.tgoval)
-	c:RegisterEffect(e5)
 end
 s.material_race=RACE_WARRIOR
 s.material_attribute={ATTRIBUTE_LIGHT}

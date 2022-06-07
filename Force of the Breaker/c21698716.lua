@@ -19,6 +19,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetRange(LOCATION_SZONE)
 	e1:SetCountLimit(1)
+	e1:SetCost(s.cs)
 	e1:SetTarget(s.tg)
 	e1:SetOperation(s.op)
 	c:RegisterEffect(e1)
@@ -41,7 +42,11 @@ function s.initial_effect(c)
 end
 s.listed_series={0x1034}
 function s.filter(c,e,sp)
-	return c:IsFaceup() and c:IsType(TYPE_UNION) and c:IsAbleToHand()
+	return c:IsFaceup() and c:IsType(TYPE_UNION) and c:IsAbleToHand() and c:IsSetCard(0x1034)
+end
+function s.cs(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,e:GetHandler()) end
+	Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST+REASON_DISCARD)
 end
 function s.tg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end

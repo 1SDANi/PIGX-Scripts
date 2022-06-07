@@ -2,7 +2,6 @@
 --Volcanic Devil
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
 	--special summon
 	local e0=Effect.CreateEffect(c)
 	e0:SetCategory(CATEGORY_SPECIAL_SUMMON)

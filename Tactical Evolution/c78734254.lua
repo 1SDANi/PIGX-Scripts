@@ -2,7 +2,6 @@
 --Neospacian Marine Dolphin
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
 	Fusion.AddProcMixN(c,true,true,17955766,1)
 	--change name
 	local e0=Effect.CreateEffect(c)

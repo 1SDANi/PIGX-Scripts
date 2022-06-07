@@ -2,7 +2,6 @@
 --The Stone Soldier of Resheph
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
 	--control
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -16,12 +15,9 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 s.listed_names={60369732}
-function s.cfilter(c)
-	return c:IsDiscardable() and c:IsType(TYPE_SPELL)
-end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND,0,1,nil) end
-	Duel.DiscardHand(tp,s.cfilter,1,1,REASON_COST+REASON_DISCARD)
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,nil) end
+	Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST+REASON_DISCARD)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsControlerCanBeChanged,tp,0,LOCATION_MZONE,1,nil) end

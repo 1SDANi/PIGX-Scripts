@@ -2,7 +2,6 @@
 --Blue-Eyes Shining Dragon
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
 	Fusion.AddProcMixN(c,true,true,23995346,1)
 	--atkup
 	local e3=Effect.CreateEffect(c)

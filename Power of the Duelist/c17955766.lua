@@ -28,8 +28,8 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		local tg=g:FilterSelect(tp,Card.IsType,1,1,nil,TYPE_MONSTER)
 		local tc=tg:GetFirst()
 		if tc then
-			local atk=tc:GetAttack()
-			if tc:HasLevel() and Duel.IsExistingMatchingCard(aux.FilterFaceupFunction(Card.IsLevelAbove,atk),tp,LOCATION_MZONE,0,1,nil) and
+			local lv=tc:GetLevel()
+			if tc:HasLevel() and Duel.IsExistingMatchingCard(aux.FilterFaceupFunction(Card.IsLevelAbove,lv),tp,LOCATION_MZONE,0,1,nil) and
 				Duel.Destroy(tc,REASON_EFFECT) then
 				Duel.Damage(1-tp,500,REASON_EFFECT)
 			end

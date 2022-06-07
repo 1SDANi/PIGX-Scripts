@@ -2,7 +2,6 @@
 --Neo-Spacian Twinkle Moss
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
 	Fusion.AddProcMixN(c,true,true,17732278,1)
 	--Activate
 	local e1=Effect.CreateEffect(c)

@@ -2,7 +2,6 @@
 --Elemental HERO Neo-Bubbleman
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
 	Fusion.AddProcMixN(c,true,true,79979666,1)
 	--change name
 	local e1=Effect.CreateEffect(c)
@@ -40,6 +39,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 s.material_setcode={0x8,0x3008}
+s.listed_names={79979666,CARD_METAMORPHOSIS}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION)
 end

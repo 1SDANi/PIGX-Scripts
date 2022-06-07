@@ -3,7 +3,6 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
 	Fusion.AddProcMix(c,true,true,CARD_DARK_MAGICIAN,38033121)
 	--negate
 	local e1=Effect.CreateEffect(c)

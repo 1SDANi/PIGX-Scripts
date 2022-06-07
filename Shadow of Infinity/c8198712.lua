@@ -13,7 +13,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x303,0x304}
 function s.filter(c,e,tp,m)
-	if not (c:IsSetCard(0x303) and c:IsSetCard(0x304) and c:IsType(TYPE_RITUAL) and c:IsType(TYPE_MONSTER)) 
+	if not ((c:IsSetCard(0x303) or c:IsSetCard(0x304)) and c:IsType(TYPE_RITUAL) and c:IsType(TYPE_MONSTER)) 
 	or not c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,true,true) or c:IsHasEffect(EFFECT_SPSUMMON_CONDITION) then return false end
 	if m:IsContains(c) then
 		m:RemoveCard(c)

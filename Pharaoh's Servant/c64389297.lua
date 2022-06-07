@@ -14,7 +14,7 @@ function s.initial_effect(c)
 end
 s.listed_names={67284908}
 function s.filter1(c)
-	return c:IsAttribute(ATTRIBUTE_EARTH) and c:IsRace(RACE_ELEMENTAL)
+	return c:IsAttribute(ATTRIBUTE_EARTH)
 end 
 function s.filter2(c,e,tp)
 	return c:IsCode(67284908) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP)

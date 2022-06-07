@@ -2,7 +2,6 @@
 --Exodia Necross
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
 	--"Exodia the Forbidden One": This card cannot be destroyed by battle
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
@@ -43,7 +42,7 @@ function s.initial_effect(c)
 	local e6=Effect.CreateEffect(c)
 	e6:SetDescription(aux.Stringid(id,0))
 	e6:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
-	e6:SetCategory(CATEGORY_ATKCHANGE)
+	e6:SetCategory(CATEGORY_ATKDEFCHANGE)
 	e6:SetCode(EVENT_DAMAGE_STEP_END)
 	e6:SetRange(LOCATION_MZONE)
 	e6:SetProperty(EFFECT_FLAG_REPEAT)

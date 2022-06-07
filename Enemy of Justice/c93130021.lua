@@ -51,7 +51,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	elseif op==2 then
 		e:SetCategory(CATEGORY_EQUIP)
 	else
-		e:SetCategory(CATEGORY_ATKCHANGE)
+		e:SetCategory(CATEGORY_ATKDEFCHANGE)
 	end
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)

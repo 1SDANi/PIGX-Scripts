@@ -83,7 +83,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if ft2>0 then
 		if Duel.IsPlayerAffectedByEffect(1-tp,CARD_BLUEEYES_SPIRIT) then ft2=1 end
 		Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_SPSUMMON)
-		local g=Duel.SelectMatchingCard(1-tp,s.filter,tp,0,LOCATION_REMOVED,ft2,ft2,nil,e,1-tp)
+		local g=Duel.SelectMatchingCard(1-tp,s.filter,1-tp,0,LOCATION_REMOVED,ft2,ft2,nil,e,1-tp)
 		if #g>0 then
 			local tc=g:GetFirst()
 			while tc do

@@ -1,7 +1,6 @@
 --The Wicked God Zorc Necrophades
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
 	Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0x302),7)
 	--spsummon condition
 	local e0=Effect.CreateEffect(c)

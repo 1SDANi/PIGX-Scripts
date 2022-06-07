@@ -55,7 +55,7 @@ function s.initial_effect(c)
 	--atkdown
 	local e8=Effect.CreateEffect(c)
 	e8:SetDescription(aux.Stringid(id,1))
-	e8:SetCategory(CATEGORY_ATKCHANGE+CATEGORY_DESTROY)
+	e8:SetCategory(CATEGORY_ATKDEFCHANGE+CATEGORY_DESTROY)
 	e8:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
 	e8:SetProperty(EFFECT_FLAG_DELAY)
 	e8:SetRange(LOCATION_MZONE)

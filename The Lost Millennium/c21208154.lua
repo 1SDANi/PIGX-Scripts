@@ -2,7 +2,6 @@
 --The Avatar of Zorc
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
 	--special summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -80,7 +79,7 @@ function s.spfilter(c)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND,0,1,e:GetHandler()) end
-	Duel.DiscardHand(tp,s.spfilter,1,1,REASON_COST+REASON_DISCARD)
+	Duel.DiscardHand(tp,s.spfilter,1,1,REASON_COST+REASON_DISCARD,e:GetHandler())
 	local g=Duel.GetOperatedGroup()
 	e:SetLabel(g:GetFirst():GetLevel())
 end

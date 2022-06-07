@@ -26,7 +26,7 @@ function s.armop(e,tp,eg,ep,ev,re,r,rp)
 		--atk up
 		local e1=Effect.CreateEffect(c)
 		e1:SetDescription(aux.Stringid(id,1))
-		e1:SetCategory(CATEGORY_ATKCHANGE)
+		e1:SetCategory(CATEGORY_ATKDEFCHANGE)
 		e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
 		e1:SetCode(EVENT_PRE_DAMAGE_CALCULATE)
 		e1:SetCondition(s.upcon)

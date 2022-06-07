@@ -10,7 +10,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 	--Activate
 	local e1=Effect.CreateEffect(c)
-	e1:SetCategory(CATEGORY_ATKCHANGE)
+	e1:SetCategory(CATEGORY_ATKDEFCHANGE)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
 	e1:SetCode(EVENT_BE_BATTLE_TARGET)
 	e1:SetCondition(s.condition)

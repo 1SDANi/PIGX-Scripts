@@ -1,7 +1,6 @@
 --Mirror Knight Calling
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
 	--Special Summon Tokens
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_TOKEN)
@@ -39,7 +38,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD)
 		token:RegisterEffect(e1)
 		local e3=Effect.CreateEffect(e:GetHandler())
-		e3:SetCategory(CATEGORY_ATKCHANGE+CATEGORY_DEFCHANGE)
+		e3:SetCategory(CATEGORY_ATKDEFCHANGE+CATEGORY_ATKDEFCHANGE)
 		e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 		e3:SetCode(EVENT_PRE_DAMAGE_CALCULATE)
 		e3:SetCondition(s.defcon)

@@ -62,8 +62,8 @@ function s.coinop(e,tp,eg,ep,ev,re,r,rp)
 	c:RegisterFlagEffect(36690018,RESET_EVENT+RESETS_STANDARD,EFFECT_FLAG_CLIENT_HINT,1,res,63-res)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.CheckReleaseGroupCost(tp,nil,1,false,nil,nil) end
-	local sg=Duel.SelectReleaseGroupCost(tp,nil,1,1,false,nil,nil)
+	if chk==0 then return Duel.CheckReleaseGroupCost(tp,nil,1,false,nil,e:GetHandler()) end
+	local sg=Duel.SelectReleaseGroupCost(tp,nil,1,1,false,nil,e:GetHandler())
 	Duel.Release(sg,REASON_COST)
 end
 function s.filter(c,e,tp)

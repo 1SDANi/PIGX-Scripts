@@ -5,7 +5,7 @@ function s.initial_effect(c)
 	--atk
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_ATKCHANGE+CATEGORY_REMOVE)
+	e1:SetCategory(CATEGORY_ATKDEFCHANGE+CATEGORY_REMOVE)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e1:SetCode(EVENT_SUMMON_SUCCESS)

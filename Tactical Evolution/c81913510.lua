@@ -25,7 +25,7 @@ function s.tgfilter(c,e,tp)
 end
 function s.spfilter(c,e,tp,mc)
 	if Duel.GetLocationCountFromEx(tp,tp,mc,c)<=0 then return false end
-	return c:IsType(TYPE_FUSION) and mc:IsCode(table.unpack(c.material)) and c.min_material_count==1 and
+	return c:IsType(TYPE_FUSION) and c.material and table.unpack(c.material) and mc:IsCode(table.unpack(c.material)) and c.min_material_count==1 and
 	c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_FUSION,tp,false,false)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)

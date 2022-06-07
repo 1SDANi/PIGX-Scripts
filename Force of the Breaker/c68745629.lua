@@ -3,13 +3,12 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
-	Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_FIRE),2)
+	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_FIRE),s.fusfilter)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	--atk up
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_ATKCHANGE)
+	e1:SetCategory(CATEGORY_ATKDEFCHANGE)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
 	e1:SetCode(EVENT_PRE_DAMAGE_CALCULATE)
 	e1:SetCondition(s.upcon)
@@ -17,6 +16,10 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 s.material_attribute={ATTRIBUTE_FIRE}
+s.material_setcode={0x8}
+function s.fusfilter(c)
+	return c:IsSetCard(0x8) and c:IsType(TYPE_MONSTER+TYPE_UNION)
+end
 function s.upcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetBattleTarget()
 end

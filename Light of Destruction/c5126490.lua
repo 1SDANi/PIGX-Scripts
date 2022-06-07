@@ -3,7 +3,6 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
 	Fusion.AddProcMix(c,true,true,s.filter1,s.filter2)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	--damage&recover
@@ -37,6 +36,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 s.material_setcode={0x8,0x3008,0x9,0x306}
+s.listed_names={CARD_NEOS}
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsLocation(LOCATION_GRAVE) and (r&REASON_EFFECT+REASON_BATTLE)~=0
 end
@@ -69,10 +69,10 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.filter1(c)
-	return c:IsCode(CARD_NEOS) and c:IsType(TYPE_MONSTER)
+	return c:IsCode(CARD_NEOS) and c:IsType(TYPE_MONSTER+TYPE_UNION)
 end
 function s.filter2(c)
-	return c:IsSetCard(0x306) and c:IsType(TYPE_MONSTER)
+	return c:IsSetCard(0x306) and c:IsType(TYPE_MONSTER+TYPE_UNION)
 end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local bc=e:GetHandler():GetBattleTarget()

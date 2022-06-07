@@ -3,7 +3,6 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
 	Fusion.AddProcMix(c,true,true,s.fusfilter,aux.FilterBoolFunctionEx(Card.IsRace,RACE_REPTILE))
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	--special summon
@@ -33,7 +32,7 @@ end
 s.listed_series={0x19}
 s.material_setcode={0x19}
 function s.fusfilter(c)
-	return c:IsSetCard(0x19) and c:IsType(TYPE_MONSTER)
+	return c:IsSetCard(0x19) and c:IsType(TYPE_MONSTER+TYPE_UNION)
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetBattledGroupCount()>0

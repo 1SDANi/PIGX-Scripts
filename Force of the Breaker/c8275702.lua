@@ -12,6 +12,7 @@ function s.initial_effect(c)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
 end
+s.listed_series={0x1034}
 function s.filter(c,e,sp)
 	return c:IsFaceup() and c:IsSetCard(0x1034) and c:IsType(TYPE_UNION) and c:IsCanBeSpecialSummoned(e,0,sp,true,false)
 end

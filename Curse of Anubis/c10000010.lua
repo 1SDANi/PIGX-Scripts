@@ -33,7 +33,7 @@ function s.initial_effect(c)
 	--One Turn Kill
 	local e6=Effect.CreateEffect(c)
 	e6:SetDescription(aux.Stringid(id,0))
-	e6:SetCategory(CATEGORY_ATKCHANGE)
+	e6:SetCategory(CATEGORY_ATKDEFCHANGE)
 	e6:SetType(EFFECT_TYPE_TRIGGER_O+EFFECT_TYPE_SINGLE)
 	e6:SetCode(EVENT_SUMMON_SUCCESS)
 	e6:SetCost(s.atkcost)

@@ -21,7 +21,6 @@ function s.spfilter(c,e,tp,mc)
 	c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_FUSION,tp,false,false) and c:IsLevel(mc:GetLevel())
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_MZONE,0,1,nil,e,tp) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
 end

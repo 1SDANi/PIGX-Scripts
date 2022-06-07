@@ -2,7 +2,6 @@
 --Legendary Flame Lord
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
 	c:EnableCounterPermit(COUNTER_SPELL)
 	--add counter
 	local e0=Effect.CreateEffect(c)

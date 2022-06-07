@@ -3,7 +3,6 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--Fusion Material
-	c:EnableReviveLimit()
 	Fusion.AddProcMix(c,true,true,25652259,90876561,64788463)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	--cannot be target

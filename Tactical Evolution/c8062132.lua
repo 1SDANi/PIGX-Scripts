@@ -3,7 +3,6 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableCounterPermit(0x11)
-	c:EnableReviveLimit()
 	--special summon condition
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_SINGLE)

@@ -2,7 +2,6 @@
 --Machina Force
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
 	--fusion material
 	Fusion.AddProcMixN(c,true,true,s.fusfilter,3)
 	local e1=Effect.CreateEffect(c)
@@ -28,7 +27,7 @@ end
 s.material_setcode={0x36}
 s.listed_series={0x36}
 function s.fusfilter(c)
-	return c:IsSetCard(0x36) and c:IsType(TYPE_MONSTER)
+	return c:IsSetCard(0x36) and c:IsType(TYPE_MONSTER+TYPE_UNION)
 end
 function s.ctfilter(c,e,tp)
 	return c:IsSetCard(0x36) and c:IsCanBeSpecialSummoned(e,0,tp,false,false) and not c:IsCode(id)

@@ -2,7 +2,6 @@
 --Cú Chulainn the Awakened
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
@@ -20,7 +19,7 @@ function s.initial_effect(c)
 	--atkup
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,0))
-	e3:SetCategory(CATEGORY_REMOVE+CATEGORY_ATKCHANGE)
+	e3:SetCategory(CATEGORY_REMOVE+CATEGORY_ATKDEFCHANGE)
 	e3:SetType(EFFECT_TYPE_IGNITION)
 	e3:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e3:SetRange(LOCATION_MZONE)

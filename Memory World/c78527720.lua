@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	--gain 1000 atk
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,0))
-	e4:SetCategory(CATEGORY_ATKCHANGE)
+	e4:SetCategory(CATEGORY_ATKDEFCHANGE)
 	e4:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
 	e4:SetCode(EVENT_EQUIP)
 	e4:SetCondition(s.gaincon)

@@ -2,7 +2,6 @@
 --The Cursed Remains of Haman
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
 	Fusion.AddProcMixRep(c,true,true,s.filter,1,99)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	local e0=Effect.CreateEffect(c)

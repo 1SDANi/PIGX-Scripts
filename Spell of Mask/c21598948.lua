@@ -11,7 +11,7 @@ function s.initial_effect(c)
 	--atk change
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
-	e2:SetCategory(CATEGORY_ATKCHANGE+CATEGORY_COIN)
+	e2:SetCategory(CATEGORY_ATKDEFCHANGE+CATEGORY_COIN)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
 	e2:SetProperty(EFFECT_FLAG_DELAY)
 	e2:SetCode(EVENT_ATTACK_ANNOUNCE)

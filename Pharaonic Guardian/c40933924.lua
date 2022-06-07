@@ -16,7 +16,7 @@ end
 s.material_setcode={0x1a}
 s.listed_series={0x1a}
 function s.fusfilter(c)
-	return c:IsSetCard(0x1a) and c:IsType(TYPE_MONSTER)
+	return c:IsSetCard(0x1a) and c:IsType(TYPE_MONSTER+TYPE_UNION)
 end
 function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION)

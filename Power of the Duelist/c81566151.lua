@@ -3,7 +3,6 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
 	Fusion.AddProcMix(c,true,true,CARD_NEOS,89621922)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	aux.EnableNeosReturn(c)
@@ -15,6 +14,9 @@ function s.initial_effect(c)
 	e5:SetRange(LOCATION_MZONE)
 	e5:SetValue(s.atkval)
 	c:RegisterEffect(e5)
+	local e2=e5:Clone()
+	e2:SetCode(EFFECT_UPDATE_DEFENSE)
+	c:RegisterEffect(e2)
 end
 s.material_setcode={0x8,0x3008,0x9,0x1f}
 function s.atkval(e,c)

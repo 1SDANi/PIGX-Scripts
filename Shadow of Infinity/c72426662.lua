@@ -2,7 +2,6 @@
 --Demise, King of Armageddon
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e2:SetProperty(EFFECT_FLAG_DELAY)

@@ -1,7 +1,6 @@
 --Orichalcos Aristeros
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
 	--Cannot be destroyed by battle or card effect
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(3008)
@@ -16,7 +15,7 @@ function s.initial_effect(c)
 	e2:SetCode(EFFECT_INDESTRUCTABLE_EFFECT)
 	c:RegisterEffect(e2)
 	local e3=Effect.CreateEffect(c)
-	e3:SetCategory(CATEGORY_ATKCHANGE+CATEGORY_DEFCHANGE)
+	e3:SetCategory(CATEGORY_ATKDEFCHANGE+CATEGORY_ATKDEFCHANGE)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e3:SetCode(EVENT_PRE_DAMAGE_CALCULATE)
 	e3:SetCondition(s.defcon)

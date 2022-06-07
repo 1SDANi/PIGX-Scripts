@@ -10,7 +10,7 @@ function s.initial_effect(c)
 	--atk up
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
-	e2:SetCategory(CATEGORY_ATKCHANGE)
+	e2:SetCategory(CATEGORY_ATKDEFCHANGE)
 	e2:SetType(EFFECT_TYPE_TRIGGER_F+EFFECT_TYPE_SINGLE)
 	e2:SetCode(EVENT_PRE_DAMAGE_CALCULATE)
 	e2:SetCondition(s.atkcon)

@@ -5,7 +5,7 @@ function s.initial_effect(c)
 	--Activate
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
-	e1:SetCategory(CATEGORY_DECKDES)
+	e1:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_TOKEN)
 	e1:SetCode(EVENT_PRE_DAMAGE_CALCULATE)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.activate)
@@ -31,4 +31,21 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SpecialSummonStep(token,0,tp,tp,false,false,POS_FACEUP)
 	end
 	Duel.SpecialSummonComplete()
+	local cid=Duel.GetChainInfo(ev,CHAININFO_CHAIN_ID)
+	local e1=Effect.CreateEffect(e:GetHandler())
+	e1:SetType(EFFECT_TYPE_FIELD)
+	e1:SetCode(EFFECT_CHANGE_DAMAGE)
+	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
+	e1:SetTargetRange(1,0)
+	e1:SetLabel(cid)
+	e1:SetValue(s.refcon)
+	e1:SetReset(RESET_CHAIN)
+	Duel.RegisterEffect(e1,tp)
+end
+function s.refcon(e,re,val,r,rp,rc)
+	local cc=Duel.GetCurrentChain()
+	if cc==0 or (r&REASON_EFFECT+REASON_BATTLE)==0 then return end
+	local cid=Duel.GetChainInfo(0,CHAININFO_CHAIN_ID)
+	if cid==e:GetLabel() then return 0
+	else return val end
 end

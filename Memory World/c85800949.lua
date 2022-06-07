@@ -2,7 +2,6 @@
 --Legendary Knight Critias
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
 	--set
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)

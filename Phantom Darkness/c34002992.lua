@@ -9,7 +9,7 @@ function s.initial_effect(c)
 	e1:SetCode(EVENT_PRE_DAMAGE_CALCULATE)
 	e1:SetProperty(EFFECT_FLAG_DELAY)
 	e1:SetCondition(s.condition)
-	e1:SetOperation(s.activate)
+	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)

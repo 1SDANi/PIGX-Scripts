@@ -32,3 +32,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	e3:SetReset(RESET_PHASE+PHASE_END)
 	Duel.RegisterEffect(e3,tp)
 end
+function s.damval(e,re,val,r,rp,rc)
+	if (r&REASON_EFFECT)~=0 or (r&REASON_BATTLE)~=0 then return 0
+	else return val end
+end

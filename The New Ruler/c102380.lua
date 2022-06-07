@@ -2,7 +2,6 @@
 --Lava Golem
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
 	--special summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)

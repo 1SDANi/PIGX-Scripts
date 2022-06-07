@@ -3,7 +3,6 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--Fusion Procedure
-	c:EnableReviveLimit()
 	Fusion.AddProcMix(c,false,false,CARD_DARK_MAGICIAN,aux.FilterBoolFunctionEx(Card.IsRace,RACE_DRAGON))
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	--atkup

@@ -2,7 +2,6 @@
 --Super-Electromagnetic Voltech Dragon
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
 	Fusion.AddProcMixRep(c,true,true,s.filter,1,99)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	--atk
@@ -41,7 +40,7 @@ function s.val(e,c)
 	return #g*2000
 end
 function s.filter(c)
-	return c:IsSetCard(0x28) and c:IsType(TYPE_MONSTER)
+	return c:IsSetCard(0x28) and c:IsType(TYPE_MONSTER+TYPE_UNION)
 end
 function s.contactfil(tp)
 	return Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)

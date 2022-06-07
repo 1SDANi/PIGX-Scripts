@@ -2,7 +2,6 @@
 --Ruin, Queen of Oblivion
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableReviveLimit()
 	--extra attack
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))

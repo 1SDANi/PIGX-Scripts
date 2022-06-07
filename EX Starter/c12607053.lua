@@ -26,3 +26,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	e2:SetValue(1)
 	Duel.RegisterEffect(e2,tp)
 end
+function s.damval(e,re,val,r,rp,rc)
+	if (r&REASON_EFFECT)~=0 or (r&REASON_BATTLE)~=0 then return 0
+	else return val end
+end

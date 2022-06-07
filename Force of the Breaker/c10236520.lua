@@ -24,6 +24,6 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DISCARD)
 	local g=Duel.SelectMatchingCard(1-tp,Card.IsDiscardable,tp,0,LOCATION_HAND,2,2,nil)
 	if g and #g>0 then
-		Duel.SendtoGrave(sg,REASON_EFFECT+REASON_DISCARD)
+		Duel.SendtoGrave(g,REASON_EFFECT+REASON_DISCARD)
 	end
 end

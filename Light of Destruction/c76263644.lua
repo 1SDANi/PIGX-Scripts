@@ -3,7 +3,6 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	c:EnableReviveLimit()
 	Fusion.AddProcMixN(c,true,true,s.filter,2)
 	--destroy
 	local e2=Effect.CreateEffect(c)
@@ -33,7 +32,7 @@ end
 s.listed_series={0xc008}
 s.material_setcode={0xc008}
 function s.filter(c,fc,sumtype,tp)
-	return c:IsSetCard(0xc008) and c:IsLevelAbove(7)
+	return c:IsSetCard(0xc008) and c:IsLevelAbove(7) and c:IsType(TYPE_MONSTER+TYPE_UNION)
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(1-tp) end

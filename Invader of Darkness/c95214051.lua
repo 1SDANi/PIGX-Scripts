@@ -15,7 +15,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,0))
-	local g=Duel.SelectMatchingCard(1-tp,Card.IsRace,tp,LOCATION_DECK,0,1,1,nil,RACE_INSECT)
+	local g=Duel.SelectMatchingCard(tp,Card.IsRace,tp,LOCATION_DECK,0,1,1,nil,RACE_INSECT)
 	local tc=g:GetFirst()
 	if tc then
 		Duel.ShuffleDeck(tp)

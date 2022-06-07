@@ -52,9 +52,6 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	return c:IsPreviousPosition(POS_FACEUP)
 end
-function s.costfilter(c)
-	return ((not c:IsLocation(LOCATION_REMOVED)) or c:IsFaceup()) and c:IsType(TYPE_MONSTER) and c:IsSetCard(0x40)
-end
 function s.filter(c,e,tp)
 	return c:IsCode(31764700) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end

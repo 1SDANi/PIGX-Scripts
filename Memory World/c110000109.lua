@@ -28,7 +28,7 @@ function s.initial_effect(c)
 	--atk
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE)
-	e3:SetCategory(CATEGORY_ATKCHANGE)
+	e3:SetCategory(CATEGORY_ATKDEFCHANGE)
 	e3:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e3:SetRange(LOCATION_MZONE)
 	e3:SetCode(EFFECT_UPDATE_ATTACK)
