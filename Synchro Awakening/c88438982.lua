@@ -1,5 +1,5 @@
---王族親衛隊
---Royal Retainer
+--ワーム・ディミクレス
+--Worm Dimikles
 local s,id=GetID()
 function s.initial_effect(c)
 	--flip

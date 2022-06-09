@@ -1,5 +1,5 @@
---サイバー・サモン・ブラスター
---Cyber Summon Blaster
+--コモンメンタルワールド
+--Psycho Synchro Link
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -12,28 +12,28 @@ function s.initial_effect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_DAMAGE)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
-	e2:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
-	e2:SetRange(LOCATION_SZONE)
 	e2:SetCode(EVENT_SPSUMMON_SUCCESS)
-	e2:SetCondition(s.damcon)
-	e2:SetTarget(s.damtg)
-	e2:SetOperation(s.damop)
+	e2:SetProperty(EFFECT_FLAG_DELAY)
+	e2:SetRange(LOCATION_SZONE)
+	e2:SetCondition(s.condition)
+	e2:SetTarget(s.target)
+	e2:SetOperation(s.operation)
 	c:RegisterEffect(e2)
 end
-function s.filter(c)
-	return c:IsFaceup() and c:IsRace(RACE_MACHINE)
+function s.cfilter(c,tp)
+	return c:IsFaceup() and c:IsSummonPlayer(tp) and c:IsSummonType(SUMMON_TYPE_FUSION)
 end
-function s.damcon(e,tp,eg,ep,ev,re,r,rp)
-	return eg:IsExists(s.filter,1,nil)
+function s.condition(e,tp,eg,ep,ev,re,r,rp)
+	return eg:IsExists(s.cfilter,1,nil,tp)
 end
-function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return eg and #eg>0 end
-	local g=eg:Filter(s.filter,nil)
+function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return true end
+	local g=eg:Filter(s.cfilter,nil)
 	local ct=0
 	if g and #g>0 then ct=#g end
 	Duel.SetTargetPlayer(1-tp)
 	Duel.SetTargetParam(500*ct)
-	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,500*ct)
+	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,0,0,1-tp,500*ct)
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
