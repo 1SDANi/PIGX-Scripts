@@ -66,7 +66,8 @@ function Fusion.RegisterSummonEff(c,...)
 end
 function Fusion.SummonEffFilter(c,fusfilter,e,tp,mg,gc,chkf,value,sumlimit,nosummoncheck,sumpos,codelimit,setlimit)
 	return c:IsType(TYPE_FUSION) and (not fusfilter or fusfilter(c,tp)) and (nosummoncheck or c:IsCanBeSpecialSummoned(e,value,tp,sumlimit,false,sumpos) or
-			(c:IsCanBeSpecialSummoned(e,value,tp,true,false,sumpos) and ((codelimit and c:IsCode(codelimit)) or (setlimit and c:IsSetCard(setlimit))))) and c:CheckFusionMaterial(mg,gc,chkf)
+			(c:IsCanBeSpecialSummoned(e,value,tp,true,false,sumpos) and ((codelimit and c:IsCode(codelimit)) or (setlimit and c:IsSetCard(setlimit))))) and
+			c:CheckFusionMaterial(mg,gc,chkf)
 end
 
 function Fusion.ForcedMatValidity(c,e)
@@ -128,6 +129,7 @@ function(fusfilter,matfilter,extrafil,extraop,gc2,stage2,exactcount,value,locati
 					Fusion.CheckMax=maxcount
 					local res=Duel.IsExistingMatchingCard(Fusion.SummonEffFilter,tp,location,0,1,nil,fusfilter,e,tp,mg1,gc,chkf,value&0xffffffff,sumlimit,nosummoncheck,sumpos,codelimit,setlimit)
 					Fusion.CheckAdditional=nil
+					Fusion.CheckAdditional2=nil
 					Fusion.ExtraGroup=nil
 					if not res and not notfusion then
 						for _,ce in ipairs({Duel.GetPlayerEffect(tp,EFFECT_CHAIN_MATERIAL)}) do
@@ -138,6 +140,7 @@ function(fusfilter,matfilter,extrafil,extraop,gc2,stage2,exactcount,value,locati
 								local fcheck=nil
 								if ce:GetLabelObject() then fcheck=ce:GetLabelObject():GetOperation() end
 								Fusion.CheckAdditional=checkAddition
+								Fusion.CheckAdditional2=checkAddition2
 								if fcheck then
 									if checkAddition then Fusion.CheckAdditional=aux.AND(checkAddition,fcheck) else Fusion.CheckAdditional=fcheck end
 									if checkAddition2 then Fusion.CheckAdditional2=aux.AND(checkAddition2,fcheck) else Fusion.CheckAdditional2=fcheck end
@@ -333,10 +336,15 @@ function (fusfilter,matfilter,extrafil,extraop,gc2,stage2,exactcount,value,locat
 				Fusion.CheckMax=nil
 				Fusion.CheckExact=nil
 				Fusion.CheckAdditional=nil
+				Fusion.CheckAdditional2=nil
 			end
 end,"fusfilter","matfilter","extrafil","extraop","gc","stage2","exactcount","value","location","chkf","preselect","nosummoncheck","mincount","maxcount","sumpos","codelimit","setlimit","extrafil2")
 function Fusion.BanishMaterial(e,tc,tp,sg)
 	Duel.Remove(sg,POS_FACEUP,REASON_EFFECT+REASON_MATERIAL+REASON_FUSION)
+	sg:Clear()
+end
+function Fusion.GraveMaterial(e,tc,tp,sg)
+	Duel.SendtoGrave(sg,REASON_EFFECT+REASON_MATERIAL+REASON_FUSION)
 	sg:Clear()
 end
 function Fusion.BanishMaterialFacedown(e,tc,tp,sg)

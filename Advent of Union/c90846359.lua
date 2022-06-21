@@ -12,6 +12,7 @@ function s.initial_effect(c)
 	--adjust
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
+	e2:SetProperty(EFFECT_FLAG_DAMAGE_STEP)
 	e2:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE)
 	e2:SetCode(EVENT_ADJUST)
 	e2:SetRange(LOCATION_SZONE)

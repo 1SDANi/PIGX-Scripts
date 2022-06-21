@@ -11,9 +11,9 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetLP(tp)-Duel.GetLP(1-tp)>=8000 or Duel.GetLP(1-tp)-Duel.GetLP(tp)>=8000
+	return Duel.GetLP(tp)-Duel.GetLP(1-tp)>=4000 or Duel.GetLP(1-tp)-Duel.GetLP(tp)>=8000
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	Duel.SetLP(tp,8000)
-	Duel.SetLP(1-tp,8000)
+	Duel.SetLP(tp,4000)
+	Duel.SetLP(1-tp,4000)
 end

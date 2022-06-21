@@ -16,6 +16,7 @@ function s.initial_effect(c)
 	--atkup
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
+	e4:SetProperty(EFFECT_FLAG_DELAY)
 	e2:SetCategory(CATEGORY_ATKDEFCHANGE)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetRange(LOCATION_MZONE)
@@ -54,7 +55,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local d=Duel.GetChainInfo(0,CHAININFO_TARGET_PARAM)
-	Duel.Damage(1-tp,d,REASON_EFFECT,true)
 	Duel.Damage(tp,d,REASON_EFFECT,true)
-	Duel.RDComplete()
+	Duel.BreakEffect()
+	Duel.Damage(1-tp,d,REASON_EFFECT,true)
 end

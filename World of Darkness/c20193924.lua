@@ -47,7 +47,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	local tc=g:GetFirst()
 	for tc in aux.Next(g) do
 		lv=tc:GetLevel()
-		if tc and tc:HasLevel() and tc:IsCanAddCounter(COUNTER_ICE,1) and tc:AddCounter(COUNTER_ICE,1) then
+		if tc and tc:IsCanAddCounter(COUNTER_ICE,1) and tc:AddCounter(COUNTER_ICE,1) then
 			local e1=Effect.CreateEffect(c)
 			e1:SetType(EFFECT_TYPE_SINGLE)
 			e1:SetCode(EFFECT_CANNOT_ATTACK)

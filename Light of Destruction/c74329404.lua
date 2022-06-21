@@ -12,6 +12,7 @@ function s.initial_effect(c)
 	e3:SetCategory(CATEGORY_TOHAND)
 	e3:SetDescription(aux.Stringid(id,0))
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
+	e3:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY)
 	e3:SetRange(LOCATION_SZONE)
 	e3:SetCode(EVENT_DESTROYED)
 	e3:SetCondition(c.condition)
@@ -20,11 +21,11 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 s.listed_series={0xc008}
-function s.cfilter(c,e,tp)
-	return c:IsControler(tp) and c:IsLocation(LOCATION_GRAVE) and c:IsReason(REASON_BATTLE+REASON_EFFECT)
+function s.cfilter(c,tp)
+	return c:IsControler(tp) and c:IsLocation(LOCATION_GRAVE) and (c:IsReason(REASON_BATTLE) or c:IsReason(REASON_EFFECT))
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	eg:IsExists(s.cfilter,1,nil,e,tp)
+	eg:IsExists(s.cfilter,1,nil,tp)
 end
 function s.filter(c)
 	return c:IsSetCard(0xc008) and c:IsType(TYPE_MONSTER) and c:IsAbleToHand()

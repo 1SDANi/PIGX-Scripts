@@ -39,6 +39,6 @@ function s.damop(e,tp,eg,ep,ev,re,r,rp)
 		c:SetFlagEffectLabel(id,dam)
 	end
 	Duel.Damage(tp,dam,REASON_EFFECT,true)
+	Duel.BreakEffect()
 	Duel.Damage(1-tp,dam,REASON_EFFECT,true)
-	Duel.RDComplete()
 end

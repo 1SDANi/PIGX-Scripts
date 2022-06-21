@@ -14,12 +14,15 @@ function s.initial_effect(c)
 	e3:SetCode(EFFECT_UPDATE_DEFENSE)
 	e3:SetValue(1500)
 	c:RegisterEffect(e3)
-	--destroy sub
+	--Destruction replacement effect
 	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_EQUIP)
 	e4:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE)
 	e4:SetCode(EFFECT_DESTROY_SUBSTITUTE)
-	e4:SetValue(1)
+	e4:SetValue(s.repval)
 	c:RegisterEffect(e4)
 end
 s.listed_series={0x3d}
+function s.repval(e,re,r,rp)
+	return (r&REASON_BATTLE+REASON_EFFECT)~=0
+end

@@ -32,6 +32,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		if lv>1 then
 			local e1=Effect.CreateEffect(e:GetHandler())
 			e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
+			e1:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_DAMAGE_STEP)
 			e1:SetCode(EVENT_SUMMON_SUCCESS)
 			e1:SetCountLimit(1)
 			e1:SetCondition(s.damcon)

@@ -27,8 +27,8 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if tc:IsFaceup() and Duel.Destroy(tc,REASON_EFFECT)~=0 then
 		Duel.SendtoHand(tc,nil,REASON_EFFECT)
 		Duel.BreakEffect()
-		local val=Duel.Damage(tp,1000,REASON_EFFECT)
-		local val=Duel.Damage(1-tp,1000,REASON_EFFECT)
-		Duel.RDComplete()
+		Duel.Damage(tp,tc:GetLevel()*500,REASON_EFFECT)
+		Duel.BreakEffect()
+		Duel.Damage(1-tp,tc:GetLevel()*500,REASON_EFFECT)
 	end
 end

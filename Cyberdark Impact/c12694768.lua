@@ -23,7 +23,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,PLAYER_ALL,1000)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
-	Duel.Recover(tp,1000,REASON_EFFECT)
-	Duel.Recover(1-tp,1000,REASON_EFFECT)
-	Duel.RDComplete()
+	Duel.Damage(tp,1000,REASON_EFFECT)
+	Duel.BreakEffect()
+	Duel.Damage(1-tp,1000,REASON_EFFECT)
 end

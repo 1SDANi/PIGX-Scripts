@@ -75,7 +75,7 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp,chk)
 		local ad=ag:GetSum(Card.GetAttack)
 		local rd=rg:GetSum(Card.GetAttack)
 		Duel.Damage(tp,ad,REASON_EFFECT,true)
+		Duel.BreakEffect()
 		Duel.Damage(1-tp,rd,REASON_EFFECT,true)
-		Duel.RDComplete()
 	end
 end

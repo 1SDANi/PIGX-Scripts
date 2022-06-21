@@ -5,7 +5,7 @@ function s.initial_effect(c)
 	--Place 1 venom counter on 1 of opponent's monsters
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_COUNTER+CATEGORY_ATKDEFCHANGE+CATEGORY_ATKDEFCHANGE)
+	e1:SetCategory(CATEGORY_COUNTER+CATEGORY_ATKDEFCHANGE)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e1:SetType(EFFECT_TYPE_QUICK_O)
 	e1:SetCode(EVENT_FREE_CHAIN)

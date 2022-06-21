@@ -29,8 +29,8 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Damage(tp,1000,REASON_EFFECT,true)
+	Duel.BreakEffect()
 	Duel.Damage(1-tp,1000,REASON_EFFECT,true)
-	Duel.RDComplete()
 end
 function s.tg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

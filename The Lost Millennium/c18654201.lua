@@ -5,7 +5,7 @@ function s.initial_effect(c)
 	--reg
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
-	e1:SetProperty(EFFECT_FLAG_DELAY)
+	e1:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_DAMAGE_STEP)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetCode(EVENT_TO_HAND)
 	e1:SetCondition(s.condition)

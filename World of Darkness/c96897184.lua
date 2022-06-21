@@ -5,7 +5,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--Susion summon procedure
-	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_EARTH),aux.FilterBoolFunctionEx(Card.IsLevelAbove,5))
+	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_EARTH),aux.FilterBoolFunctionEx(Card.IsLevelAbove,7))
 	--double attack
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)

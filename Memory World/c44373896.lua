@@ -36,8 +36,8 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if tc:IsFaceup() and Duel.Destroy(tc,REASON_EFFECT)~=0 then
 		local atk=tc:GetAttack()
 		if atk<0 then atk=0 end
-		local val=Duel.Damage(tp,atk,REASON_EFFECT)
-		local val=Duel.Damage(1-tp,atk,REASON_EFFECT)
-		Duel.RDComplete()
+		Duel.Damage(tp,atk,REASON_EFFECT)
+		Duel.BreakEffect()
+		Duel.Damage(1-tp,atk,REASON_EFFECT)
 	end
 end

@@ -3,7 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	Fusion.AddProcMixRep(c,true,true,s.fil,1,99)
+	Fusion.AddProcMixRep(c,true,true,s.fil,2,99)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	--atk
 	local e1=Effect.CreateEffect(c)
@@ -21,6 +21,7 @@ function s.initial_effect(c)
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE)
 	e3:SetCode(EFFECT_EXTRA_ATTACK)
+	e3:SetRange(LOCATION_MZONE)
 	e3:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e3:SetValue(s.count)
 	c:RegisterEffect(e3)

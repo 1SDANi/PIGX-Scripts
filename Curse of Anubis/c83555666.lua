@@ -14,8 +14,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,e:GetHandler()) and
-		Duel.GetCurrentPhase()==PHASE_MAIN1 and not Duel.CheckPhaseActivity() and Duel.GetTurnPlayer()==tp end
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,e:GetHandler()) end
 	Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST+REASON_DISCARD)
 end
 function s.filter(c)
@@ -31,8 +30,8 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if tc:IsFaceup() and Duel.Destroy(tc,REASON_EFFECT)~=0 then
 		local atk=tc:GetAttack()
 		if atk<0 then atk=0 end
-		local val=Duel.Damage(tp,atk,REASON_EFFECT)
-		local val=Duel.Damage(1-tp,atk,REASON_EFFECT)
-		Duel.RDComplete()
+		Duel.Damage(tp,atk,REASON_EFFECT)
+		Duel.BreakEffect()
+		Duel.Damage(1-tp,atk,REASON_EFFECT)
 	end
 end
