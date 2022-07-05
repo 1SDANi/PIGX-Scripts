@@ -1,5 +1,5 @@
---サイバー・オーガ
---Cyber Ogre
+--オネスト
+--Honest
 local s,id=GetID()
 function s.initial_effect(c)
 	--atkup

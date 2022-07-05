@@ -19,20 +19,21 @@ function s.initial_effect(c)
 	e2:SetOperation(s.rmop)
 	c:RegisterEffect(e2)
 end
-s.listed_names={id}
 function s.cfilter(c,tp)
 	return c:GetPreviousLocation()==LOCATION_DECK and c:IsControler(tp)
 end
 function s.rmcon(e,tp,eg,ep,ev,re,r,rp)
 	if not re then return false end
-	return (r&REASON_EFFECT)~=0 and eg:IsExists(s.cfilter,1,nil,tp) and re:GetHandler():GetCode()~=id
+	return (r&REASON_EFFECT)~=0 and eg:IsExists(s.cfilter,1,nil,tp)
 end
 function s.rmtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_DECKDES,nil,1,tp,LOCATION_DECK)
+	local ct=dg:FilterCount(s.cfilter,nil)
+	Duel.SetOperationInfo(0,CATEGORY_DECKDES,nil,ct,1-tp,LOCATION_DECK)
 end
 function s.rmop(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
 	if Duel.GetFieldGroupCount(tp,0,LOCATION_DECK)==0 then return end
-	Duel.DiscardDeck(1-tp,1,REASON_EFFECT)
+	local ct=dg:FilterCount(s.cfilter,nil)
+	Duel.DiscardDeck(1-tp,ct,REASON_EFFECT)
 end

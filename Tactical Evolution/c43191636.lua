@@ -22,7 +22,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.poscon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():GetAttackedCount()>0 and e:GetHandler():IsGeminiState()
+	return e:GetHandler():GetAttackedCount()>0 and e:GetHandler():IsGeminiState() and e:GetHandler():IsAttackPos()
 end
 function s.posop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

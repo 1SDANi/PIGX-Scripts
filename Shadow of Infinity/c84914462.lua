@@ -11,7 +11,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.poscon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler()==Duel.GetAttacker() and e:GetHandler():IsRelateToBattle()
+	return e:GetHandler()==Duel.GetAttacker() and e:GetHandler():IsRelateToBattle() and e:GetHandler():IsAttackPos()
 end
 function s.posop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

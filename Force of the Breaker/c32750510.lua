@@ -7,7 +7,7 @@ function s.initial_effect(c)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetRange(LOCATION_HAND)
-	e1:SetCost(s.spcost)
+	e1:SetCondition(s.spcon)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
@@ -34,13 +34,12 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 s.counter_list={COUNTER_ICE}
-function s.filter(c)
+function s.spfilter(c)
 	return c:IsFaceup() and c:IsAttribute(ATTRIBUTE_WATER)
 end
-function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.CheckReleaseGroupCost(tp,s.filter,2,false,nil,nil) end
-	local sg=Duel.SelectReleaseGroupCost(tp,s.filter,2,2,false,nil,nil)
-	Duel.Release(sg,REASON_COST)
+function s.spcon(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_MZONE,0,2,nil)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()

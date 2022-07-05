@@ -18,12 +18,17 @@ function s.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e2:SetProperty(EFFECT_FLAG_DELAY)
 	e2:SetCode(EVENT_ATTACK_ANNOUNCE)
+	e2:SetCost(s.cost)
 	e2:SetTarget(s.target)
 	e2:SetOperation(s.operation)
 	c:RegisterEffect(e2)
 end
+function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return true end
+	e:GetHandler():RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_BATTLE,0,1)
+end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.GetFieldGroupCount(ep,LOCATION_HAND,0)>0 end
+	if chk==0 then return Duel.GetFieldGroupCount(tp,0,LOCATION_HAND)>0 end
 	Duel.SetOperationInfo(0,CATEGORY_HANDES,nil,0,1-tp,1)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
@@ -34,7 +39,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.poscon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():GetAttackedCount()>0
+	return e:GetHandler():GetFlagEffect(id)~=0 and e:GetHandler():IsAttackPos()
 end
 function s.posop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

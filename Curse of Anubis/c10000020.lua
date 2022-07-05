@@ -131,14 +131,12 @@ function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.atktg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsRelateToEffect(e) end
-	Duel.SetTargetCard(eg)
 end
 function s.atkop(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetTargetCards(e):Filter(Card.IsFaceup,nil)
-	if #g==0 then return end
+	if #eg==0 then return end
 	local dg=Group.CreateGroup()
 	local c=e:GetHandler()
-	for tc in aux.Next(g) do
+	for tc in aux.Next(eg) do
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_UPDATE_ATTACK)

@@ -22,12 +22,12 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	local ct=Duel.GetFieldGroupCount(tp,LOCATION_MZONE,0)
 	Duel.SetTargetPlayer(tp)
-	Duel.SetOperationInfo(0,CATEGORY_RECOVER,nil,0,tp,ct*4000)
+	Duel.SetOperationInfo(0,CATEGORY_RECOVER,nil,0,tp,ct*2000)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
 	local ct=Duel.GetFieldGroupCount(tp,LOCATION_MZONE,0)
-	Duel.Recover(p,ct*4000,REASON_EFFECT)
+	Duel.Recover(p,ct*2000,REASON_EFFECT)
 end
 function s.fusionfilter(c,fc,sumtype,sp,sub,mg,sg)
 	local tg=fc:GetLevel()

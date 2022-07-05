@@ -37,17 +37,12 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	local c=e:GetHandler()
-	local bc=c:GetBattleTarget()
-	local dam=bc:GetAttack()
-	if dam<0 then dam=0 end
-	Duel.SetTargetPlayer(tp)
-	Duel.SetTargetParam(dam)
-	Duel.SetOperationInfo(0,CATEGORY_RECOVER,nil,0,tp,dam)
+	Duel.SetOperationInfo(0,CATEGORY_RECOVER,nil,0,tp,0)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
-	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
-	Duel.Recover(p,d,REASON_EFFECT)
+	local dam=e:GetHandler():GetBattleTarget():GetAttack()
+	if dam<0 then dam=0 end
+	Duel.Recover(tp,dam,REASON_EFFECT)
 end
 function s.discon(e,tp,eg,ep,ev,re,r,rp)
 	if e:GetHandler():IsStatus(STATUS_BATTLE_DESTROYED) then return false end

@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_DAMAGE)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
-	e2:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_DELAY)
+	e2:SetProperty(EFFECT_FLAG_DELAY)
 	e2:SetCode(EVENT_BATTLE_DESTROYING)
 	e2:SetCondition(s.damcon)
 	e2:SetTarget(s.damtg)
@@ -54,22 +54,12 @@ function s.damcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	local bc=e:GetHandler():GetBattleTarget()
-	Duel.SetTargetCard(bc)
-	local dam=bc:GetAttack()
-	if dam<0 then dam=0 end
-	Duel.SetTargetPlayer(1-tp)
-	Duel.SetTargetParam(dam)
-	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,dam)
+	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,0)
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
-	local tc=Duel.GetFirstTarget()
-	if tc:IsRelateToEffect(e) then
-		local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
-		local dam=tc:GetAttack()
-		if dam<0 then dam=0 end
-		Duel.Damage(p,dam,REASON_EFFECT)
-	end
+	local dam=e:GetHandler():GetBattleTarget():GetAttack()
+	if dam<0 then dam=0 end
+	Duel.Damage(1-tp,dam,REASON_EFFECT)
 end
 function s.contactfil(tp)
 	return Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)

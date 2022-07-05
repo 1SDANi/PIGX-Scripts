@@ -27,12 +27,12 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function s.atcost(e,c,tp)
-	local ct=3*(#{Duel.GetPlayerEffect(tp,id)})
+	local ct=5*(#{Duel.GetPlayerEffect(tp,id)})
 	return Duel.IsPlayerCanDiscardDeckAsCost(tp,ct)
 end
 function s.atop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.IsAttackCostPaid()~=2 and e:GetHandler():IsLocation(LOCATION_SZONE) then
-		Duel.DiscardDeck(tp,3,REASON_COST)
+		Duel.DiscardDeck(tp,5,REASON_COST)
 		Duel.AttackCostPaid()
 	end
 end

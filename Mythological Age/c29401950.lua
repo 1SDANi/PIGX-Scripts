@@ -33,16 +33,18 @@ function s.filter(c,tp,ep)
 		and ep~=tp and c:IsAbleToRemove()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	local tc=eg:GetFirst()
-	if chk==0 then return s.filter(tc,tp,ep) end
+	if chk==0 then return eg:FilterCount(s.filter,nil,tp,ep) end
+	local g=eg:Filter(s.filter,nil,tp,ep)
 	Duel.SetTargetCard(eg)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,tc,1,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,tc,1,0,0)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	local tc=eg:GetFirst()
-	if tc and tc:IsRelateToEffect(e) and tc:IsFaceup() and tc:GetAttack()>=2000 then
-		Duel.Destroy(tc,REASON_EFFECT,LOCATION_REMOVED)
+	local tg=Duel.GetTargetCards(e)
+	local tg2=tg:Filter(Card.IsRelateToEffect,nil,e)
+	local g=tg2:Filter(s.filter,nil,tp,ep)
+	if g and #g>0 then
+		Duel.Destroy(g,REASON_EFFECT,LOCATION_REMOVED)
 	end
 end
 function s.filter2(c,tp)

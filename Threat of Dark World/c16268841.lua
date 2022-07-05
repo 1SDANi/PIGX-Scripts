@@ -20,11 +20,8 @@ function s.reccon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.rectg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.CheckEvent(EVENT_SUMMON_SUCCESS) or Duel.CheckEvent(EVENT_MSET) end
-	Duel.SetTargetPlayer(e:GetLabel())
-	Duel.SetTargetParam(8000)
 	Duel.SetOperationInfo(0,CATEGORY_RECOVER,nil,0,e:GetLabel(),8000)
 end
 function s.recop(e,tp,eg,ep,ev,re,r,rp)
-	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
-	Duel.Recover(p,d,REASON_EFFECT)
+	Duel.Recover(tp,8000,REASON_EFFECT)
 end

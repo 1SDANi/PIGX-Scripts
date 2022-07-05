@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.filter(c,e)
-	return c:IsFaceup() and c:IsAttackBelow(1400) and (not e or c:IsRelateToEffect(e))
+	return c:IsFaceup() and c:IsAttackBelow(1400)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.filter,1,nil) and not eg:IsContains(e:GetHandler()) and not e:GetHandler():IsStatus(STATUS_BATTLE_DESTROYED)
@@ -26,7 +26,6 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	local g=eg:Filter(s.filter,nil)
-	Duel.SetTargetCard(eg)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,#g,0,0)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)

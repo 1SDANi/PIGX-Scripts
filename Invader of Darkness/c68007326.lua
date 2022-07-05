@@ -7,7 +7,7 @@ function s.initial_effect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_RECOVER)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
-	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_DELAY)
+	e1:SetProperty(EFFECT_FLAG_DELAY)
 	e1:SetCode(EVENT_BATTLE_DESTROYING)
 	e1:SetCondition(s.reccon)
 	e1:SetTarget(s.rectg)
@@ -21,15 +21,10 @@ function s.reccon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.rectg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	local c=e:GetHandler()
-	local bc=c:GetBattleTarget()
-	local rec=bc:GetBaseAttack()
-	if rec<0 then rec=0 end
-	Duel.SetTargetPlayer(tp)
-	Duel.SetTargetParam(rec)
-	Duel.SetOperationInfo(0,CATEGORY_RECOVER,nil,0,tp,rec)
+	Duel.SetOperationInfo(0,CATEGORY_RECOVER,nil,0,tp,0)
 end
 function s.recop(e,tp,eg,ep,ev,re,r,rp)
-	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
-	Duel.Recover(p,d,REASON_EFFECT)
+	local dam=e:GetHandler():GetBattleTarget():GetAttack()
+	if dam<0 then dam=0 end
+	Duel.Recover(tp,dam,REASON_EFFECT)
 end
