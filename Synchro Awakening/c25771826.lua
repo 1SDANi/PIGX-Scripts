@@ -14,6 +14,6 @@ function s.condtion(e)
 	if not (ph==PHASE_DAMAGE or ph==PHASE_DAMAGE_CAL) then return false end
 	local a=Duel.GetAttacker()
 	local d=Duel.GetAttackTarget()
-	return (a==e:GetHandler() and d and d:IsFaceup() and not d:IsAttribute(ATTRIBUTE_DARK))
-		or (d==e:GetHandler() and not a:IsAttribute(ATTRIBUTE_DARK))
+	return (a==e:GetHandler() and d and (d:IsFacedown() or not d:IsAttribute(ATTRIBUTE_DARK)))
+		or (d==e:GetHandler() and (a:IsFacedown() or not a:IsAttribute(ATTRIBUTE_DARK)))
 end

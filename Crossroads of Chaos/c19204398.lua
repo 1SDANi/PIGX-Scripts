@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e12)
 end
 function s.filter(c)
-	return not c:IsAttribute(ATTRIBUTE_DARK)
+	return (c:IsFacedown() or not c:IsAttribute(ATTRIBUTE_DARK))
 end
 function s.atkval(e,c)
 	return Duel.GetMatchingGroupCount(s.filter,c:GetControler(),0,LOCATION_GRAVE+LOCATION_ONFIELD,e:GetHandler(),CARD_SKULL_SERVANT)*1000

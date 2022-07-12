@@ -1,0 +1,55 @@
+--スキヤナー
+--Scanner
+local s,id=GetID()
+function s.initial_effect(c)
+	--destroy
+	local e1=Effect.CreateEffect(c)
+	e1:SetDescription(aux.Stringid(id,0))
+	e1:SetCategory(CATEGORY_DESTROY)
+	e1:SetType(EFFECT_TYPE_IGNITION)
+	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
+	e1:SetRange(LOCATION_MZONE)
+	e1:SetCountLimit(1)
+	e1:SetCost(s.cost)
+	e1:SetOperation(s.operation)
+	c:RegisterEffect(e1)
+end
+function s.costfilter(c)
+	return c:IsType(TYPE_MONSTER) and c:IsAbleToRemoveAsCost() and c:HasLevel() and aux.SpElimFilter(c)
+end
+function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,nil) end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
+	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,1,nil)
+	Duel.Remove(g,POS_FACEUP,REASON_COST)
+	e:SetLabel(g:GetFirst():GetCode(),g:GetFirst():GetLevel(),g:GetFirst():GetAttack(),g:GetFirst():GetDefense())
+end
+function s.operation(e,tp,eg,ep,ev,re,r,rp)
+	local code,level,atk,def=e:GetLabel()
+	if e:GetHandler():IsRelateToEffect(e) and e:GetHandler():IsFaceup() then
+		local e0=Effect.CreateEffect(e:GetHandler())
+		e0:SetType(EFFECT_TYPE_SINGLE)
+		e0:SetCode(EFFECT_CHANGE_CODE)
+		e0:SetReset(RESET_EVENT+RESETS_STANDARD_DISABLE)
+		e0:SetValue(code)
+		tc:RegisterEffect(e0)
+		local e1=Effect.CreateEffect(c)
+		e1:SetType(EFFECT_TYPE_SINGLE)
+		e1:SetCode(EFFECT_SET_ATTACK_FINAL)
+		e1:SetValue(atk)
+		e1:SetReset(RESET_EVENT+RESETS_STANDARD_DISABLE)
+		c:RegisterEffect(e1)
+		local e2=Effect.CreateEffect(c)
+		e2:SetType(EFFECT_TYPE_SINGLE)
+		e2:SetCode(EFFECT_SET_DEFENSE_FINAL)
+		e2:SetValue(def)
+		e2:SetReset(RESET_EVENT+RESETS_STANDARD_DISABLE)
+		c:RegisterEffect(e2)
+		local e3=Effect.CreateEffect(c)
+		e3:SetType(EFFECT_TYPE_SINGLE)
+		e3:SetCode(EFFECT_CHANGE_LEVEL)
+		e3:SetValue(level)
+		e3:SetReset(RESET_EVENT+RESETS_STANDARD_DISABLE)
+		c:RegisterEffect(e3)
+	end
+end

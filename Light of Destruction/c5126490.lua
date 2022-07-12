@@ -3,7 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	Fusion.AddProcMix(c,true,true,s.filter1,s.filter2)
+	Fusion.AddProcMix(c,true,true,CARD_NEOS,s.filter2)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	--damage&recover
 	local e1=Effect.CreateEffect(c)
@@ -68,12 +68,6 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)
 	end
 end
-function s.filter1(c)
-	return c:IsCode(CARD_NEOS) and c:IsType(TYPE_MONSTER+TYPE_UNION)
-end
-function s.filter2(c)
-	return c:IsSetCard(0x306) and c:IsType(TYPE_MONSTER+TYPE_UNION)
-end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local bc=e:GetHandler():GetBattleTarget()
 	if chk==0 then return bc end
@@ -88,6 +82,9 @@ function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	if def<0 then def=0 end
 	Duel.Damage(1-tp,atk,REASON_EFFECT)
 	Duel.Recover(tp,def,REASON_EFFECT)
+end
+function s.filter2(c)
+	return c:IsSetCard(0x306) and c:IsType(TYPE_MONSTER+TYPE_UNION)
 end
 function s.contactfil(tp)
 	return Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)

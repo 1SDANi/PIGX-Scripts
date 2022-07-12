@@ -33,6 +33,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 	--Register effect
 	local e4=Effect.CreateEffect(c)
+	e4:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_DAMAGE_STEP)
 	e4:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 	e4:SetCode(EVENT_SPSUMMON_SUCCESS)
 	e4:SetCondition(s.regcon)

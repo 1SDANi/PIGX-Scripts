@@ -28,7 +28,6 @@ function s.initial_effect(c)
 	e3:SetOperation(s.operation)
 	c:RegisterEffect(e3)
 end
-s.material={68505803}
 s.listed_names={68505803}
 function s.filter(c)
 	return c:IsCode(68505803) and c:IsAbleToRemoveAsCost()

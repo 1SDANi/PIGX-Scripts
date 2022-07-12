@@ -15,8 +15,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x12}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	local d=Duel.GetAttackTarget()
-	return d and d:IsFaceup() and d:IsControler(tp) and d:IsSetCard(0x12)
+	return tp~=Duel.GetTurnPlayer() and Duel.IsExistingMatchingCard(aux.FilterFaceupFunction(Card.IsSetCard,0x12),tp,LOCATION_MZONE,0,1,nil)
 end
 function s.filter(c)
 	return c:IsAttackPos()

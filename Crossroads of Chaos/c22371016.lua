@@ -18,7 +18,7 @@ function s.rmtg(e,tp,eg,ep,ev,re,r,rp,chk)
 		local a=Duel.GetAttacker()
 		if a==c then a=Duel.GetAttackTarget() end
 		e:SetLabelObject(a)
-		return a and not a:IsAttribute(ATTRIBUTE_DARK)
+		return a and (a:IsFacedown() or not a:IsAttribute(ATTRIBUTE_DARK))
 	end
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,e:GetLabelObject(),1,0,0)
 end

@@ -20,7 +20,7 @@ function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	local tc=Duel.GetAttacker()
 	if tc==c then tc=Duel.GetAttackTarget() end
-	if chk==0 then return tc and tc:IsFaceup() and not tc:IsAttribute(ATTRIBUTE_DARK) end
+	if chk==0 then return tc and (tc:IsFacedown() or not tc:IsAttribute(ATTRIBUTE_DARK)) end
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,tc,1,0,0)
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)

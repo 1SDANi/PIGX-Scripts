@@ -56,5 +56,12 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetCode(EFFECT_INDESTRUCTABLE_BATTLE)
 		e1:SetValue(1)
 		token:RegisterEffect(e1,true)
+		local e2=Effect.CreateEffect(e:GetHandler())
+		e2:SetType(EFFECT_TYPE_FIELD)
+		e2:SetCode(EFFECT_CHANGE_LEVEL)
+		e2:SetRange(LOCATION_MZONE)
+		e2:SetTargetRange(LOCATION_MZONE,0)
+		e2:SetValue(1)
+		token:RegisterEffect(e2,true)
 	end
 end

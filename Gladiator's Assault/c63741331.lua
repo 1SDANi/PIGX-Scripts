@@ -28,11 +28,9 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	local lv=1
 	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_MZONE,LOCATION_MZONE,nil)
 	local tc=g:GetFirst()
 	for tc in aux.Next(g) do
-		lv=tc:GetLevel()
 		if tc and tc:IsCanAddCounter(COUNTER_FOG,1) then
 			tc:AddCounter(COUNTER_FOG,1)
 		end

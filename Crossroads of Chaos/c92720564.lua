@@ -24,7 +24,7 @@ function s.cona(e)
 	return e:GetHandler():IsAttackPos()
 end
 function s.target(e,c)
-	return c:IsSetCard(0x26)
+	return e:GetHandler()~=c
 end
 function s.valcon(e,re,r,rp)
 	return (r&REASON_BATTLE)~=0 or (r&REASON_EFFECT)~=0

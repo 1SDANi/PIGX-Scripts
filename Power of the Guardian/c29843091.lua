@@ -47,7 +47,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			e5:SetValue(1)
 			e5:SetReset(RESET_EVENT+RESETS_STANDARD)
 			token:RegisterEffect(e5,true)
-			--Inflict 300 damage when destroyed
+			--Inflict 500 damage when destroyed
 			local e2=Effect.CreateEffect(e:GetHandler())
 			e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 			e2:SetCode(EVENT_LEAVE_FIELD)

@@ -29,16 +29,17 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if tg and #tg>0 then
 		local tc=tg:GetFirst()
 		for tc in aux.Next(tg) do
-			tc:AddCounter(COUNTER_A,1)
-			local e1=Effect.CreateEffect(e:GetHandler())
-			e1:SetType(EFFECT_TYPE_SINGLE)
-			e1:SetCode(EFFECT_UPDATE_ATTACK)
-			e1:SetReset(RESET_EVENT+RESETS_STANDARD)
-			e1:SetValue(-500)
-			tc:RegisterEffect(e1)
-			local e2=e1:Clone()
-			e2:SetCode(EFFECT_UPDATE_DEFENSE)
-			tc:RegisterEffect(e2)
+			if tc:AddCounter(COUNTER_A,1) then
+				local e1=Effect.CreateEffect(e:GetHandler())
+				e1:SetType(EFFECT_TYPE_SINGLE)
+				e1:SetCode(EFFECT_UPDATE_ATTACK)
+				e1:SetReset(RESET_EVENT+RESETS_STANDARD)
+				e1:SetValue(-500)
+				tc:RegisterEffect(e1)
+				local e2=e1:Clone()
+				e2:SetCode(EFFECT_UPDATE_DEFENSE)
+				tc:RegisterEffect(e2)
+			end
 		end
 	end
 end

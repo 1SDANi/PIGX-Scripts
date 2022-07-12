@@ -19,14 +19,14 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.atkfilter(e,c)
-	return not (c:IsFaceup() and c:IsAttribute(ATTRIBUTE_DARK))
+	return (c:IsFacedown() or not c:IsAttribute(ATTRIBUTE_DARK))
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
 		local c=e:GetHandler()
 		local a=Duel.GetAttacker()
 		if a==c then a=Duel.GetAttackTarget() end
-		return a and a:IsAttribute(ATTRIBUTE_DARK)
+		return a and a:IsFaceup() and a:IsAttribute(ATTRIBUTE_DARK)
 	end
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,e:GetHandler(),1,0,0)
 end
