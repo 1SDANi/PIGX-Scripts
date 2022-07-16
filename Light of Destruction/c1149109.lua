@@ -19,7 +19,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_CANNOT_SPECIAL_SUMMON)
 	e1:SetTargetRange(LOCATION_DECK,LOCATION_DECK)
-	e1:SetReset(RESET_PHASE+PHASE_END)
+	e1:SetReset(RESET_PHASE+PHASE_STANDBY+RESET_SELF_TURN)
 	Duel.RegisterEffect(e1,tp)
 	--cannot draw
 	local e2=e1:Clone()

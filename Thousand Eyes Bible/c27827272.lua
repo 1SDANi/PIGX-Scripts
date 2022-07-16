@@ -14,7 +14,7 @@ function s.initial_effect(c)
 end
 s.listed_names={CARD_SKULL_ARCHFIEND}
 function s.filter(c)
-	return c:IsCode(CARD_SKULL_ARCHFIEND) or (c:IsRace(RACE_ELEMENTAL) and c:IsAttribute(ATTRIBUTE_LIGHT))
+	return c:IsCode(CARD_SKULL_ARCHFIEND) or c:IsAttribute(ATTRIBUTE_LIGHT)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.CheckReleaseGroupCost(tp,s.filter,1,false,nil,nil) end

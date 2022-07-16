@@ -14,9 +14,7 @@ function s.initial_effect(c)
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return Duel.GetFieldGroupCount(tp,LOCATION_MZONE,0)==0
-		and	Duel.GetFieldGroupCount(tp,0,LOCATION_MZONE)>0
-		and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
+	return Duel.GetFieldGroupCount(tp,LOCATION_MZONE,0)==0 and Duel.GetFieldGroupCount(tp,0,LOCATION_MZONE)>0 and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()

@@ -71,11 +71,11 @@ function s.cn4(e,tp,eg,ep,ev,re,r,rp)
 	return tp~=Duel.GetTurnPlayer()
 end
 function s.cn5(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetCurrentChain()==0
+	return Duel.GetCurrentChain()==0 and ep~=tp
 end
 function s.cs1(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,e:GetHandler()) end
-	Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST+REASON_DISCARD)
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,2,e:GetHandler()) end
+	Duel.DiscardHand(tp,Card.IsDiscardable,2,2,REASON_COST+REASON_DISCARD)
 end
 function s.tg3(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
@@ -96,6 +96,8 @@ function s.op2(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetAttacker()
 	if tc:CanAttack() and not tc:IsStatus(STATUS_ATTACK_CANCELED) then
 		Duel.Destroy(tc,REASON_EFFECT)
+		Duel.BreakEffect()
+		Duel.Damage(1-tp,1000,REASON_EFFECT)
 	end
 end
 function s.tg1(e,tp,eg,ep,ev,re,r,rp,chk)

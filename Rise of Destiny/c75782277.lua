@@ -24,7 +24,7 @@ function s.initial_effect(c)
 	e3:SetType(EFFECT_TYPE_FIELD)
 	e3:SetCode(EFFECT_UPDATE_ATTACK)
 	e3:SetRange(LOCATION_FZONE)
-	e3:SetTarget(aux.AND(aux.TargetBoolFunction(Card.IsRace,RACE_BEAST),aux.TargetBoolFunction(Card.IsAttribute,ATTRIBUTE_WIND)))
+	e3:SetTarget(aux.TargetBoolFunction(Card.IsAttribute,ATTRIBUTE_WIND))
 	e3:SetTargetRange(LOCATION_MZONE,LOCATION_MZONE)
 	e3:SetValue(500)
 	c:RegisterEffect(e3)
@@ -40,14 +40,16 @@ function s.initial_effect(c)
 		local ge2=ge1:Clone()
 		ge2:SetCode(EVENT_SPSUMMON_SUCCESS)
 		Duel.RegisterEffect(ge2,0)
+		local ge3=ge1:Clone()
+		ge3:SetCode(EVENT_FLIP_SUMMON_SUCCESS)
+		Duel.RegisterEffect(ge3,0)
 	end)
 end
-s.listed_names={CARD_HARPY_LADY}
 function s.check(e,tp,eg,ep,ev,re,r,rp)
 	local g1=Group.CreateGroup()
 	local g2=Group.CreateGroup()
 	for tc in aux.Next(eg) do
-		if tc:IsFaceup() and tc:IsCode(CARD_HARPY_LADY) then
+		if tc:IsFaceup() and tc:IsAttribute(ATTRIBUTE_WIND) then
 			if tc:IsControler(0) then g1:AddCard(tc) else g2:AddCard(tc) end
 		end
 	end

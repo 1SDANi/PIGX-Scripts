@@ -29,8 +29,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function s.filter(c,tp,ep)
-	return c:IsLocation(LOCATION_MZONE) and c:IsFaceup() and c:GetAttack()>=2000
-		and ep~=tp and c:IsAbleToRemove()
+	return c:IsLocation(LOCATION_MZONE) and c:IsFaceup() and c:GetAttack()>=2000 and c:IsSummonPlayer(1-tp) and c:IsAbleToRemove()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return eg:FilterCount(s.filter,nil,tp,ep) end

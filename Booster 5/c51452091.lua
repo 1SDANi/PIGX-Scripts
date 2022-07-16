@@ -31,7 +31,6 @@ function s.initial_effect(c)
 	e4:SetTargetRange(LOCATION_MZONE,LOCATION_MZONE)
 	e4:SetTarget(s.distarget)
 	c:RegisterEffect(e4)
-	aux.DoubleSnareValidity(c,LOCATION_SZONE)
 end
 function s.distarget(e,c)
 	return c~=e:GetHandler() and c:IsType(TYPE_TRAP)

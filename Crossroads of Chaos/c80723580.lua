@@ -13,11 +13,13 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return #eg>=2 end
-	Duel.SetOperationInfo(0,CATEGORY_DESTROY,eg,#eg,0,0)
+	local g=eg:Filter(IsSummonPlayer,nil,1-tp)
+	if chk==0 then return g and #g>0 end
+	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,#g,0,0)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
-	if #eg>0 then
-		Duel.Destroy(eg,REASON_EFFECT)
+	local g=eg:Filter(IsSummonPlayer,nil,1-tp)
+	if g and #g>0 then
+		Duel.Destroy(g,REASON_EFFECT)
 	end
 end

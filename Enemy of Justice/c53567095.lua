@@ -20,7 +20,7 @@ function s.cs(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Release(g,REASON_COST)
 end
 function s.costfilter(c)
-	return c:IsRace(RACE_BEAST) and c:IsAttribute(ATTRIBUTE_WIND)
+	return c:IsAttribute(ATTRIBUTE_WIND)
 end
 function s.tg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsOnField() and chkc~=e:GetHandler() end

@@ -31,16 +31,18 @@ function s.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
-	return rp~=tp
+	return eg:IsExists(Card.IsSummonPlayer,1,nil,1-tp)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return eg and #eg>0 end
-	Duel.SetOperationInfo(0,CATEGORY_COUNTER,nil,#eg,0,0)
+	local g=eg:Filter(IsSummonPlayer,nil,1-tp)
+	if chk==0 then return g and #g>0 end
+	Duel.SetOperationInfo(0,CATEGORY_COUNTER,nil,#g,0,0)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	local tc=eg:GetFirst()
-	for tc in aux.Next(eg) do
+	local g=eg:Filter(IsSummonPlayer,nil,1-tp)
+	local tc=g:GetFirst()
+	for tc in aux.Next(g) do
 		if tc and tc:IsCanAddCounter(COUNTER_A,1) and tc:AddCounter(COUNTER_A,1) then
 		end
 	end

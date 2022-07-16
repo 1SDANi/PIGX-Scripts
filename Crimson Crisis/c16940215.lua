@@ -11,7 +11,7 @@ function s.initial_effect(c)
 	e1:SetCode(EVENT_CHAINING)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetCondition(s.discon)
-	e1:SetCost(aux.CostWithReplace(s.discost,CARD_NATURIA_CAMELLIA))
+	e1:SetCost(s.discost)
 	e1:SetTarget(s.distg)
 	e1:SetOperation(s.disop)
 	c:RegisterEffect(e1)
@@ -26,8 +26,8 @@ function s.cfilter(c)
 end
 function s.discost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return Duel.CheckReleaseGroupCost(tp,s.cfilter,1,false,nil,c) end
-	local g=Duel.SelectReleaseGroupCost(tp,s.cfilter,1,1,false,nil,c)
+	if chk==0 then return Duel.CheckReleaseGroupCost(tp,s.cfilter,1,false,nil,nil) end
+	local g=Duel.SelectReleaseGroupCost(tp,s.cfilter,1,1,false,nil,nil)
 	Duel.Release(g,REASON_COST)
 end
 function s.distg(e,tp,eg,ep,ev,re,r,rp,chk)

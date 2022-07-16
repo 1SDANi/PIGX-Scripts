@@ -7,10 +7,16 @@ function s.initial_effect(c)
 	e4:SetCategory(CATEGORY_NEGATE+CATEGORY_DESTROY)
 	e4:SetType(EFFECT_TYPE_ACTIVATE)
 	e4:SetCode(EVENT_CHAINING)
+	e1:SetCondition(s.condition)
 	e4:SetCost(s.cost)
 	e4:SetTarget(s.target)
 	e4:SetOperation(s.activate)
 	c:RegisterEffect(e4)
+end
+function s.condition(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	if ep==tp or c:IsStatus(STATUS_BATTLE_DESTROYED) then return false end
+	return (re:IsActiveType(TYPE_MONSTER) or re:IsHasType(EFFECT_TYPE_ACTIVATE)) and Duel.IsChainNegatable(ev)
 end
 function s.costfilter(c)
 	return c:IsRace(RACE_ELEMENTAL) and c:IsAttribute(ATTRIBUTE_WATER) and c:IsType(TYPE_MONSTER) and c:IsDiscardable()

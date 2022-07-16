@@ -2,7 +2,7 @@
 --Vision HERO Bombardment
 local s,id=GetID()
 function s.initial_effect(c)
-	--self destroy
+	--foolish
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_TOGRAVE)
 	e1:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_DAMAGE_STEP)

@@ -33,10 +33,10 @@ function s.initial_effect(c)
 end
 s.toss_coin=true
 function s.heads(e)
-	return e:GetHandler():GetFlagEffectLabel(36690018)==1
+	return e:GetHandler():GetFlagEffectLabel(36690018)==1 and eg:IsExists(Card.IsSummonPlayer,1,nil,1-tp)
 end
 function s.tails(e)
-	return e:GetHandler():GetFlagEffectLabel(36690018)==0
+	return e:GetHandler():GetFlagEffectLabel(36690018)==0 and eg:IsExists(Card.IsSummonPlayer,1,nil,1-tp)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local e1=Effect.CreateEffect(e:GetHandler())

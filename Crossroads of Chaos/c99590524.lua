@@ -29,7 +29,7 @@ function s.filter(c,tp,ep)
 	return c:IsLocation(LOCATION_MZONE)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return eg:FilterCount(Card.IsControler,nil,1-tp)>0 and not Duel.IsExistingMatchingCard(Card.IsType,tp,LOCATION_GRAVE,0,1,nil,TYPE_TRAP)
+	return eg:FilterCount(Card.IsSummonPlayer,nil,1-tp)>0 and not Duel.IsExistingMatchingCard(Card.IsType,tp,LOCATION_GRAVE,0,1,nil,TYPE_TRAP)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return eg:FilterCount(s.filter,nil,tp,ep) end

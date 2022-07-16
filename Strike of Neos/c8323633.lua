@@ -34,23 +34,23 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	e3:SetCode(EVENT_FLIP)
 	c:RegisterEffect(e3)
 end
-function s.filter(c,code)
-	return c:IsFaceup() and c:IsCode(code)
+function s.filter(c,tp,code)
+	return c:IsFaceup() and c:IsSummonPlayer(1-tp) and c:IsCode(code)
 end
 function s.rmcon(e,tp,eg,ep,ev,re,r,rp)
-	return eg:IsExists(s.filter,1,nil,e:GetLabel()) and rp~=tp
+	return eg:IsExists(s.filter,1,nil,tp,e:GetLabel())
 end
 function s.rmtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsRelateToEffect(e) end
 	Duel.SetTargetCard(eg)
-	local g=eg:Filter(s.filter,nil,e:GetLabel())
+	local g=eg:Filter(s.filter,nil,tp,e:GetLabel())
 	g:AddCard(e:GetHandler())
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,g,#g,0,0)
 end
 function s.rmop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if not c:IsRelateToEffect(e) then return end
-	local g=eg:Filter(s.filter,nil,e:GetLabel()):Filter(Card.IsRelateToEffect,nil,e)
+	local g=eg:Filter(s.filter,nil,tp,e:GetLabel()):Filter(Card.IsRelateToEffect,nil,e)
 	if #g>0 then
 		g:AddCard(c)
 		Duel.Remove(g,POS_FACEUP,REASON_EFFECT)

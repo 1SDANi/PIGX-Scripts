@@ -13,7 +13,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x8}
 function s.filter(c,e,tp)
-	return c:IsLevelBelow(4) and c:IsSetCard(0x08) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsSetCard(0x08) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_HAND,0,1,nil,e,tp) end
