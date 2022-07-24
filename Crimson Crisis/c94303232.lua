@@ -81,7 +81,7 @@ end
 function s.cn(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local ec=c:GetPreviousEquipTarget()
-	return c:IsReason(REASON_LOST_TARGET) and ec:IsReason(REASON_BATTLE+REASON_EFFECT) and ec:IsLocation(LOCATION_GRAVE)
+	return c:IsReason(REASON_LOST_TARGET) and ec:IsReason(REASON_BATTLE+REASON_EFFECT)
 end
 function s.filter(c)
 	return c:IsFaceup() and not c:CanAttack()

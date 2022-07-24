@@ -12,6 +12,7 @@ function s.initial_effect(c)
 	e2:SetValue(2)
 	c:RegisterEffect(e2)
 end
+s.material_race={RACE_DRAGON}
 function s.fusionfilter(c,fc,sumtype,sp,sub,mg,sg)
 	local tg=fc:GetLevel()
 	local rg

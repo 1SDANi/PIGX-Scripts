@@ -19,6 +19,7 @@ function s.initial_effect(c)
 	e2:SetCode(EFFECT_SPSUMMON_COST)
 	c:RegisterEffect(e2)
 end
+s.material_race={RACE_PLANT}
 function s.sumtg(e,c)
 	return c:GetRace()~=RACE_PLANT
 end

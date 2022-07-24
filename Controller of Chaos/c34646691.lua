@@ -26,15 +26,14 @@ function s.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsRelateToEffect(e) end
-	Duel.SetTargetCard(eg)
+	if chk==0 then return e:GetHandler():IsRelateToEffect(e) and eg and #eg>0 end
 	Duel.SetOperationInfo(0,CATEGORY_POSITION,eg,#eg,0,0)
 end
 function s.filter(c,e)
-	return c:IsFaceup() and c:IsAttackPos() and c:IsRelateToEffect(e)
+	return c:IsFaceup() and c:IsAttackPos()
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
-	if not e:GetHandler():IsRelateToEffect(e) then return end
-	local g=eg:Filter(s.filter,nil,e)
-	Duel.ChangePosition(g,POS_FACEUP_DEFENSE)
+	if e:GetHandler():IsRelateToEffect(e) and eg and #eg>0 then
+		Duel.ChangePosition(eg,POS_FACEUP_DEFENSE)
+	end
 end

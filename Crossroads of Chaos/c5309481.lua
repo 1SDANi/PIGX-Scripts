@@ -24,6 +24,7 @@ function s.initial_effect(c)
 	e5:SetValue(aux.tgoval)
 	c:RegisterEffect(e5)
 end
+s.material_race={RACE_ZOMBIE}
 function s.cn(e)
 	local c=e:GetHandler()
 	return Duel.IsExistingMatchingCard(aux.FilterFaceupFunction(Card.IsRace,RACE_ZOMBIE),c:GetControler(),LOCATION_MZONE,0,1,c)

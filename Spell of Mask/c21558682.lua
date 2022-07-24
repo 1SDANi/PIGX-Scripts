@@ -25,7 +25,7 @@ function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	return tp~=Duel.GetTurnPlayer() and Duel.GetAttackTarget()~=nil
 end
 function s.filter(c,atg)
-	return c:IsFaceup() and c:IsAttribute(ATTRIBUTE_WATER) and c:IsType(TYPE_ELEMENTAL) and atg:IsContains(c)
+	return c:IsFaceup() and c:IsAttribute(ATTRIBUTE_WATER) and atg:IsContains(c)
 end
 function s.atktg2(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local atg=Duel.GetAttacker():GetAttackableTarget()

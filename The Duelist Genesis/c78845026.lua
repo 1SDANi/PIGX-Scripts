@@ -15,8 +15,11 @@ end
 function s.filter(c)
 	return c:IsFaceup() and c:IsAttribute(ATTRIBUTE_LIGHT)
 end
-function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return true end
+function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
+	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) and s.filter(chkc) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_MZONE,0,1,nil,tp) end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
+	Duel.SelectTarget(tp,s.filter,tp,LOCATION_MZONE,0,1,1,nil)
 	local lv=e:GetHandler():GetLevel()
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,0))
 	e:SetLabel(Duel.AnnounceLevel(tp,1,11,lv))

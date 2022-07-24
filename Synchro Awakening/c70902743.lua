@@ -5,40 +5,27 @@ function s.initial_effect(c)
 	--fusion material
 	Fusion.AddProcMixRep(c,true,true,s.fusionfilter,2,99)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
-	--extra attack
-	local e2=Effect.CreateEffect(c)
-	e2:SetDescription(aux.Stringid(id,1))
-	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
-	e2:SetCode(EVENT_BATTLE_DESTROYING)
-	e2:SetCondition(s.atcon)
-	e2:SetOperation(s.atop)
-	c:RegisterEffect(e2)
 	--destroy
-	local e5=Effect.CreateEffect(c)
-	e5:SetDescription(aux.Stringid(id,0))
-	e5:SetCategory(CATEGORY_DESTROY)
-	e5:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
-	e5:SetProperty(EFFECT_FLAG_DELAY)
-	e5:SetCode(EVENT_ATTACK_ANNOUNCE)
-	e5:SetTarget(s.tg)
-	e5:SetOperation(s.op)
-	c:RegisterEffect(e5)
-end
-function s.atcon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetAttacker()==e:GetHandler() and aux.bdcon(e,tp,eg,ep,ev,re,r,rp)
-		and e:GetHandler():CanChainAttack(0)
-end
-function s.atop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.ChainAttack()
+	local e1=Effect.CreateEffect(c)
+	e1:SetDescription(aux.Stringid(id,0))
+	e1:SetCategory(CATEGORY_DESTROY)
+	e1:SetProperty(EFFECT_FLAG_DELAY)
+	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
+	e1:SetCode(EVENT_BATTLE_CONFIRM)
+	e1:SetTarget(s.tg)
+	e1:SetOperation(s.op)
+	c:RegisterEffect(e1)
 end
 function s.tg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return true end
 	local g=Duel.GetMatchingGroup(Card.IsDefensePos,tp,0,LOCATION_MZONE,nil)
+	if chk==0 then return g and #g>0 end
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,#g,0,0)
 end
 function s.op(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(Card.IsDefensePos,tp,0,LOCATION_MZONE,nil)
-	Duel.Destroy(g,REASON_EFFECT)
+	if g and #g>0 then
+		Duel.Destroy(g,REASON_EFFECT)
+	end
 end
 function s.fusionfilter(c,fc,sumtype,sp,sub,mg,sg)
 	local tg=fc:GetLevel()

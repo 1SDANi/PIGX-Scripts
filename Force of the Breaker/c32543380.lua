@@ -22,7 +22,7 @@ function s.initial_effect(c)
 	e3:SetCode(EFFECT_MUST_ATTACK_MONSTER)
 	e3:SetValue(s.atklimit)
 	c:RegisterEffect(e3)
-	--special summon
+	--destroy
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,0))
 	e4:SetCategory(CATEGORY_DESTROY+CATEGORY_DAMAGE)

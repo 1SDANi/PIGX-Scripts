@@ -40,9 +40,13 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 		local atk=e:GetHandler():GetAttack()
 		if def<0 then def=0 end
 		if atk<0 then atk=0 end
-		Duel.Damage(1-tp,def,REASON_EFFECT)
+		local rec=Duel.Damage(1-tp,def,REASON_EFFECT)
 		Duel.BreakEffect()
-		Duel.Damage(1-tp,atk,REASON_EFFECT)
+		rec=rec+Duel.Damage(1-tp,atk,REASON_EFFECT)
+		Duel.BreakEffect()
+		if rec then
+			Duel.Recover(tp,rec,REASON_EFFECT)
+		end
 	end
 end
 function s.spcn(e,tp,eg,ep,ev,re,r,rp)

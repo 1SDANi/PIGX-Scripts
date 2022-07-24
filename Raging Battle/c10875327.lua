@@ -34,7 +34,7 @@ function s.initial_effect(c)
 	e5:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e5:SetCondition(aux.NOT(s.nofieldcon))
 	e5:SetRange(LOCATION_MZONE)
-	e5:SetValue(aux.tgoval)
+	e5:SetValue(s.efilter)
 	c:RegisterEffect(e5)
 	--destroy monsters
 	local e4=Effect.CreateEffect(c)
@@ -49,6 +49,10 @@ function s.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 s.listed_series={0x21}
+function s.efilter(e,re,rp)
+	return (re:GetHandler():IsType(TYPE_SPELL) or re:GetHandler():IsType(TYPE_TRAP))
+		and aux.tgoval(e,re,rp)
+end
 function s.nofieldcon(e)
 	return not Duel.IsExistingMatchingCard(Card.IsFaceup,0,LOCATION_FZONE,LOCATION_FZONE,1,nil)
 end

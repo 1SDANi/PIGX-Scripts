@@ -12,6 +12,7 @@ function s.initial_effect(c)
 	e2:SetTarget(aux.TRUE)
 	c:RegisterEffect(e2)
 end
+s.listed_series={0x2f}
 function s.dircon(e)
 	return Duel.IsExistingMatchingCard(aux.FilterFaceupFunction(Card.IsSetCard,0x2f),e:GetHandler():GetControler(),LOCATION_MZONE,0,1,e:GetHandler())
 end

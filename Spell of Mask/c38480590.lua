@@ -20,7 +20,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Release(e:GetHandler(),REASON_COST)
 end
 function s.filter(c,tid,e,tp)
-	return c:IsType(TYPE_MONSTER) and c:IsCanBeSpecialSummoned(e,0,tp,false,false) and
+	return c:IsType(TYPE_MONSTER) and c:IsCanBeSpecialSummoned(e,0,tp,false,false) and c:IsReason(REASON_DESTROY) and
 		(c:IsReason(REASON_BATTLE) or c:IsReason(REASON_EFFECT)) and c:GetTurnID()==tid
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)

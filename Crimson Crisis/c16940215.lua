@@ -15,7 +15,6 @@ function s.initial_effect(c)
 	e1:SetTarget(s.distg)
 	e1:SetOperation(s.disop)
 	c:RegisterEffect(e1)
-	aux.DoubleSnareValidity(c,LOCATION_MZONE)
 end
 s.listed_series={0x2a}
 function s.discon(e,tp,eg,ep,ev,re,r,rp)

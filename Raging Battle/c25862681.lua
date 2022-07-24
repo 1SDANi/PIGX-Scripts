@@ -64,7 +64,7 @@ function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetMatchingGroup(aux.TRUE,0,LOCATION_FZONE,LOCATION_FZONE,nil)
 	if chk==0 then return #g>0 end
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,#g,0,0)
-	Duel.SetOperationInfo(0,CATEGORY_RECOVER,nil,0,tp,1000)
+	Duel.SetOperationInfo(0,CATEGORY_RECOVER,nil,0,tp,2000)
 end
 function s.ffilter(c)
 	return c:IsType(TYPE_FIELD) and c:IsAbleToHand()
@@ -74,7 +74,7 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	if #g>0 then
 		local ct=Duel.Destroy(g,REASON_EFFECT)
 		if ct>0 then
-			Duel.Recover(tp,1000,REASON_EFFECT)
+			Duel.Recover(tp,2000,REASON_EFFECT)
 			local fg=Duel.GetMatchingGroup(s.ffilter,tp,LOCATION_DECK,0,nil)
 			if #fg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,3)) then
 				Duel.BreakEffect()
