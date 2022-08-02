@@ -12,10 +12,10 @@ function s.initial_effect(c)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
 end
-s.listed_names={CARD_HARPY_LADY}
+s.listed_names={0x64}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return re:IsActiveType(TYPE_MONSTER) and Duel.IsChainNegatable(ev) and
-		Duel.IsExistingMatchingCard(aux.FilterFaceupFunction(Card.IsCode,CARD_HARPY_LADY),tp,LOCATION_MZONE,0,1,nil)
+		Duel.IsExistingMatchingCard(aux.FilterFaceupFunction(Card.IsSetCard,0x64),tp,LOCATION_MZONE,0,1,nil)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

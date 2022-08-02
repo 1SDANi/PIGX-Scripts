@@ -2,6 +2,7 @@
 --/Duelist/Deck/Arcanite Magician/Assault Mode
 local s,id=GetID()
 function s.initial_effect(c)
+	c:EnableCounterPermit(COUNTER_SPELL)
 	--fusion material
 	Fusion.AddProcMix(c,true,true,31924889,s.filter2)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)

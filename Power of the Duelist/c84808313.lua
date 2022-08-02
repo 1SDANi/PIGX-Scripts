@@ -6,7 +6,6 @@ function s.initial_effect(c)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
-	e1:SetCost(s.cost)
 	c:RegisterEffect(e1)
 	--reduce tribute
 	local e2=Effect.CreateEffect(c)
@@ -18,11 +17,6 @@ function s.initial_effect(c)
 	e2:SetCondition(s.ntcon)
 	e2:SetTarget(aux.FieldSummonProcTg(aux.TargetBoolFunction(Card.IsRace,RACE_REPTILE)))
 	c:RegisterEffect(e2)
-end
-function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.CheckReleaseGroupCost(tp,Card.IsRace,1,false,nil,nil,RACE_REPTILE) end
-	local g=Duel.SelectReleaseGroupCost(tp,Card.IsRace,1,1,false,nil,nil,RACE_REPTILE)
-	Duel.Release(g,REASON_COST)
 end
 function s.ntcon(e,c,minc)
 	if c==nil then return true end

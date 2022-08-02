@@ -38,7 +38,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g1=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_DECK,0,1,1,nil,e,tp)
 	local tc1=g1:GetFirst()
-	if tc1 and Duel.SpecialSummon(tc1,104,tp,tp,false,false,POS_FACEUP)>0 then
+	if tc1 and Duel.SpecialSummon(tc1,104,tp,tp,false,false,POS_FACEUP)>0 and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_GRAVE,0,1,nil,e,tp) and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 then
 		tc1:RegisterFlagEffect(tc1:GetOriginalCode(),RESET_EVENT+RESETS_STANDARD_DISABLE,0,0)
 		g2=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
 		tc2=g2:GetFirst()

@@ -29,15 +29,14 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 s.material_attribute={ATTRIBUTE_WIND}
-s.listed_series={0x29}
 function s.eqval(ec,c,tp)
-	return ec:IsControler(tp) and ec:IsSetCard(0x29)
+	return ec:IsControler(tp) and c:IsType(TYPE_UNION)
 end
 function s.eqcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION)
 end
 function s.filter(c)
-	return c:IsSetCard(0x29) and not c:IsForbidden()
+	return c:IsType(TYPE_UNION) and not c:IsForbidden()
 end
 function s.eqtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.filter(chkc) end

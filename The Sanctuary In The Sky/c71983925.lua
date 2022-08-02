@@ -25,7 +25,7 @@ function s.initial_effect(c)
 	e3:SetProperty(EFFECT_FLAG_SET_AVAILABLE)
 	e3:SetRange(LOCATION_SZONE)
 	e3:SetTargetRange(LOCATION_SZONE+LOCATION_HAND,LOCATION_SZONE+LOCATION_HAND)
-	e3:SetTarget(aux.TargetBoolFunction(Card.IsType,TYPE_SPELL))
+	e3:SetTarget(s.distarget)
 	c:RegisterEffect(e3)
 	--Negate Spells
 	local e4=Effect.CreateEffect(c)
@@ -66,11 +66,11 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 	end
 end
-function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	Duel.IsExistingMatchingCard(aux.FilterFaceupFunction(Card.IsCode,2468169),e:GetHandlerPlayer(),LOCATION_ONFIELD,0,1,nil)
+function s.condition(e)
+	return Duel.IsExistingMatchingCard(aux.FilterFaceupFunction(Card.IsCode,2468169),e:GetHandlerPlayer(),LOCATION_ONFIELD,0,1,nil)
 end
 function s.distarget(e,c)
-	return c~=e:GetHandler() and c:IsType(TYPE_SPELL)
+	return c~=e:GetHandler() and c:IsType(TYPE_SPELL) and s.condition(e)
 end
 function s.disop(e,tp,eg,ep,ev,re,r,rp)
 	local tl=Duel.GetChainInfo(ev,CHAININFO_TRIGGERING_LOCATION)

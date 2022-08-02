@@ -36,12 +36,12 @@ function s.initial_effect(c)
 	e4:SetOperation(s.desop)
 	c:RegisterEffect(e4)
 end
-s.listed_names={CARD_HARPY_LADY}
+s.listed_series={0x64}
 function s.cfilter(c)
-	return c:IsFaceup() and c:IsCode(CARD_HARPY_LADY) and c~=e:GetHandler()
+	return c:IsFaceup() and c:IsSetCard(0x64) and c~=e:GetHandler()
 end
 function s.atlimit(e,c)
-	return c:IsFaceup() and c:IsCodes(CARD_HARPY_LADY) and c~=e:GetHandler()
+	return c:IsFaceup() and c:IsSetCard(0x64) and c~=e:GetHandler()
 end
 function s.adcon(e)
 	return Duel.IsExistingMatchingCard(s.cfilter,e:GetHandlerPlayer(),LOCATION_MZONE,0,2,nil)

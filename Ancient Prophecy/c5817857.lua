@@ -19,8 +19,8 @@ function s.initial_effect(c)
 	e2:SetCode(EFFECT_DESTROY_REPLACE)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetValue(1)
-	e2:SetTarget(s.destg)
-	e2:SetOperation(s.desop)
+	e2:SetTarget(s.reptg)
+	e2:SetOperation(s.repop)
 	c:RegisterEffect(e2)
 end
 s.listed_series={0x1d}
@@ -37,7 +37,7 @@ end
 function s.rfilter(c)
 	return c:IsSetCard(0x1d) and c:IsAbleToRemove() and aux.SpElimFilter(c,true)
 end
-function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
+function s.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
 		if #eg~=1 then return false end
 		local tc=eg:GetFirst()
@@ -47,7 +47,7 @@ function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	end
 	return Duel.SelectEffectYesNo(tp,e:GetHandler(),96)
 end
-function s.desop(e,tp,eg,ep,ev,re,r,rp)
+function s.repop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
 	local g=Duel.SelectMatchingCard(tp,s.rfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,1,nil)
 	Duel.Remove(g,POS_FACEUP,REASON_EFFECT)

@@ -23,7 +23,7 @@ function s.initial_effect(c)
 	e3:SetCondition(s.lvcon)
 	e3:SetOperation(s.lvop)
 	c:RegisterEffect(e3)
-	--special summon
+	--destroy
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,1))
 	e4:SetCategory(CATEGORY_DESTROY)
@@ -36,7 +36,6 @@ function s.initial_effect(c)
 	e4:SetOperation(s.op)
 	c:RegisterEffect(e4)
 end
-s.listed_series={0x31}
 function s.value(e,c)
 	return c:GetLevel()*200
 end

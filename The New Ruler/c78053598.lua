@@ -27,7 +27,7 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local p,code=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
 	Duel.Hint(HINT_SELECTMSG,p,HINTMSG_ATOHAND)
-	local g=Duel.SelectMatchingCard(p,s.filter,1-tp,LOCATION_DECK,0,1,1,nil,code)
+	local g=Duel.SelectMatchingCard(p,s.filter,p,LOCATION_DECK,0,1,1,nil,code)
 	local tc=g:GetFirst()
 	if tc then
 		if Duel.SendtoHand(tc,nil,REASON_EFFECT) then

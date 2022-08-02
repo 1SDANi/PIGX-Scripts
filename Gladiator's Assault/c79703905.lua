@@ -27,13 +27,13 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetTargetPlayer(tp)
+	Duel.SetTargetPlayer(1-tp)
 	Duel.SetOperationInfo(0,CATEGORY_HANDES,nil,0,1-tp,1)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
 	local g=Duel.GetFieldGroup(p,LOCATION_HAND,0)
 	if #g==0 then return end
-	local sg=g:RandomSelect(1-tp,1)
+	local sg=g:RandomSelect(p,1)
 	Duel.SendtoGrave(sg,REASON_EFFECT+REASON_DISCARD)
 end

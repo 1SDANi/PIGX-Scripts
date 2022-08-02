@@ -11,12 +11,6 @@ function s.initial_effect(c)
 	e2:SetTarget(s.tg)
 	e2:SetOperation(s.op)
 	c:RegisterEffect(e2)
-	local e3=e2:Clone()
-	e3:SetCode(EVENT_SPSUMMON_SUCCESS)
-	c:RegisterEffect(e3)
-	local e4=e3:Clone()
-	e4:SetCode(EVENT_FLIP_SUMMON_SUCCESS)
-	c:RegisterEffect(e4)
 end
 s.listed_series={0x35}
 function s.filter(c)

@@ -18,10 +18,10 @@ function s.initial_effect(c)
 	e2:SetTargetRange(LOCATION_HAND+LOCATION_MZONE,0)
 	e2:SetCode(EFFECT_EXTRA_SUMMON_COUNT)
 	e2:SetDescription(aux.Stringid(id,0))
-	e2:SetTarget(aux.TargetBoolFunction(Card.IsType,TYPE_GEMINI))
+	e2:SetTarget(aux.TargetBoolFunction(Card.IsType,TYPE_NORMAL))
 	c:RegisterEffect(e2)
 end
-s.listed_card_types={TYPE_GEMINI}
+s.listed_card_types={TYPE_NORMAL}
 function s.valcon(e,re,r,rp)
 	return (r&REASON_BATTLE)~=0 or (r&REASON_EFFECT)~=0
 end

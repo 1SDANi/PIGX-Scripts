@@ -45,15 +45,18 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return ep~=tp
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.GetFieldGroupCount(tp,0,LOCATION_HAND)>0 end
+	if chk==0 then return true end
+	Duel.SetTargetPlayer(1-tp)
 	Duel.SetOperationInfo(0,CATEGORY_HANDES,nil,0,1-tp,1)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetFieldGroup(ep,LOCATION_HAND,0)
+	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
+	local g=Duel.GetFieldGroup(p,LOCATION_HAND,0)
 	if #g==0 then return end
-	local sg=g:RandomSelect(1-tp,1)
+	local sg=g:RandomSelect(p,1)
 	Duel.SendtoGrave(sg,REASON_EFFECT+REASON_DISCARD)
 end
+
 function s.tg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetAttackTarget()==e:GetHandler() or Duel.GetAttacker()==e:GetHandler() end
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,e:GetHandler(),1,0,0)

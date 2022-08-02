@@ -11,9 +11,9 @@ function s.initial_effect(c)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
 end
-s.listed_series={0x303,0x304}
+s.listed_series={0x303,0x304,0x307}
 function s.filter(c,e,tp,m)
-	if not ((c:IsSetCard(0x303) or c:IsSetCard(0x304)) and c:IsType(TYPE_RITUAL) and c:IsType(TYPE_MONSTER)) 
+	if not ((c:IsSetCard(0x303) or c:IsSetCard(0x304) or c:IsSetCard(0x307)) and c:IsType(TYPE_RITUAL) and c:IsType(TYPE_MONSTER)) 
 	or not c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,true,true) or c:IsHasEffect(EFFECT_SPSUMMON_CONDITION) then return false end
 	if m:IsContains(c) then
 		m:RemoveCard(c)

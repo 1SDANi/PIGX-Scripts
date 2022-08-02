@@ -1,5 +1,5 @@
 --ダークネス・アイ
---Darkness Eye
+--Dark Eye
 local s,id=GetID()
 function s.initial_effect(c)
 	--confirm
@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	--special summon
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
-	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
+	e2:SetCategory(CATEGORY_SUMMON)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetCountLimit(1)
 	e2:SetRange(LOCATION_MZONE)
@@ -54,7 +54,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST+REASON_DISCARD)
 end
 function s.filter(c,e)
-	return c:GetTextAttack()==-2 and c:GetTextDefense()==-2 and c:IsSummonable(true,e)
+	return c:GetTextAttack()==-2 and c:GetTextDefense()==-2 and c:IsSummonable(true,e:GetLabelObject())
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0

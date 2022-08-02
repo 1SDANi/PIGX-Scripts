@@ -31,6 +31,6 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) and tc:IsFaceup() and tc:IsRace(RACE_FIEND) then
-		Duel.GetControl(tc,tp,PHASE_END,1)
+		Duel.GetControl(tc,tp)
 	end
 end

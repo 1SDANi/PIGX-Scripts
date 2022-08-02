@@ -40,7 +40,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.RegisterEffect(e4,tp)
 end
 function s.sumlimit(e,c,sump,sumtype,sumpos,targetp,se)
-	return e:GetLabelObject()~=se
+	return not c:IsAttribute(ATTRIBUTE_DARK)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT)
