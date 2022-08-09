@@ -31,7 +31,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.ConfirmDecktop(1-tp,1)
 	end
 	if Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,e:GetHandler()) and
-		Duel.SelectYesNo(tp,aux.Stringid(id,0)) and
+		Duel.SelectYesNo(tp,aux.Stringid(id,0)) and Duel.IsPlayerCanDraw(tp,1) and
 		Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST+REASON_DISCARD) then
 		Duel.Draw(tp,1,REASON_EFFECT)
 		Duel.Draw(1-tp,1,REASON_EFFECT)

@@ -24,8 +24,8 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.ConfirmCards(p,g)
 		Duel.Hint(HINT_SELECTMSG,p,HINTMSG_TODECK)
 		local sg=g:Select(p,1,1,nil)
-		if Duel.SendtoDeck(sg,nil,2,REASON_EFFECT)>0 and Duel.IsPlayerCanDraw(1-tp,2) and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
-			Duel.Draw(p,d,REASON_EFFECT)
+		if Duel.SendtoDeck(sg,nil,2,REASON_EFFECT)>0 and Duel.IsPlayerCanDraw(p,1) and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
+			Duel.Draw(p,1,REASON_EFFECT)
 		end
 		Duel.ShuffleHand(1-p)
 	end

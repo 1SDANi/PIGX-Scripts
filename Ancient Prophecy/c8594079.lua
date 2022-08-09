@@ -2,14 +2,19 @@
 --Jurrac Brachiosaurus
 local s,id=GetID()
 function s.initial_effect(c)
-	--battle indestructable
-	local e2=Effect.CreateEffect(c)
-	e2:SetType(EFFECT_TYPE_SINGLE)
-	e2:SetCode(EFFECT_INDESTRUCTABLE)
-	e2:SetCondition(s.indcon)
-	e2:SetValue(1)
-	c:RegisterEffect(e2)
+	local e1=Effect.CreateEffect(c)
+	e1:SetCode(EFFECT_INDESTRUCTABLE)
+	e1:SetType(EFFECT_TYPE_FIELD)
+	e1:SetRange(LOCATION_MZONE)
+	e1:SetTargetRange(LOCATION_MZONE,0)
+	e1:SetTarget(s.target)
+	e1:SetValue(s.valcon)
+	c:RegisterEffect(e1)
 end
-function s.indcon(e)
-	return Duel.IsExistingMatchingCard(aux.FilterFaceupFunction(Card.IsSetCard,0x22),0,LOCATION_MZONE,LOCATION_MZONE,1,e:GetHandler()) and (r&REASON_BATTLE+REASON_EFFECT)~=0
+s.listed_series={0x22}
+function s.target(e,c)
+	return c~=e:GetHandler() and c:IsSetCard(0x22)
+end
+function s.valcon(e,re,r,rp)
+	return (r&REASON_BATTLE)~=0
 end

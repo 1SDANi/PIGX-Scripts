@@ -20,15 +20,17 @@ function s.initial_effect(c)
 	e4:SetCode(EVENT_SPSUMMON_SUCCESS)
 	c:RegisterEffect(e4)
 end
-function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsRelateToEffect(e) and eg and #eg>0 end
-	Duel.SetOperationInfo(0,CATEGORY_POSITION,eg,#eg,0,0)
-end
-function s.filter(c,e)
+function s.filter(c)
 	return c:IsFaceup() and c:IsAttackPos()
 end
+function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
+	local g=eg:Filter(s.filter,nil)
+	if chk==0 then return e:GetHandler():IsRelateToEffect(e) and g and #g>0 end
+	Duel.SetOperationInfo(0,CATEGORY_POSITION,eg,#eg,0,0)
+end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
-	if e:GetHandler():IsRelateToEffect(e) and eg and #eg>0 then
-		Duel.ChangePosition(eg,POS_FACEUP_DEFENSE)
+	local g=eg:Filter(s.filter,nil)
+	if e:GetHandler():IsRelateToEffect(e) and g and #g>0 then
+		Duel.ChangePosition(g,POS_FACEUP_DEFENSE,POS_FACEDOWN_DEFENSE,POS_FACEUP_DEFENSE,POS_FACEDOWN_DEFENSE)
 	end
 end

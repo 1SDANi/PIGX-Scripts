@@ -58,7 +58,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION)
 end
 function s.filter(c)
-	return aux.IsCodeListed(84327329) and c:IsType(TYPE_SPELL+TYPE_TRAP) and c:IsAbleToHand()
+	return aux.IsCodeListed(c,84327329) and c:IsType(TYPE_SPELL+TYPE_TRAP) and c:IsAbleToHand()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil) end

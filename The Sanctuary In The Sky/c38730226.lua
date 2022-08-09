@@ -21,7 +21,7 @@ function s.con(e,tp,eg,ep,ev,re,r,rp,chk)
 	return Duel.GetTurnPlayer()==tp or Duel.IsEnvironment(CARD_SANCTUARY_SKY)
 end
 function s.tg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return true end
+	if chk==0 then return Duel.IsPlayerCanDraw(tp,1) end
 	Duel.SetTargetPlayer(tp)
 	Duel.SetTargetParam(1)
 	Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,1)

@@ -16,7 +16,7 @@ end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.CheckReleaseGroupCost(tp,nil,1,false,nil,nil) end
 	local sg=Duel.SelectReleaseGroupCost(tp,nil,1,1,false,nil,nil)
-	e:SetLabel(sg:GetFirst():GetAttack())
+	e:SetLabel(sg:GetFirst():GetAttack()+sg:GetFirst():GetDefense())
 	Duel.Release(sg,REASON_COST)
 end
 function s.tg(e,tp,eg,ep,ev,re,r,rp,chk)

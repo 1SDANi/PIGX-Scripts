@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)>0 end
+	if chk==0 then return Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)>0 and Duel.IsPlayerCanDraw(tp,1) end
 	local sg=Duel.GetFieldGroup(tp,LOCATION_HAND,0)
 	Duel.SetOperationInfo(0,CATEGORY_HANDES,sg,#sg,0,0)
 end

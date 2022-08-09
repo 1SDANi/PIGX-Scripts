@@ -893,11 +893,12 @@ function Fusion.AddContactProc(c,group,op,sumcon,condition,sumtype,settype,setco
 	else
 		e1:SetDescription(desc)
 	end
-	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE)
+	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_DAMAGE_STEP)
 	e1:SetRange(LOCATION_EXTRA)
 	if sumtype then
 		e1:SetValue(sumtype)
 	end
+	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetCondition(Fusion.ContactCon(group,condition))
 	e1:SetTarget(Fusion.ContactTg(opc))
 	e1:SetOperation(Fusion.ContactOp(op,group))

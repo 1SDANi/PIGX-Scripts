@@ -39,9 +39,9 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 		if Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)==0 then return false end
 		if e:GetLabel()==1 then
 			e:SetLabel(0)
-			return Duel.CheckReleaseGroupCost(tp,s.cfilter,1,false,s.spcheck,nil,dg)
+			return Duel.CheckReleaseGroupCost(tp,s.cfilter,1,false,s.spcheck,nil,dg) and Duel.IsPlayerCanDraw(tp,1)
 		else
-			return Duel.IsExistingTarget(aux.TRUE,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,e:GetHandler())
+			return Duel.IsExistingTarget(aux.TRUE,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,e:GetHandler()) and Duel.IsPlayerCanDraw(tp,1)
 		end
 	end
 	if e:GetLabel()==1 then

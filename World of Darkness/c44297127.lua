@@ -28,7 +28,7 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil)
-	if g and #g>0 and Duel.SendtoGrave(g:GetFirst(),REASON_EFFECT) and g:GetFirst():IsLocation(LOCATION_GRAVE) and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
+	if g and #g>0 and Duel.SendtoGrave(g:GetFirst(),REASON_EFFECT) and g:GetFirst():IsLocation(LOCATION_GRAVE) and Duel.IsPlayerCanDraw(tp,1) and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
 		Duel.BreakEffect()
 		Duel.Draw(tp,1,REASON_EFFECT)
 		local e1=Effect.CreateEffect(e:GetHandler())

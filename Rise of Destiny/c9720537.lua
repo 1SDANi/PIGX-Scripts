@@ -27,7 +27,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp,chk)
 			ct=ct+1
 		end
 	end
-	if ct>0 and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
+	if ct>0 and Duel.IsPlayerCanDraw(tp,1) and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
 		Duel.Draw(tp,1,REASON_EFFECT)
 	end
 end

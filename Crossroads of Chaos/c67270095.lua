@@ -34,7 +34,7 @@ end
 function s.posop(e,tp,eg,ep,ev,re,r,rp)
 	local d=Duel.GetAttackTarget()
 	if d and d:IsAttackPos() and d:IsCanChangePosition() then
-		Duel.ChangePosition(d,POS_FACEUP_DEFENSE)
+		Duel.ChangePosition(d,POS_FACEUP_DEFENSE,POS_FACEDOWN_DEFENSE,POS_FACEUP_DEFENSE,POS_FACEDOWN_DEFENSE)
 	end
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)

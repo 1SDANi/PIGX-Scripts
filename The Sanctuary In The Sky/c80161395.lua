@@ -20,13 +20,11 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,LOCATION_MZONE,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
 	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_MZONE,0,1,1,nil)
-	local stats=g:GetFirst():GetAttack()+g:GetFirst():GetDefense()
 	Duel.SetTargetPlayer(tp)
-	Duel.SetTargetParam(stats)
-	Duel.SetOperationInfo(0,CATEGORY_RECOVER,nil,0,tp,stats)
+	Duel.SetTargetParam(g:GetFirst():GetAttack())
+	Duel.SetOperationInfo(0,CATEGORY_RECOVER,nil,0,tp,g:GetFirst():GetAttack())
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	local p,g=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_CARDS)
-	local stats=g:GetFirst():GetAttack()+g:GetFirst():GetDefense()
-	Duel.Recover(p,stats,REASON_EFFECT)
+	local p,lp=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
+	Duel.Recover(p,lp,REASON_EFFECT)
 end

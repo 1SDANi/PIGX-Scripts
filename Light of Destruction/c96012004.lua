@@ -30,7 +30,7 @@ function s.cn(e,tp,eg,ep,ev,re,r,rp)
 	return re:IsActiveType(TYPE_MONSTER) and ex
 end
 function s.tg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return true end
+	if chk==0 then return Duel.IsPlayerCanDraw(tp,1) end
 	Duel.SetOperationInfo(0,CATEGORY_COIN,nil,0,tp,1)
 end
 function s.op(e,tp,eg,ep,ev,re,r,rp)

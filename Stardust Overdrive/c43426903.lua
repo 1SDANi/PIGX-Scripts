@@ -22,13 +22,13 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local tc=Duel.GetAttacker()
 	if tc==e:GetHandler() then tc=Duel.GetAttackTarget() end
-	if chk==0 then return tc and tc:IsRelateToBattle() end
+	if chk==0 then return tc and tc:IsRelateToBattle() and not (tc:IsAttackBelow(0) and tc:IsDefenseBelow(0)) end
 	Duel.SetOperationInfo(0,CATEGORY_NEGATE,tc,1,0,0)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetAttacker()
 	if tc==e:GetHandler() then tc=Duel.GetAttackTarget() end
-	if tc:IsRelateToBattle() then
+	if tc:IsRelateToBattle() and not (tc:IsAttackBelow(0) and tc:IsDefenseBelow(0)) then
 		--ATK becomes 0
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)

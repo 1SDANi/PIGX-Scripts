@@ -5,6 +5,7 @@ function s.initial_effect(c)
 	--confirm
 	local e0=Effect.CreateEffect(c)
 	e0:SetDescription(aux.Stringid(id,0))
+	e0:SetProperty(EFFECT_FLAG_DAMAGE_STEP)
 	e0:SetType(EFFECT_TYPE_QUICK_O)
 	e0:SetCode(EVENT_FREE_CHAIN)
 	e0:SetRange(LOCATION_MZONE)

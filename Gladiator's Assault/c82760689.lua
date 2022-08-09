@@ -7,6 +7,7 @@ function s.initial_effect(c)
 	e1:SetCategory(CATEGORY_DRAW)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
+	e1:SetCondition(s.cn)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
 	aux.GlobalCheck(s,function()
@@ -44,6 +45,9 @@ function s.checkop(e,tp,eg,ep,ev,re,r,rp)
 		end
 	end
 end
+function s.cn(e,tp,eg,ep,ev,re,r,rp)
+	return Duel.IsPlayerCanDraw(tp,1)
+end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
@@ -55,7 +59,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterEffect(e1,tp)
 end
 function s.drcon(e,tp,eg,ep,ev,re,r,rp)
-	return s[0] or s[1]:IsExists(Card.IsSetCard,2,nil,0x18)
+	return (s[0] or s[1]:IsExists(Card.IsSetCard,2,nil,0x18)) and Duel.IsPlayerCanDraw(tp,1)
 end
 function s.drop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Draw(tp,1,REASON_EFFECT)

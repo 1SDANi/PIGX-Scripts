@@ -15,8 +15,7 @@ function s.dfilter(c,tp)
 	return c:IsLocation(LOCATION_MZONE) and c:IsFaceup() and c:IsControler(tp) and c:IsReason(REASON_BATTLE+REASON_EFFECT) and not c:IsReason(REASON_REPLACE)
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return not eg:IsContains(e:GetHandler())
-		and Duel.CheckLPCost(tp,2000) and eg:IsExists(s.dfilter,1,nil,tp) end
+	if chk==0 then return Duel.CheckLPCost(tp,2000) and eg:IsExists(s.dfilter,1,nil,tp) end
 	if Duel.SelectEffectYesNo(tp,e:GetHandler(),96) then
 		Duel.PayLPCost(tp,2000)
 		return true

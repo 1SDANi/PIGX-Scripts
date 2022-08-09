@@ -16,10 +16,15 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,nil) and
-		e:GetHandler():IsReleasable() end
+	local eg=Group.CreateGroup()
+	local hg=Duel.GetMatchingGroup(s.filter,tp,LOCATION_HAND+LOCATION_DECK,0,c,e,tp)
+	if hg and #hg==2 then
+		eg:AddCard(hg:GetFirst())
+		eg:AddCard(hg:GetNext())
+	end
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,eg) and e:GetHandler():IsReleasable() end
 	Duel.Release(e:GetHandler(),REASON_COST)
-	Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST+REASON_DISCARD)
+	Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST+REASON_DISCARD,eg)
 end
 function s.filter(c,e,tp)
 	return c:IsLevelBelow(3) and c:IsRace(RACE_DRAGON) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)

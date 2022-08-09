@@ -5,6 +5,7 @@ function s.initial_effect(c)
 	--atk
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
+	e1:SetProperty(EFFECT_FLAG_DAMAGE_STEP)
 	e1:SetType(EFFECT_TYPE_QUICK_O)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetRange(LOCATION_MZONE)

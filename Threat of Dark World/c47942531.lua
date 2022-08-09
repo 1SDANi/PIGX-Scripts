@@ -1,5 +1,5 @@
---偉大魔獣 ガーゼット
---Great Maju Garzett
+--合成魔獣 ガーゼット
+--Maju Garzett
 local s,id=GetID()
 function s.initial_effect(c)
 	local e1=Effect.CreateEffect(c)

@@ -28,10 +28,10 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local rc=eg:GetFirst()
 	for rc in aux.Next(eg) do
 		if rc:GetFlagEffect(id)==0 then
-			--Unaffected by traps
+			--Unaffected by spells
 			local e1=Effect.CreateEffect(e:GetHandler())
 			e1:SetType(EFFECT_TYPE_SINGLE)
-			e1:SetDescription(3103)
+			e1:SetDescription(3112)
 			e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE+EFFECT_FLAG_CLIENT_HINT)
 			e1:SetRange(LOCATION_MZONE)
 			e1:SetCode(EFFECT_IMMUNE_EFFECT)
@@ -43,5 +43,5 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.efilter(e,te)
-	return e:GetOwnerPlayer()~=re:GetOwnerPlayer() and te:IsActiveType(TYPE_TRAP)
+	return e:GetOwnerPlayer()~=re:GetOwnerPlayer() and te:IsActiveType(TYPE_SPELL)
 end

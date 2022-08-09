@@ -34,6 +34,6 @@ function s.filter(c,e)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if e:GetHandler():IsRelateToEffect(e) and eg and #eg>0 then
-		Duel.ChangePosition(eg,POS_FACEUP_DEFENSE)
+		Duel.ChangePosition(eg,POS_FACEUP_DEFENSE,POS_FACEDOWN_DEFENSE,POS_FACEUP_DEFENSE,POS_FACEDOWN_DEFENSE)
 	end
 end

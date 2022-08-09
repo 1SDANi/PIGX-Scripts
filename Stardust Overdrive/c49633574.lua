@@ -11,6 +11,12 @@ function s.initial_effect(c)
 	e2:SetTarget(s.tg)
 	e2:SetOperation(s.op)
 	c:RegisterEffect(e2)
+	local e3=e2:Clone()
+	e3:SetCode(EVENT_FLIP_SUMMON_SUCCESS)
+	c:RegisterEffect(e3)
+	local e4=e2:Clone()
+	e4:SetCode(EVENT_SPSUMMON_SUCCESS)
+	c:RegisterEffect(e4)
 end
 s.listed_series={0x35}
 function s.filter(c,e,tp)
@@ -23,7 +29,11 @@ function s.tg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.op(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
-	if Duel.DiscardHand(tp,aux.TRUE,1,1,REASON_EFFECT+REASON_DISCARD)>0 then
+	local eg=Group.CreateGroup()
+	eg:AddCard(c)
+	local hg=Duel.GetMatchingGroup(s.filter,tp,LOCATION_HAND,0,c,e,tp)
+	if hg and #hg==1 then eg:AddCard(hg:GetFirst()) end
+	if Duel.DiscardHand(tp,aux.TRUE,1,1,REASON_EFFECT+REASON_DISCARD,eg)>0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_HAND,0,1,1,nil,e,tp)
 		if #g>0 then

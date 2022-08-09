@@ -31,9 +31,11 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 			--Draw
 			local e1=Effect.CreateEffect(e:GetHandler())
 			e1:SetDescription(aux.Stringid(id,0))
-			e1:SetProperty(EFFECT_FLAG_CLIENT_HINT)
+			e1:SetCategory(CATEGORY_DRAW)
+			e1:SetProperty(EFFECT_FLAG_CLIENT_HINT+EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_DELAY)
 			e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 			e1:SetCode(EVENT_BATTLE_DESTROYING)
+			e1:SetCondition(s.drawcn)
 			e1:SetTarget(s.drawtg)
 			e1:SetOperation(s.drawop)
 			e1:SetReset(RESET_EVENT+RESETS_STANDARD)
@@ -42,8 +44,13 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		end
 	end
 end
+function s.drawcn(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	local bc=c:GetBattleTarget()
+	return c:IsRelateToBattle() and bc:IsLocation(LOCATION_GRAVE)
+end
 function s.drawtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return true end
+	if chk==0 then return Duel.IsPlayerCanDraw(tp,1) end
 	Duel.SetTargetPlayer(tp)
 	Duel.SetTargetParam(1)
 	Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,1)

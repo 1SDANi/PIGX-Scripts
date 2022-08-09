@@ -39,7 +39,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.Destroy(e:GetHandler(),REASON_EFFECT) then
+	if Duel.Destroy(e:GetHandler(),REASON_EFFECT) and Duel.IsPlayerCanDraw(tp,1) then
 		Duel.Draw(tp,1,REASON_EFFECT)
 	end
 end

@@ -16,10 +16,12 @@ function s.initial_effect(c)
 end
 s.listed_names={23558733}
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,nil) and
-		e:GetHandler():IsReleasable() end
+	local eg=Group.CreateGroup()
+	local hg=Duel.GetMatchingGroup(s.filter,tp,LOCATION_HAND+LOCATION_DECK,0,c,e,tp)
+	if hg and #hg==1 then eg:AddCard(hg:GetFirst()) end
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,eg) and e:GetHandler():IsReleasable() end
 	Duel.Release(e:GetHandler(),REASON_COST)
-	Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST+REASON_DISCARD)
+	Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST+REASON_DISCARD,eg)
 end
 function s.filter(c,e,tp)
 	return c:IsCode(23558733) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)

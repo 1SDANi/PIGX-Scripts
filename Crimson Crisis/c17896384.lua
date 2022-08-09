@@ -50,7 +50,7 @@ function s.drcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SendtoGrave(e:GetHandler(),REASON_COST)
 end
 function s.drtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():GetCounter(COUNTER_SPELL)>0 end
+	if chk==0 then return e:GetHandler():GetCounter(COUNTER_SPELL)>0 and Duel.IsPlayerCanDraw(tp,e:GetHandler():GetCounter(COUNTER_SPELL)) end
 	Duel.SetTargetPlayer(tp)
 	Duel.SetTargetParam(e:GetLabel())
 	Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,e:GetLabel())

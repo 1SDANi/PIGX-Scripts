@@ -33,7 +33,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.NegateActivation(ev) and re:GetHandler():IsRelateToEffect(re) then
-		Duel.Destroy(eg,REASON_EFFECT)\
+		Duel.Destroy(eg,REASON_EFFECT)
 		Duel.BreakEffect()
 		Duel.Damage(1-tp,1000,REASON_EFFECT)
 	end

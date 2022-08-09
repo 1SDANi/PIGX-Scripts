@@ -17,7 +17,7 @@ function s.initial_effect(c)
 end
 s.listed_names={CARD_METAMORPHOSIS}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler()==Duel.GetAttacker() or e:GetHandler()==Duel.GetAttackTarget() and e:GetHandler():IsRelateToEffect(e)
+	return e:GetHandler()==Duel.GetAttacker() or e:GetHandler()==Duel.GetAttackTarget() and e:GetHandler():IsRelateToEffect(e) and Duel.IsPlayerCanDraw(tp,1)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local a=Duel.GetAttacker()

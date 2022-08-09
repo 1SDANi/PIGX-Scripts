@@ -14,9 +14,6 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.filter(c)
-	return c:IsFaceup() and c:IsControlerCanBeChanged() and c:GetAttack()==0
-end
-function s.filter(c)
 	return c:IsFaceup() and (c:IsDefenseBelow(1500) or c:IsAttackBelow(1500)) and c:IsControlerCanBeChanged()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)

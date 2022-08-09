@@ -29,17 +29,7 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local rc=re:GetHandler()
 	if Duel.NegateActivation(ev) and rc:IsRelateToEffect(re) then
-		if rc:IsStatus(STATUS_ACT_FROM_HAND) then
-			rc:CancelToGrave()
-			Duel.SendtoHand(rc,nil,REASON_EFFECT)
-		else
-			if rc:IsCanTurnSet() then
-				rc:CancelToGrave()
-				Duel.ChangePosition(rc,POS_FACEDOWN)
-				rc:SetStatus(STATUS_ACTIVATE_DISABLED,false)
-				rc:SetStatus(STATUS_SET_TURN,false)
-				Duel.RaiseEvent(rc,EVENT_SSET,e,REASON_EFFECT,tp,tp,0)
-			end
-		end
+		rc:CancelToGrave()
+		Duel.SendtoHand(rc,nil,REASON_EFFECT)
 	end
 end
