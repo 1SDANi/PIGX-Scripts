@@ -24,13 +24,18 @@ function s.initial_effect(c)
 	e2:SetCategory(CATEGORY_DESTROY+CATEGORY_RECOVER+CATEGORY_SEARCH)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetCountLimit(1)
-	e2:SetCost(s.cost)
+	e2:SetCost(s.descost)
 	e2:SetTarget(s.destg)
 	e2:SetOperation(s.desop)
 	c:RegisterEffect(e2)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
+	Duel.Hint(HINT_OPSELECTED,1-tp,e:GetDescription())
+end
+function s.descost(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,e:GetHandler()) end
+	Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST+REASON_DISCARD)
 	Duel.Hint(HINT_OPSELECTED,1-tp,e:GetDescription())
 end
 function s.sumcon(e,tp,eg,ep,ev,re,r,rp)

@@ -22,6 +22,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local eg=Group.CreateGroup()
+	eg:AddCard(e:GetHandler()
 	local hg=Duel.GetMatchingGroup(s.filter,tp,LOCATION_HAND+LOCATION_DECK,0,c,e,tp)
 	if hg and #hg==1 then eg:AddCard(hg:GetFirst()) end
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,eg) end

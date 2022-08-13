@@ -37,6 +37,6 @@ end
 function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	local pe=e:GetLabelObject()
 	local atk=pe:GetValue()-1000
-	if atk<0 then atk=0 end
+	if atk>0 then atk=0 end
 	pe:SetValue(atk)
 end

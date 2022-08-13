@@ -5,30 +5,23 @@ function s.initial_effect(c)
 	--fusion material
 	Fusion.AddProcMixRep(c,true,true,s.fusionfilter,2,99)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
-	--atk up
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_DESTROY)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e1:SetProperty(EFFECT_FLAG_DELAY)
-	e1:SetCode(EVENT_SUMMON_SUCCESS)
+	e1:SetCode(EVENT_SUMMON)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetCondition(s.condition)
 	e1:SetCost(s.cost)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
-	local e2=e1:Clone()
-	e2:SetCode(EVENT_SPSUMMON_SUCCESS)
-	c:RegisterEffect(e2)
 	local e3=e1:Clone()
-	e3:SetCode(EVENT_FLIP_SUMMON_SUCCESS)
+	e3:SetCode(EVENT_FLIP_SUMMON)
 	c:RegisterEffect(e3)
 end
 s.material_attribute={ATTRIBUTE_EARTH}
-function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetCurrentChain()==0
-end
 function s.cfilter(c)
 	return c:IsSetCard(0x2a) and not c:IsStatus(STATUS_BATTLE_DESTROYED)
 end

@@ -2,19 +2,18 @@
 --Horn of Heaven
 local s,id=GetID()
 function s.initial_effect(c)
-	--Activate(summon)
+	--Activate
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_DISABLE_SUMMON+CATEGORY_DESTROY)
+	e1:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DAMAGE_CAL)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
-	e1:SetCode(EVENT_SPSUMMON)
-	e1:SetCondition(s.condition)
-	e1:SetCost(s.cost)
+	e1:SetCode(EVENT_SUMMON)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
-end
-function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetCurrentChain()==0
+	local e2=e1:Clone()
+	e2:SetCode(EVENT_FLIP_SUMMON)
+	c:RegisterEffect(e2)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if Duel.IsPlayerAffectedByEffect(tp,EFFECT_DISCARD_COST_CHANGE) then return true end

@@ -54,9 +54,6 @@ function s.initial_effect(c)
 	local e6=e5:Clone()
 	e6:SetCode(EVENT_FLIP_SUMMON)
 	c:RegisterEffect(e6)
-	local e7=e5:Clone()
-	e7:SetCode(EVENT_SPSUMMON)
-	c:RegisterEffect(e7)
 end
 s.material_race={RACE_MACHINE}
 function s.cn1(e,tp,eg,ep,ev,re,r,rp)
@@ -72,7 +69,7 @@ function s.cn4(e,tp,eg,ep,ev,re,r,rp)
 	return tp~=Duel.GetTurnPlayer()
 end
 function s.cn5(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetCurrentChain()==0 and ep~=tp
+	return ep~=tp
 end
 function s.cs1(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,2,e:GetHandler()) end

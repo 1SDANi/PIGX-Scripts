@@ -5,18 +5,18 @@ function s.initial_effect(c)
 	--Activate(summon)
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_DISABLE_SUMMON+CATEGORY_DESTROY)
+	e1:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DAMAGE_CAL)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
-	e1:SetCode(EVENT_SPSUMMON)
-	e1:SetCondition(s.condition)
+	e1:SetCode(EVENT_SUMMON)
 	e1:SetCost(s.cost)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
+	local e2=e1:Clone()
+	e2:SetCode(EVENT_FLIP_SUMMON)
+	c:RegisterEffect(e2)
 end
 s.listed_names={36623431}
-function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetCurrentChain()==0
-end
 function s.cfilter(c)
 	return c:IsCode(36623431) and not c:IsPublic()
 end

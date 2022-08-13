@@ -17,23 +17,18 @@ function s.filter(c)
 	return c:IsSetCard(0x19) and c:IsAbleToDeck()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:GetLocation()==LOCATION_GRAVE and chkc:GetControler()==tp and s.filter(chkc) end
-	if chk==0 then return Duel.IsPlayerCanDraw(tp,2) 
-		and Duel.IsExistingTarget(s.filter,tp,LOCATION_GRAVE,0,3,nil) end
+	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_GRAVE) and s.filter(chkc) end
+	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,LOCATION_GRAVE,0,3,nil) and Duel.IsPlayerCanDraw(tp,2) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
 	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_GRAVE,0,3,3,nil)
-	Duel.SetOperationInfo(0,CATEGORY_TODECK,g,#g,0,0)
-	Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,1)
+	Duel.SetOperationInfo(0,CATEGORY_TODECK,g,3,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,2)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	local tg=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS)
-	if not tg or tg:FilterCount(Card.IsRelateToEffect,nil,e)~=3 then return end
-	Duel.SendtoDeck(tg,nil,0,REASON_EFFECT)
-	local g=Duel.GetOperatedGroup()
-	if g:IsExists(Card.IsLocation,1,nil,LOCATION_DECK) then Duel.ShuffleDeck(tp) end
-	local ct=g:FilterCount(Card.IsLocation,nil,LOCATION_DECK+LOCATION_EXTRA)
-	if ct==3 then
-		Duel.BreakEffect()
+	local g=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS)
+	local sg=g:Filter(Card.IsRelateToEffect,nil,e)
+	if #sg>0 and Duel.SendtoDeck(sg,nil,2,REASON_EFFECT) then
+		Duel.ShuffleDeck(tp)
 		Duel.Draw(tp,2,REASON_EFFECT)
 	end
 end

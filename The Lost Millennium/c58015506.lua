@@ -10,8 +10,9 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
-	e2:SetProperty(EFFECT_FLAG_DELAY)
+	e2:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_DAMAGE_STEP)
 	e2:SetCode(EVENT_DRAW)
+	e2:SetCondition(s.condition)
 	e2:SetOperation(s.activate)
 	c:RegisterEffect(e2)
 end
@@ -36,7 +37,9 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
 	Duel.Draw(p,d,REASON_EFFECT)
 end
+function s.condition(e,tp,eg,ep,ev,re,r,rp)
+	return ep~=e:GetOwnerPlayer()
+end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	if ep==e:GetOwnerPlayer() then return end
 	Duel.ConfirmCards(1-ep,eg)
 end

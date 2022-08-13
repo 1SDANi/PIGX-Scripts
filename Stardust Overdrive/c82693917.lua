@@ -57,6 +57,9 @@ end
 function s.spfilter(c,e,tp)
 	return c:IsSetCard(0x31) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
+function s.filter(c)
+	return c:IsType(TYPE_SPELL+TYPE_TRAP)
+end
 function s.tg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsOnField() and s.filter(chkc) and chkc~=e:GetHandler() end
 	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,0,LOCATION_ONFIELD,1,e:GetHandler()) end

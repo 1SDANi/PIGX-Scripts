@@ -11,9 +11,9 @@ function s.initial_effect(c)
 	--level
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
-	e2:SetCode(EFFECT_UPDATE_LEVEL)
+	e2:SetCode(EFFECT_CHANGE_LEVEL)
 	e2:SetRange(LOCATION_SZONE)
 	e2:SetTargetRange(0,LOCATION_MZONE)
-	e2:SetValue(-1)
+	e2:SetValue(1)
 	c:RegisterEffect(e2)
 end

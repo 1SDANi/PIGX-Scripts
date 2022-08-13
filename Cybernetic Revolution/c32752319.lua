@@ -25,6 +25,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 s.material_setcode={0x16}
+s.material_race={RACE_WARRIOR}
 s.listed_names={7602840}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsLocation(LOCATION_GRAVE) and (r&REASON_EFFECT+REASON_BATTLE)~=0

@@ -11,6 +11,7 @@ function s.initial_effect(c)
 	--add counter
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
+	e2:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_DAMAGE_STEP)
 	e2:SetRange(LOCATION_SZONE)
 	e2:SetCode(EVENT_DESTROYED)
 	e2:SetCondition(s.ctcon)
@@ -52,7 +53,8 @@ function s.initial_effect(c)
 end
 s.counter_place_list={0x18}
 function s.ctfilter(c,tp)
-	return c:IsPreviousLocation(LOCATION_MZONE) and c:IsPreviousControler(tp) and c:IsReason(REASON_DESTROY) and c:IsReason(REASON_BATTLE+REASON_EFFECT) and c:IsLocation(LOCATION_GRAVE)
+	return c:IsPreviousLocation(LOCATION_MZONE) and c:IsPreviousControler(tp) and c:IsReason(REASON_DESTROY) and
+		c:IsReason(REASON_BATTLE+REASON_EFFECT) and c:IsLocation(LOCATION_GRAVE)
 end
 function s.ctcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.ctfilter,1,nil,tp)

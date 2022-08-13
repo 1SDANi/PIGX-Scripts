@@ -14,9 +14,6 @@ function s.initial_effect(c)
 	local e2=e1:Clone()
 	e2:SetCode(EVENT_FLIP_SUMMON)
 	c:RegisterEffect(e2)
-	local e3=e1:Clone()
-	e3:SetCode(EVENT_SPSUMMON)
-	c:RegisterEffect(e3)
 end
 function s.cfilter(c,rc)
 	return c:IsFaceup() and c:IsRace(rc)
@@ -25,7 +22,7 @@ function s.filter(c)
 	return Duel.IsExistingMatchingCard(s.cfilter,0,LOCATION_MZONE,LOCATION_MZONE,1,nil,c:GetRace())
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetCurrentChain(true)==0 and eg:IsExists(s.filter,1,nil)
+	return and eg:IsExists(s.filter,1,nil)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
@@ -33,8 +30,12 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_DISABLE_SUMMON,g,#g,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,#g,0,0)
 end
+function s.dfilter(c,race)
+	return c:IsFaceup() and c:IsRace(race)
+end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=eg:Filter(s.filter,nil)
 	Duel.NegateSummon(g)
+	local dg=Duel.GetMatchingGroup(s.dfilter,tp,0,LOCATION_MZONE,nil,g:GetRace())
 	Duel.Destroy(g,REASON_EFFECT)
 end

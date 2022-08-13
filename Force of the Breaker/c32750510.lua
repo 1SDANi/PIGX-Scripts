@@ -72,7 +72,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		e2:SetType(EFFECT_TYPE_SINGLE)
 		e2:SetCode(EFFECT_CANNOT_CHANGE_POSITION)
 		e2:SetReset(RESET_EVENT+RESETS_STANDARD)
-		c:RegisterEffect(e2)
+		tc:RegisterEffect(e2)
 	end
 end
 s.counter_list={COUNTER_ICE}

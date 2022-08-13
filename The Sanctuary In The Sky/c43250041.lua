@@ -5,7 +5,7 @@ function s.initial_effect(c)
 	--Activate
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_RECOVER)
-	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
+	e1:SetProperty(EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DELAY)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_ATTACK_ANNOUNCE)
 	e1:SetCondition(s.condition)

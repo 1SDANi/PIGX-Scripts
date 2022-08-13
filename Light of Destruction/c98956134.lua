@@ -22,6 +22,10 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	local ex,tg,tc=Duel.GetOperationInfo(ev,CATEGORY_DESTROY)
 	return ex and tg~=nil and tc+tg:FilterCount(s.cfilter,nil,tp)-#tg>0
 end
+function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,e:GetHandler()) end
+	Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST+REASON_DISCARD)
+end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	Duel.SetOperationInfo(0,CATEGORY_NEGATE,eg,1,0,0)

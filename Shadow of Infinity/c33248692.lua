@@ -13,7 +13,6 @@ function s.initial_effect(c)
 	e2:SetRange(LOCATION_SZONE)
 	e2:SetCode(EVENT_DESTROYED)
 	e2:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_DAMAGE_STEP)
-	e1:SetCondition(s.condition)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e2)
@@ -21,16 +20,13 @@ end
 function s.filter(c,tp)
 	return c:IsPreviousControler(tp) and c:IsLocation(LOCATION_GRAVE) and c:IsReason(REASON_BATTLE+REASON_EFFECT) and c:IsReason(REASON_DESTROY)
 end
-function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return eg and #eg==1 and eg:IsExists(s.filter,1,nil,tp)
-end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return true end
-	local rec=eg:Filter(s.filter,nil,tp):GetFirst():GetAttack()
+	if chk==0 then return eg and #eg==1 and eg:IsExists(s.filter,1,nil,tp) end
+	local rec=eg:GetFirst():GetAttack()
 	if rec<0 then rec=0 end
 	Duel.SetTargetPlayer(tp)
-	Duel.SetTargetParam(rec*4)
-	Duel.SetOperationInfo(0,CATEGORY_RECOVER,nil,0,tp,rec*4)
+	Duel.SetTargetParam(rec)
+	Duel.SetOperationInfo(0,CATEGORY_RECOVER,nil,0,tp,rec)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)

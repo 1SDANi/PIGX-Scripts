@@ -225,22 +225,23 @@ function s.regcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION)
 end
 function s.regop(e,tp,eg,ep,ev,re,r,rp)
-	if e:GetHandler():GetMaterial():IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_EARTH) then
+	local c=e:GetHandler()
+	if c:GetMaterial():IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_EARTH) then
 		c:RegisterFlagEffect(0,RESET_EVENT+RESETS_STANDARD,EFFECT_FLAG_CLIENT_HINT,1,0,aux.Stringid(id,6))
 	end
-	if e:GetHandler():GetMaterial():IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_WIND) then
+	if c:GetMaterial():IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_WIND) then
 		c:RegisterFlagEffect(0,RESET_EVENT+RESETS_STANDARD,EFFECT_FLAG_CLIENT_HINT,1,0,aux.Stringid(id,7))
 	end
-	if e:GetHandler():GetMaterial():IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_FIRE) then
+	if c:GetMaterial():IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_FIRE) then
 		c:RegisterFlagEffect(0,RESET_EVENT+RESETS_STANDARD,EFFECT_FLAG_CLIENT_HINT,1,0,aux.Stringid(id,8))
 	end
-	if e:GetHandler():GetMaterial():IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_WATER) then
+	if c:GetMaterial():IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_WATER) then
 		c:RegisterFlagEffect(0,RESET_EVENT+RESETS_STANDARD,EFFECT_FLAG_CLIENT_HINT,1,0,aux.Stringid(id,9))
 	end
-	if e:GetHandler():GetMaterial():IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_LIGHT) then
+	if c:GetMaterial():IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_LIGHT) then
 		c:RegisterFlagEffect(0,RESET_EVENT+RESETS_STANDARD,EFFECT_FLAG_CLIENT_HINT,1,0,aux.Stringid(id,10))
 	end
-	if e:GetHandler():GetMaterial():IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_DARK) then
+	if c:GetMaterial():IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_DARK) then
 		c:RegisterFlagEffect(0,RESET_EVENT+RESETS_STANDARD,EFFECT_FLAG_CLIENT_HINT,1,0,aux.Stringid(id,11))
 	end
 end

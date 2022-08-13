@@ -38,7 +38,7 @@ end
 s.roll_dice=true
 s.listed_names={35975813}
 function s.dfilter(c,tp)
-	return c:IsFaceup() and c:IsCode(35975813) and not c:IsReason(REASON_REPLACE) and c:IsControler(tp)
+	return c:IsFaceup() and c:IsCode(35975813) and not c:IsReason(REASON_REPLACE) and c:IsControler(tp) and c:IsReason(REASON_BATTLE+REASON_EFFECT)
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return not eg:IsContains(e:GetHandler())
@@ -49,7 +49,7 @@ function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.value(e,c)
 	return c:IsLocation(LOCATION_MZONE) and c:IsFaceup() and c:IsCode(35975813)
-		and not c:IsReason(REASON_REPLACE) and c:IsControler(e:GetHandlerPlayer())
+		and not c:IsReason(REASON_REPLACE) and c:IsControler(e:GetHandlerPlayer()) and c:IsReason(REASON_BATTLE+REASON_EFFECT)
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Destroy(e:GetHandler(),REASON_EFFECT+REASON_REPLACE)

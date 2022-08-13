@@ -20,6 +20,9 @@ end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(s.cfilter,tp,0,LOCATION_ONFIELD,3,nil)
 end
+function s.filter(c)
+	return c:IsType(TYPE_SPELL+TYPE_TRAP)
+end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsOnField() and s.filter(chkc) and chkc~=e:GetHandler() end
 	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,e:GetHandler()) end

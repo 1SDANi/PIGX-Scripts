@@ -2,7 +2,7 @@
 --Protector of the Grave
 local s,id=GetID()
 function s.initial_effect(c)
-	--remove
+	--shuffle
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetProperty(EFFECT_FLAG_SET_AVAILABLE+EFFECT_FLAG_IGNORE_RANGE+EFFECT_FLAG_IGNORE_IMMUNE)

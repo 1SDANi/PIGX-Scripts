@@ -7,14 +7,10 @@ function s.initial_effect(c)
 	e1:SetCategory(CATEGORY_DISABLE_SUMMON+CATEGORY_REMOVE)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_SUMMON)
-	e1:SetCondition(s.condition1)
 	e1:SetCost(s.cost)
 	e1:SetTarget(s.target1)
 	e1:SetOperation(s.activate1)
 	c:RegisterEffect(e1)
-	local e12=e1:Clone()
-	e12:SetCode(EVENT_SPSUMMON)
-	c:RegisterEffect(e12)
 	local e13=e1:Clone()
 	e13:SetCode(EVENT_FLIP_SUMMON)
 	c:RegisterEffect(e13)
@@ -31,9 +27,6 @@ end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,e:GetHandler()) end
 	Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST+REASON_DISCARD)
-end
-function s.condition1(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetCurrentChain(true)==0
 end
 function s.target1(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return eg:GetFirst():IsAbleToRemove() end

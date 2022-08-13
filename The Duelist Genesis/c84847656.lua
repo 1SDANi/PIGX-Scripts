@@ -22,5 +22,6 @@ function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	else return false end
 end
 function s.value(e,c)
-	return c:IsLocation(LOCATION_MZONE) and c:IsFaceup() and c:IsControler(e:GetHandler():GetControler()) and c:IsReason(REASON_BATTLE+REASON_EFFECT) and not c:IsReason(REASON_REPLACE)
+	return c:IsLocation(LOCATION_MZONE) and c:IsControler(e:GetHandler():GetControler()) and
+		c:IsReason(REASON_BATTLE+REASON_EFFECT) and not c:IsReason(REASON_REPLACE)
 end

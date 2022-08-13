@@ -44,12 +44,12 @@ function s.tg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	local ct=Duel.GetFieldGroupCount(tp,0,LOCATION_ONFIELD)
 	Duel.SetTargetPlayer(1-tp)
+	Duel.SetTargetParam(ct*500)
 	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,ct*500)
 end
 function s.op(e,tp,eg,ep,ev,re,r,rp)
-	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
-	local ct=Duel.GetFieldGroupCount(tp,0,LOCATION_ONFIELD)
-	Duel.Damage(p,ct*500,REASON_EFFECT)
+	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
+	Duel.Damage(p,d,REASON_EFFECT)
 end
 function s.atlimit(e,c)
 	return c~=e:GetHandler()

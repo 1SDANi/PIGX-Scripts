@@ -21,7 +21,6 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,dam)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
-	local dam=Duel.GetFieldGroupCount(tp,LOCATION_MZONE,LOCATION_MZONE)*500
-	Duel.Damage(p,dam,REASON_EFFECT)
+	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
+	Duel.Damage(p,d,REASON_EFFECT)
 end
