@@ -1,5 +1,5 @@
 --コアキメイル・マキシマム
---Koa'ki Meiru Maximus
+--Core Chimera Maximus
 local s,id=GetID()
 function s.initial_effect(c)
 	--destroy
@@ -35,6 +35,7 @@ function s.initial_effect(c)
 	e2:SetOperation(s.operation)
 	c:RegisterEffect(e2)
 end
+s.listed_series={0x1d}
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,e:GetHandler()) end
 	Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST+REASON_DISCARD)
@@ -54,12 +55,11 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.spfilter(c)
-	return c:IsDiscardable() and c:HasLevel() and c:IsAttribute(ATTRIBUTE_DIVINE)
+	return c:IsDiscardable() c:IsSetCard(0x1d)
 end
 function s.spcs(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND,0,1,e:GetHandler()) end
 	Duel.DiscardHand(tp,s.spfilter,1,1,REASON_COST+REASON_DISCARD,e:GetHandler())
-	local g=Duel.GetOperatedGroup()
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()

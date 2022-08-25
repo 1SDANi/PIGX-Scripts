@@ -59,8 +59,8 @@ function s.condition(e)
 	return e:GetHandler():GetFlagEffectLabel(36690018)==0
 end
 function s.filter(c,e,tp)
-	return c:IsLocation(LOCATION_GRAVE) and c:IsReason(REASON_BATTLE+REASON_EFFECT) and
-		c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP) and c:IsPreviousControler(tp)
+	return c:IsLocation(LOCATION_GRAVE) and c:IsReason(REASON_BATTLE+REASON_EFFECT) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP) and
+		c:IsPreviousControler(tp) and c:IsPreviousLocation(LOCATION_MZONE)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then

@@ -25,7 +25,7 @@ function s.initial_effect(c)
 end
 s.listed_names={47693640}
 function s.filter(c,e,tp)
-	return c:IsRace(RACE_ZOMBIE) and c:IsLevelBelow(3) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsLevelBelow(3) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0

@@ -16,18 +16,6 @@ function s.initial_effect(c)
 	e3:SetOperation(s.drop)
 	c:RegisterEffect(e3)
 end
-function s.descon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetTurnPlayer()==tp
-end
-function s.desop(e,tp,eg,ep,ev,re,r,rp)
-	local c=e:GetHandler()
-	local ct=c:GetTurnCounter()
-	ct=ct+1
-	c:SetTurnCounter(ct)
-	if ct==3 then
-		Duel.Destroy(c,REASON_EFFECT)
-	end
-end
 function s.drcon(e,tp,eg,ep,ev,re,r,rp)
 	local ec=eg:GetFirst()
 	local bc=ec:GetBattleTarget()

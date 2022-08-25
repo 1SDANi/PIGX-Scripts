@@ -16,5 +16,5 @@ function s.target(e,c)
 	return c~=e:GetHandler() and c:IsSetCard(0x22)
 end
 function s.valcon(e,re,r,rp)
-	return (r&REASON_BATTLE)~=0
+	return (r&REASON_BATTLE)~=0 or (r&REASON_EFFECT)~=0
 end

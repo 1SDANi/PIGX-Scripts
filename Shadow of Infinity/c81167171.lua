@@ -14,7 +14,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x8}
 function s.cfilter(c,tp)
-	return c:IsReason(REASON_BATTLE+REASON_EFFECT) and c:IsLocation(LOCATION_GRAVE) and c:IsPreviousControler(tp) and c:IsSetCard(0x8)
+	return c:IsReason(REASON_BATTLE+REASON_EFFECT) and c:IsLocation(LOCATION_GRAVE) and c:IsPreviousControler(tp) and c:IsSetCard(0x8) and c:IsPreviousLocation(LOCATION_MZONE)
 end
 function s.cn(e,tp,eg,ep,ev,re,r,rp)
 	return eg and eg:IsExists(s.cfilter,1,nil,tp)

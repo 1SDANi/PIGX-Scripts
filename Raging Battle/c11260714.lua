@@ -1,5 +1,5 @@
 --堕天使スペルビア
---Darklord Superbia
+--Fallen Angel Belias
 local s,id=GetID()
 function s.initial_effect(c)
 	--Special Summon 1 Fairy from your GY

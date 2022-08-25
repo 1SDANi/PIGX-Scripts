@@ -19,8 +19,7 @@ function s.initial_effect(c)
 end
 s.listed_names={27288416}
 function s.cfilter1(c,tp)
-	return c:IsPreviousLocation(LOCATION_MZONE) and c:IsPreviousPosition(POS_FACEUP)
-		and c:IsPreviousControler(tp) and c:IsRace(RACE_FAIRY)
+	return c:IsPreviousLocation(LOCATION_MZONE) and c:IsPreviousPosition(POS_FACEUP) and c:IsPreviousControler(tp) and c:IsRace(RACE_FAIRY)
 end
 function s.cfilter2(c)
 	return c:IsRace(RACE_FAIRY) and c:IsType(TYPE_NORMAL) and c:IsLevel(1) and c:IsFaceup()
@@ -37,7 +36,7 @@ function s.regop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_UPDATE_ATTACK)
 		e1:SetValue(3000)
-		e1:SetReset(RESET_EVENT+RESETS_STANDARD)
+		e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
 		tc:RegisterEffect(e1)
 		local e2=e1:Clone()
 		e2:SetCode(EFFECT_UPDATE_DEFENSE)

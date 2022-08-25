@@ -10,9 +10,12 @@ function s.initial_effect(c)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
 end
+function s.filter(c)
+	return c:IsType(TYPE_FUSION) and c:IsFaceup()
+end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.CheckReleaseGroupCost(tp,Card.IsType,1,false,nil,nil,TYPE_FUSION) end
-	local g=Duel.SelectReleaseGroupCost(tp,Card.IsType,1,1,false,nil,nil,TYPE_FUSION)
+	if chk==0 then return Duel.CheckReleaseGroupCost(tp,s.filter,1,false,nil,nil) end
+	local g=Duel.SelectReleaseGroupCost(tp,s.filter,1,1,false,nil,nil)
 	Duel.Release(g,REASON_COST)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)

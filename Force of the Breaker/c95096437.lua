@@ -1,4 +1,4 @@
-
+--Secrets of the Phantom Thief
 local s,id=GetID()
 function s.initial_effect(c)
 	aux.AddEquipProcedure(c)
@@ -6,10 +6,12 @@ function s.initial_effect(c)
 	e1:SetCategory(CATEGORY_HANDES)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
+	e1:SetProperty(EFFECT_FLAG_DELAY)
 	e1:SetCode(EVENT_BATTLE_DAMAGE)
 	e1:SetCondition(s.condition)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.operation)
+	c:RegisterEffect(e1)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return ep~=tp and eg:GetFirst()==e:GetHandler():GetEquipTarget()
