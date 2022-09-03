@@ -31,5 +31,5 @@ function s.atktg(e,c)
 	return c:IsAttribute(ATTRIBUTE_LIGHT) and c~=e:GetHandler()
 end
 function s.atkval(e,c)
-	return Duel.GetMatchingGroupCount(Card.IsAttribute,e:GetHandlerPlayer(),LOCATION_GRAVE,0,nil,ATTRIBUTE_LIGHT)*500
+	return Duel.GetMatchingGroupCount(Card.IsAttribute,e:GetHandlerPlayer(),LOCATION_GRAVE,0,nil,ATTRIBUTE_LIGHT)*200
 end

@@ -37,6 +37,18 @@ function s.initial_effect(c)
 	e5:SetTarget(s.desreptg)
 	e5:SetOperation(s.desrepop)
 	c:RegisterEffect(e5)
+	--atkup
+	local e4=Effect.CreateEffect(c)
+	e4:SetType(EFFECT_TYPE_FIELD)
+	e4:SetCode(EFFECT_UPDATE_ATTACK)
+	e4:SetRange(LOCATION_FZONE)
+	e4:SetTargetRange(LOCATION_MZONE,LOCATION_MZONE)
+	e4:SetTarget(aux.TargetBoolFunction(Card.IsSetCard,0x38))
+	e4:SetValue(s.atkval)
+	c:RegisterEffect(e4)
+	local e6=e4:Clone()
+	e6:SetCode(EFFECT_UPDATE_DEFENSE)
+	c:RegisterEffect(e6)
 end
 s.listed_series={0x19}
 function s.repfilter(c,tp)

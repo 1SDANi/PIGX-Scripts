@@ -27,7 +27,7 @@ function s.regop(e,tp,eg,ep,ev,re,r,rp)
 		e3:SetCode(EFFECT_CANNOT_ACTIVATE)
 		e3:SetRange(LOCATION_MZONE)
 		e3:SetTargetRange(0,1)
-		e3:SetValue(s.actlimit)
+		e3:SetValue(s.aclimit)
 		e3:SetCondition(s.actcon)
 		c:RegisterEffect(e3)
 		c:RegisterFlagEffect(0,RESET_EVENT+RESETS_STANDARD,EFFECT_FLAG_CLIENT_HINT,1,0,aux.Stringid(id,0))
@@ -96,6 +96,12 @@ function s.regop(e,tp,eg,ep,ev,re,r,rp)
 		c:RegisterEffect(e1)
 		c:RegisterFlagEffect(0,RESET_EVENT+RESETS_STANDARD,EFFECT_FLAG_CLIENT_HINT,1,0,aux.Stringid(id,5))
 	end
+end
+function s.actcon(e)
+	return Duel.GetAttacker()==e:GetHandler()
+end
+function s.aclimit(e,re,tp)
+	return re:IsActiveType(TYPE_MONSTER) or re:IsHasType(EFFECT_TYPE_ACTIVATE)
 end
 function s.tdtarget(e,c)
 	return c:IsAbleToDeck()

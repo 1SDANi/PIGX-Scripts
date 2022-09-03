@@ -50,8 +50,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x21}
 function s.efilter(e,re,rp)
-	return (re:GetHandler():IsType(TYPE_SPELL) or re:GetHandler():IsType(TYPE_TRAP))
-		and aux.tgoval(e,re,rp)
+	return (re:GetHandler():IsType(TYPE_SPELL) or re:GetHandler():IsType(TYPE_TRAP)) and aux.tgoval(e,re,rp)
 end
 function s.nofieldcon(e)
 	return not Duel.IsExistingMatchingCard(Card.IsFaceup,0,LOCATION_FZONE,LOCATION_FZONE,1,nil)

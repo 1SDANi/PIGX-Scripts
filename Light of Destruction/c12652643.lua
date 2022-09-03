@@ -44,6 +44,9 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	e3:SetTargetRange(0,1)
 	Duel.RegisterEffect(e3,tp)
 end
+function s.aclimit(e,re,tp)
+	return re:IsActiveType(TYPE_MONSTER) or re:IsHasType(EFFECT_TYPE_ACTIVATE)
+end
 function s.cond(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION)
 end

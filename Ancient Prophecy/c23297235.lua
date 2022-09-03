@@ -16,7 +16,7 @@ function s.initial_effect(c)
 end
 s.listed_names={id}
 function s.filter(c,e,tp)
-	return (c:IsDefense(0) or c:IsAttack()) and c:IsAttribute(ATTRIBUTE_FIRE) and c:GetCode()~=id and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return (c:IsDefense(0) or c:IsAttack(0)) and c:GetCode()~=id and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0

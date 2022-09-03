@@ -73,9 +73,9 @@ function s.cfilter(c)
 	return c:IsType(TYPE_MONSTER) and c:IsCode(CARD_STARDUST_DRAGON) and c:IsAbleToRemoveAsCost()
 end
 function s.spcs(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND+LOCATION_DECK,0,1,e:GetHandler()) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_EXTRA,0,1,e:GetHandler()) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local cg=Duel.SelectMatchingCard(tp,s.cfilter,LOCATION_HAND+LOCATION_DECK,0,1,1,e:GetHandler())
+	local cg=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_EXTRA,0,1,1,e:GetHandler())
 	Duel.Remove(cg,POS_FACEUP,REASON_COST)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)

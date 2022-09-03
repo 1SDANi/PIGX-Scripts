@@ -25,7 +25,7 @@ function s.actcon(e)
 	return Duel.GetAttacker()==e:GetHandler()
 end
 function s.aclimit(e,re,tp)
-	return re:IsActiveType(TYPE_SPELL+TYPE_TRAP)
+	return re:IsActiveType(TYPE_MONSTER) or re:IsHasType(EFFECT_TYPE_ACTIVATE)
 end
 function s.atcon(e,tp,eg,ep,ev,re,r,rp)
 	return aux.bdogcon(e,tp,eg,ep,ev,re,r,rp) and e:GetHandler():CanChainAttack()

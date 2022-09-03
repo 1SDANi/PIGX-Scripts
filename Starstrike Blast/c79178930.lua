@@ -1,5 +1,7 @@
 --時限カラクリ爆弾
 --Karakuri Klock
+local s,id=GetID()
+function s.initial_effect(c)
 	--Activate
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_DESTROY)
@@ -29,5 +31,3 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Destroy(g,REASON_EFFECT)
 	end
 end
-local s,id=GetID()
-function s.initial_effect(c)

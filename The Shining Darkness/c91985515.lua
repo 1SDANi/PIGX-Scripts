@@ -13,10 +13,13 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 s.listed_series={0x1d}
+function s.cfilter(c)
+	return c:IsSetCard(0x1d) and c:IsFaceup()
+end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.CheckReleaseGroupCost(tp,nil,1,false,nil,nil) end
-	local g=Duel.SelectReleaseGroupCost(tp,nil,1,1,false,nil,nil)
-	Duel.Release(g,REASON_COST)
+	if chk==0 then return Duel.CheckReleaseGroupCost(tp,cfilter,1,false,nil,nil) end
+	local sg=Duel.SelectReleaseGroupCost(tp,s.cfilter,1,1,false,nil,nil)
+	Duel.Release(sg,REASON_COST)
 end
 function s.filter(c)
 	return c:IsSetCard(0x1d) and c:IsAbleToHand()
