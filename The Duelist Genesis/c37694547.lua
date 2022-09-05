@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	e2:SetCode(EFFECT_DECREASE_TRIBUTE)
 	e2:SetRange(LOCATION_FZONE)
 	e2:SetTargetRange(LOCATION_HAND,LOCATION_HAND)
-	e2:SetTarget(aux.TargetBoolFunction(Card.IsSetCard,0x7))
+	e2:SetTarget(aux.TargetBoolFunction(Card.IsRace,RACE_MACHINE))
 	e2:SetValue(0x1)
 	c:RegisterEffect(e2)
 	--special summon

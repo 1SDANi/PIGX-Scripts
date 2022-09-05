@@ -343,6 +343,10 @@ function Fusion.BanishMaterial(e,tc,tp,sg)
 	Duel.Remove(sg,POS_FACEUP,REASON_EFFECT+REASON_MATERIAL+REASON_FUSION)
 	sg:Clear()
 end
+function Fusion.ReturnMaterial(e,tc,tp,sg)
+	Duel.SendtoGrave(sg,POS_FACEUP,REASON_EFFECT+REASON_RETURN+REASON_MATERIAL+REASON_FUSION)
+	sg:Clear()
+end
 function Fusion.GraveMaterial(e,tc,tp,sg)
 	Duel.SendtoGrave(sg,REASON_EFFECT+REASON_MATERIAL+REASON_FUSION)
 	sg:Clear()

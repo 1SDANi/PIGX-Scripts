@@ -1,22 +1,35 @@
 --Malefic World
 local s,id=GetID()
 function s.initial_effect(c)
+	--search
+	local e0=Effect.CreateEffect(c)
+	e0:SetDescription(aux.Stringid(id,0))
+	e0:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
+	e0:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
+	e0:SetCode(EVENT_PREDRAW)
+	e0:SetRange(LOCATION_FZONE)
+	e0:SetCondition(s.condition)
+	e0:SetTarget(s.target)
+	e0:SetOperation(s.operation)
+	c:RegisterEffect(e0)
 	--Activate
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	c:RegisterEffect(e1)
-	--search
+	--Atk
 	local e2=Effect.CreateEffect(c)
-	e2:SetDescription(aux.Stringid(id,0))
-	e2:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
-	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
-	e2:SetCode(EVENT_PREDRAW)
+	e2:SetType(EFFECT_TYPE_FIELD)
+	e2:SetCode(EFFECT_UPDATE_ATTACK)
 	e2:SetRange(LOCATION_FZONE)
-	e2:SetCondition(s.condition)
-	e2:SetTarget(s.target)
-	e2:SetOperation(s.operation)
+	e2:SetTargetRange(LOCATION_MZONE,LOCATION_MZONE)
+	e2:SetTarget(aux.TargetBoolFunction(Card.IsType,TYPE_RITUAL))
+	e2:SetValue(1000)
 	c:RegisterEffect(e2)
+	--Def
+	local e3=e2:Clone()
+	e3:SetCode(EFFECT_UPDATE_DEFENSE)
+	c:RegisterEffect(e3)
 end
 s.listed_series={0x23}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)

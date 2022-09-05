@@ -15,7 +15,6 @@ function s.initial_effect(c)
 	local e3=e1:Clone()
 	e3:SetCode(EFFECT_NO_BATTLE_DAMAGE)
 	c:RegisterEffect(e3)
-	--dam
 	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_SINGLE)
 	e4:SetCode(EFFECT_AVOID_BATTLE_DAMAGE)

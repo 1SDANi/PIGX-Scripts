@@ -42,7 +42,8 @@ function s.tg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 end
 function s.op(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetTargetCards(e)
-	if g and #g>0 then
-		Duel.Destroy(g,REASON_EFFECT)
+	local sg=g:Filter(Card.IsRelateToEffect,nil,e)
+	if sg and #sg>0 then
+		Duel.Destroy(sg,REASON_EFFECT)
 	end
 end

@@ -15,7 +15,7 @@ function s.initial_effect(c)
 end
 s.listed_names={68505803}
 function s.filter(c,e,tp)
-	return c:IsCode(0x25) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsCode(68505803) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.filter(chkc,e,tp) end

@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	e5:SetRange(LOCATION_FZONE)
 	e5:SetCode(EFFECT_EXTRA_SUMMON_COUNT)
 	e5:SetTargetRange(LOCATION_HAND+LOCATION_MZONE,LOCATION_HAND+LOCATION_MZONE)
-	e5:SetTarget(aux.TargetBoolFunction(Card.IsSetCard,0x7))
+	e5:SetTarget(aux.TargetBoolFunction(Card.IsRace,RACE_MACHINE))
 	c:RegisterEffect(e5)
 	aux.GlobalCheck(s,function()
 		--summon proc

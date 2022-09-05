@@ -2,12 +2,13 @@
 --The Dark Phoenix of Nephthys
 local s,id=GetID()
 function s.initial_effect(c)
-	--Activate
+	--Special Summon
 	local e1=Effect.CreateEffect(c)
-	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
+	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e1:SetCode(EVENT_DESTROYED)
 	e1:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_DAMAGE_STEP)
+	e1:SetRange(LOCATION_HAND)
 	e1:SetCondition(s.spcn)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
@@ -23,7 +24,6 @@ function s.initial_effect(c)
 	e3:SetOperation(s.desop)
 	c:RegisterEffect(e3)
 end
-s.listed_series={0x3008}
 function s.cfilter(c,tp)
 	return c:IsReason(REASON_BATTLE+REASON_EFFECT) and c:IsLocation(LOCATION_GRAVE) and c:IsPreviousControler(tp) and c:IsPreviousLocation(LOCATION_MZONE) and c:IsAttribute(ATTRIBUTE_DARK)
 end

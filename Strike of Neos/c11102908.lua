@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	e2:SetCode(EFFECT_UPDATE_ATTACK)
 	e2:SetRange(LOCATION_FZONE)
 	e2:SetTargetRange(LOCATION_MZONE,LOCATION_MZONE)
-	e2:SetTarget(aux.NOT(aux.TargetBoolFunction(Card.IsSetCard,0x3d)))
+	e2:SetTarget(aux.NOT(aux.TargetBoolFunction(Card.IsRace,RACE_WARRIOR)))
 	e2:SetValue(-2000)
 	c:RegisterEffect(e2)
 	--Def
