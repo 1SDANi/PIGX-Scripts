@@ -27,11 +27,11 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 s.listed_series={0xd}
-function s.filter(c)
-	return c:IsSetCard(0xd) and c:IsType(TYPE_MONSTER) and c:IsLocation(LOCATION_GRAVE) and c:IsReason(REASON_BATTLE+REASON_EFFECT) and c:IsPreviousLocation(LOCATION_MZONE)
+function s.filter(c,tp)
+	return c:IsSetCard(0xd) and c:IsType(TYPE_MONSTER) and c:IsLocation(LOCATION_GRAVE) and c:IsReason(REASON_BATTLE+REASON_EFFECT) and c:IsPreviousLocation(LOCATION_MZONE) and c:IsPreviousControler(tp)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return eg:IsExists(s.filter,1,nil)
+	return eg:IsExists(s.filter,1,nil,tp)
 end
 function s.condition2(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

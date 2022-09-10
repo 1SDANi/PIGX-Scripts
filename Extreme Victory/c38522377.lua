@@ -70,15 +70,15 @@ function s.damop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.RDComplete()
 	end
 end
-function s.filter(c)
-	return c:IsFaceup() and c:IsSetCard(0x13)
+function s.repfilter(c,e)
+	return c:IsFaceup() and c:IsSetCard(0x13) and c:IsDestructable(e) and not c:IsStatus(STATUS_DESTROY_CONFIRMED)
 end
 function s.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsReason(REASON_BATTLE+REASON_EFFECT) and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_MZONE,0,1,c) end
+	if chk==0 then return c:IsReason(REASON_BATTLE+REASON_EFFECT) and Duel.IsExistingMatchingCard(s.repfilter,tp,LOCATION_MZONE,0,1,c) end
 	if Duel.SelectEffectYesNo(tp,c,96) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
-		local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_ONFIELD,0,1,1,c)
+		local g=Duel.SelectMatchingCard(tp,s.repfilter,tp,LOCATION_ONFIELD,0,1,1,c)
 		Duel.Destroy(g,REASON_EFFECT+REASON_REPLACE)
 		return true
 	else return false end

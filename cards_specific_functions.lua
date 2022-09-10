@@ -194,21 +194,13 @@ function Auxiliary.EnableNeosReturn(c,extracat,extrainfo,extraop,returneff)
 	e1:SetTarget(Auxiliary.NeosReturnTarget(c,extrainfo))
 	e1:SetOperation(Auxiliary.NeosReturnOperation(c,extraop))
 	c:RegisterEffect(e1)
-	local e2=e1:Clone()
-	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
-	e2:SetProperty(0)
-	e2:SetCondition(Auxiliary.NeosReturnCondition2)
-	c:RegisterEffect(e2)
 	if returneff then
 		e1:SetLabelObject(returneff)
 		e2:SetLabelObject(returneff)
 	end
 end
 function Auxiliary.NeosReturnCondition1(e,tp,eg,ep,ev,re,r,rp)
-	return not e:GetHandler():IsHasEffect(42015635)
-end
-function Auxiliary.NeosReturnCondition2(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsHasEffect(42015635)
+	return e:GetHandler():IsAbleToDeck()
 end
 function Auxiliary.NeosReturnTarget(c,extrainfo)
 	return function(e,tp,eg,ep,ev,re,r,rp,chk)

@@ -36,7 +36,7 @@ function s.initial_effect(c)
 	e5:SetTarget(s.desreptg)
 	e5:SetOperation(s.desrepop)
 	c:RegisterEffect(e5)
-	--Prevent destruction by battle
+	--Prevent destruction
 	local e6=Effect.CreateEffect(c)
 	e6:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_FIELD)
 	e6:SetCode(EFFECT_DESTROY_REPLACE)

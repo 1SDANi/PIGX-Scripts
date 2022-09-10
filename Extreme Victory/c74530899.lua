@@ -2,6 +2,8 @@
 --Timelord Metatron
 local s,id=GetID()
 function s.initial_effect(c)
+	--summon with 3 tribute
+	local e1=aux.AddNormalSetProcedure(c)
 	--summon
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))

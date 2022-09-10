@@ -27,9 +27,19 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
-	if tc:IsRelateToEffect(e) then
-		Duel.SendtoGrave(tc,REASON_EFFECT+REASON_RETURN)
-		Duel.BreakEffect()
-		Duel.Draw(tp,2,REASON_EFFECT)
+	if tc:IsRelateToEffect(e) and Duel.Remove(tc,0,REASON_EFFECT+REASON_TEMPORARY)~=0 then
+		local e1=Effect.CreateEffect(e:GetHandler())
+		e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
+		e1:SetCode(EVENT_PHASE+PHASE_END)
+		e1:SetReset(RESET_PHASE+PHASE_END)
+		e1:SetLabelObject(tc)
+		e1:SetCountLimit(1)
+		e1:SetOperation(s.retop)
+		Duel.RegisterEffect(e1,tp)
+	end
+end
+function s.retop(e,tp,eg,ep,ev,re,r,rp)
+	if Duel.ReturnToField(e:GetLabelObject()) then
+		Duel.Draw(e:GetLabelObject():GetControler(),2,REASON_EFFECT)
 	end
 end
