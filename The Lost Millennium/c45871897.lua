@@ -2,6 +2,12 @@
 --Lost Guardian
 local s,id=GetID()
 function s.initial_effect(c)
+	--Attack while in defense position
+	local e0=Effect.CreateEffect(c)
+	e0:SetType(EFFECT_TYPE_SINGLE)
+	e0:SetCode(EFFECT_DEFENSE_ATTACK)
+	e0:SetValue(0)
+	c:RegisterEffect(e0)
 	--change defense
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)

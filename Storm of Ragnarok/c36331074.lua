@@ -24,19 +24,26 @@ function s.filter(c)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
-	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,LOCATION_MZONE,0,1,e:GetHandler()) and Duel.IsExistingTarget(s.filter,tp,0,LOCATION_MZONE,1,nil) end
+	if chk==0 then return Duel.IsExistingTarget(s.filter1,tp,LOCATION_GRAVE,0,2,nil) and
+		Duel.IsExistingTarget(s.filter,tp,LOCATION_MZONE,0,1,e:GetHandler()) and Duel.IsExistingTarget(s.filter,tp,0,LOCATION_MZONE,1,nil) end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
+	local g0=Duel.SelectTarget(tp,s.filter1,tp,LOCATION_GRAVE,0,2,2,nil)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_CONTROL)
 	local g1=Duel.SelectTarget(tp,s.filter,tp,LOCATION_MZONE,0,1,1,e:GetHandler())
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_CONTROL)
 	local g2=Duel.SelectTarget(tp,s.filter,tp,0,LOCATION_MZONE,1,1,nil)
 	g1:Merge(g2)
+	Duel.SetOperationInfo(0,CATEGORY_TODECK,g0,2,0,LOCATION_GRAVE)
 	Duel.SetOperationInfo(0,CATEGORY_CONTROL,g1,2,0,0)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS)
-	local a=g:GetFirst()
-	local b=g:GetNext()
-	if a:IsRelateToEffect(e) and b:IsRelateToEffect(e) then
+	local ex,g1=Duel.GetOperationInfo(0,CATEGORY_TODECK)
+	local ex,g2=Duel.GetOperationInfo(0,CATEGORY_CONTROL)
+	local tg1=g1:Filter(Card.IsRelateToEffect,nil,e)
+	local tg2=g2:Filter(Card.IsRelateToEffect,nil,e)
+	if tg1 and #tg1>0 and tg2 and #tg2==2 and Duel.SendtoDeck(tg1,nil,2,REASON_EFFECT) then
+		local a=tg2:GetFirst()
+		local b=tg2:GetNext()
 		Duel.SwapControl(a,b)
 	end
 end

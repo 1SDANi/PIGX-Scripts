@@ -18,26 +18,20 @@ function s.filter1(c)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
-	if chk==0 then return Duel.IsExistingTarget(s.filter1,tp,LOCATION_GRAVE,0,2,nil) and Duel.IsExistingTarget(aux.TRUE,tp,0,LOCATION_MZONE,1,nil) end
+	if chk==0 then return Duel.IsExistingTarget(s.filter1,tp,LOCATION_GRAVE,0,2,nil) and Duel.IsExistingTarget(aux.TRUE,tp,0,LOCATION_ONFIELD,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
 	local g1=Duel.SelectTarget(tp,s.filter1,tp,LOCATION_GRAVE,0,2,2,nil)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
-	local g2=Duel.SelectTarget(tp,aux.TRUE,tp,0,LOCATION_MZONE,1,1,nil)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RTOHAND)
+	local g2=Duel.SelectTarget(tp,aux.TRUE,tp,0,LOCATION_ONFIELD,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,g1,2,0,LOCATION_GRAVE)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,g2,1,0,0)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local ex,g1=Duel.GetOperationInfo(0,CATEGORY_TODECK)
 	local ex,g2=Duel.GetOperationInfo(0,CATEGORY_TOHAND)
-	if g1:GetFirst():IsRelateToEffect(e) then
-		Duel.SendtoDeck(g1,nil,2,REASON_EFFECT)
-		local og=Duel.GetOperatedGroup()
-		local fg=og:Filter(Card.IsLocation,nil,LOCATION_DECK+LOCATION_EXTRA)
-		if fg and g1 and #fg==#g1 then
-			local tc=g2:GetFirst()
-			if tc:IsFaceup() and tc:IsRelateToEffect(e) then
-				Duel.SendtoHand(tc,nil,REASON_EFFECT)
-			end
-		end
+	local tg1=g1:Filter(Card.IsRelateToEffect,nil,e)
+	local tg2=g2:Filter(Card.IsRelateToEffect,nil,e)
+	if tg1 and #tg1>0 and tg2 and #tg2>0 and Duel.SendtoDeck(tg1,nil,2,REASON_EFFECT) then
+		Duel.SendtoHand(tg2,nil,REASON_EFFECT)
 	end
 end

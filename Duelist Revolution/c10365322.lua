@@ -42,3 +42,9 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Damage(1-tp,atk,REASON_EFFECT)
 	end
 end
+function s.contactfil(tp)
+	return Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)
+end
+function s.contactop(g)
+	Duel.SendtoGrave(g,REASON_COST+REASON_MATERIAL+REASON_FUSION)
+end

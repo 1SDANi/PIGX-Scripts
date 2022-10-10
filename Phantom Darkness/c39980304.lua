@@ -22,10 +22,32 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e1:SetTargetRange(1,0)
 	e1:SetReset(RESET_PHASE+PHASE_END)
+	e1:SetCondition(s.chain_condition)
 	e1:SetTarget(s.chain_target)
 	e1:SetOperation(s.chain_operation)
 	e1:SetValue(aux.TRUE)
 	Duel.RegisterEffect(e1,tp)
+	e1:SetLabel(0)
+	local e2=Effect.CreateEffect(e:GetHandler())
+	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
+	e2:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_CANNOT_DISABLE)
+	e2:SetCode(EVENT_SPSUMMON_SUCCESS)
+	e2:SetCondition(s.condition)
+	e2:SetOperation(s.operation)
+	e2:SetLabelObject(e1)
+	Duel.RegisterEffect(e2,tp)
+end
+function s.cfilter(c,tp)
+	return c:IsFaceup() and c:IsSummonPlayer(tp) and c:IsSummonType(SUMMON_TYPE_FUSION)
+end
+function s.condition(e,tp,eg,ep,ev,re,r,rp)
+	return eg:IsExists(s.cfilter,1,nil,tp)
+end
+function s.operation(e)
+	e:GetLabelObject():SetLabel(1)
+end
+function s.chain_condition(e,tp,eg,ep,ev,re,r,rp)
+	return e:GetLabel()==0
 end
 function s.filter(c,e)
 	return c:IsType(TYPE_MONSTER) and c:IsCanBeFusionMaterial() and c:IsAbleToRemove() and not c:IsImmuneToEffect(e)

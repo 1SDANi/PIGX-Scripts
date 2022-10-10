@@ -86,7 +86,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Damage(p,d,REASON_EFFECT)
 end
 function s.spfilter(c)
-	return c:IsSetCard(0x13) and c:IsAbleToRemoveAsCost() and aux.SpElimFilter(c,true) and c:GetActivateEffect():IsActivatable(tp,true,true)
+	return c:IsSetCard(0x13) and c:IsAbleToRemoveAsCost() and aux.SpElimFilter(c,true)
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,3,e:GetHandler()) end

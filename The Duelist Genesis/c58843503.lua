@@ -20,15 +20,15 @@ function s.initial_effect(c)
 	e3:SetCode(EVENT_SPSUMMON_SUCCESS)
 	c:RegisterEffect(e3)
 end
-s.listed_names={22754505,25247218}
+s.listed_series={0x30c}
 function s.cfilter(c)
-	return c:IsFaceup() and (c:IsCode(22754505) or c:IsCode(25247218))
+	return c:IsFaceup() and c:IsSetCard(0x30c)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_ONFIELD,0,1,nil)
+	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_ONFIELD,0,1,e:GetHandler())
 end
 function s.filter(c,e,tp)
-	return (c:IsCode(22754505) or c:IsCode(25247218)) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsSetCard(0x30c) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0

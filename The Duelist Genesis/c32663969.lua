@@ -32,16 +32,24 @@ function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 		and Duel.IsExistingTarget(aux.TRUE,tp,LOCATION_MZONE,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
 	local g2=Duel.SelectTarget(tp,aux.TRUE,tp,LOCATION_MZONE,0,1,1,nil)
+	e:SetLabelObject(g2:GetFirst())
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
 	local g1=Duel.SelectTarget(tp,aux.TRUE,tp,0,LOCATION_MZONE,1,1,nil,ft)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,g1+g2,2,0,0)
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS)
+	local lg=e:GetLabelObject()
 	local tg=g:Filter(Card.IsRelateToEffect,nil,e)
 	if #tg>1 then
-		if Duel.Destroy(tg:GetFirst(),REASON_EFFECT) then
-			Duel.Destroy(tg:GetNext(),REASON_EFFECT)
+		local tc1 = tg:GetFirst()
+		local tc2 = tg:GetNext()
+		if tc2==lg then
+			tc2=tc1
+			tc1=lg
+		end
+		if Duel.Destroy(tc1,REASON_EFFECT) then
+			Duel.Destroy(tc2,REASON_EFFECT)
 		end
 	end
 end

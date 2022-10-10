@@ -25,7 +25,7 @@ end
 s.listed_series={0x14c}
 s.material_attribute={ATTRIBUTE_EARTH}
 function s.filter(c,e,tp)
-	return c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP) and c:IsSetCard(0x14c)
+	return c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP) and c:IsSetCard(0x14c) and c:IsType(TYPE_FUSION)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local c=e:GetHandler()
