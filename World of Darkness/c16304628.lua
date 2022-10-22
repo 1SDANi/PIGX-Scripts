@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 s.listed_series={0x08}
-s.material_setcode={0x8,0x08}
+s.material_setcode={0x8}
 function s.fusfilter(c)
 	return c:IsSetCard(0x08) and c:IsType(TYPE_MONSTER+TYPE_UNION)
 end

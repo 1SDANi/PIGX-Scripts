@@ -60,7 +60,7 @@ function s.econ(e)
 	return Duel.IsEnvironment(CARD_SANCTUARY_SKY)
 end
 function s.target(e,c)
-	return c:IsRace(RACE_FAIRY) and c:IsType(TYPE_NORMAL)
+	return c:IsRace(RACE_FAIRY) and (c:IsType(TYPE_NORMAL) or (c:IsType(TYPE_GEMINI) and c:IsLocation(LOCATION_DECK)))
 end
 function s.value(e,c)
 	return Duel.GetMatchingGroupCount(aux.FilterFaceupFunction(Card.IsCode,39552864),c:GetControler(),LOCATION_MZONE,LOCATION_MZONE,nil)*500

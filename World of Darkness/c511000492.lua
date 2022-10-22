@@ -18,7 +18,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x8}
 function s.spfilter(c,e,tp)
-	return c:IsCanBeSpecialSummoned(e,0,tp,false,false) and c:IsType(TYPE_NORMAL) and c:IsAttackBelow(2000) and c:IsDefenseBelow(2000)
+	return c:IsCanBeSpecialSummoned(e,0,tp,false,false) and (c:IsType(TYPE_NORMAL) or (c:IsType(TYPE_GEMINI) and c:IsLocation(LOCATION_DECK))) and c:IsAttackBelow(2000) and c:IsDefenseBelow(2000)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_DECK) and chkc:IsControler(tp) and s.spfilter(chkc,e,tp) end

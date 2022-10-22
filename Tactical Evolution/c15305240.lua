@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.normalfilter(c)
-	return c:IsType(TYPE_NORMAL) and c:IsFaceup()
+	return (c:IsType(TYPE_NORMAL) or (c:IsType(TYPE_GEMINI) and c:IsLocation(LOCATION_DECK))) and c:IsFaceup()
 end
 function s.filter(c)
 	return c:IsControlerCanBeChanged() and c:IsFaceup()

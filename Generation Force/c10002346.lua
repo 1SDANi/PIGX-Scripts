@@ -47,7 +47,7 @@ function s.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	return Duel.SelectEffectYesNo(tp,c,96)
 end
 function s.repop(e,tp,eg,ep,ev,re,r,rp)
-	e:GetHandler():RemoveCounter(tp,COUNTER_XYZ,1,REASON_COST)
+	e:GetHandler():RemoveCounter(tp,COUNTER_XYZ,1,REASON_EFFECT)
 end
 function s.xyzcn(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION)

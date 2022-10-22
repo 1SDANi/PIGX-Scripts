@@ -29,7 +29,22 @@ function s.rmtg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.rmop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	if c:IsRelateToEffect(e) and c:IsFaceup() then
-		Duel.Remove(c,POS_FACEUP,REASON_EFFECT)
+	if c:IsRelateToEffect(e) then
+		if Duel.Remove(c,0,REASON_EFFECT+REASON_TEMPORARY)==0 then return end
+		local e1=Effect.CreateEffect(c)
+		e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
+		e1:SetCode(EVENT_PHASE+PHASE_STANDBY)
+		e1:SetCountLimit(1)
+		e1:SetLabelObject(c)
+		e1:SetCondition(s.retcon)
+		e1:SetOperation(s.retop)
+		e1:SetReset(RESET_PHASE+PHASE_STANDBY+RESET_SELF_TURN)
+		Duel.RegisterEffect(e1,tp)
 	end
+end
+function s.retcon(e,tp,eg,ep,ev,re,r,rp)
+	return Duel.GetTurnPlayer()==tp
+end
+function s.retop(e,tp,eg,ep,ev,re,r,rp)
+	Duel.ReturnToField(e:GetLabelObject())
 end

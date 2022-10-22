@@ -13,5 +13,5 @@ function s.extraop(mat,e,tp,eg,ep,ev,re,r,rp,tc)
 	return Duel.ReleaseRitualMaterial(mat)
 end
 function s.forcedgroup(c,e,tp)
-	return c:IsLocation(LOCATION_DECK+LOCATION_HAND) and c:IsType(TYPE_NORMAL) and c:IsCanBeRitualMaterial()
+	return c:IsLocation(LOCATION_DECK+LOCATION_HAND) and (c:IsType(TYPE_NORMAL) or (c:IsType(TYPE_GEMINI) and c:IsLocation(LOCATION_DECK))) and c:IsCanBeRitualMaterial()
 end

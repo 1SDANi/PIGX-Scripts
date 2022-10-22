@@ -30,10 +30,10 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function s.tg(e,c)
-	return c:IsFaceup() and c:IsType(TYPE_NORMAL)
+	return c:IsFaceup() and (c:IsType(TYPE_NORMAL) or (c:IsType(TYPE_GEMINI) and c:IsLocation(LOCATION_DECK)))
 end
 function s.repfilter(c,e)
-	return c:IsFaceup() and c:IsType(TYPE_NORMAL) and c:IsDestructable(e) and not c:IsStatus(STATUS_DESTROY_CONFIRMED)
+	return c:IsFaceup() and (c:IsType(TYPE_NORMAL) or (c:IsType(TYPE_GEMINI) and c:IsLocation(LOCATION_DECK))) and c:IsDestructable(e) and not c:IsStatus(STATUS_DESTROY_CONFIRMED)
 end
 function s.desreptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()

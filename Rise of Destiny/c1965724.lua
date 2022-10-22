@@ -22,7 +22,7 @@ function s.cfilter1(c,tp)
 	return c:IsPreviousLocation(LOCATION_MZONE) and c:IsPreviousPosition(POS_FACEUP) and c:IsPreviousControler(tp) and c:IsRace(RACE_FAIRY)
 end
 function s.cfilter2(c)
-	return c:IsRace(RACE_FAIRY) and c:IsType(TYPE_NORMAL) and c:IsLevel(1) and c:IsFaceup()
+	return c:IsRace(RACE_FAIRY) and (c:IsType(TYPE_NORMAL) or (c:IsType(TYPE_GEMINI) and c:IsLocation(LOCATION_DECK))) and c:IsLevel(1) and c:IsFaceup()
 end
 function s.regcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetFlagEffect(id)==0 and eg:IsExists(s.cfilter1,1,nil,tp)

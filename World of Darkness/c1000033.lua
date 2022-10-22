@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_FIELD)
 	e4:SetCode(EFFECT_DISABLE)
-	e4:SetRange(LOCATION_SZONE)
+	e4:SetRange(LOCATION_MZONE)
 	e4:SetTargetRange(LOCATION_MZONE,LOCATION_MZONE)
 	e4:SetCondition(s.tails)
 	e4:SetTarget(s.disable)
@@ -83,7 +83,7 @@ function s.tails(e)
 	return e:GetHandler():GetFlagEffectLabel(36690018)==0
 end
 function s.disable(e,c)
-	return c:IsType(TYPE_EFFECT) or (c:GetOriginalType()&TYPE_EFFECT)==TYPE_EFFECT
+	return (c:IsType(TYPE_EFFECT) or (c:GetOriginalType()&TYPE_EFFECT)==TYPE_EFFECT) and e:GetHandler()~=c
 end
 function s.cointg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

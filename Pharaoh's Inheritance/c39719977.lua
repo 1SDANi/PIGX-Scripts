@@ -13,14 +13,14 @@ function s.initial_effect(c)
 end
 function s.filter(c,tp)
 	local tpe=c:GetType()
-	return c:IsFaceup() and c:IsType(TYPE_NORMAL) and Duel.IsExistingMatchingCard(s.filter2,tp,LOCATION_MZONE,0,2,c,c:GetCode())
+	return c:IsFaceup() and (c:IsType(TYPE_NORMAL) or (c:IsType(TYPE_GEMINI) and c:IsLocation(LOCATION_DECK))) and Duel.IsExistingMatchingCard(s.filter2,tp,LOCATION_MZONE,0,2,c,c:GetCode())
 end
 function s.filter2(c,code)
 	local tpe=c:GetType()
-	return c:IsFaceup() and c:IsType(TYPE_NORMAL) and c:IsCode(code)
+	return c:IsFaceup() and (c:IsType(TYPE_NORMAL) or (c:IsType(TYPE_GEMINI) and c:IsLocation(LOCATION_DECK))) and c:IsCode(code)
 end
 function s.filter3(c)
-	return c:IsFaceup() and c:IsType(TYPE_NORMAL) and not c:IsHasEffect(EFFECT_DIRECT_ATTACK)
+	return c:IsFaceup() and (c:IsType(TYPE_NORMAL) or (c:IsType(TYPE_GEMINI) and c:IsLocation(LOCATION_DECK))) and not c:IsHasEffect(EFFECT_DIRECT_ATTACK)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_MZONE,0,3,nil,tp)

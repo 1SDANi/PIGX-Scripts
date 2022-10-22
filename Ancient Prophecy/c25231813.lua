@@ -2,8 +2,6 @@
 --Silver Wing
 local s,id=GetID()
 function s.initial_effect(c)
-	--atkup
-	local e2=Effect.CreateEffect(c)
 	--indes
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_EQUIP)

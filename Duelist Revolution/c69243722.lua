@@ -16,10 +16,10 @@ function s.initial_effect(c)
 end
 s.listed_series={0x34,0x8}
 function s.costfilter(c,ft)
-	return c:IsFaceup() and c:IsType(TYPE_NORMAL) and c:IsAbleToRemoveAsCost()  and (ft>0 or c:GetSequence()<5)
+	return c:IsFaceup() and (c:IsType(TYPE_NORMAL) or (c:IsType(TYPE_GEMINI) and c:IsLocation(LOCATION_DECK))) and c:IsAbleToRemoveAsCost()  and (ft>0 or c:GetSequence()<5)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.CheckReleaseGroupCost(tp,s.rfilter,1,false,nil,e:GetHandler()) and c:IsReleasable() end
+	if chk==0 then return Duel.CheckReleaseGroupCost(tp,s.rfilter,1,false,nil,e:GetHandler()) and e:GetHandler():IsReleasable() end
 	local sg=Duel.SelectReleaseGroupCost(tp,s.rfilter,1,1,false,nil,e:GetHandler())
 	sg:AddCard(e:GetHandler())
 	Duel.Release(sg,REASON_COST)

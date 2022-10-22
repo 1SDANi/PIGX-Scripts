@@ -41,7 +41,7 @@ function s.defvalue(e,c)
 	return def
 end
 function s.filter(c)
-	return c:IsType(TYPE_NORMAL) and c:IsAbleToRemove() and aux.SpElimFilter(c,true)
+	return (c:IsType(TYPE_NORMAL) or (c:IsType(TYPE_GEMINI) and c:IsLocation(LOCATION_DECK))) and c:IsAbleToRemove() and aux.SpElimFilter(c,true)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE+LOCATION_GRAVE) and chkc:IsControler(tp) and s.filter(chkc) end

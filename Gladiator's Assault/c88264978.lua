@@ -54,7 +54,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.filter2(c,fc,sumtype,tp)
-	return ((c:IsRace(RACE_MACHINE,fc,sumtype,tp) and c:IsType(TYPE_NORMAL)) or c:IsCode(68540058))
+	return ((c:IsRace(RACE_MACHINE,fc,sumtype,tp) and (c:IsType(TYPE_NORMAL) or (c:IsType(TYPE_GEMINI) and c:IsLocation(LOCATION_DECK)))) or c:IsCode(68540058))
 end
 function s.contactfil(tp)
 	return Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)

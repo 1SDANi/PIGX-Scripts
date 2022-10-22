@@ -5,14 +5,14 @@ function s.initial_effect(c)
 	aux.AddEquipProcedure(c,0,s.filter,nil,s.cost,s.target,s.operation)
 end
 function s.filter(c)
-	return c:IsType(TYPE_NORMAL)
+	return (c:IsType(TYPE_NORMAL) or (c:IsType(TYPE_GEMINI) and c:IsLocation(LOCATION_DECK)))
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:SetLabel(1)
 	if chk==0 then return true end
 end
 function s.rfilter(c)
-	return c:IsType(TYPE_NORMAL) and c:IsReleasable()
+	return (c:IsType(TYPE_NORMAL) or (c:IsType(TYPE_GEMINI) and c:IsLocation(LOCATION_DECK))) and c:IsReleasable()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,tc,chk)
 	local label=e:GetLabel()

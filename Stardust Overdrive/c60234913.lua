@@ -20,8 +20,7 @@ function s.filter(c,e,tp,lv)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=eg:Filter(s.cfilter,nil,tp)
-	local lv=g:GetSum(Card.GetLevel)
-	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_HAND+LOCATION_DECK,0,1,nil,e,tp,lv) end
+	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and g and #g>0 Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_HAND+LOCATION_DECK,0,1,nil,e,tp,g:GetSum(Card.GetLevel)) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND+LOCATION_DECK)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)

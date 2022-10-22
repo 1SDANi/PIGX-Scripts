@@ -15,7 +15,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x08}
 function s.filter(c)
-	return c:IsSetCard(0x08) and c:IsType(TYPE_NORMAL) and c:IsAbleToHand()
+	return c:IsSetCard(0x08) and (c:IsType(TYPE_NORMAL) or (c:IsType(TYPE_GEMINI) and c:IsLocation(LOCATION_DECK))) and c:IsAbleToHand()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:GetLocation()==LOCATION_GRAVE and chkc:GetControler()==tp and s.filter(chkc) end

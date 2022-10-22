@@ -23,7 +23,7 @@ function s.cs(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Release(e:GetHandler(),REASON_COST)
 end
 function s.filter(c,e)
-	return c:IsAttribute(ATTRIBUTE_EARTH) and c:IsType(TYPE_NORMAL) and c:IsSummonable(true,e)
+	return c:IsAttribute(ATTRIBUTE_EARTH) and (c:IsType(TYPE_NORMAL) or (c:IsType(TYPE_GEMINI) and c:IsLocation(LOCATION_DECK))) and c:IsSummonable(true,e)
 end
 function s.tg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0

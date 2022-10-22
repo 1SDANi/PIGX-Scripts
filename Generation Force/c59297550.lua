@@ -19,7 +19,7 @@ end
 s.listed_series={0x58}
 s.listed_names={id}
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
-	return re:IsActiveType(TYPE_MONSTER) and re:GetHandler():IsSetCard(0x58) and re:GetHandler():GetCode()~=id
+	return re:IsActiveType(TYPE_MONSTER) and re:GetHandler():IsSetCard(0x58) and re:GetHandler():GetCode()~=id and e:GetHandler():IsPosition(POS_FACEUP_ATTACK)
 end
 function s.filter(c,e,tp)
 	return c:IsSetCard(0x58) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP_DEFENSE) and not c:IsCode(id)

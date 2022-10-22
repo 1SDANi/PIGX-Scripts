@@ -12,14 +12,15 @@ function s.initial_effect(c)
 	e0:SetTarget(s.eqtg)
 	e0:SetOperation(s.eqop)
 	c:RegisterEffect(e0)
-	--destroy
+	--tohand
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_ATKDEFCHANGE)
+	e1:SetCategory(CATEGORY_TOHAND)
 	e1:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_DAMAGE_STEP)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e1:SetCode(EVENT_BE_MATERIAL)
 	e1:SetCondition(s.cn)
+	e1:SetCost(s.cn)
 	e1:SetTarget(s.tg)
 	e1:SetOperation(s.op)
 	c:RegisterEffect(e1)
@@ -58,6 +59,10 @@ end
 function s.cn(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	return c:IsLocation(LOCATION_GRAVE) and r==REASON_FUSION
+end
+function s.cs(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,e:GetHandler()) end
+	Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST+REASON_DISCARD)
 end
 function s.filter(c)
 	return ((c:IsType(TYPE_UNION) and c:IsType(TYPE_MONSTER)) or (c:IsType(TYPE_EQUIP) and c:IsType(TYPE_SPELL+TYPE_TRAP))) and c:IsAbleToHand()

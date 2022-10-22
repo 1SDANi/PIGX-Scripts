@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.filter(c)
-	return c:IsType(TYPE_NORMAL) and not c:IsPublic()
+	return (c:IsType(TYPE_NORMAL) or (c:IsType(TYPE_GEMINI) and c:IsLocation(LOCATION_DECK))) or (c:IsType(TYPE_GEMINI)) and c:IsLocation(LOCATION_DECK)) and not c:IsPublic()
 end
 function s.drcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return ep==tp and eg:IsExists(s.filter,1,nil) end

@@ -16,7 +16,7 @@ function s.filter(c,ft,tp)
 	return c:IsType(TYPE_EFFECT) and (c:IsFaceup() or c:IsControler(tp)) and (ft>0 or (c:GetSequence()<5 and c:IsControler(tp)))
 end
 function s.spfilter(c,e,tp)
-	return c:IsType(TYPE_NORMAL) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return (c:IsType(TYPE_NORMAL) or (c:IsType(TYPE_GEMINI) and c:IsLocation(LOCATION_DECK))) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)

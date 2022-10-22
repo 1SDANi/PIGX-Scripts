@@ -15,7 +15,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x3a}
 function s.filter(c,e,tp)
-	return c:IsSetCard(0x3a) and c:IsLevelBelow(4) c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsSetCard(0x3a) and c:IsLevelBelow(4) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.sumtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.filter(chkc,e,tp) end
