@@ -29,14 +29,12 @@ end
 s.counter_place_list={COUNTER_XYZ}
 function s.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return not c:IsReason(REASON_REPLACE) and e:GetHandler():GetCounter(COUNTER_XYZ)>0 and
-		Duel.IsExistingMatchingCard(aux.TRUE,tp,0,LOCATION_ONFIELD,1,nil) end
+	if chk==0 then return not c:IsReason(REASON_REPLACE) and Duel.IsExistingMatchingCard(aux.TRUE,tp,0,LOCATION_ONFIELD,1,nil) end
 	return Duel.SelectEffectYesNo(tp,c,96)
 end
 function s.repop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
 	local g=Duel.SelectMatchingCard(tp,nil,tp,0,LOCATION_ONFIELD,1,1,nil)
-	e:GetHandler():RemoveCounter(tp,COUNTER_XYZ,1,REASON_EFFECT)
 	if #g>0 then
 		Duel.Destroy(g,REASON_EFFECT)
 	end

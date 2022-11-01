@@ -54,8 +54,7 @@ function s.tg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetTargetParam(Duel.SelectOption(tp,70,71,72))
 end
 function s.op(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.GetFieldGroupCount(1-tp,0,LOCATION_DECK)<=0
-		or not e:GetHandler():IsRelateToEffect(e)then return end
+	if Duel.GetFieldGroupCount(1-tp,0,LOCATION_DECK)<=0 or not e:GetHandler():IsRelateToEffect(e)then return end
 	Duel.DisableShuffleCheck()
 	Duel.ConfirmDecktop(1-tp,1)
 	local g=Duel.GetDecktopGroup(1-tp,1)

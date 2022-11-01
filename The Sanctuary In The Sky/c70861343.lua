@@ -11,8 +11,29 @@ function s.initial_effect(c)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
+	--destroy replace
+	local e3=Effect.CreateEffect(c)
+	e3:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_FIELD)
+	e3:SetCode(EFFECT_DESTROY_REPLACE)
+	e3:SetRange(LOCATION_SZONE)
+	e3:SetValue(1)
+	e3:SetTarget(s.reptg)
+	e3:SetOperation(s.repop)
+	c:RegisterEffect(e3)
 end
 s.listed_series={0x2b}
+function s.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then
+		if #eg~=1 then return false end
+		local tc=eg:GetFirst()
+		local g=Duel.GetFieldGroup(tp,LOCATION_HAND,0)
+		return #g>0 and tc:IsFaceup() and tc:IsLocation(LOCATION_MZONE) and tc:IsReason(REASON_BATTLE+REASON_EFFECT) and not tc:IsReason(REASON_REPLACE)
+	end
+	return Duel.SelectEffectYesNo(tp,e:GetHandler(),96)
+end
+function s.repop(e,tp,eg,ep,ev,re,r,rp)
+	Duel.DiscardHand(tp,nil,1,1,REASON_EFFECT+REASON_DISCARD)
+end
 function s.cfilter(c,e,tp,ft)
 	local lv=c:GetLevel()
 	return lv>0 and c:IsSetCard(0x2b) and (ft>0 or (c:IsControler(tp) and c:GetSequence()<5))

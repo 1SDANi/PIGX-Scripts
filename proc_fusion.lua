@@ -889,7 +889,7 @@ function Fusion.AddContactProc(c,group,op,sumcon,condition,sumtype,settype,setco
 		e1:SetCode(setcode)
 	end
 	if not desc then
-		e1:SetDescription(2)
+		e1:SetDescription(1170)
 	else
 		e1:SetDescription(desc)
 	end

@@ -36,6 +36,7 @@ function s.initial_effect(c)
 end
 s.xyz_number=56
 s.counter_place_list={COUNTER_XYZ}
+s.listed_series={0x48}
 function s.drcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,COUNTER_XYZ,1,REASON_COST) end
 	e:GetHandler():RemoveCounter(tp,COUNTER_XYZ,1,REASON_COST)

@@ -33,3 +33,6 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	e3:SetTargetRange(0,1)
 	Duel.RegisterEffect(e3,tp)
 end
+function s.actlimit(e,re,tp)
+	return re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_TRAP+TYPE_SPELL)
+end

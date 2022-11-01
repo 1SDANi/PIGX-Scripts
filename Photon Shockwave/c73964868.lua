@@ -32,6 +32,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 s.counter_place_list={COUNTER_XYZ}
+s.material_attribute={ATTRIBUTE_LIGHT}
 function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,COUNTER_XYZ,1,REASON_COST) end
 	e:GetHandler():RemoveCounter(tp,COUNTER_XYZ,1,REASON_COST)
@@ -65,7 +66,7 @@ function s.xyzop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.fusionfilter(c,fc,sumtype,sp,sub,mg,sg)
 	local lv=fc:GetLevel()
-	return c:HasLevel() and c:IsLevel(lv) and c:IsAttribute(ATTRIBUTE_DARK)
+	return c:HasLevel() and c:IsLevel(lv) and c:IsAttribute(ATTRIBUTE_LIGHT)
 end
 function s.contactfil(tp)
 	return Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)

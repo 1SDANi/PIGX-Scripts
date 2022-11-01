@@ -35,6 +35,7 @@ function s.initial_effect(c)
 end
 s.xyz_number=19
 s.counter_place_list={COUNTER_XYZ}
+s.listed_series={0x48}
 function s.rcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	return (r&REASON_COST)~=0 and re:IsActivated() and ep==e:GetOwnerPlayer() and c:GetCounter(COUNTER_XYZ)>=ev

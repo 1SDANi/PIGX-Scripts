@@ -46,6 +46,7 @@ function s.initial_effect(c)
 end
 s.xyz_number=83
 s.counter_place_list={COUNTER_XYZ}
+s.listed_series={0x48}
 function s.condition(e)
 	return Duel.IsExistingMatchingCard(aux.FilterFaceupFunction(Card.IsRace,RACE_REPTILE),e:GetHandlerPlayer(),LOCATION_MZONE,0,1,e:GetHandler())
 end

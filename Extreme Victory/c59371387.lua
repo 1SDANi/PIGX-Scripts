@@ -19,5 +19,5 @@ function s.initial_effect(c)
 end
 s.listed_series={0x13}
 function s.target(e,c)
-	return c:IsPosition(POS_FACEUP_ATTACK) and c:IsSetCard(0x13)
+	return c:IsSetCard(0x13)
 end

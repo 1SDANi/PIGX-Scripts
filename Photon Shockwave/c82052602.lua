@@ -27,7 +27,7 @@ function s.initial_effect(c)
 		end)
 	end)
 end
-s.listed_series={0x54}
+s.listed_series={0x54,0x30a,0x82,0x59,0x8f}
 function s.checkop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=eg:GetFirst()
 	for tc in aux.Next(eg) do

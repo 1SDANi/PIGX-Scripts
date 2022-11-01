@@ -32,6 +32,7 @@ function s.initial_effect(c)
 end
 s.xyz_number=30
 s.counter_place_list={COUNTER_XYZ}
+s.listed_series={0x48}
 function s.atcost(e,c,tp)
 	return e:GetHandler():IsCanRemoveCounter(tp,COUNTER_XYZ,1,REASON_COST)
 end

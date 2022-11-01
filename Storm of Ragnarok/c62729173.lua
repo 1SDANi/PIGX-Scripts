@@ -23,10 +23,10 @@ function s.initial_effect(c)
 	e2:SetOperation(s.thop)
 	c:RegisterEffect(e2)
 end
-s.listed_series={0x100a}
+s.listed_series={0xa}
 s.listed_names={id}
 function s.thfilter(c)
-	return c:IsType(TYPE_MONSTER) and c:IsSetCard(0x100a) and c:IsAbleToHand() and not c:IsCode(id)
+	return c:IsType(TYPE_MONSTER) and c:IsSetCard(0xa) and c:IsAbleToHand() and not c:IsCode(id)
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end

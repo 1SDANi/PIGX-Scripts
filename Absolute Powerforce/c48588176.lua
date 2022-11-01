@@ -13,8 +13,9 @@ function s.initial_effect(c)
 	e2:SetOperation(s.op)
 	c:RegisterEffect(e2)
 end
+s.listed_names={id}
 function s.hfilter(c)
-	return c:IsAbleToHand() and c:IsRace(RACE_INSECT) and c:IsType(TYPE_MONSTER)
+	return c:IsAbleToHand() and c:IsRace(RACE_INSECT) and c:IsType(TYPE_MONSTER) and not c:IsCode(id)
 end
 function s.tg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.hfilter,tp,LOCATION_DECK,0,1,nil) end
