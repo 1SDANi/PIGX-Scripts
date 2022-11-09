@@ -14,7 +14,6 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.HasCounters,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil) end
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	local count=0
 	for tc in Duel.GetMatchingGroup(Card.HasCounters,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,nil):Iter() do
 		tc:RemoveAllCounters()
 	end

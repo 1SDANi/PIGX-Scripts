@@ -35,7 +35,7 @@ function s.initial_effect(c)
 	e5:SetCode(EFFECT_DESTROY_SUBSTITUTE)
 	e5:SetValue(s.repval)
 	c:RegisterEffect(e5)
-	--tohand
+	--direct attack
 	local e6=Effect.CreateEffect(c)
 	e6:SetDescription(aux.Stringid(id,1))
 	e6:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)

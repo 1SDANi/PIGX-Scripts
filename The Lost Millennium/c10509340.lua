@@ -23,13 +23,13 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function s.actlimit(e,re,tp)
-	return re:IsHasType(EFFECT_TYPE_ACTIVATE) or re:IsActiveType(TYPE_MONSTER)
+	return re:IsActiveType(TYPE_SPELL+TYPE_TRAP)
 end
 function s.actcon(e)
 	return Duel.GetAttacker()==e:GetHandler()
 end
 function s.aclimit(e,re,tp)
-	return re:IsActiveType(TYPE_SPELL+TYPE_TRAP)
+	return re:IsHasType(EFFECT_TYPE_ACTIVATE) or re:IsActiveType(TYPE_MONSTER)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_TRIBUTE)

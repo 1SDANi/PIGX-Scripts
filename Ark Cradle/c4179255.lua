@@ -49,7 +49,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Draw(p,d,REASON_EFFECT)
 end
 function s.fieldfilter(c)
-	return c:IsType(TYPE_FIELD) and c:IsType(TYPE_SPELL) and c:IsFaceup() and c:IsCanTurnSet()
+	return c:IsType(TYPE_FIELD) and c:IsType(TYPE_SPELL) and c:IsFaceup()
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp,chk)
 	return Duel.IsExistingMatchingCard(s.fieldfilter,e:GetHandlerPlayer(),LOCATION_FZONE,LOCATION_FZONE,1,nil)
