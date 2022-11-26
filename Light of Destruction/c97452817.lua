@@ -2,6 +2,8 @@
 --Arcana Force XVIII - The Moon
 local s,id=GetID()
 function s.initial_effect(c)
+	--summon with 3 tribute
+	local e0=aux.AddNormalSetProcedure(c)
 	--coin
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))

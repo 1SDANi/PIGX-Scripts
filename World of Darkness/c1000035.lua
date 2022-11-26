@@ -23,7 +23,7 @@ function s.initial_effect(c)
 	e5:SetCode(EFFECT_CANNOT_BE_EFFECT_TARGET)
 	e5:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e5:SetRange(LOCATION_MZONE)
-	e5:SetValue(s.heads)
+	e5:SetValue(s.tails)
 	c:RegisterEffect(e5)
 	--indes
 	local e6=Effect.CreateEffect(c)
@@ -31,12 +31,12 @@ function s.initial_effect(c)
 	e6:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e6:SetRange(LOCATION_MZONE)
 	e6:SetCode(EFFECT_INDESTRUCTABLE)
-	e6:SetValue(s.tails)
+	e6:SetValue(s.heads)
 	c:RegisterEffect(e6)
 end
 s.toss_coin=true
 function s.heads(e,re,r,rp)
-	return (r&REASON_BATTLE)~=0 and e:GetHandler():GetFlagEffectLabel(36690018)==1
+	return (r&REASON_BATTLE+REASON_EFFECT)~=0 and e:GetHandler():GetFlagEffectLabel(36690018)==1
 end
 function s.tails(e,re,rp)
 	return aux.tgoval(e,re,rp) and e:GetHandler():GetFlagEffectLabel(36690018)==0

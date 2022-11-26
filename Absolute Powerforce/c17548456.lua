@@ -30,13 +30,13 @@ function s.spfilter(c,e,tp)
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,nil)
-	if g and #g>0 then Duel.Destroy(g,REASON_EFFECT) end
-	local sg=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.spfilter),tp,LOCATION_GRAVE,0,nil,e,tp)
-	if #sg~=0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
-		Duel.BreakEffect()
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local sp=sg:Select(tp,1,1,nil)
-		Duel.SpecialSummon(sp,0,tp,tp,false,false,POS_FACEUP)
+	if g and #g>0 and Duel.Destroy(g,REASON_EFFECT) then
+		local sg=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.spfilter),tp,LOCATION_GRAVE,0,nil,e,tp)
+		if #sg~=0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
+			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
+			local sp=sg:Select(tp,1,1,nil)
+			Duel.SpecialSummon(sp,0,tp,tp,false,false,POS_FACEUP)
+		end
 	end
 end
 function s.fusionfilter(c,fc,sumtype,sp,sub,mg,sg)

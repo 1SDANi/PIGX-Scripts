@@ -22,7 +22,7 @@ function s.drop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
 	local g=Duel.SelectMatchingCard(tp,aux.TRUE,tp,0,LOCATION_ONFIELD,1,1,nil)
-	if Duel.Destroy(g,REASON_EFFECT) and Duel.IsPlayerCanDraw(tp,1) and Duel.IsEnvironment(CARD_SANCTUARY_SKY) then
+	if g and Duel.Destroy(g,REASON_EFFECT) and Duel.IsPlayerCanDraw(tp,1) and Duel.IsEnvironment(CARD_SANCTUARY_SKY) then
 		Duel.Draw(tp,1,REASON_EFFECT)
 	end
 end

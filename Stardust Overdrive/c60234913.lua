@@ -16,7 +16,8 @@ function s.cfilter(c,tp)
 	return c:IsReason(REASON_BATTLE+REASON_EFFECT) and c:IsLocation(LOCATION_GRAVE) and c:IsPreviousControler(tp)
 end
 function s.filter(c,e,tp,lv)
-	return (c:IsSetCard(0x303) or c:IsSetCard(0x304) or c:IsSetCard(0x307) or c:IsSetCard(0x308)) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,true,true) and c:IsLevelBelow(lv)
+	return (c:IsSetCard(0x303) or c:IsSetCard(0x304) or c:IsSetCard(0x307) or c:IsSetCard(0x308)) and c:IsType(TYPE_RITUAL) and
+		c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,true,true) and c:IsLevelBelow(lv)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=eg:Filter(s.cfilter,nil,tp)

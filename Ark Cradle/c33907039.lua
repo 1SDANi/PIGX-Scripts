@@ -30,16 +30,16 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if #g>0 and Duel.SendtoHand(g,nil,REASON_EFFECT) then
 		Duel.ConfirmCards(1-tp,g)
 		-- Check Normal Summon for matching name
-		local e1=Effect.CreateEffect(c)
+		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 		e1:SetCode(EVENT_SUMMON_SUCCESS)
 		e1:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_DAMAGE_STEP)
-		e1:SetLabel(tc:GetCode())
+		e1:SetLabel(g:GetFirst():GetCode())
 		e1:SetOperation(s.checkop)
 		e1:SetReset(RESET_PHASE+PHASE_END,2)
 		Duel.RegisterEffect(e1,tp)
 		-- Cannot activate effects of monsters with the same name
-		local e2=Effect.CreateEffect(c)
+		local e2=Effect.CreateEffect(e:GetHandler())
 		e2:SetType(EFFECT_TYPE_FIELD)
 		e2:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 		e2:SetCode(EFFECT_CANNOT_ACTIVATE)
@@ -48,18 +48,31 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		e2:SetLabelObject(e1)
 		e2:SetReset(RESET_PHASE+PHASE_END,2)
 		Duel.RegisterEffect(e2,tp)
-		Duel.BreakEffect()
-		Duel.SetLP(tp,math.ceil(Duel.GetLP(tp)/2))
+		local e3=Effect.CreateEffect(e:GetHandler())
+		e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
+		e3:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
+		e3:SetCode(EVENT_PHASE+PHASE_END)
+		e3:SetReset(RESET_PHASE+PHASE_END)
+		e3:SetCountLimit(1)
+		e3:SetTarget(s.tg)
+		e3:SetOperation(s.op)
+		e3:SetLabelObject(e1)
+		Duel.RegisterEffect(e3,tp)
 	end
 end
 function s.checkop(e,tp,eg,ep,ev,re,r,rp)
 	local sc=eg:GetFirst()
 	if sc:IsSummonPlayer(1-tp) then return end
 	if sc:IsCode(e:GetLabel()) then
-		Duel.SetLP(tp,math.ceil(Duel.GetLP(tp)/2))
 		e:SetLabel(-1)
 	end
 end
 function s.aclimit(e,re,tp)
 	return not re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:GetHandler():IsCode(e:GetLabelObject():GetLabel())
+end
+function s.tg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return e:GetLabelObject():GetLabel()==-1 end
+end
+function s.op(e,tp,eg,ep,ev,re,r,rp)
+	Duel.SetLP(tp,math.ceil(Duel.GetLP(tp)/2))
 end

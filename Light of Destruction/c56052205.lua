@@ -8,7 +8,6 @@ function s.initial_effect(c)
 	e0:SetCode(EFFECT_DIRECT_ATTACK)
 	e0:SetRange(LOCATION_MZONE)
 	e0:SetTargetRange(LOCATION_MZONE,0)
-	e0:SetCondition(aux.IsGeminiState)
 	e0:SetTarget(aux.TargetBoolFunction(Card.IsSetCard,0x12))
 	c:RegisterEffect(e0)
 	--search
