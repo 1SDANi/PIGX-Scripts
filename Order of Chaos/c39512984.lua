@@ -32,7 +32,7 @@ function s.splimit(e,se,sp,st)
 	return not e:GetHandler():IsLocation(LOCATION_EXTRA) or (st&SUMMON_TYPE_FUSION)==SUMMON_TYPE_FUSION
 end
 function s.atkfilter(c)
-	return c:IsSetCard(0x47) and c:IsMonster()
+	return c:IsSetCard(0x47) and c:IsType(TYPE_MONSTER)
 end
 function s.atkup(e,c)
 	return Duel.GetMatchingGroupCount(s.atkfilter,c:GetControler(),LOCATION_GRAVE,0,nil)*100

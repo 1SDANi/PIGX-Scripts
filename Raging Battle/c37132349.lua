@@ -18,7 +18,7 @@ end
 s.listed_names={id}
 s.listed_series={0xf}
 function s.filter(c,e,tp)
-	return c:IsSetCard(0xf) and c:IsCanBeSpecialSummoned(e,0,tp,false,false) and not c:IsCode(id)
+	return c:IsSetCard(0xf) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0

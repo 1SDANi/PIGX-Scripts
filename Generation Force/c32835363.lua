@@ -32,7 +32,7 @@ function s.regcon(e,tp,eg,ep,ev,re,r,rp)
 	local d2=false
 	local tc=eg:GetFirst()
 	for tc in aux.Next(eg) do
-		if tc:IsMonster() then
+		if tc:IsType(TYPE_MONSTER) then
 			if tc:GetControler()==0 then d1=true
 			else d2=true end
 		end

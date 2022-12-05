@@ -18,6 +18,7 @@ function s.initial_effect(c)
 	e5:SetDescription(3309)
 	e5:SetType(EFFECT_TYPE_EQUIP)
 	e5:SetCode(EFFECT_CANNOT_BE_FUSION_MATERIAL)
+	e5:SetRange(LOCATION_MZONE)
 	e5:SetValue(1)
 	c:RegisterEffect(e5)
 end

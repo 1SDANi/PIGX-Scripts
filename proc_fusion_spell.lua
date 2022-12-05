@@ -398,7 +398,7 @@ end
 function Fusion.IsMonsterFilter(f1,...)
 	local funs={f1,...}
 	return	function(c,...)
-		local res = c:IsMonster()
+		local res = c:IsType(TYPE_MONSTER)
 		if res then
 			for i,fil in ipairs(funs) do
 				if not fil(c,...) then

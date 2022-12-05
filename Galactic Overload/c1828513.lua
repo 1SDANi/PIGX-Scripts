@@ -50,9 +50,9 @@ function s.cfilter(c)
 end
 function s.discost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.CheckReleaseGroupCost(tp,s.cfilter,1,false,nil,nil) and e:GetHandler():IsCanRemoveCounter(tp,COUNTER_XYZ,1,REASON_COST) end
-	e:GetHandler():RemoveCounter(tp,COUNTER_XYZ,1,REASON_COST)
 	local sg=Duel.SelectReleaseGroupCost(tp,s.cfilter,1,1,false,nil,nil)
 	Duel.Release(sg,REASON_COST)
+	e:GetHandler():RemoveCounter(tp,COUNTER_XYZ,1,REASON_COST)
 end
 function s.distg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

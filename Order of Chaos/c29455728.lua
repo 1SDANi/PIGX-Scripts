@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
 	c:EnableReviveLimit()
-	Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0x55),2)
+	Fusion.AddProcMixN(c,true,true,aux.OR(aux.FilterBoolFunctionEx(Card.IsSetCard,0x55),aux.FilterBoolFunctionEx(Card.IsSetCard,0x7b)),2)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	--spsummon
 	local e1=Effect.CreateEffect(c)
@@ -23,8 +23,8 @@ function s.initial_effect(c)
 	e2:SetValue(1)
 	c:RegisterEffect(e2)
 end
-s.listed_series={0x55}
-s.material_setcode=0x55
+s.listed_series={0x55,0x7b}
+s.material_setcode=0x55,0x7b
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsReleasable() end
 	Duel.Release(e:GetHandler(),REASON_COST)

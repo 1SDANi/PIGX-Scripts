@@ -30,7 +30,7 @@ end
 s.listed_series={0x4}
 function s.regfilter(c)
 	return c:IsReason(REASON_DESTROY) and c:IsRace(RACE_WARRIOR) and c:HasLevel()
-		and (c:IsPreviousLocation(LOCATION_MZONE) or (not c:IsPreviousLocation(LOCATION_MZONE) and c:IsMonster()))
+		and (c:IsPreviousLocation(LOCATION_MZONE) or (not c:IsPreviousLocation(LOCATION_MZONE) and c:IsType(TYPE_MONSTER)))
 end
 function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	if #eg~=1 then return end

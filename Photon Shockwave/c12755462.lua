@@ -34,7 +34,7 @@ function s.sumsuc(e,tp,eg,ep,ev,re,r,rp)
 	Duel.SetChainLimitTillChainEnd(s.chlimit1)
 end
 function s.chlimit1(re,rp,tp)
-	return not re:GetHandler():IsTrap() or not re:IsHasType(EFFECT_TYPE_ACTIVATE)
+	return not re:GetHandler():IsType(TYPE_TRAP) or not re:IsHasType(EFFECT_TYPE_ACTIVATE)
 end
 function s.cedcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:GetFirst()~=e:GetHandler()
@@ -48,5 +48,5 @@ function s.cedop2(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.chlimit2(re,rp,tp)
-	return not re:GetHandler():IsTrap() or not re:IsHasType(EFFECT_TYPE_ACTIVATE) or not re:GetHandler():IsSetCard(0x4c)
+	return not re:GetHandler():IsType(TYPE_TRAP) or not re:IsHasType(EFFECT_TYPE_ACTIVATE) or not re:GetHandler():IsSetCard(0x4c)
 end

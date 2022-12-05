@@ -54,7 +54,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.damfilter(c)
-	return c:IsMonster() and c:IsRace(RACE_ZOMBIE)
+	return c:IsType(TYPE_MONSTER) and c:IsRace(RACE_ZOMBIE)
 end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.damfilter,tp,LOCATION_GRAVE,0,1,nil) end

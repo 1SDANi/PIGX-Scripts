@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function s.sumlimit(e,c,sump,sumtype,sumpos,targetp)
-	if c:IsMonster() then
+	if c:IsType(TYPE_MONSTER) then
 		return c:IsType(TYPE_EFFECT)
 	else
 		return c:IsOriginalType(TYPE_EFFECT)

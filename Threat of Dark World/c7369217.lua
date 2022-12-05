@@ -61,5 +61,5 @@ function s.eqlimit(e,c)
 	return c==e:GetLabelObject()
 end
 function s.efilter(e,te)
-	return te:GetOwnerPlayer()~=e:GetHandlerPlayer() and te:IsActiveType(TYPE_SPELL)
+	return te:GetOwnerPlayer()~=e:GetHandlerPlayer() and te:IsActiveType(TYPE_SPELL+TYPE_TRAP)
 end

@@ -38,7 +38,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_DECKDES,nil,0,1-tp,3)
 end
 function s.cfilter(c)
-	return c:IsLocation(LOCATION_GRAVE) and c:IsMonster()
+	return c:IsLocation(LOCATION_GRAVE) and c:IsType(TYPE_MONSTER)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.DiscardDeck(1-tp,3,REASON_EFFECT)

@@ -17,7 +17,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	return true
 end
 function s.cfilter(c)
-	return c:IsSpell() and c:IsAbleToRemove()
+	return c:IsType(TYPE_SPELL) and c:IsAbleToRemove()
 end
 function s.filter(c,atk)
 	return c:IsFaceup() and c:IsAttackBelow(atk)

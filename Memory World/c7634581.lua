@@ -99,7 +99,31 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if #g==0 or ft<#g then return end
 	local sg=aux.SelectUnselectGroup(g,e,tp,1,c,s.ctcheck,1,tp,HINTMSG_SPSUMMON)
 	for tc in aux.Next(g) do
-		Duel.SpecialSummonStep(tc,SUMMON_TYPE_RITUAL,tp,tp,true,true,POS_FACEUP)
+		if Duel.SpecialSummonStep(tc,SUMMON_TYPE_RITUAL,tp,tp,true,true,POS_FACEUP) then
+			--Cannot be tributed
+			local e3=Effect.CreateEffect(e:GetHandler())
+			e3:SetDescription(3303)
+			e3:SetType(EFFECT_TYPE_SINGLE)
+			e3:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_SINGLE_RANGE+EFFECT_FLAG_CLIENT_HINT)
+			e3:SetRange(LOCATION_MZONE)
+			e3:SetCode(EFFECT_UNRELEASABLE_SUM)
+			e3:SetValue(1)
+			e3:SetReset(RESET_EVENT+RESETS_STANDARD)
+			tc:RegisterEffect(e3,true)
+			local e4=e3:Clone()
+			e4:SetCode(EFFECT_UNRELEASABLE_NONSUM)
+			tc:RegisterEffect(e4,true)
+			--Cannot be used as fusion material
+			local e5=Effect.CreateEffect(e:GetHandler())
+			e5:SetDescription(3309)
+			e5:SetType(EFFECT_TYPE_SINGLE)
+			e5:SetCode(EFFECT_CANNOT_BE_FUSION_MATERIAL)
+			e5:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_CLIENT_HINT)
+			e5:SetRange(LOCATION_MZONE)
+			e5:SetValue(1)
+			e5:SetReset(RESET_EVENT+RESETS_STANDARD)
+			tc:RegisterEffect(e5,true)
+		end
 		tc:CompleteProcedure()
 	end
 	Duel.SpecialSummonComplete()

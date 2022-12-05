@@ -24,7 +24,7 @@ function s.addcount(e,tp,eg,ep,ev,re,r,rp)
 	local p=nil
 	for tc in eg:Iter() do
 		p=tc:GetReasonPlayer()
-		if tc:IsMonster() and not tc:IsType(TYPE_TOKEN) and (tc:IsPreviousLocation(LOCATION_MZONE)
+		if tc:IsType(TYPE_MONSTER) and not tc:IsType(TYPE_TOKEN) and (tc:IsPreviousLocation(LOCATION_MZONE)
 			or (tc:IsPreviousLocation(LOCATION_HAND) and tc:IsPreviousControler(p))) then
 			Duel.RegisterFlagEffect(p,id,RESET_PHASE+PHASE_END,0,1)
 		end
@@ -37,7 +37,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_DESTROY,nil,1,PLAYER_ALL,LOCATION_ONFIELD)
 end
 function s.thfilter(c)
-	return c:IsMonster() and c:IsAbleToHand()
+	return c:IsType(TYPE_MONSTER) and c:IsAbleToHand()
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_CARD,0,id)

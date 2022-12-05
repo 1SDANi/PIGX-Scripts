@@ -19,9 +19,9 @@ function s.initial_effect(c)
 	e4:SetCode(EVENT_FLIP_SUMMON_SUCCESS)
 	c:RegisterEffect(e4)
 end
-s.listed_series={0x55}
+s.listed_series={0x55,0x7b}
 function s.filter(c)
-	return c:IsSetCard(0x55) and c:IsAbleToHand()
+	return (c:IsSetCard(0x55) or c:IsSetCard(0x7b)) and c:IsAbleToHand() and c:IsType(TYPE_MONSTER)
 end
 function s.cs(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,e:GetHandler()) end

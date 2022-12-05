@@ -34,7 +34,7 @@ function s.damcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:GetHandler():RemoveCounter(tp,COUNTER_XYZ,1,REASON_COST)
 end
 function s.filter(c)
-	return c:IsFaceup() and c:IsMonster() and c:IsRace(RACE_AQUATIC)
+	return c:IsFaceup() and c:IsType(TYPE_MONSTER) and c:IsRace(RACE_AQUATIC)
 end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_REMOVED,0,1,nil) end

@@ -37,7 +37,7 @@ function s.initial_effect(c)
 	end)
 end
 function s.regfilter(c)
-	return c:IsReason(REASON_DESTROY) and (c:IsPreviousLocation(LOCATION_MZONE) or (not c:IsPreviousLocation(LOCATION_MZONE) and c:IsMonster()))
+	return c:IsReason(REASON_DESTROY) and (c:IsPreviousLocation(LOCATION_MZONE) or (not c:IsPreviousLocation(LOCATION_MZONE) and c:IsType(TYPE_MONSTER)))
 end
 function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=eg:GetFirst()

@@ -18,5 +18,5 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.sumlimit(e,c,sump,sumtype,sumpos,targetp)
-	return c:IsLocation(LOCATION_GRAVE) and c:IsMonster()
+	return c:IsLocation(LOCATION_GRAVE) and c:IsType(TYPE_MONSTER)
 end

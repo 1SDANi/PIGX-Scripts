@@ -39,8 +39,9 @@ function s.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 s.counter_place_list={0x13}
+s.listed_series={0xcf}
 function s.ctfilter(c)
-	return c:IsFaceup() and c:IsMonster() and not c:IsPreviousLocation(0x80+LOCATION_SZONE) and not c:IsType(TYPE_TOKEN)
+	return c:IsFaceup() and c:IsType(TYPE_MONSTER) and not c:IsPreviousLocation(0x80+LOCATION_SZONE) and not c:IsType(TYPE_TOKEN)
 end
 function s.ctop(e,tp,eg,ep,ev,re,r,rp)
 	local ct=eg:FilterCount(s.ctfilter,nil)
@@ -71,7 +72,7 @@ function s.thcn(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsReason(REASON_DESTROY)
 end
 function s.thfilter(c)
-	return c:IsAttribute(ATTRIBUTE_LIGHT+ATTRIBUTE_DARK) and c:IsAbleToHand()
+	return c:IsSetCard(0xcf) and c:IsType(TYPE_MONSTER) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end

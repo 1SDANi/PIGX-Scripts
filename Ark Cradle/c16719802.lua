@@ -28,7 +28,7 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) and tc:IsFaceup() then
-		local dlv=Duel.SelectOption(tp,aux.Stringid(id,0),aux.Stringid(id,1))+1
+		local dlv=Duel.SelectOption(tp,aux.Stringid(id,1),aux.Stringid(id,2))+1
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_UPDATE_LEVEL)

@@ -30,7 +30,7 @@ end
 s.listed_series={0x122}
 s.listed_names={id}
 function s.filter1(c)
-	return c:IsFaceup() and c:IsMonster()
+	return c:IsFaceup() and c:IsType(TYPE_MONSTER)
 end
 function s.val(e,c)
 	return Duel.GetMatchingGroupCount(s.filter1,c:GetControler(),LOCATION_REMOVED,LOCATION_REMOVED,nil)*200
