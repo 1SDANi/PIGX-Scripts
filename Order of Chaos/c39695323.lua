@@ -22,7 +22,7 @@ function s.initial_effect(c)
 	e1:SetOperation(s.posop)
 	c:RegisterEffect(e1)
 end
-s.listed_series={0x8}
+s.listed_series={0x54,0x30a,0x82,0x59,0x8f}
 function s.filter(c,e,tp)
 	return (tc:IsSetCard(0x54) or tc:IsSetCard(0x30a) or tc:IsSetCard(0x82) or tc:IsSetCard(0x59) or tc:IsSetCard(0x8f)) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end

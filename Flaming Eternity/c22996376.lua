@@ -71,7 +71,9 @@ function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,g,#g,0,0)
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS)
-	local sg=g:Filter(Card.IsRelateToEffect,nil,e)
-	Duel.SpecialSummon(sg,0,tp,tp,false,false,POS_FACEUP)
+	local g=Duel.GetTargetCards(e)
+	local tg=g:Filter(Card.IsRelateToEffect,nil,e)
+	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
+	if #tg~=2 or ft<#tg or Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then return end
+	Duel.SpecialSummon(tg,0,tp,tp,false,false,POS_FACEUP)
 end

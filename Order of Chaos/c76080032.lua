@@ -21,6 +21,7 @@ function s.initial_effect(c)
 	--negate
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
+	e3:SetProperty(EFFECT_FLAG_DELAY)
 	e3:SetCategory(CATEGORY_NEGATE)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
 	e3:SetCode(EVENT_BATTLE_CONFIRM)
@@ -31,9 +32,10 @@ function s.initial_effect(c)
 end
 s.listed_series={0x7f}
 function s.tg(e,tp,eg,ep,ev,re,r,rp,chk)
-	local t=Duel.GetAttackTarget()
-	if t==e:GetHandler() then t=Duel.GetAttacker() end
-	if chk ==0 then	return t end
+	local d=Duel.GetAttackTarget()
+	local a=Duel.GetAttacker()
+	local q=e:GetHandler():GetEquipTarget()
+	if chk ==0 then	return (a==q and d~=nil) or (a~=nil and d==q) end
 	Duel.SetOperationInfo(0,CATEGORY_NEGATE,t,1,0,0)
 end
 function s.op(e,tp,eg,ep,ev,re,r,rp)

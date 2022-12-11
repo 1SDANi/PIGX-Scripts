@@ -2,7 +2,6 @@
 --Earthbound Immortal K'usillu
 local s,id=GetID()
 function s.initial_effect(c)
-	c:SetUniqueOnField(1,0,aux.FilterBoolFunction(Card.IsSetCard,0x21),LOCATION_MZONE)
 	local e7=Effect.CreateEffect(c)
 	e7:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e7:SetProperty(CATEGORY_DESTROY)

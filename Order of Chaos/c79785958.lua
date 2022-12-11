@@ -9,7 +9,6 @@ function s.initial_effect(c)
 	e2:SetTargetRange(LOCATION_HAND+LOCATION_MZONE,0)
 	e2:SetCode(EFFECT_EXTRA_SUMMON_COUNT)
 	e2:SetDescription(aux.Stringid(id,0))
-	e2:SetTarget(aux.TargetBoolFunction(Card.IsSetCard,0xa))
+	e2:SetTarget(aux.TargetBoolFunction(Card.IsAttribute,ATTRIBUTE_DARK))
 	c:RegisterEffect(e2)
 end
-s.listed_series={0xa}

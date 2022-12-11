@@ -42,7 +42,10 @@ function s.initial_effect(c)
 	c:RegisterEffect(e5)
 end
 function s.eqfilter(c)
-	return c:IsFaceup() and c:IsType(TYPE_SYNCHRO) and c:IsAbleToChangeControler()
+	return c:IsFaceup() and c:IsType(TYPE_FUSION) and c:IsAbleToChangeControler()
+end
+function s.eqval(ec,c,tp)
+	return ec:IsType(TYPE_FUSION)
 end
 function s.eqtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(1-tp) and s.eqfilter(chkc) end

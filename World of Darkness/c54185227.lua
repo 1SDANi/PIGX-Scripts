@@ -36,9 +36,9 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,0,0)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
-	local sg=Duel.GetTargetCards(e)
+	local g=Duel.GetTargetCards(e)
+	local tg=g:Filter(Card.IsRelateToEffect,nil,e)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-	if ft>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
-	if ft<#sg then return end
-	Duel.SpecialSummon(sg,0,tp,tp,true,false,POS_FACEUP)
+	if #tg~=2 or ft<#tg or Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then return end
+	Duel.SpecialSummon(tg,0,tp,tp,false,false,POS_FACEUP)
 end

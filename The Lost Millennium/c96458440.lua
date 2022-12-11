@@ -23,9 +23,11 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return (a==q and d~=nil) or (a~=nil and d==q)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return true end
 	local d=Duel.GetAttackTarget()
-	if d==e:GetHandler():GetEquipTarget() then d=Duel.GetAttacker() end
+	local a=Duel.GetAttacker()
+	local q=e:GetHandler():GetEquipTarget()
+	if chk ==0 then	return (a==q and d~=nil) or (a~=nil and d==q) end
+	if d==q then d=Duel.GetAttacker() end
 	local dam=d:GetAttack()
 	Duel.SetTargetPlayer(1-tp)
 	Duel.SetTargetParam(dam)

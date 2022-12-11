@@ -20,10 +20,11 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 	local e5=Effect.CreateEffect(c)
 	e5:SetDescription(aux.Stringid(id,1))
-	e5:SetCategory(CATEGORY_DAMAGE)
+	e5:SetCategory(CATEGORY_DAMAGE+CATEGORY_DESTROY)
 	e5:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
+	e5:SetProperty(EFFECT_FLAG_DELAY)
 	e5:SetRange(LOCATION_SZONE)
-	e5:SetCode(EVENT_BATTLE_DESTROYING)
+	e5:SetCode(EVENT_BATTLE_CONFIRM)
 	e5:SetCondition(s.tkcon)
 	e5:SetTarget(s.tktg)
 	e5:SetOperation(s.tkop)
@@ -34,14 +35,18 @@ function s.tkcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:GetFirst()==e:GetHandler():GetEquipTarget()
 end
 function s.tktg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return true end
-	Duel.SetTargetPlayer(1-tp)
-	Duel.SetTargetParam(1000)
-	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,1000)
+	local d=Duel.GetAttackTarget()
+	local a=Duel.GetAttacker()
+	local q=e:GetHandler():GetEquipTarget()
+	if chk ==0 then	return (a==q and d~=nil) or (a~=nil and d==q) end
+	Duel.SetOperationInfo(0,CATEGORY_DESTROY,t,1,0,0)
 end
 function s.tkop(e,tp,eg,ep,ev,re,r,rp)
-	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
-	Duel.Damage(p,d,REASON_EFFECT)
+	local t=Duel.GetAttackTarget()
+	if t==e:GetHandler() then t=Duel.GetAttacker() end
+	if t and t:IsRelateToBattle() and Duel.Destroy(t,REASON_EFFECT) then
+		Duel.Damage(1-tp,e:GetHandler():GetAttack(),REASON_EFFECT)
+	end
 end
 function s.eqfilter(c)
 	return c:IsFaceup() and c:IsSetCard(0x7f)

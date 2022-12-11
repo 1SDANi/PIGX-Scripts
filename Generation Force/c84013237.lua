@@ -34,7 +34,7 @@ function s.initial_effect(c)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
 end
-s.xyz_number=17
+s.xyz_number=39
 s.counter_place_list={COUNTER_XYZ}
 s.listed_series={0x48}
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk,chkc)

@@ -46,6 +46,9 @@ function s.spcs(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsCanRemoveCounter(tp,1,0,COUNTER_SPELL,6,REASON_COST) end
 	Duel.RemoveCounter(tp,1,0,COUNTER_SPELL,6,REASON_COST)
 end
+function s.filter(c)
+	return c:IsSpell() and c:IsAbleToHand()
+end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local c=e:GetHandler()
 	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.filter(chkc) end

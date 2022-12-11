@@ -20,5 +20,7 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(Card.IsType,tp,LOCATION_MZONE,LOCATION_MZONE,nil,TYPE_TOKEN)
 	local ct=Duel.Destroy(g,REASON_EFFECT)
-	Duel.Damage(tp,ct*500,REASON_EFFECT)
+	if ct and ct>0 then
+		Duel.Damage(tp,ct*500,REASON_EFFECT)
+	end
 end

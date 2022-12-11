@@ -5,7 +5,7 @@ local selfs={}
 if self_table then
 	function self_table.initial_effect(c) table.insert(selfs,c) end
 end
-local id=72
+local id=73
 if self_code then id=self_code end
 if not SealedDuel then
 	SealedDuel={}
