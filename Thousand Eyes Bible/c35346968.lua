@@ -12,12 +12,17 @@ function s.initial_effect(c)
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e2:SetProperty(EFFECT_FLAG_DELAY)
+	e2:SetCategory(CATEGORY_RECOVER)
 	e2:SetRange(LOCATION_SZONE)
 	e2:SetCode(EVENT_DRAW)
+	e2:SetTarget(s.rectg)
 	e2:SetOperation(s.recop)
 	c:RegisterEffect(e2)
 end
+function s.rectg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return ep==tp end
+	Duel.SetOperationInfo(0,CATEGORY_RECOVER,nil,0,tp,2000*#eg)
+end
 function s.recop(e,tp,eg,ep,ev,re,r,rp)
-	if ep~=tp then return end
 	Duel.Recover(tp,2000*#eg,REASON_EFFECT)
 end

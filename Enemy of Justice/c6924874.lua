@@ -37,8 +37,9 @@ function s.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 s.listed_series={0x64}
+s.listed_names={CARD_HARPY_LADY}
 function s.cfilter(c)
-	return c:IsFaceup() and c:IsSetCard(0x64) and c~=e:GetHandler()
+	return c:IsFaceup() and c:IsCode(CARD_HARPY_LADY)
 end
 function s.atlimit(e,c)
 	return c:IsFaceup() and c:IsSetCard(0x64) and c~=e:GetHandler()

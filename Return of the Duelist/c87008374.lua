@@ -29,6 +29,13 @@ function s.initial_effect(c)
 	e5:SetTarget(s.tktg)
 	e5:SetOperation(s.tkop)
 	c:RegisterEffect(e5)
+	--Destruction replacement effect
+	local e4=Effect.CreateEffect(c)
+	e4:SetType(EFFECT_TYPE_EQUIP)
+	e4:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE)
+	e4:SetCode(EFFECT_DESTROY_SUBSTITUTE)
+	e4:SetValue(s.repval)
+	c:RegisterEffect(e4)
 end
 s.listed_series={0x7f}
 function s.tkcon(e,tp,eg,ep,ev,re,r,rp)
@@ -77,4 +84,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.eqlimit(e,c)
 	return c==e:GetLabelObject()
+end
+function s.repval(e,re,r,rp)
+	return (r&REASON_BATTLE+REASON_EFFECT)~=0
 end

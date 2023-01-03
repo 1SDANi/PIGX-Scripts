@@ -38,6 +38,13 @@ function s.initial_effect(c)
 	e4:SetCondition(s.damcon)
 	e4:SetValue(s.damval)
 	c:RegisterEffect(e4)
+	--Destruction replacement effect
+	local e5=Effect.CreateEffect(c)
+	e5:SetType(EFFECT_TYPE_EQUIP)
+	e5:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE)
+	e5:SetCode(EFFECT_DESTROY_SUBSTITUTE)
+	e5:SetValue(s.repval)
+	c:RegisterEffect(e5)
 end
 s.listed_series={0x7f}
 function s.damcon(e)
@@ -166,4 +173,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Remove(e:GetHandler(),POS_FACEDOWN,REASON_EFFECT)
+end
+function s.repval(e,re,r,rp)
+	return (r&REASON_BATTLE+REASON_EFFECT)~=0
 end

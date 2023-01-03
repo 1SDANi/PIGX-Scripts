@@ -32,6 +32,7 @@ function s.initial_effect(c)
 	e4:SetValue(s.repval)
 	c:RegisterEffect(e4)
 end
+s.listed_series={0x7f}
 function s.eqfilter(c)
 	return c:IsFaceup() and c:IsSetCard(0x7f)
 end

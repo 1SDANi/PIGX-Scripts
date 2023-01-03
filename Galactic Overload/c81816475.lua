@@ -28,11 +28,11 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if #g1==0 or #g2==0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,1))
 	local tc=g2:Select(tp,1,1,nil):GetFirst()
-	if tc and tc:RemoveCounter(tp,COUNTER_SPELL,1,REASON_EFFECT)>0 then
+	if tc and tc:RemoveCounter(tp,COUNTER_XYZ,1,REASON_EFFECT)>0 then
 		Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,2))
 		local mg=g1:Select(tp,1,1,nil)
 		if mg then
-			mc:AddCounter(COUNTER_SPELL,1)
+			mc:AddCounter(COUNTER_XYZ,1)
 		end
 	end
 end

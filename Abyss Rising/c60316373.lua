@@ -15,7 +15,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x76}
 function s.filter(c)
-	return c:IsFaceup() and c:IsSetCard(0x76) and c:IsType(TYPE_MONSTER) and c:IsAbleToHand()
+	return c:IsSetCard(0x76) and c:IsType(TYPE_MONSTER) and c:IsAbleToHand()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_GRAVE) and s.filter(chkc) end

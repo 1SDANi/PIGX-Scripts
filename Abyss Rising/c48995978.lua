@@ -3,8 +3,9 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableCounterPermit(COUNTER_XYZ)
+	c:EnableCounterPermit(0x2b)
 	--fusion material
-	Fusion.AddProcMixRep(c,true,true,s.fusionfilter,3,99)
+	Fusion.AddProcMixRep(c,true,true,s.fusionfilter,2,99)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	local xyz=Effect.CreateEffect(c)
 	xyz:SetDescription(6666)
@@ -29,7 +30,6 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetCountLimit(1)
 	e1:SetRange(LOCATION_MZONE)
-	e1:SetCondition(s.condition)
 	e1:SetCost(s.cost)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.operation)
@@ -46,12 +46,6 @@ end
 s.xyz_number=88
 s.counter_place_list={COUNTER_XYZ}
 s.listed_series={0x48}
-function s.filter(c)
-	return c:GetSequence()<5
-end
-function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return not Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_SZONE,0,1,nil)
-end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,COUNTER_XYZ,1,REASON_COST) end
 	e:GetHandler():RemoveCounter(tp,COUNTER_XYZ,1,REASON_COST)

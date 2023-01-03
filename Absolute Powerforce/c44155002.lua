@@ -14,10 +14,9 @@ function s.initial_effect(c)
 	e1:SetCode(EFFECT_DISABLE)
 	c:RegisterEffect(e1)
 end
-s.listed_names={id}
 s.material_race={RACE_FIEND,RACE_BEAST}
 function s.disable(e,c)
-	return c:IsType(TYPE_EFFECT) and c~=e:GetHandler() and not c:IsCode(id)
+	return c:IsType(TYPE_EFFECT) and c~=e:GetHandler()
 end
 function s.fusionfilter(c,fc,sumtype,sp,sub,mg,sg)
 	local tg=fc:GetLevel()

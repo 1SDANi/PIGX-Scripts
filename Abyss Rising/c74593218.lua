@@ -49,7 +49,7 @@ end
 function s.negop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if Duel.NegateActivation(ev) and re:GetHandler():IsRelateToEffect(re) then
-		Duel.Destroy(eg,REASON_EFFECT)>0
+		Duel.Destroy(eg,REASON_EFFECT)
 	end
 end
 function s.xyzcn(e,tp,eg,ep,ev,re,r,rp)

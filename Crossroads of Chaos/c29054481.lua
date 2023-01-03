@@ -17,7 +17,7 @@ end
 s.listed_series={0x37}
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsAbleToHand() end
-	Duel.SendtoHand(e:GetHandler(),nil,REASON_EFFECT)
+	Duel.SendtoHand(e:GetHandler(),nil,REASON_COST)
 end
 function s.filter(c,e,tp)
 	return c:IsCode(0x37) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)

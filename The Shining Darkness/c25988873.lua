@@ -26,7 +26,7 @@ s.listed_series={0x29}
 function s.tg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler():GetEquipTarget()
 	if chk==0 then return c:IsFaceup() end
-	local lv=e:GetHandler():GetLevel()
+	local lv=c:GetLevel()
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,0))
 	e:SetLabel(Duel.AnnounceLevel(tp,1,11,lv))
 end

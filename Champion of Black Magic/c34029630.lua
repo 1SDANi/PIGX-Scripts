@@ -24,14 +24,6 @@ function s.initial_effect(c)
 	e3:SetTarget(s.target2)
 	e3:SetOperation(s.operation)
 	c:RegisterEffect(e3)
-	--self destroy
-	local e4=Effect.CreateEffect(c)
-	e4:SetType(EFFECT_TYPE_SINGLE)
-	e4:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
-	e4:SetRange(LOCATION_SZONE)
-	e4:SetCode(EFFECT_SELF_DESTROY)
-	e4:SetCondition(s.descon)
-	c:RegisterEffect(e4)
 end
 s.counter_place_list={COUNTER_SPELL}
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
@@ -71,7 +63,4 @@ function s.target2(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 		and Duel.IsExistingTarget(s.filter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,e:GetHandler()) end
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,2))
 	Duel.SelectTarget(tp,s.filter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,1,e:GetHandler())
-end
-function s.descon(e)
-	return e:GetHandler():GetCounter(COUNTER_SPELL)==0 and Duel.SelectYesNo(tp,aux.Stringid(id,3))
 end

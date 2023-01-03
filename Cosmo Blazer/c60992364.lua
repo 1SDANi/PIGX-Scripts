@@ -58,6 +58,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e5)
 end
 s.counter_place_list={COUNTER_XYZ}
+s.listed_series={0x7f}
 function s.eqfilter(c)
 	return c:IsFaceup() and c:IsSetCard(0x7f)
 end

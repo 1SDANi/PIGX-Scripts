@@ -23,9 +23,8 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.tg(e,c)
-	return c:IsFaceup() and c:IsRace(RACE_BEAST)
+	return c:IsFaceup() and c:IsAttribute(ATTRIBUTE_FIRE)
 end
-
 function s.spfilter(c)
 	return c:IsFaceup() and c:IsType(TYPE_TRAP+TYPE_SPELL) and c:IsAbleToGraveAsCost()
 end
