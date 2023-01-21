@@ -42,6 +42,7 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,c,1,0,0)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) then
 		Duel.SpecialSummon(c,SUMMON_TYPE_RITUAL,tp,1-tp,true,true,POS_FACEUP_DEFENSE)
 		c:CompleteProcedure()

@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableCounterPermit(COUNTER_XYZ)
 	--fusion material
-	Fusion.AddProcMixRep(c,true,true,s.fusionfilter,3,99)
+	Fusion.AddProcMixRep(c,true,true,s.fusionfilter,2,99)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	local xyz=Effect.CreateEffect(c)
 	xyz:SetDescription(6666)
@@ -37,7 +37,8 @@ s.xyz_number=16
 s.counter_place_list={COUNTER_XYZ}
 s.listed_series={0x48}
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,COUNTER_XYZ,1,REASON_COST) end
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,e:GetHandler()) and e:GetHandler():IsCanRemoveCounter(tp,COUNTER_XYZ,1,REASON_COST) end
+	Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST+REASON_DISCARD)
 	e:GetHandler():RemoveCounter(tp,COUNTER_XYZ,1,REASON_COST)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)

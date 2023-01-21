@@ -33,5 +33,5 @@ function s.atlimit(e,c)
 	return c:IsFaceup() and c:IsRace(RACE_DRAGON)
 end
 function s.ccon(e)
-	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsRace,RACE_DRAGON),tp,LOCATION_MZONE,0,1,nil)
+	return Duel.IsExistingMatchingCard(FilterFaceupFunction(Card.IsRace,RACE_DRAGON),tp,LOCATION_MZONE,0,1,nil)
 end

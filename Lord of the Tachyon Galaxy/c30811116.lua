@@ -55,7 +55,7 @@ function s.filter(c)
 	return c:IsType(TYPE_SPELL+TYPE_TRAP)
 end
 function s.descost(e,tp,eg,ep,ev,re,r,rp,chk)
-	local dg=Duel.GetMatchingGroup(s.filter,tp,0,LOCATION_MZONE,nil,e)
+	local dg=Duel.GetMatchingGroup(s.filter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,nil,e)
 	if chk==0 then return Duel.CheckReleaseGroupCost(tp,s.descfilter,1,false,aux.ReleaseCheckTarget,nil,dg) end
 	local g=Duel.SelectReleaseGroupCost(tp,s.descfilter,1,1,false,aux.ReleaseCheckTarget,nil,dg)
 	Duel.Release(g,REASON_COST)
@@ -85,8 +85,8 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.lvval(e,c)
-	return Duel.GetMatchingGroupCount(aux.FaceupFilter(Card.IsType,TYPE_TOKEN),c:GetControler(),LOCATION_MZONE,0,nil)
+	return Duel.GetMatchingGroupCount(aux.FilterFaceupFunction(Card.IsType,TYPE_TOKEN),c:GetControler(),LOCATION_MZONE,0,nil)
 end
 function s.indcon(e)
-	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsType,TYPE_TOKEN),e:GetHandlerPlayer(),LOCATION_MZONE,0,1,nil)
+	return Duel.IsExistingMatchingCard(aux.FilterFaceupFunction(Card.IsType,TYPE_TOKEN),e:GetHandlerPlayer(),LOCATION_MZONE,0,1,nil)
 end

@@ -17,12 +17,9 @@ s.listed_names={TOKEN_MECHA_PHANTOM_BEAST}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsChainNegatable(ev) and (re:IsActiveType(TYPE_MONSTER) or re:IsHasType(EFFECT_TYPE_ACTIVATE))
 end
-function s.filter(c)
-	return c:IsReleasable() and not c:IsStatus(STATUS_BATTLE_DESTROYED)
-end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	local g=Duel.GetMatchingGroup(Card.IsCode,tp,LOCATION_MZONE,0,nil,TOKEN_MECHA_PHANTOM_BEAST)
-	if chk==0 then return #g>0 and g:FilterCount(s.filter,nil)==#g end
+	if chk==0 then return Duel.CheckReleaseGroupCost(tp,Card.IsType,1,false,nil,nil,TYPE_TOKEN) end
+	local g=Duel.SelectReleaseGroupCost(tp,Card.IsType,1,1,false,nil,nil,TYPE_TOKEN)
 	Duel.Release(g,REASON_COST)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)

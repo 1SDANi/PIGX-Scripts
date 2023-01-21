@@ -14,7 +14,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x7}
 function s.filter(c)
-	return c:IsFaceup() and c:IsSetCard(0x7)
+	return c:IsFaceup() and c:IsSetCard(0x7) and c:IsType(TYPE_MONSTER)
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetLocationCount(tp,LOCATION_MZONE)>0

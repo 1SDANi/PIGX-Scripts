@@ -12,11 +12,11 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsType,TYPE_SPELL),tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,e:GetHandler()) end
+	if chk==0 then return Duel.IsExistingMatchingCard(aux.FilterFaceupFunction(Card.IsType,TYPE_SPELL),tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,e:GetHandler()) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,0,tp,LOCATION_DECK+LOCATION_HAND)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(aux.FaceupFilter(Card.IsType,TYPE_SPELL),tp,LOCATION_ONFIELD,LOCATION_ONFIELD,e:GetHandler())
+	local g=Duel.GetMatchingGroup(aux.FilterFaceupFunction(Card.IsType,TYPE_SPELL),tp,LOCATION_ONFIELD,LOCATION_ONFIELD,e:GetHandler())
 	local tc=g:GetFirst()
 	for tc in aux.Next(g) do
 		local e1=Effect.CreateEffect(c)

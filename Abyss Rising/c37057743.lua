@@ -30,6 +30,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 s.counter_place_list={COUNTER_XYZ}
+s.material_attribute={ATTRIBUTE_FIRE}
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,COUNTER_XYZ,1,REASON_COST) end
 	e:GetHandler():RemoveCounter(tp,COUNTER_XYZ,1,REASON_COST)

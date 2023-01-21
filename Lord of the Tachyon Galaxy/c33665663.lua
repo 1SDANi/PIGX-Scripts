@@ -38,7 +38,6 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local rec=Duel.GetFieldGroupCount(tp,LOCATION_MZONE,LOCATION_MZONE)*2000
 	Duel.Recover(p,rec,REASON_EFFECT)
 end
-
 function s.tg(e,c)
 	return c:IsRace(RACE_BEAST)
 end

@@ -1,5 +1,5 @@
 --炎王獣 キリン
---Fire King Avatar Kirin
+--Fire King Avatar Qilin
 local s,id=GetID()
 function s.initial_effect(c)
 	--special summon

@@ -23,8 +23,8 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,g,1,0,0)
 end
 function s.spfilter1(c,e,tp,lv)
-	local lv=c:GetLevel()
-	return lv>0 and lv<lv and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	local level=c:GetLevel()
+	return level>0 and level<lv and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
@@ -35,20 +35,19 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if ct<=0 then return end
 	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ct=1 end
 	local g=Duel.GetMatchingGroup(s.spfilter1,tp,LOCATION_GRAVE,0,nil,e,tp,lv)
-	if Duel.SendtoDeck(tc,nil,0,REASON_EFFECT)~=0 and (sumtype&SUMMON_TYPE_FUSION)==SUMMON_TYPE_FUSION
-		and g:CheckWithSumEqual(Card.GetLevel,lv,1,ct) and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
+	if Duel.SendtoDeck(tc,nil,0,REASON_EFFECT)~=0 and tc:IsPreviousControler(tp) and g:CheckWithSumEqual(Card.GetLevel,lv,1,ct) and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
 		Duel.BreakEffect()
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		local sg=g:SelectWithSumEqual(tp,Card.GetLevel,lv,1,ct)
 		local tc=sg:GetFirst()
 		for tc in aux.Next(sg) do
 			Duel.SpecialSummonStep(tc,0,tp,tp,false,false,POS_FACEUP)
-			local e1=Effect.CreateEffect(c)
+			local e1=Effect.CreateEffect(e:GetHandler())
 			e1:SetType(EFFECT_TYPE_SINGLE)
 			e1:SetCode(EFFECT_DISABLE)
 			e1:SetReset(RESET_EVENT+RESETS_STANDARD)
 			tc:RegisterEffect(e1)
-			local e2=Effect.CreateEffect(c)
+			local e2=Effect.CreateEffect(e:GetHandler())
 			e2:SetType(EFFECT_TYPE_SINGLE)
 			e2:SetCode(EFFECT_DISABLE_EFFECT)
 			e2:SetReset(RESET_EVENT+RESETS_STANDARD)

@@ -12,9 +12,9 @@ function s.initial_effect(c)
 	e2:SetOperation(s.spop)
 	c:RegisterEffect(e2)
 end
-s.listed_names={93717133}
+s.listed_series={0x107b}
 function s.filter(c)
-	return c:IsFaceup() and c:IsCode(93717133)
+	return c:IsFaceup() and c:IsCode(0x107b) and c:IsType(TYPE_MONSTER)
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()

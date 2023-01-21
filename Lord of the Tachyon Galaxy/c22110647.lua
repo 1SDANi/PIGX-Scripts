@@ -53,13 +53,10 @@ function s.initial_effect(c)
 	c:RegisterEffect(e5)
 end
 s.counter_place_list={COUNTER_XYZ}
-function s.descfilter(c)
-	return c:IsType(TYPE_TOKEN)
-end
+s.listed_names={TOKEN_MECHA_PHANTOM_BEAST}
 function s.descost(e,tp,eg,ep,ev,re,r,rp,chk)
-	local dg=Duel.GetMatchingGroup(aux.TRUE,tp,0,LOCATION_MZONE,nil,e)
-	if chk==0 then return Duel.CheckReleaseGroupCost(tp,s.descfilter,1,false,aux.ReleaseCheckTarget,nil,dg) end
-	local g=Duel.SelectReleaseGroupCost(tp,s.descfilter,1,1,false,aux.ReleaseCheckTarget,nil,dg)
+	if chk==0 then return Duel.CheckReleaseGroupCost(tp,Card.IsType,1,false,nil,nil,TYPE_TOKEN) end
+	local g=Duel.SelectReleaseGroupCost(tp,Card.IsType,1,1,false,nil,nil,TYPE_TOKEN)
 	Duel.Release(g,REASON_COST)
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
@@ -76,7 +73,7 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.indcon(e)
-	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsType,TYPE_TOKEN),e:GetHandlerPlayer(),LOCATION_MZONE,0,1,nil)
+	return Duel.IsExistingMatchingCard(FilterFaceupFunction(Card.IsType,TYPE_TOKEN),e:GetHandlerPlayer(),LOCATION_MZONE,0,1,nil)
 end
 function s.spcs(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,COUNTER_XYZ,2,REASON_COST) end
@@ -92,7 +89,7 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) and Duel.GetLocationCount(tp,LOCATION_MZONE)>1 
 		and Duel.IsPlayerCanSpecialSummonMonster(tp,TOKEN_MECHA_PHANTOM_BEAST,0x101b,TYPES_TOKEN,0,0,3,RACE_MACHINE,ATTRIBUTE_WIND) then
-		local token1=Duel.CreateToken(tp,TOKEN_MECHA_PHANTOM_BEAST_DRACOSSACK)
+		local token1=Duel.CreateToken(tp,TOKEN_MECHA_PHANTOM_BEAST)
 		Duel.SpecialSummonStep(token1,0,tp,tp,false,false,POS_FACEUP)
 		--Cannot be tributed for a tribute summon
 		local e1=Effect.CreateEffect(e:GetHandler())
@@ -112,7 +109,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		e5:SetValue(1)
 		e5:SetReset(RESET_EVENT+RESETS_STANDARD)
 		token1:RegisterEffect(e5,true)
-		local token2=Duel.CreateToken(tp,TOKEN_MECHA_PHANTOM_BEAST_DRACOSSACK)
+		local token2=Duel.CreateToken(tp,TOKEN_MECHA_PHANTOM_BEAST)
 		Duel.SpecialSummonStep(token2,0,tp,tp,false,false,POS_FACEUP)
 		--Cannot be tributed for a tribute summon
 		local e2=Effect.CreateEffect(e:GetHandler())

@@ -23,7 +23,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0xbf}
 function s.filter(c,e,tp)
-	return c:IsLevel(2) and c:IsAttribute(ATTRIBUTE_FIRE) and c:IsType(TYPE_NORMAL) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP,1-tp)
+	return c:IsLevelBelow(3) and c:IsAttribute(ATTRIBUTE_FIRE) and (c:IsType(TYPE_NORMAL) or (c:IsType(TYPE_GEMINI) and c:IsLocation(LOCATION_DECK))) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP,1-tp)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()

@@ -38,7 +38,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp,chk)
 	end
 end
 function s.spfilter(c)
-	return c:IsFaceup() and c:IsSetCard(0x3d)
+	return c:IsFaceup() and c:IsSetCard(0x3d) and c:IsType(TYPE_MONSTER)
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

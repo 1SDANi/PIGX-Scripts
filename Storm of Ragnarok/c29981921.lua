@@ -55,7 +55,7 @@ function s.disop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.repfilter(c,e)
-	return c:IsFaceup() and c:IsSetCard(0x3d) and c:IsDestructable(e) and not c:IsStatus(STATUS_DESTROY_CONFIRMED+STATUS_BATTLE_DESTROYED)
+	return c:IsFaceup() and c:IsSetCard(0x3d) and c:IsReleasableByEffect() and not c:IsStatus(STATUS_DESTROY_CONFIRMED+STATUS_BATTLE_DESTROYED)
 end
 function s.desreptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()

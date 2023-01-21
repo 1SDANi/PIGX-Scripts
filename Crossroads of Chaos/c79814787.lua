@@ -1,5 +1,5 @@
 --伝説の白石
---The White Stone of Legend
+--The White Egg of Legend
 local s,id=GetID()
 function s.initial_effect(c)
 	--to hand

@@ -1,5 +1,5 @@
 --RUM－リミテッド・バリアンズ・フォース
---Rank-Up-Magic Limited Barian's Force
+--Rank-Up-Magic Limited Varian's Force
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -19,7 +19,7 @@ function s.spfilter(c,e,tp,mc)
 	return c:IsType(TYPE_FUSION) and c:IsLevel(mc:GetLevel()+1) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_FUSION,tp,false,false) and (c:IsSetCard(0x1048) or c:IsSetCard(0x1073))
 end
 function s.tgfilter(c,e,tp)
-	return c:IsFaceup() and c:IsCanBeFusionMaterial() and c:IsAbleToRemove() and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp,c)
+	return c:IsFaceup() and c:IsCanBeFusionMaterial() and c:IsAbleToRemove() and c:IsLevelBelow(4) and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp,c)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,nil,e,tp) end

@@ -1,6 +1,14 @@
 --The Splendid Venus
 local s,id=GetID()
 function s.initial_effect(c)
+	--Type Fairy
+	local e00=Effect.CreateEffect(c)
+	e00:SetType(EFFECT_TYPE_SINGLE)
+	e00:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
+	e00:SetCode(EFFECT_ADD_RACE)
+	e00:SetRange(LOCATION_ALL)
+	e00:SetValue(RACE_FAIRY)
+	c:RegisterEffect(e00)
 	--atk,def
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)

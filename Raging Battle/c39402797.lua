@@ -1,5 +1,5 @@
 --トライデント・ドラギオン
---Trident Dragion
+--Trident Dragon
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material

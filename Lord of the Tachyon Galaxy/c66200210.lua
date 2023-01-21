@@ -37,12 +37,9 @@ function s.initial_effect(c)
 end
 s.listed_names={TOKEN_MECHA_PHANTOM_BEAST}
 s.listed_series={0x101b}
-function s.descfilter(c)
-	return c:IsType(TYPE_TOKEN)
-end
 function s.thcs(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.CheckReleaseGroupCost(tp,s.descfilter,1,false,aux.ReleaseCheckTarget,nil) end
-	local g=Duel.SelectReleaseGroupCost(tp,s.descfilter,1,1,false,aux.ReleaseCheckTarget,nil)
+	if chk==0 then return Duel.CheckReleaseGroupCost(tp,Card.IsType,1,false,nil,nil,TYPE_TOKEN) end
+	local g=Duel.SelectReleaseGroupCost(tp,Card.IsType,1,1,false,nil,nil,TYPE_TOKEN)
 	Duel.Release(g,REASON_COST)
 end
 function s.filter(c)
@@ -61,7 +58,6 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SendtoHand(tc,nil,REASON_EFFECT)
 	end
 end
-
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>1 end
 	Duel.SetOperationInfo(0,CATEGORY_TOKEN,nil,2,tp,0)
@@ -77,8 +73,8 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.lvval(e,c)
-	return Duel.GetMatchingGroupCount(aux.FaceupFilter(Card.IsType,TYPE_TOKEN),c:GetControler(),LOCATION_MZONE,0,nil)
+	return Duel.GetMatchingGroupCount(aux.FilterFaceupFunction(Card.IsType,TYPE_TOKEN),c:GetControler(),LOCATION_MZONE,0,nil)
 end
 function s.indcon(e)
-	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsType,TYPE_TOKEN),e:GetHandlerPlayer(),LOCATION_MZONE,0,1,nil)
+	return Duel.IsExistingMatchingCard(aux.FilterFaceupFunction(Card.IsType,TYPE_TOKEN),e:GetHandlerPlayer(),LOCATION_MZONE,0,1,nil)
 end

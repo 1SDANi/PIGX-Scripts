@@ -104,19 +104,8 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) then
-		Duel.SpecialSummonStep(tc,0,tp,tp,false,false,POS_FACEUP)
-		local e2=Effect.CreateEffect(e:GetHandler())
-		e2:SetType(EFFECT_TYPE_SINGLE)
-		e2:SetCode(EFFECT_DISABLE)
-		e2:SetReset(RESET_EVENT+RESETS_STANDARD)
-		tc:RegisterEffect(e2,true)
-		local e3=Effect.CreateEffect(e:GetHandler())
-		e3:SetType(EFFECT_TYPE_SINGLE)
-		e3:SetCode(EFFECT_DISABLE_EFFECT)
-		e3:SetReset(RESET_EVENT+RESETS_STANDARD)
-		tc:RegisterEffect(e3,true)
+		Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)
 	end
-	Duel.SpecialSummonComplete()
 end
 function s.contactfil(tp)
 	return Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)

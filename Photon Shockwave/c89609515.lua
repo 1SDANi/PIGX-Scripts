@@ -13,10 +13,10 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsAttribute,ATTRIBUTE_FIRE),tp,LOCATION_MZONE,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(aux.FilterFaceupFunction(Card.IsAttribute,ATTRIBUTE_FIRE),tp,LOCATION_MZONE,0,1,nil) end
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(aux.FaceupFilter(Card.IsAttribute,ATTRIBUTE_FIRE),tp,LOCATION_MZONE,0,nil)
+	local g=Duel.GetMatchingGroup(aux.FilterFaceupFunction(Card.IsAttribute,ATTRIBUTE_FIRE),tp,LOCATION_MZONE,0,nil)
 	local tc=g:GetFirst()
 	for tc in aux.Next(g) do
 		local e1=Effect.CreateEffect(e:GetHandler())

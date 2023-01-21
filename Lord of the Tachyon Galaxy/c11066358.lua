@@ -9,13 +9,13 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetCondition(aux.IsGeminiState)
-	e1:SetCost(s.spcost)
+	e1:SetCost(s.spcs)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
 end
 s.listed_series={0x107b}
-function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
+function s.spcs(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsReleasable() end
 	Duel.Release(e:GetHandler(),REASON_COST)
 end

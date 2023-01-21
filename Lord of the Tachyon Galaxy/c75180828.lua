@@ -17,18 +17,17 @@ function s.initial_effect(c)
 	e3:SetValue(1)
 	c:RegisterEffect(e3)
 end
-s.listed_series={0x74}
-function s.spfilter(c)
-	return c:IsDiscardable() and c:IsAttribute(ATTRIBUTE_WATER)
+function s.spfilter(c,tp)
+	return c:IsAttribute(ATTRIBUTE_WATER) and c:IsAbleToRemoveAsCost() and aux.SpElimFilter(c,true)
 end
 function s.spcs(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND,0,1,e:GetHandler()) end
-	Duel.DiscardHand(tp,s.spfilter,1,1,REASON_COST+REASON_DISCARD,e:GetHandler())
-	local g=Duel.GetOperatedGroup()
-	e:SetLabel(g:GetFirst():GetLevel())
+	if chk==0 then return Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,e:GetHandler()) end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
+	local cg=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,1,e:GetHandler())
+	Duel.Remove(cg,POS_FACEUP,REASON_COST)
 end
 function s.filter(c)
-	return c:IsSetCard(0x74) and c:IsType(TYPE_MONSTER) and c:IsAbleToHand()
+	return c:IsAttribute(ATTRIBUTE_WATER) and c:IsType(TYPE_MONSTER) and c:IsAbleToHand()
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local c=e:GetHandler()

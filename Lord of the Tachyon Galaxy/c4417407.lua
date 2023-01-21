@@ -47,23 +47,19 @@ function s.initial_effect(c)
 	c:RegisterEffect(e5)
 end
 s.listed_names={TOKEN_MECHA_PHANTOM_BEAST}
-function s.poscfilter(c)
-	return c:IsType(TYPE_TOKEN)
-end
 function s.poscost(e,tp,eg,ep,ev,re,r,rp,chk)
-	local dg=Duel.GetMatchingGroup(s.filter,tp,0,LOCATION_MZONE,nil,e)
-	if chk==0 then return Duel.CheckReleaseGroupCost(tp,s.poscfilter,1,false,aux.ReleaseCheckTarget,nil,dg) end
-	local g=Duel.SelectReleaseGroupCost(tp,s.poscfilter,1,1,false,aux.ReleaseCheckTarget,nil,dg)
+	if chk==0 then return Duel.CheckReleaseGroupCost(tp,Card.IsType,1,false,nil,nil,TYPE_TOKEN) end
+	local g=Duel.SelectReleaseGroupCost(tp,Card.IsType,1,1,false,nil,nil,TYPE_TOKEN)
 	Duel.Release(g,REASON_COST)
 end
 function s.filter(c)
 	return c:IsFaceup() and c:IsCanTurnSet()
 end
 function s.postg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_MZONE) and s.filter(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,LOCATION_MZONE,LOCATION_MZONE,1,nil) end
+	if chkc then return chkc:IsLocation(LOCATION_MZONE) and s.filter(chkc) and chkc:IsControler(1-tp) end
+	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,0,LOCATION_MZONE,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_POSCHANGE)
-	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_MZONE,LOCATION_MZONE,1,1,nil)
+	local g=Duel.SelectTarget(tp,s.filter,tp,0,LOCATION_MZONE,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_POSITION,g,1,0,0)
 end
 function s.posop(e,tp,eg,ep,ev,re,r,rp)
@@ -84,8 +80,8 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.lvval(e,c)
-	return Duel.GetMatchingGroupCount(aux.FaceupFilter(Card.IsType,TYPE_TOKEN),c:GetControler(),LOCATION_MZONE,0,nil)
+	return Duel.GetMatchingGroupCount(aux.FilterFaceupFunction(Card.IsType,TYPE_TOKEN),c:GetControler(),LOCATION_MZONE,0,nil)
 end
 function s.indcon(e)
-	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsType,TYPE_TOKEN),e:GetHandlerPlayer(),LOCATION_MZONE,0,1,nil)
+	return Duel.IsExistingMatchingCard(aux.FilterFaceupFunction(Card.IsType,TYPE_TOKEN),e:GetHandlerPlayer(),LOCATION_MZONE,0,1,nil)
 end

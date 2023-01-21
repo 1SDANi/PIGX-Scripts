@@ -26,5 +26,5 @@ function s.etarget(e,c)
 	return c:IsRace(RACE_DRAGON)
 end
 function s.ccon(e)
-	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsRace,RACE_DRAGON),tp,LOCATION_MZONE,0,1,nil,RACE_DRAGON)
+	return Duel.IsExistingMatchingCard(aux.FilterFaceupFunction(Card.IsRace,RACE_DRAGON),tp,LOCATION_MZONE,0,1,nil,RACE_DRAGON)
 end

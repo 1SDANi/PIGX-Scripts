@@ -16,6 +16,7 @@ function s.initial_effect(c)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
 end
+s.material_attribute={ATTRIBUTE_FIRE}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION)
 end

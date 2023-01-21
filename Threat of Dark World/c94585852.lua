@@ -45,15 +45,14 @@ function s.spfilter(c,lv,e,tp)
 	return c:GetLevel()<lv and c:IsSetCard(0x45) and c:IsType(TYPE_MONSTER) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil,eg:GetFirst():GetLevel()) or
-	(eg:GetFirst():IsSetCard(0x45) and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_DECK,0,1,nil,eg:GetFirst():GetLevel(),e,tp)) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil,eg:GetFirst():GetLevel()) end
 	if not eg:GetFirst():IsSetCard(0x45) then
 		Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
 		e:SetCategory(CATEGORY_TOHAND)
 	end
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
-	if eg:GetFirst():IsSetCard(0x45) and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
+	if eg:GetFirst():IsSetCard(0x45) and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_DECK,0,1,nil,eg:GetFirst():GetLevel(),e,tp) and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_DECK,0,1,1,nil,eg:GetFirst():GetLevel(),e,ep)
 		if #g>0 then

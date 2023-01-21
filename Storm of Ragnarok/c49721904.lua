@@ -25,7 +25,7 @@ end
 s.listed_series={0x3d}
 s.listed_names={id}
 function s.filter(c)
-	return c:IsFaceup() and c:IsSetCard(0x3d)
+	return c:IsFaceup() and c:IsSetCard(0x3d) and c:IsType(TYPE_MONSTER)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_MZONE,0,1,nil) end

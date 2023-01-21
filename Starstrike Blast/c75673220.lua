@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return true end
+	if chk==0 then return Duel.GetMatchingGroup(Card.IsAbleToRemove,tp,0,LOCATION_HAND,nil)>0 end
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,nil,1,1-tp,LOCATION_HAND)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)

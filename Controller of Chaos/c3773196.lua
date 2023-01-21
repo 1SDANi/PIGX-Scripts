@@ -24,6 +24,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		--Destroy
 		local e2=Effect.CreateEffect(c)
 		e2:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_SINGLE)
+		e2:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 		e2:SetCode(EVENT_LEAVE_FIELD)
 		e2:SetOperation(s.desop)
 		c:RegisterEffect(e2,true)

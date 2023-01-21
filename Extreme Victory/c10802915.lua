@@ -37,14 +37,14 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		e2:SetReset(RESET_EVENT+RESETS_STANDARD)
 		tc:RegisterEffect(e2,true)
 		--Banish it if it leaves the field
-		local e3=Effect.CreateEffect(c)
+		local e3=Effect.CreateEffect(e:GetHandler())
 		e3:SetDescription(3300)
 		e3:SetType(EFFECT_TYPE_SINGLE)
 		e3:SetCode(EFFECT_LEAVE_FIELD_REDIRECT)
 		e3:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_CLIENT_HINT)
 		e3:SetReset(RESET_EVENT+RESETS_REDIRECT)
 		e3:SetValue(LOCATION_REMOVED)
-		c:RegisterEffect(e3,true)
+		tc:RegisterEffect(e3,true)
 	end
 	Duel.SpecialSummonComplete()
 end

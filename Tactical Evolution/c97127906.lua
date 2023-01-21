@@ -56,5 +56,5 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.val(e,c)
-	return Duel.GetMatchingGroupCount(aux.FilterFaceupFunction(Card.IsRace,RACE_MACHINE),c:GetControler(),LOCATION_MZONE,LOCATION_MZONE,nil)*500
+	return Duel.GetCounter(0,1,1,COUNTER_A)*500
 end

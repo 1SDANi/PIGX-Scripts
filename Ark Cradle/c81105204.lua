@@ -26,7 +26,7 @@ function s.valcon(e,re,r,rp)
 	return (r&REASON_EFFECT)~=0
 end
 function s.spfilter(c)
-	return c:IsFaceup() and c:IsSetCard(0x33)
+	return c:IsFaceup() and c:IsSetCard(0x33) and c:IsType(TYPE_MONSTER)
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

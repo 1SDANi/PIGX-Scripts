@@ -45,7 +45,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.spfilter(c)
-	return c:IsFaceup() and c:IsSetCard(0x19)
+	return c:IsFaceup() and c:IsSetCard(0x19) and c:IsType(TYPE_MONSTER)
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

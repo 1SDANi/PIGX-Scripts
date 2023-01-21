@@ -14,7 +14,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x76}
 function s.spfilter(c)
-	return c:IsFaceup() and c:IsSetCard(0x76)
+	return c:IsFaceup() and c:IsSetCard(0x76) and c:IsType(TYPE_MONSTER)
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

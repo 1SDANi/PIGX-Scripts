@@ -18,8 +18,7 @@ function s.sumcs(e,tp,eg,ep,ev,re,r,rp,chk)
 	local eg=Group.CreateGroup()
 	local hg=Duel.GetMatchingGroup(s.filter,tp,LOCATION_HAND+LOCATION_DECK,0,c,e,tp)
 	if hg and #hg==1 then eg:AddCard(hg:GetFirst()) end
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,eg) and e:GetHandler():IsReleasable() end
-	Duel.Release(e:GetHandler(),REASON_COST)
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,eg) end
 	Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST+REASON_DISCARD,eg)
 end
 function s.filter(c,e,sp)
