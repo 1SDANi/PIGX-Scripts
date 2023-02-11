@@ -11,11 +11,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 
-		and Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,0,TYPES_TOKEN,0,0,1,RACE_ELEMENTAL,ATTRIBUTE_WATER) end
-	local dis=Duel.SelectDisableField(tp,1,LOCATION_MZONE,0,0)
-	Duel.Hint(HINT_ZONE,tp,dis)
-	e:SetLabel(dis)
+	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0  and Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,0,TYPES_TOKEN,0,0,1,RACE_ELEMENTAL,ATTRIBUTE_WATER) end
 	Duel.SetOperationInfo(0,CATEGORY_TOKEN,nil,1,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,0)
 end
@@ -24,12 +20,6 @@ function s.disop(e,tp)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	local e1=Effect.CreateEffect(c)
-	e1:SetType(EFFECT_TYPE_FIELD)
-	e1:SetCode(EFFECT_DISABLE_FIELD)
-	e1:SetOperation(s.disop)
-	e1:SetLabel(e:GetLabel())
-	Duel.RegisterEffect(e1,tp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 		and Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,0,TYPES_TOKEN,0,0,1,RACE_AQUA,ATTRIBUTE_WATER) then
 		local token=Duel.CreateToken(tp,id+1)

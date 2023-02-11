@@ -16,10 +16,10 @@ function s.initial_effect(c)
 	Duel.AddCustomActivityCounter(id,ACTIVITY_FLIPSUMMON,s.counterfilter)
 end
 function s.counterfilter(c)
-	return c:IsAttribute(ATTRIBUTE_WATER)
+	return c:IsRace(RACE_AQUATIC)
 end
 function s.sumlimit(e,c,sump,sumtype,sumpos,targetp,se)
-	return not c:IsAttribute(ATTRIBUTE_WATER)
+	return not c:IsRace(RACE_AQUATIC)
 end
 function s.filter(c,e,tp)
 	return c:IsRace(RACE_AQUATIC) and c:IsLevelBelow(4) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
@@ -86,6 +86,14 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 			e2:SetCode(EFFECT_DISABLE_EFFECT)
 			e2:SetReset(RESET_EVENT+RESETS_STANDARD)
 			tc:RegisterEffect(e2)
+			local e3=Effect.CreateEffect(e:GetHandler())
+			e3:SetDescription(3300)
+			e3:SetType(EFFECT_TYPE_SINGLE)
+			e3:SetCode(EFFECT_LEAVE_FIELD_REDIRECT)
+			e3:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_CLIENT_HINT)
+			e3:SetReset(RESET_EVENT+RESETS_REDIRECT)
+			e3:SetValue(LOCATION_REMOVED)
+			tc:RegisterEffect(e3,true)
 		end
 	end
 	Duel.SpecialSummonComplete()

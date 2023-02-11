@@ -25,7 +25,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsLocation(LOCATION_GRAVE) and (r&REASON_EFFECT+REASON_BATTLE)~=0
 end
 function s.filter(c)
-	return c:HasLevel() and c:IsCanAddCounter(COUNTER_FOG,c:GetLevel())
+	return c:IsCanAddCounter(COUNTER_FOG,c:GetLevel())
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_MZONE,LOCATION_MZONE,1,nil) end

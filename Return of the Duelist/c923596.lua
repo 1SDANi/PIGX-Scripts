@@ -20,12 +20,17 @@ function s.initial_effect(c)
 	e2:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_DAMAGE_STEP)
 	e2:SetCode(EVENT_TO_GRAVE)
 	e2:SetCondition(s.cn)
+	e2:SetCost(s.cs)
 	e2:SetTarget(s.tg)
 	e2:SetOperation(s.op)
 	c:RegisterEffect(e2)
 end
 function s.cn(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsPreviousLocation(LOCATION_ONFIELD)
+end
+function s.cs(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,e:GetHandler()) end
+	Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST+REASON_DISCARD)
 end
 function s.hfilter(c)
 	return c:IsRace(RACE_MACHINE) and c:IsAbleToHand()

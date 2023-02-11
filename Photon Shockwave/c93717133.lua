@@ -46,9 +46,10 @@ function s.rmcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.rmtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	local bc=c:GetBattleTarget()
-	if chk==0 then return bc and bc:IsOnField() and c:IsAbleToRemove() and bc:IsAbleToRemove() end
-	local g=Group.FromCards(c,bc)
+	local at=c:GetBattleTarget()
+	if at==c then at=c:GetAttacker() end
+	if chk==0 then return at and at:IsOnField() and at:IsAbleToRemove() and c:IsAbleToRemove() end
+	local g=Group.FromCards(c,at)
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,g,2,0,0)
 end
 function s.rmop(e,tp,eg,ep,ev,re,r,rp)

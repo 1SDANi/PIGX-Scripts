@@ -34,7 +34,7 @@ function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:GetHandler():RemoveCounter(tp,COUNTER_XYZ,1,REASON_COST)
 end
 function s.filter(c,e,tp)
-	return c:IsLevelBelow(3) and c:IsType(TYPE_FUSION) and c:IsAttribute(ATTRIBUTE_WATER) and Duel.GetLocationCountFromEx(tp,tp,nil,c)>0 and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsLevelBelow(3) and c:IsType(TYPE_FUSION) and c:IsRace(RACE_AQUATIC) and Duel.GetLocationCountFromEx(tp,tp,nil,c)>0 and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_EXTRA,0,1,nil,e,tp) end
@@ -64,7 +64,7 @@ function s.xyzop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.fusionfilter(c,fc,sumtype,sp,sub,mg,sg)
 	local lv=fc:GetLevel()
-	return c:HasLevel() and c:IsLevel(lv)
+	return c:IsLevel(lv) and c:IsRace(RACE_AQUATIC)
 end
 function s.contactfil(tp)
 	return Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)

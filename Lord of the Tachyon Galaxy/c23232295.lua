@@ -37,8 +37,7 @@ function s.attackup(e,c)
 	return -1000*c:GetCounter(COUNTER_XYZ)
 end
 function s.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return (r&REASON_REPLACE+REASON_RULE)==0
-		and e:GetHandler():GetCounter(COUNTER_XYZ)>0 end
+	if chk==0 then return (r&REASON_REPLACE+REASON_RULE)==0 and e:GetHandler():IsCanRemoveCounter(tp,COUNTER_XYZ,1,REASON_EFFECT) end
 	Duel.SetOperationInfo(0,CATEGORY_COIN,nil,0,tp,1)
 	return true
 end
@@ -70,7 +69,7 @@ function s.xyzop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.fusionfilter(c,fc,sumtype,sp,sub,mg,sg)
 	local lv=fc:GetLevel()
-	return c:HasLevel() and c:IsLevel(lv)
+	return c:IsLevel(lv) and c:IsRace(RACE_WARRIOR)
 end
 function s.contactfil(tp)
 	return Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)

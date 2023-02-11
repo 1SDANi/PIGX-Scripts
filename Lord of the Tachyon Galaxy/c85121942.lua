@@ -59,7 +59,8 @@ s.counter_place_list={COUNTER_XYZ}
 s.listed_series={0x48}
 s.listed_names={59627393}
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,COUNTER_XYZ,1,REASON_COST) end
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,e:GetHandler()) and e:GetHandler():IsCanRemoveCounter(tp,COUNTER_XYZ,1,REASON_COST) end
+	Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST+REASON_DISCARD)
 	e:GetHandler():RemoveCounter(tp,COUNTER_XYZ,1,REASON_COST)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
@@ -138,7 +139,7 @@ function s.xyzop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.fusionfilter(c,fc,sumtype,sp,sub,mg,sg)
 	local lv=fc:GetLevel()
-	return c:HasLevel() and c:IsLevel(lv)
+	return c:IsLevel(lv)
 end
 function s.contactfil(tp)
 	return Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)

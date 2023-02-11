@@ -20,6 +20,7 @@ function s.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_TRIGGER_O+EFFECT_TYPE_SINGLE)
 	e2:SetCode(EVENT_TO_GRAVE)
 	e2:SetCondition(s.condition)
+	e2:SetCost(s.cost)
 	e2:SetTarget(s.target)
 	e2:SetOperation(s.operation)
 	c:RegisterEffect(e2)
@@ -36,6 +37,10 @@ function s.repval(e,re,r,rp)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp,chk)
 	return e:GetHandler():IsPreviousLocation(LOCATION_ONFIELD)
+end
+function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,e:GetHandler()) end
+	Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST+REASON_DISCARD)
 end
 function s.filter(c)
 	return c:IsType(TYPE_UNION) and c:IsType(TYPE_MONSTER) and c:IsAbleToHand()

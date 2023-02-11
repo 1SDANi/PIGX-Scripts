@@ -14,14 +14,15 @@ function s.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetRange(LOCATION_FZONE)
 	e2:SetProperty(EFFECT_FLAG_BOTH_SIDE)
+	e2:SetCountLimit(1)
 	e2:SetCost(s.cost)
 	e2:SetTarget(s.target)
 	e2:SetOperation(s.activate)
 	c:RegisterEffect(e2)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.CheckLPCost(tp,1000) end
-	Duel.PayLPCost(tp,1000)
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,e:GetHandler()) end
+	Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST+REASON_DISCARD)
 end
 function s.filter(c)
 	return c:IsSummonable(true,nil)

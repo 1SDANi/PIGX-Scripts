@@ -44,7 +44,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.filter(c)
-	return c:IsCode(0x36) and c:IsAbleToHand() and not c:IsCode(id)
+	return c:IsCode(0x36) and c:IsAbleToHand() and c:IsType(TYPE_MONSTER) and not c:IsCode(id)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

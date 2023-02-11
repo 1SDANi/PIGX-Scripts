@@ -13,6 +13,7 @@ function s.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_FIELD)
 	e2:SetCode(EVENT_TO_GRAVE)
 	e2:SetRange(LOCATION_FZONE)
+	e2:SetTarget(s.actg)
 	e2:SetOperation(s.acop)
 	c:RegisterEffect(e2)
 	--atkup
@@ -69,6 +70,10 @@ function s.atkval(e,c)
 end
 function s.cfilter(c)
 	return c:GetPreviousLocation()==LOCATION_DECK
+end
+function s.actg(e,tp,eg,ep,ev,re,r,rp,chk)
+	local g=eg:Filter(s.cfilter,nil)
+	if chk==0 then return g and #g>0 end
 end
 function s.acop(e,tp,eg,ep,ev,re,r,rp)
 	local g=eg:Filter(s.cfilter,nil)

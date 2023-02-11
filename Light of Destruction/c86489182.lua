@@ -25,8 +25,9 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,g,#g,0,0)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
-	local tc=Duel.GetFirstTarget()
-	if tc and tc:IsRelateToEffect(e) then
-		Duel.SendtoHand(tc,nil,REASON_EFFECT)
+	local g=Duel.GetFirstTarget()
+	local tg=g:Filter(Card.IsRelateToEffect,nil,e)
+	if tg and #tg>0 then
+		Duel.SendtoHand(tg,nil,REASON_EFFECT)
 	end
 end

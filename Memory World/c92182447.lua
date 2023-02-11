@@ -72,5 +72,5 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterEffect(e3,tp)
 end
 function s.limit(e,re,tp)
-	return re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:GetHandler():IsCode(92182447)
+	return re:IsHasType(EFFECT_TYPE_ACTIVATE)
 end

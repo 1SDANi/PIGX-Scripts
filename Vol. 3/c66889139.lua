@@ -1,4 +1,4 @@
---Gaia the Dragon Champion
+--Gaia The Fierce Dragoon
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material

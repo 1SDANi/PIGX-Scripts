@@ -3,7 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsCode,11321183),s.filter)
+	Fusion.AddProcMix(c,true,true,11321183,s.filter)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	--Destruction replacement
 	local e4=Effect.CreateEffect(c)
@@ -33,10 +33,8 @@ function s.desreptg(e,tp,eg,ep,ev,re,r,rp,chk)
 		return true
 	else return false end
 end
-function s.filter(c,fc,sumtype,tp)
-	return  (c:IsRace(RACE_DRAGON,fc,sumtype,tp) and
-			(c:IsAttribute(ATTRIBUTE_DARK,fc,sumtype,tp)) and
-			(c:IsType(TYPE_UNION,fc,sumtype,tp)))
+function s.filter(c)
+	return c:IsRace(RACE_DRAGON) and c:IsAttribute(ATTRIBUTE_DARK) and c:IsType(TYPE_UNION)
 end
 function s.contactfil(tp)
 	return Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)

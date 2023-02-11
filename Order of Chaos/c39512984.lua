@@ -38,7 +38,7 @@ function s.atkup(e,c)
 	return Duel.GetMatchingGroupCount(s.atkfilter,c:GetControler(),LOCATION_GRAVE,0,nil)*100
 end
 function s.filter(c)
-	return c:IsLevelBelow(7) and c:IsSetCard(0x34) and c:IsSetCard(0x8) and c:IsType(TYPE_FUSION) and c:IsAbleToRemoveAsCost() and aux.SpElimFilter(c,true)
+	returnc:IsSetCard(0x34) and c:IsSetCard(0x8) and c:IsType(TYPE_FUSION) and c:IsAbleToRemoveAsCost() and aux.SpElimFilter(c,true)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,e:GetHandler()) end

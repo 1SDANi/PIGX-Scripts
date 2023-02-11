@@ -54,9 +54,6 @@ end
 function s.valcon(e,re,r,rp)
 	return (r&REASON_BATTLE+REASON_EFFECT)~=0
 end
-function s.tg(e,c)
-	return c:IsFaceup() and c:IsType(TYPE_UNION)
-end
 function s.indop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local e1=Effect.CreateEffect(c)
@@ -64,8 +61,9 @@ function s.indop(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetRange(LOCATION_SZONE)
-	e1:SetTargetRange(LOCATION_ONFIELD,0)
-	e1:SetTarget(s.tg)
+	e1:SetTargetRange(LOCATION_MZONE,0)
+	e1:SetReset(RESET_PHASE+PHASE_END)
+	e1:SetTarget(aux.TRUE)
 	e1:SetValue(aux.tgoval)
 	c:RegisterEffect(e1)
 end

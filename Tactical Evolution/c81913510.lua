@@ -8,17 +8,9 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e1:SetCode(EVENT_FREE_CHAIN)
-	e1:SetCost(s.cost)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
-end
-function s.filter(c,e,tp)
-	return c:IsDiscardable() and ((not s.tgfilter(c,e,tp)) or Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_HAND+LOCATION_DECK+LOCATION_ONFIELD,0,1,c,e,tp))
-end
-function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_HAND,0,1,e:GetHandler(),e,tp) end
-	Duel.DiscardHand(tp,s.filter,1,1,REASON_COST+REASON_DISCARD,e:GetHandler(),e,tp)
 end
 function s.tgfilter(c,e,tp)
 	return c:IsCanBeFusionMaterial() and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp,c)

@@ -7,6 +7,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Susion summon procedure
 	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_EARTH),aux.TRUE)
+	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	--double attack
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -44,4 +45,10 @@ function s.op(e,tp,eg,ep,ev,re,r,rp,chk)
 		Duel.SendtoHand(g,nil,REASON_EFFECT)
 		Duel.ConfirmCards(1-tp,g)
 	end
+end
+function s.contactfil(tp)
+	return Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)
+end
+function s.contactop(g)
+	Duel.SendtoGrave(g,REASON_COST+REASON_MATERIAL+REASON_FUSION)
 end

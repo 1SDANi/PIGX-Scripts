@@ -33,13 +33,6 @@ function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=re:GetHandler()
 	return rp==tp and re:IsHasType(EFFECT_TYPE_ACTIVATE) and c:IsType(TYPE_TRAP) and c:IsSetCard(0x4c)
 end
-function s.cs(e,tp,eg,ep,ev,re,r,rp,chk)
-	local eg=Group.CreateGroup()
-	local hg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_HAND+LOCATION_DECK,0,c,e,tp)
-	if hg and #hg==1 then eg:AddCard(hg:GetFirst()) end
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,eg) end
-	Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST+REASON_DISCARD,eg)
-end
 function s.spfilter(c,e,tp)
 	return c:IsSetCard(0x108a) and c:IsCanBeSpecialSummoned(e,0,tp,false,false) and not c:IsCode(id)
 end

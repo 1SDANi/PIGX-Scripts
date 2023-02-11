@@ -37,10 +37,10 @@ function s.filter(c)
 	return c:IsType(TYPE_SPELL+TYPE_TRAP)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsOnField() and s.filter(chkc) and chkc~=e:GetHandler() end
-	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,e:GetHandler()) end
+	if chkc then return chkc:IsOnField() and s.filter(chkc) and chkc:IsControler(1-tp) end
+	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,0,LOCATION_ONFIELD,1,e:GetHandler()) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
-	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,1,e:GetHandler())
+	local g=Duel.SelectTarget(tp,s.filter,tp,0,LOCATION_ONFIELD,1,1,e:GetHandler())
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,1,0,0)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
@@ -65,7 +65,7 @@ function s.xyzop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.fusionfilter(c,fc,sumtype,sp,sub,mg,sg)
 	local lv=fc:GetLevel()
-	return c:HasLevel() and c:IsLevel(lv)
+	return c:IsLevel(lv)
 end
 function s.contactfil(tp)
 	return Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)

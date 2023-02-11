@@ -1,5 +1,5 @@
 --ナイト・バタフライ・アサシン
---Night Butterspy
+--Shadow Assassin Butterspy
 local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableCounterPermit(COUNTER_XYZ)
@@ -92,7 +92,7 @@ function s.xyzop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.fusionfilter(c,fc,sumtype,sp,sub,mg,sg)
 	local lv=fc:GetLevel()
-	return c:HasLevel() and c:IsLevel(lv)
+	return c:IsLevel(lv) and c:IsRace(RACE_INSECT)
 end
 function s.contactfil(tp)
 	return Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)

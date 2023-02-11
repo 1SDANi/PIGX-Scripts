@@ -3,6 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	Fusion.AddProcMixN(c,true,true,79979666,1)
+	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	--change name
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -16,8 +17,8 @@ function s.initial_effect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
-	e2:SetCode(EVENT_SPSUMMON_SUCCESS+EFFECT_FLAG_DAMAGE_STEP)
-	e2:SetProperty(EFFECT_FLAG_DELAY)
+	e2:SetProperty(EVENT_SPSUMMON_SUCCESS+EFFECT_FLAG_DAMAGE_STEP)
+	e2:SetCode(EVENT_SPSUMMON_SUCCESS)
 	e2:SetCondition(s.condition)
 	e2:SetTarget(s.target)
 	e2:SetOperation(s.operation)
@@ -68,4 +69,10 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	if bc and bc:IsRelateToBattle() then
 		Duel.Destroy(bc,REASON_EFFECT)
 	end
+end
+function s.contactfil(tp)
+	return Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)
+end
+function s.contactop(g)
+	Duel.SendtoGrave(g,REASON_COST+REASON_MATERIAL+REASON_FUSION)
 end

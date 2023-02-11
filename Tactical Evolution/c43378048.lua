@@ -60,7 +60,7 @@ function s.effcon(e)
 	return e:GetHandler():GetSummonType()==SUMMON_TYPE_FUSION
 end
 function s.contactfil(tp)
-	return Duel.GetMatchingGroup(Card.IsAbleToRemoveAsCost,tp,LOCATION_ONFIELD,0,nil)
+	return Duel.GetMatchingGroup(Card.IsAbleToRemoveAsCost,tp,LOCATION_ONFIELD+LOCATION_GRAVE,0,nil)
 end
 function s.contactop(g)
 	Duel.Remove(g,POS_FACEUP,REASON_COST+REASON_MATERIAL+REASON_FUSION)

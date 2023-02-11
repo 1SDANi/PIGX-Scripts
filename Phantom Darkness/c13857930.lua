@@ -3,6 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	Fusion.AddProcMixN(c,true,true,17732278,1)
+	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	--Activate
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -51,4 +52,16 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	elseif opval[op]==3 then
 		Duel.ChangePosition(a,POS_FACEUP_DEFENSE)
 	end
+end
+function s.contactfil(tp)
+	return Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)
+end
+function s.contactop(g)
+	Duel.SendtoGrave(g,REASON_COST+REASON_MATERIAL+REASON_FUSION)
+end
+function s.contactfil(tp)
+	return Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)
+end
+function s.contactop(g)
+	Duel.SendtoGrave(g,REASON_COST+REASON_MATERIAL+REASON_FUSION)
 end

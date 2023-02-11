@@ -24,7 +24,7 @@ function s.spfilter(c,e,tp,rg)
 	return result
 end
 function s.rmfilter(c)
-	return c:HasLevel() and c:IsAbleToRemove() and aux.SpElimFilter(c,true)
+	return c:IsAbleToRemove() and aux.SpElimFilter(c,true)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end

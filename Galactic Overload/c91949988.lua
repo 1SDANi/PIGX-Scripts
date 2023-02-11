@@ -1,5 +1,5 @@
 --迅雷の騎士ガイアドラグーン
---Gaia the Fierce Dragoon
+--Gaia the Fierce Dragoon of Wind
 local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableCounterPermit(COUNTER_XYZ)
@@ -65,7 +65,7 @@ function s.posop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.chaosfilter(c,e,tp)
-	return c:IsFaceup() and c:IsCanBeFusionMaterial() and (c:IsLevel(5) or c:IsLevel(6)) and c:IsType(TYPE_FUSION)
+	return c:IsFaceup() and c:IsCanBeFusionMaterial() and c:IsLevel(6) and c:IsType(TYPE_FUSION)
 end
 function s.chaostg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.chaosfilter,tp,LOCATION_MZONE,0,1,nil,e,tp) and e:GetHandler():IsCanBeSpecialSummoned(e,SUMMON_TYPE_FUSION,tp,false,false) end
@@ -103,7 +103,7 @@ function s.xyzop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.fusionfilter(c,fc,sumtype,sp,sub,mg,sg)
 	local lv=fc:GetLevel()
-	return c:HasLevel() and c:IsLevel(lv)
+	return c:IsLevel(lv) and c:IsRace(RACE_WARRIOR)
 end
 function s.contactfil(tp)
 	return Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)

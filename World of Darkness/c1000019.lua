@@ -2,6 +2,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	Fusion.AddProcMixN(c,true,true,54959865,1)
+	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	--change name
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_SINGLE)
@@ -32,4 +33,10 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local rt=Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)*4000
 	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
 	Duel.Recover(p,rt,REASON_EFFECT)
+end
+function s.contactfil(tp)
+	return Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)
+end
+function s.contactop(g)
+	Duel.SendtoGrave(g,REASON_COST+REASON_MATERIAL+REASON_FUSION)
 end

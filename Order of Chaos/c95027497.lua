@@ -43,7 +43,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.filter1(c)
-	return c:IsSetCard(0x2b) and c:IsAbleToHand()
+	return c:IsSetCard(0x2b) and c:IsAbleToHand() and c:IsType(TYPE_MONSTER)
 end
 function s.tg1(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter1,tp,LOCATION_DECK,0,1,nil) end

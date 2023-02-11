@@ -16,12 +16,6 @@ function s.initial_effect(c)
 	xyz:SetTarget(s.xyztg)
 	xyz:SetOperation(s.xyzop)
 	c:RegisterEffect(xyz)
-	--battle indestructable
-	local e0=Effect.CreateEffect(c)
-	e0:SetType(EFFECT_TYPE_SINGLE)
-	e0:SetCode(EFFECT_INDESTRUCTABLE_BATTLE)
-	e0:SetValue(s.indes)
-	c:RegisterEffect(e0)
 	--cannot be target
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -80,7 +74,7 @@ function s.xyzop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.fusionfilter(c,fc,sumtype,sp,sub,mg,sg)
 	local lv=fc:GetLevel()
-	return c:HasLevel() and c:IsLevel(lv)
+	return c:IsLevel(lv)
 end
 function s.contactfil(tp)
 	return Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)

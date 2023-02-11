@@ -21,6 +21,7 @@ function s.tg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.SelectTarget(tp,aux.TRUE,tp,LOCATION_MZONE,0,1,1,nil)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RTOHAND)
 	Duel.SelectTarget(tp,aux.TRUE,tp,0,LOCATION_MZONE,1,1,nil)
+	Duel.SetOperationInfo(0,CATEGORY_TOHAND,g1+g2,2,0,0)
 end
 function s.op(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS)

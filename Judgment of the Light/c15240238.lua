@@ -1,5 +1,5 @@
 --霞鳥クラウソラス
---Mist Bird Claidheamh Solais
+--Mist Valley Claidheamh Solais
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
@@ -42,7 +42,7 @@ function s.fusionfilter(c,fc,sumtype,sp,sub,mg,sg)
 	if sg then
 		st=sg:GetSum(Card.GetLevel)
 	end
-	return c:HasLevel() and (not rg or not sg or (st==tg and #sg>1) or (st<tg and rg:CheckWithSumEqual(Card.GetLevel,tg-st,1,99)))
+	return c:IsLevelAbove(1) and c:IsAttribute(ATTRIBUTE_WIND) and (not rg or not sg or (st==tg and #sg>1) or (st<tg and rg:CheckWithSumEqual(Card.GetLevel,tg-st,1,99)))
 end
 function s.contactfil(tp)
 	return Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)

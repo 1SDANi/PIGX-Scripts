@@ -20,7 +20,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 		and Duel.GetLocationCount(tp,LOCATION_MZONE)>1
 		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_DECK,0,2,nil,e,tp)
 	end
-	--Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,2,tp,LOCATION_DECK)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,2,tp,LOCATION_DECK)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then return end
@@ -32,25 +32,25 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local fid=e:GetHandler():GetFieldID()
 	local i=0
 	for tg in aux.Next(sg) do
-		--destroy
+		if Duel.SpecialSummonStep(tg,0,tp,tp,true,false,POS_FACEUP_DEFENSE) then
+			i = i + 1
+		end
 		local e6=Effect.CreateEffect(tg)
 		e6:SetDescription(aux.Stringid(id,1))
 		e6:SetCategory(CATEGORY_DESTROY)
 		e6:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
 		e6:SetRange(LOCATION_MZONE)
 		e6:SetCode(EVENT_PHASE+PHASE_END)
+		e6:SetReset(RESET_EVENT+RESETS_STANDARD-RESET_TURN_SET)
 		e6:SetCountLimit(1)
 		e6:SetTarget(s.destg)
 		e6:SetOperation(s.desop)
 		tg:RegisterEffect(e6)
 		tg:AddMonsterAttribute(TYPE_EFFECT,ATTRIBUTE_DARK,RACE_SPELLCASTER,1,0,0)
-		if Duel.SpecialSummonStep(tg,0,tp,tp,true,false,POS_FACEUP_DEFENSE) then
-			i = i + 1
-		end
 		tg:AddMonsterAttributeComplete()
-		Duel.SpecialSummonComplete()
 	end
-	if i==2 then
+	Duel.SpecialSummonComplete()
+	if i>0 then
 		local fg=Duel.GetFieldGroup(tp,LOCATION_MZONE,0)
 		if #fg>0 then
 			Duel.ChangePosition(fg,POS_FACEDOWN_DEFENSE)

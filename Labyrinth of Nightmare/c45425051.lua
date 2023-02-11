@@ -16,5 +16,5 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.tg(e,c)
-	return c:IsRace(RACE_FAIRY)
+	return c:IsRace(RACE_PLANT)
 end

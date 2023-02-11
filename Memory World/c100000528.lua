@@ -26,16 +26,6 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_HAND,0,1,1,nil,e,tp)
 	if #g>0 then
-		Duel.SpecialSummonStep(g:GetFirst(),0,tp,tp,false,false,POS_FACEUP)
-		--Cannot be used as fusion material
-		local e1=Effect.CreateEffect(e:GetHandler())
-		e1:SetDescription(3309)
-		e1:SetType(EFFECT_TYPE_SINGLE)
-		e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_CLIENT_HINT)
-		e1:SetCode(EFFECT_CANNOT_BE_FUSION_MATERIAL)
-		e1:SetReset(RESET_EVENT+RESETS_STANDARD)
-		e1:SetValue(1)
-		g:GetFirst():RegisterEffect(e1)
-		Duel.SpecialSummonComplete()
+		Duel.SpecialSummon(g:GetFirst(),0,tp,tp,false,false,POS_FACEUP)
 	end
 end

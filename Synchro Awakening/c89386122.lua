@@ -1,4 +1,4 @@
---Mist Valley Ally of Justice
+--Ally of Justice Claidheamh Solais
 local s,id=GetID()
 function s.initial_effect(c)
 	aux.EnableGeminiAttribute(c)

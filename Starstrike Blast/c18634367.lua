@@ -15,18 +15,9 @@ function s.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
 	e2:SetCode(EFFECT_CANNOT_ATTACK_ANNOUNCE)
 	e2:SetRange(LOCATION_SZONE)
-	e2:SetTargetRange(0,LOCATION_MZONE)
+	e2:SetTargetRange(LOCATION_MZONE,LOCATION_MZONE)
+	e2:SetTarget(s.atktarget)
 	c:RegisterEffect(e2)
-	--maintain
-	local e3=Effect.CreateEffect(c)
-	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
-	e3:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
-	e3:SetCode(EVENT_PHASE+PHASE_END)
-	e3:SetRange(LOCATION_SZONE)
-	e3:SetCountLimit(1)
-	e3:SetCondition(s.mtcon)
-	e3:SetOperation(s.mtop)
-	c:RegisterEffect(e3)
 	--spsummon
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,0))
@@ -43,6 +34,9 @@ function s.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 s.listed_names={70902743}
+function s.atktarget(e,c)
+	return c:GetAttack()>=2000
+end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_GRAVE) and s.filter(chkc,e,tp) end
 	if chk==0 then return true end
@@ -61,16 +55,6 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 		e:SetCategory(0)
 		e:SetProperty(0)
 		e:SetLabel(0)
-	end
-end
-function s.mtcon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetTurnPlayer()==tp
-end
-function s.mtop(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.CheckLPCost(tp,500) then
-		Duel.PayLPCost(tp,500)
-	else
-		Duel.Destroy(e:GetHandler(),REASON_COST)
 	end
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)

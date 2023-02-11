@@ -43,7 +43,6 @@ function s.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e2:SetCode(EVENT_SUMMON_SUCCESS)
 	e2:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY)
-	e2:SetCost(s.cs)
 	e2:SetTarget(s.tg)
 	e2:SetOperation(s.op)
 	c:RegisterEffect(e2)
@@ -55,13 +54,6 @@ function s.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 s.listed_series={0x1034}
-function s.cs(e,tp,eg,ep,ev,re,r,rp,chk)
-	local eg=Group.CreateGroup()
-	local hg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_HAND,0,c,e,tp)
-	if hg and #hg==1 then eg:AddCard(hg:GetFirst()) end
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,eg) end
-	Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST+REASON_DISCARD,eg)
-end
 function s.spfilter(c,e,tp)
 	return c:IsType(TYPE_UNION) and c:IsSetCard(0x1034) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end

@@ -19,7 +19,7 @@ function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsPreviousLocation(LOCATION_ONFIELD)
 end
 function s.filter(c,e,tp)
-	return c:IsCode(id) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEDOWN_DEFENSE)
+	return c:IsCode(id) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK+LOCATION_HAND,0,1,nil,e,tp) end
@@ -33,10 +33,10 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if #g>0 then
 		local t1=g:GetFirst()
 		local t2=g:GetNext()
-		Duel.SpecialSummonStep(t1,0,tp,tp,false,false,POS_FACEDOWN_DEFENSE)
+		Duel.SpecialSummonStep(t1,0,tp,tp,false,false,POS_FACEUP)
 		Duel.ConfirmCards(1-tp,t1)
 		if t2 and ct>1 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
-			Duel.SpecialSummonStep(t2,0,tp,tp,false,false,POS_FACEDOWN_DEFENSE)
+			Duel.SpecialSummonStep(t2,0,tp,tp,false,false,POS_FACEUP)
 			Duel.ConfirmCards(1-tp,t2)
 		end
 		Duel.SpecialSummonComplete()

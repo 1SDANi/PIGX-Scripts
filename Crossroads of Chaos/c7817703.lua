@@ -25,12 +25,12 @@ function s.value(e,c)
 	return c:GetBaseAttack()*2
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():GetEquipTarget() and e:GetHandler():GetEquipTarget():IsAttackPos() end
+	if chk==0 then return e:GetHandler():GetEquipTarget() and e:GetHandler():GetEquipTarget():IsPosition(POS_ATTACK) end
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,e:GetHandler(),1,0,0)
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	if c:IsRelateToEffect(e) and c:IsFaceup() and c:GetEquipTarget() and e:GetHandler():GetEquipTarget():IsAttackPos() then
+	if c:IsRelateToEffect(e) and c:IsFaceup() and c:GetEquipTarget() and e:GetHandler():GetEquipTarget():IsPosition(POS_ATTACK) then
 		Duel.Destroy(c:GetEquipTarget(),REASON_EFFECT)
 	end
 end

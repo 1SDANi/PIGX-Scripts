@@ -20,7 +20,7 @@ function s.initial_effect(c)
 end
 s.material_setcode={0x16}
 function s.fusfilter(c)
-	return c:IsSetCard(0x16) and c:IsType(TYPE_MONSTER+TYPE_UNION)
+	return c:IsSetCard(0x16) and (c:IsType(TYPE_MONSTER) or c:IsOriginalType(TYPE_MONSTER))
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION)

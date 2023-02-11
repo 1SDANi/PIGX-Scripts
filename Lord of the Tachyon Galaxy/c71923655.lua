@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.spfilter(c)
-	return c:IsFaceup() and c:IsAttribute(ATTRIBUTE_WATER)
+	return c:IsFaceup() and c:IsRace(RACE_AQUATIC)
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

@@ -17,8 +17,8 @@ function s.cfilter(c)
 	return c:IsAttribute(ATTRIBUTE_WATER)
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.CheckReleaseGroupCost(tp,s.cfilter,2,false,aux.ReleaseCheckMMZ,nil) end
-	local g=Duel.SelectReleaseGroupCost(tp,s.cfilter,2,2,false,aux.ReleaseCheckMMZ,nil)
+	if chk==0 then return Duel.CheckReleaseGroupCost(tp,s.cfilter,3,false,aux.ReleaseCheckMMZ,nil) end
+	local g=Duel.SelectReleaseGroupCost(tp,s.cfilter,3,3,false,aux.ReleaseCheckMMZ,nil)
 	Duel.Release(g,REASON_COST)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)

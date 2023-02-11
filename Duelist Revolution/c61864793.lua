@@ -14,7 +14,6 @@ function s.initial_effect(c)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
 end
-s.listed_names={id}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	return c:IsFaceup() and
@@ -22,7 +21,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 		((c:GetPreviousPosition()&POS_DEFENSE)~=0 and c:IsAttackPos())
 end
 function s.filter(c)
-	return c:IsCanChangePosition() and not c:IsCode(id)
+	return c:IsCanChangePosition()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(1-tp) and s.filter(chkc) end

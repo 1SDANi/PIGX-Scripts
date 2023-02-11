@@ -35,11 +35,12 @@ function s.initial_effect(c)
 	e3:SetCode(EFFECT_SET_BASE_DEFENSE)
 	c:RegisterEffect(e3)
 end
+s.listed_series={0x40}
 function s.val(e,c)
 	return Duel.GetFieldGroupCount(c:GetControler(),LOCATION_HAND,0)*1000
 end
 function s.filter(c)
-	return (c:IsType(TYPE_NORMAL) or (c:IsType(TYPE_GEMINI) and c:IsLocation(LOCATION_DECK))) and c:IsAbleToHand()
+	return c:IsSetCard(0x40) and c:IsAbleToHand() and c:IsType(TYPE_MONSTER)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil) end

@@ -28,7 +28,7 @@ function s.fieldfilter(c)
 	return c:IsType(TYPE_FIELD) and c:IsType(TYPE_SPELL) and c:IsFaceup()
 end
 function s.econ(e)
-	return Duel.IsExistingMatchingCard(s.fieldfilter,e:GetHandlerPlayer(),LOCATION_ONFIELD,0,1,nil)
+	return Duel.IsExistingMatchingCard(s.fieldfilter,e:GetHandlerPlayer(),LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil)
 end
 function s.filter(c)
 	return c:IsType(TYPE_SPELL+TYPE_TRAP)

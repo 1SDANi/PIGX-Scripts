@@ -17,11 +17,16 @@ function s.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e2:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_DAMAGE_STEP)
 	e2:SetCode(EVENT_TO_GRAVE)
+	e2:SetCost(s.cs)
 	e2:SetTarget(s.tg)
 	e2:SetOperation(s.op)
 	c:RegisterEffect(e2)
 end
 s.listed_names={id}
+function s.cs(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,e:GetHandler()) end
+	Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST+REASON_DISCARD)
+end
 function s.hfilter(c)
 	return c:IsAbleToHand() and c:IsRace(RACE_DRAGON) and c:IsType(TYPE_MONSTER) and not c:IsCode(id)
 end

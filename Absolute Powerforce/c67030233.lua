@@ -123,7 +123,7 @@ function s.fusionfilter(c,fc,sumtype,sp,sub,mg,sg)
 	if sg then
 		st=sg:GetSum(Card.GetLevel)
 	end
-	return c:HasLevel() and (not rg or not sg or (st==tg and #sg>1) or (st<tg and rg:CheckWithSumEqual(Card.GetLevel,tg-st,1,99))) and
+	return c:IsLevelAbove(1) and (not rg or not sg or (st==tg and #sg>1) or (st<tg and rg:CheckWithSumEqual(Card.GetLevel,tg-st,1,99))) and
 		(c:IsCode(70902743) or (not sg or sg:IsExists(Card.IsCode,1,c,70902743)))
 end
 function s.contactfil(tp)

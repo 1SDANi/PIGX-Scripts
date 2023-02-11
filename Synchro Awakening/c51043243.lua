@@ -12,7 +12,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x3e}
 function s.filter(c)
-	return c:IsSetCard(0x3e) and c:IsAbleToHand()
+	return c:IsSetCard(0x3e) and c:IsAbleToHand() and c:IsType(TYPE_MONSTER)
 end
 function s.tg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

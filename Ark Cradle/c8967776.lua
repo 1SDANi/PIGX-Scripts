@@ -61,6 +61,7 @@ function s.checkop(e,tp,eg,ep,ev,re,r,rp)
 	for tc in aux.Next(eg) do
 		if s.checkfilter(tc) and rp==e:GetHandler():GetControler() then
 			Duel.RegisterFlagEffect(rp,id,0,0,1)
+			Debug.Message(Duel.GetFlagEffect(e:GetHandler():GetControler(),id))
 		end
 	end
 end

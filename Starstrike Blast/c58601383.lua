@@ -1,5 +1,5 @@
 --地天の騎士ガイアドレイク
---Gaia Drake, the Universal Force
+--Gaia the Fierce Knight of Earth and Wind
 local s,id=GetID()
 function s.initial_effect(c)
 	Fusion.AddProcMix(c,true,true,s.fusfilter,aux.FilterBoolFunctionEx(Card.IsType,TYPE_FUSION))

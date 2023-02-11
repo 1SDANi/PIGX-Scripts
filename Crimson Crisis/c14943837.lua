@@ -9,14 +9,9 @@ function s.initial_effect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e3:SetCode(EVENT_SUMMON_SUCCESS)
 	e3:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e3:SetCost(s.cost)
 	e3:SetTarget(s.target)
 	e3:SetOperation(s.operation)
 	c:RegisterEffect(e3)
-end
-function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,e:GetHandler()) end
-	Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST+REASON_DISCARD)
 end
 function s.filter2(c,e,sp)
 	return c:IsAttackBelow(500) and c:IsCanBeSpecialSummoned(e,0,sp,false,false)

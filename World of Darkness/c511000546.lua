@@ -20,8 +20,8 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if res==1 then
 		local sg1=Duel.GetMatchingGroup(aux.TRUE,tp,0,LOCATION_MZONE,e:GetHandler())
 		Duel.Destroy(sg1,REASON_EFFECT)
-	elseif Duel.IsExistingMatchingCard(Duel.IsType,1-tp,LOCATION_HAND,0,1,nil,TYPE_SPELL) and Duel.IsExistingMatchingCard(aux.TRUE,tp,LOCATION_MZONE,0,1,nil) and
-			Duel.SelectYesNo(1-tp,aux.Stringid(id,0)) and Duel.DiscardHand(1-tp,Card.IsType,1,1,REASON_DISCARD,nil,TYPE_SPELL)>0 then
+	elseif Duel.IsExistingMatchingCard(Duel.IsType,1-tp,LOCATION_HAND,0,1,nil,TYPE_TRAP) and Duel.IsExistingMatchingCard(aux.TRUE,tp,LOCATION_MZONE,0,1,nil) and
+			Duel.SelectYesNo(1-tp,aux.Stringid(id,0)) and Duel.DiscardHand(1-tp,Card.IsType,1,1,REASON_DISCARD,nil,TYPE_TRAP)>0 then
 		local sg2=Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_MZONE,0,e:GetHandler())
 		Duel.Destroy(sg2,REASON_EFFECT)
 	end

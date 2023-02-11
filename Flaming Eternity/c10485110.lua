@@ -4,6 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
 	Fusion.AddProcMixN(c,true,true,37721209,1)
+	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	--Destroy all cards on the field
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -34,4 +35,10 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.filter,tp,0,LOCATION_ONFIELD+LOCATION_HAND,nil)
 	Duel.Destroy(g,REASON_EFFECT)
+end
+function s.contactfil(tp)
+	return Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)
+end
+function s.contactop(g)
+	Duel.SendtoGrave(g,REASON_COST+REASON_MATERIAL+REASON_FUSION)
 end

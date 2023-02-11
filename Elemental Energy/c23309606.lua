@@ -13,5 +13,5 @@ function s.initial_effect(c)
 end
 function s.val(e,c)
 	local tp=c:GetControler()
-	return Duel.GetFieldGroupCount(tp,0,LOCATION_MZONE)*200
+	return Duel.GetFieldGroupCount(tp,0,LOCATION_MZONE)*1000
 end

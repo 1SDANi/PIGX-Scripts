@@ -52,3 +52,27 @@ end
 function s.efilter(e,te)
 	return te:IsActiveType(TYPE_EFFECT) and te:GetHandler():GetControler()~=e:GetHandler():GetControler()
 end
+function s.xyzcn(e,tp,eg,ep,ev,re,r,rp)
+	return e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION)
+end
+function s.xyztg(e,tp,eg,ep,ev,re,r,rp,chk)
+	local ct=e:GetHandler():GetMaterialCount()
+	if chk==0 then return ct and ct>0 end
+	Duel.SetOperationInfo(0,CATEGORY_COUNTER,nil,ct,0,COUNTER_XYZ)
+end
+function s.xyzop(e,tp,eg,ep,ev,re,r,rp)
+	local ct=e:GetHandler():GetMaterialCount()
+	if e:GetHandler():IsRelateToEffect(e) and ct and ct>0 then
+		e:GetHandler():AddCounter(COUNTER_XYZ,ct)
+	end
+end
+function s.fusionfilter(c,fc,sumtype,sp,sub,mg,sg)
+	local lv=fc:GetLevel()
+	return c:IsLevel(lv)
+end
+function s.contactfil(tp)
+	return Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)
+end
+function s.contactop(g)
+	Duel.SendtoGrave(g,REASON_COST+REASON_MATERIAL+REASON_FUSION)
+end

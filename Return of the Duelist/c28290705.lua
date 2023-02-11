@@ -1,5 +1,5 @@
 --妖精王 アルヴェルド
---Fairy King Albverdich
+--Alberich, King of Elves
 local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableCounterPermit(COUNTER_XYZ)
@@ -33,7 +33,7 @@ function s.adcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:GetHandler():RemoveCounter(tp,COUNTER_XYZ,1,REASON_COST)
 end
 function s.filter(c)
-	return c:IsFaceup() and c:GetAttribute()~=ATTRIBUTE_EARTH
+	return c:IsFaceup() and not c:IsRace(RACE_PLANT)
 end
 function s.adtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_MZONE,LOCATION_MZONE,1,nil) end
@@ -69,7 +69,7 @@ function s.xyzop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.fusionfilter(c,fc,sumtype,sp,sub,mg,sg)
 	local lv=fc:GetLevel()
-	return c:HasLevel() and c:IsLevel(lv)
+	return c:IsLevel(lv)
 end
 function s.contactfil(tp)
 	return Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)

@@ -46,7 +46,7 @@ function s.filter1(c,e,tp,cg,minc)
 		and cg:CheckWithSumGreater(Card.GetLevel,c:GetLevel(),minc,99)
 end
 function s.filter2(c)
-	return c:HasLevel() and c:IsRace(RACE_PLANT)
+	return c:IsRace(RACE_PLANT)
 end
 function s.filter3(c,e,tp,lv)
 	return c:IsLevelBelow(lv) and c:IsRace(RACE_PLANT) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)

@@ -28,12 +28,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
-	if tc:IsRelateToEffect(e) and Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP) then
-		local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.filter2),1-tp,LOCATION_GRAVE,0,nil,e,1-tp)
-		if #g>0 and Duel.GetLocationCount(1-tp,LOCATION_MZONE)>0 and Duel.SelectYesNo(1-tp,aux.Stringid(id,1)) then
-			Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_SPSUMMON)
-			local sg=g:Select(1-tp,1,1,nil)
-			Duel.SpecialSummon(sg,0,1-tp,1-tp,false,false,POS_FACEUP)
-		end
+	if tc:IsRelateToEffect(e) then
+		Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)
 	end
 end

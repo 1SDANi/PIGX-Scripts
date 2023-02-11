@@ -2,6 +2,14 @@
 --Pot of Duality
 local s,id=GetID()
 function s.initial_effect(c)
+	--change name
+	local e0=Effect.CreateEffect(c)
+	e0:SetType(EFFECT_TYPE_SINGLE)
+	e0:SetProperty(EFFECT_FLAG_SINGLE_RANGE+EFFECT_FLAG_CANNOT_DISABLE)
+	e0:SetCode(EFFECT_CHANGE_CODE)
+	e0:SetRange(LOCATION_ALL)
+	e0:SetValue(55144522)
+	c:RegisterEffect(e0)
 	--Activate
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))

@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.costfilter(c)
-	return c:IsAttribute(ATTRIBUTE_FIRE) and c:IsAbleToDeckAsCost()
+	return c:IsAttribute(ATTRIBUTE_FIRE) and (c:IsAbleToDeckAsCost() or c:IsAbleToExtraAsCost())
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_GRAVE,0,2,nil) end
@@ -50,7 +50,7 @@ function s.fusionfilter(c,fc,sumtype,sp,sub,mg,sg)
 	if sg then
 		st=sg:GetSum(Card.GetLevel)
 	end
-	return c:HasLevel() and (not rg or not sg or (st==tg and #sg>1) or (st<tg and rg:CheckWithSumEqual(Card.GetLevel,tg-st,1,99)))
+	return c:IsLevelAbove(1) and c:IsAttribute(ATTRIBUTE_FIRE) and (not rg or not sg or (st==tg and #sg>1) or (st<tg and rg:CheckWithSumEqual(Card.GetLevel,tg-st,1,99)))
 end
 function s.contactfil(tp)
 	return Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)

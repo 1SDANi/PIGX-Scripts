@@ -29,7 +29,7 @@ function s.initial_effect(c)
 end
 s.counter_list={COUNTER_A}
 function s.filter(c)
-	return c:HasLevel() and c:IsCanAddCounter(COUNTER_A,c:GetLevel())
+	return c:IsCanAddCounter(COUNTER_A,c:GetLevel())
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsCanAddCounter(COUNTER_A,1) end

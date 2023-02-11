@@ -2,6 +2,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	Fusion.AddProcMixN(c,true,true,89621922,1)
+	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	--change name
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_SINGLE)
@@ -26,4 +27,10 @@ end
 s.listed_names={CARD_METAMORPHOSIS}
 function s.val(e,c)
 	return Duel.GetMatchingGroupCount(aux.TRUE,c:GetControler(),LOCATION_ONFIELD,LOCATION_ONFIELD,e:GetHandler())*500
+end
+function s.contactfil(tp)
+	return Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)
+end
+function s.contactop(g)
+	Duel.SendtoGrave(g,REASON_COST+REASON_MATERIAL+REASON_FUSION)
 end
