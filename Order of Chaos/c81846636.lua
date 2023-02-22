@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.hfilter(c)
-	return c:IsAbleToHand() and c:IsType(TYPE_NORMAL) and c:IsType(TYPE_MONSTER)
+	return c:IsAbleToHand() and (c:IsType(TYPE_NORMAL) or (c:IsType(TYPE_GEMINI) and c:IsLocation(LOCATION_DECK))) and c:IsType(TYPE_MONSTER)
 end
 function s.tg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.hfilter,tp,LOCATION_DECK,0,1,nil) end

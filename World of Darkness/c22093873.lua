@@ -3,7 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	Fusion.AddProcMix(c,true,true,s.earthfilter,s.windfilter)
+	Fusion.AddProcMix(c,false,true,true,s.earthfilter,s.windfilter)
 	--Attributes
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_SINGLE)

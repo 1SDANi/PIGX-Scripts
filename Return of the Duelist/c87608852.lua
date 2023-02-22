@@ -25,8 +25,8 @@ end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetCustomActivityCount(id,tp,ACTIVITY_SUMMON)==0
 		and Duel.GetCustomActivityCount(id,tp,ACTIVITY_SPSUMMON)==0 
-		and Duel.GetCustomActivityCount(id,tp,ACTIVITY_FLIPSUMMON)==0 and
-		e:GetHandler():IsReleasable() end
+		and Duel.GetCustomActivityCount(id,tp,ACTIVITY_FLIPSUMMON)==0
+		and e:GetHandler():IsReleasable() end
 	Duel.Release(e:GetHandler(),REASON_COST)
 	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetType(EFFECT_TYPE_FIELD)

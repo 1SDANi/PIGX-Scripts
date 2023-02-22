@@ -3,7 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	Fusion.AddProcMix(c,true,true,CARD_NEOS,s.filter2)
+	Fusion.AddProcMix(c,false,true,true,CARD_NEOS,s.filter2)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	--damage&recover
 	local e1=Effect.CreateEffect(c)

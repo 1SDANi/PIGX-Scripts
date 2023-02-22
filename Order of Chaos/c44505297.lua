@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableCounterPermit(COUNTER_XYZ)
 	--fusion material
-	Fusion.AddProcMixRep(c,true,true,s.fusionfilter,2,99)
+	Fusion.AddProcMixRep(c,false,true,true,s.fusionfilter,2,99)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	local xyz=Effect.CreateEffect(c)
 	xyz:SetDescription(6666)
@@ -82,7 +82,7 @@ function s.eqtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,g,1,0,0)
 end
 function s.equipop(c,e,tp,tc)
-	if not c:EquipByEffectAndLimitRegister(e,tp,tc) then return end
+	if not aux.EquipByEffectAndLimitRegister(c,e,tp,tc,id) then return end
 	local atk=tc:GetTextAttack()
 	if atk<0 then atk=0 end
 	local e2=Effect.CreateEffect(c)

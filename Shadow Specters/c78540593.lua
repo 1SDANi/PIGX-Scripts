@@ -18,7 +18,7 @@ function s.initial_effect(c)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	local loc=Duel.GetChainInfo(ev,CHAININFO_TRIGGERING_LOCATION)
-	return loc==LOCATION_HAND and Duel.IsChainNegatable(ev)
+	return (loc==LOCATION_HAND or loc==LOCATION_EXTRA) and Duel.IsChainNegatable(ev)
 end
 function s.costfilter(c)
 	return c:IsFaceup() and c:IsRace(RACE_PLANT) and not c:IsStatus(STATUS_BATTLE_DESTROYED)

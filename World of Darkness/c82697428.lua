@@ -1,5 +1,5 @@
 --Ｖ・ＨＥＲＯウィッチ・レイド
---Vision HERO Witch Raider
+--Vision HERO Malevolent Catastrophe
 local s,id=GetID()
 function s.initial_effect(c)
 	--Can also tribute trap cards for its tribute summon

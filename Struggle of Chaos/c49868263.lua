@@ -3,7 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	Fusion.AddProcMix(c,false,false,75953262,aux.FilterBoolFunctionEx(Card.IsRace,RACE_DRAGON))
+	Fusion.AddProcMix(c,false,true,true,75953262,aux.FilterBoolFunctionEx(Card.IsRace,RACE_DRAGON))
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	--cannot be target
 	local e2=Effect.CreateEffect(c)

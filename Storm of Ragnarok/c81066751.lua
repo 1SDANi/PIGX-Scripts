@@ -14,12 +14,11 @@ function s.initial_effect(c)
 end
 s.listed_names={CARD_SANCTUARY_SKY}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	if not Duel.IsEnvironment(CARD_SANCTUARY_SKY) then return false end
 	if not Duel.IsChainNegatable(ev) then return false end
 	return re:IsActiveType(TYPE_MONSTER) or re:IsHasType(EFFECT_TYPE_ACTIVATE)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return true end
+	if chk==0 then return Duel.IsEnvironment(CARD_SANCTUARY_SKY) end
 	Duel.SetOperationInfo(0,CATEGORY_NEGATE,eg,1,0,0)
 	if re:GetHandler():IsDestructable() and re:GetHandler():IsRelateToEffect(re) then
 		Duel.SetOperationInfo(0,CATEGORY_DESTROY,eg,1,0,0)

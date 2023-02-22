@@ -2,7 +2,7 @@
 --Blaze Fenix, the Burning Bombardment Bird
 local s,id=GetID()
 function s.initial_effect(c)
-	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsRace,RACE_MACHINE),aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_FIRE))
+	Fusion.AddProcMix(c,false,true,true,aux.FilterBoolFunctionEx(Card.IsRace,RACE_MACHINE),aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_FIRE))
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	--Inflict damage equal to number of cards on the field x 300
 	local e2=Effect.CreateEffect(c)

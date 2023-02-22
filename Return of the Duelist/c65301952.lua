@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableCounterPermit(COUNTER_XYZ)
 	--fusion material
-	Fusion.AddProcMixRep(c,true,true,s.fusionfilter,2,99)
+	Fusion.AddProcMixRep(c,false,true,true,s.fusionfilter,2,99)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	local xyz=Effect.CreateEffect(c)
 	xyz:SetDescription(6666)
@@ -62,9 +62,6 @@ function s.setop(e,tp,eg,ep,ev,re,r,rp)
 	if #g>0 then
 		Duel.SSet(tp,g:GetFirst())
 	end
-end
-function s.indes(e,c)
-	return not c:IsSetCard(0x48)
 end
 function s.xyzcn(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION)

@@ -50,7 +50,7 @@ function s.tktg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.tkop(e,tp,eg,ep,ev,re,r,rp)
 	local t=Duel.GetAttackTarget()
-	if t==e:GetHandler() then t=Duel.GetAttacker() end
+	if t==e:GetHandler():GetEquipTarget() then t=Duel.GetAttacker() end
 	if t and t:IsRelateToBattle() and Duel.Destroy(t,REASON_EFFECT) then
 		Duel.Damage(1-tp,e:GetHandler():GetAttack(),REASON_EFFECT)
 	end

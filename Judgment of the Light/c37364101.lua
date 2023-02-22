@@ -2,6 +2,7 @@
 --Stoic Challenge
 local s,id=GetID()
 function s.initial_effect(c)
+	aux.AddEquipProcedure(c)
 	--Atk
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_EQUIP)

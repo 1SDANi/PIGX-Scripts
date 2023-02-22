@@ -2,7 +2,7 @@
 --Tyrant Wing Dragon
 local s,id=GetID()
 function s.initial_effect(c)
-	Fusion.AddProcMix(c,true,true,85800949,57470761)
+	Fusion.AddProcMix(c,false,true,true,85800949,57470761)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	--double attack
 	local e1=Effect.CreateEffect(c)

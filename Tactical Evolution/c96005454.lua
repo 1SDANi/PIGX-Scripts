@@ -19,7 +19,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Release(e:GetHandler(),REASON_COST)
 end
 function s.filter1(c)
-	return c:IsRace(RACE_DRAGON) and c:IsType(TYPE_DRAGON) and c:IsType(TYPE_MONSTER) and c:IsAbleToHand()
+	return c:IsRace(RACE_DRAGON) and (c:IsType(TYPE_NORMAL) or (c:IsType(TYPE_GEMINI) and c:IsLocation(LOCATION_DECK))) and c:IsType(TYPE_MONSTER) and c:IsAbleToHand()
 end
 function s.filter2(c,lv)
 	return c:IsSetCard(0x4093) and c:IsLevel(lv) and c:IsType(TYPE_MONSTER) and c:IsAbleToHand()

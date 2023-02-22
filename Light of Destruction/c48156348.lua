@@ -3,7 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	Fusion.AddProcMixN(c,true,true,s.fusfilter,1,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_WIND),1)
+	Fusion.AddProcMixN(c,false,true,true,s.fusfilter,1,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_WIND),1)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	--spsummon
 	local e1=Effect.CreateEffect(c)

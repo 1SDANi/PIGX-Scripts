@@ -3,7 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	Fusion.AddProcMix(c,true,true,CARD_DARK_MAGICIAN,71625222)
+	Fusion.AddProcMix(c,false,true,true,CARD_DARK_MAGICIAN,71625222)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	--Add 1 Spell to hand
 	local e3=Effect.CreateEffect(c)

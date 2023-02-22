@@ -19,7 +19,7 @@ function s.filter2(c,lv)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
-	if chk==0 then return Duel.IsExistingTarget(s.filter1,tp,LOCATION_MZONE,0,1,nil,tp) and Duel.IsExistingTarget(Card.IsFaceup,tp,LOCATION_MZONE,0,3,nil) end
+	if chk==0 then return Duel.IsExistingTarget(s.filter1,tp,LOCATION_MZONE,0,1,nil,tp) and Duel.IsExistingMatchingCard(Card.IsFaceup,tp,LOCATION_MZONE,0,3,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
 	local g1=Duel.SelectTarget(tp,s.filter1,tp,LOCATION_MZONE,0,1,1,nil,tp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
@@ -32,9 +32,10 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tg=Duel.GetTargetCards(e)
 	if (not tg) or #tg<2 or tg:GetFirst():GetLevel()~=tg:GetNext():GetLevel() then return end
 	local lv=tg:GetFirst():GetLevel()
-	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_MZONE,0,nil)
-	local tc=g:GetFirst()
-	for tc in aux.Next(g) do
+	local g1=Duel.GetMatchingGroup(s.filter,tp,LOCATION_MZONE,0,nil)
+	local g2=g1:Sub(tg)
+	local tc=g2:GetFirst()
+	for tc in aux.Next(g2) do
 		if not tg:IsContains(tc) then
 			local e1=Effect.CreateEffect(e:GetHandler())
 			e1:SetType(EFFECT_TYPE_SINGLE)

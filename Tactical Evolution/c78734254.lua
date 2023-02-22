@@ -2,7 +2,7 @@
 --Neospacian Marine Dolphin
 local s,id=GetID()
 function s.initial_effect(c)
-	Fusion.AddProcMixN(c,true,true,17955766,1)
+	Fusion.AddProcMixN(c,false,true,true,17955766,1)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	--change name
 	local e0=Effect.CreateEffect(c)

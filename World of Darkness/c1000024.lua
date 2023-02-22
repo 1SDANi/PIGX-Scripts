@@ -2,7 +2,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	Fusion.AddProcMix(c,true,true,CARD_NEOS,s.fusfilter)
+	Fusion.AddProcMix(c,false,true,true,CARD_NEOS,s.fusfilter)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	aux.EnableNeosReturn(c)
 	--copy

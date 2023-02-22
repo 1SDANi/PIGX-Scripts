@@ -2,7 +2,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	Fusion.AddProcMix(c,true,true,s.fusfilter,s.filter)
+	Fusion.AddProcMix(c,false,true,true,s.fusfilter,s.filter)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 end
 s.listed_names={CARD_METAMORPHOSIS}

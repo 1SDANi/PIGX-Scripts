@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableCounterPermit(COUNTER_XYZ)
 	--fusion material
-	Fusion.AddProcMixRep(c,true,true,s.fusionfilter,2,99)
+	Fusion.AddProcMixRep(c,false,true,true,s.fusionfilter,2,99)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	local xyz=Effect.CreateEffect(c)
 	xyz:SetDescription(6666)
@@ -76,7 +76,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.ft(c)
-	return c:IsType(TYPE_NORMAL) and c:IsFaceup()
+	return (c:IsType(TYPE_NORMAL) or (c:IsType(TYPE_GEMINI) and c:IsLocation(LOCATION_DECK))) and c:IsFaceup()
 end
 function s.tgcon(e)
 	return Duel.IsExistingMatchingCard(s.ft,tp,LOCATION_MZONE,0,1,nil)

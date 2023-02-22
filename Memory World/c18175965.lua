@@ -2,7 +2,7 @@
 --Guardian Deathscythe
 local s,id=GetID()
 function s.initial_effect(c)
-	Fusion.AddProcMix(c,true,true,34022290,s.fusfilter)
+	Fusion.AddProcMix(c,false,true,true,34022290,s.fusfilter)
 	--special summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))

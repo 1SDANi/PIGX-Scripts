@@ -2,7 +2,7 @@
 --Vampire Genesis
 local s,id=GetID()
 function s.initial_effect(c)
-	Fusion.AddProcMixN(c,true,true,s.fusfilter,2)
+	Fusion.AddProcMixN(c,false,true,true,s.fusfilter,2)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	--special summon
 	local e3=Effect.CreateEffect(c)

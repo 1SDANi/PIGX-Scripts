@@ -2,6 +2,7 @@
 --Sphinx Teleia
 local s,id=GetID()
 function s.initial_effect(c)
+	local e02=aux.AddNormalSetProcedure(c)
 	--special summon
 	local e2=Effect.CreateEffect(c)
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)

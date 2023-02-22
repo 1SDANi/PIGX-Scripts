@@ -2,7 +2,7 @@
 --Stardust Chronicle Spark Dragon
 local s,id=GetID()
 function s.initial_effect(c)
-	Fusion.AddProcMixRep(c,true,true,s.fusionfilter,2,99)
+	Fusion.AddProcMixRep(c,true,true,true,s.fusionfilter,2,99)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	--Destruction replacement
 	local e4=Effect.CreateEffect(c)

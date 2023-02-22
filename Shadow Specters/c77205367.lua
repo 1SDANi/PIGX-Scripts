@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableCounterPermit(COUNTER_XYZ)
 	--fusion material
-	Fusion.AddProcMixRep(c,true,true,s.fusionfilter,3,99)
+	Fusion.AddProcMixRep(c,false,true,true,s.fusionfilter,3,99)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	local chaos=Effect.CreateEffect(c)
 	chaos:SetType(EFFECT_TYPE_IGNITION)
@@ -51,7 +51,6 @@ function s.initial_effect(c)
 end
 s.xyz_number=96
 s.counter_place_list={COUNTER_XYZ}
-s.listed_series={0x48}
 s.listed_names={55727845}
 function s.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,COUNTER_XYZ,1,REASON_COST) end

@@ -3,7 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	Fusion.AddProcMix(c,false,false,54620698,s.fusfilter)
+	Fusion.AddProcMix(c,false,true,true,54620698,s.fusfilter)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	--destroy
 	local e0=Effect.CreateEffect(c)

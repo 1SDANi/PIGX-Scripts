@@ -2,7 +2,7 @@
 --Water Dragon
 local s,id=GetID()
 function s.initial_effect(c)
-	Fusion.AddProcMixN(c,true,true,22587018,2,58071123,1)
+	Fusion.AddProcMixN(c,false,true,true,22587018,2,58071123,1)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	--atkchange
 	local e1=Effect.CreateEffect(c)

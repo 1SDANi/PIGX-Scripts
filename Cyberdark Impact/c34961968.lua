@@ -16,9 +16,6 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 s.listed_series={0x1b}
-function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return eg:GetFirst():IsControler(1-tp)
-end
 function s.filter(c)
 	return c:IsFaceup() and c:IsSetCard(0x1b)
 end

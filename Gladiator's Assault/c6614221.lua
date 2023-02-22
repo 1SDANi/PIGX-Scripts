@@ -1,6 +1,8 @@
 --霧の王
 local s,id=GetID()
 function s.initial_effect(c)
+	--summon with 3 tribute
+	local e00=aux.AddNormalSetProcedure(c)
 	--summon with no tribute
 	local e0=Effect.CreateEffect(c)
 	e0:SetDescription(aux.Stringid(id,0))

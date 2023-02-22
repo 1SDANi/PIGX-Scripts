@@ -31,7 +31,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectMatchingCard(tp,s.sfilter,tp,LOCATION_DECK,0,1,1,nil)
-	if g and #g>0 and tc and tc:IsRelateToEffect(e) and tc:IsFaceup() Duel.SendtoGrave(g,REASON_EFFECT)>0 then
+	if g and #g>0 and tc and tc:IsRelateToEffect(e) and tc:IsFaceup() and Duel.SendtoGrave(g,REASON_EFFECT)>0 then
 		Duel.Destroy(tc,REASON_EFFECT)
 	end
 end

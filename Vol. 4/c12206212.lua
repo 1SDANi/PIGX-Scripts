@@ -2,7 +2,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	Fusion.AddProcMixN(c,true,true,CARD_HARPY_LADY,3)
+	Fusion.AddProcMixN(c,false,true,true,CARD_HARPY_LADY,3)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	--change name
 	local e1=Effect.CreateEffect(c)

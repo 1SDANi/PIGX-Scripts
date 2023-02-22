@@ -2,7 +2,7 @@
 --Super-Electromagnetic Voltech Dragon
 local s,id=GetID()
 function s.initial_effect(c)
-	Fusion.AddProcMixRep(c,true,true,s.filter,1,99)
+	Fusion.AddProcMixRep(c,false,true,true,s.filter,1,99)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	--atk
 	local e1=Effect.CreateEffect(c)

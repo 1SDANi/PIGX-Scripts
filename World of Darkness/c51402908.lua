@@ -2,6 +2,8 @@
 --The Supremacy Sun
 local s,id=GetID()
 function s.initial_effect(c)
+	--summon with 3 tribute
+	local e00=aux.AddNormalSetProcedure(c)
 	--atk/def
 	local e6=Effect.CreateEffect(c)
 	e6:SetType(EFFECT_TYPE_SINGLE)

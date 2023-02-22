@@ -3,7 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	Fusion.AddProcMix(c,true,true,21844576,58932615)
+	Fusion.AddProcMix(c,false,true,true,21844576,58932615)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	--terraforming
 	local e1=Effect.CreateEffect(c)

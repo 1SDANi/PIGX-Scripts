@@ -19,13 +19,14 @@ function s.initial_effect(c)
 	e2:SetOperation(s.operation)
 	c:RegisterEffect(e2)
 end
+s.listed_names={id}
 function s.cfilter(c,tp)
 	return c:IsPreviousLocation(LOCATION_DECK) and c:IsPreviousControler(tp)
 end
 function s.condtion(e,tp,eg,ep,ev,re,r,rp)
 	if not re then return false end
 	local rc=re:GetHandler()
-	return (r&REASON_EFFECT)~=0 and (eg:IsExists(s.cfilter,1,nil,1-tp) or eg:IsExists(s.cfilter,1,nil,tp))
+	return (r&REASON_EFFECT)~=0 and (eg:IsExists(s.cfilter,1,nil,1-tp) or eg:IsExists(s.cfilter,1,nil,tp)) and not rc:IsCode(id)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsRelateToEffect(e) end

@@ -2,7 +2,7 @@
 --Gem-HERO Aquamarine
 local s,id=GetID()
 function s.initial_effect(c)
-	Fusion.AddProcMix(c,false,false,27126980,s.fusfilter)
+	Fusion.AddProcMix(c,false,true,true,27126980,s.fusfilter)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	--Attack while in defense position
 	local e1=Effect.CreateEffect(c)

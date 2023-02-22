@@ -2,6 +2,7 @@
 --Earthbound Immortal Qaraywa
 local s,id=GetID()
 function s.initial_effect(c)
+	local e02=aux.AddNormalSetProcedure(c)
 	local e7=Effect.CreateEffect(c)
 	e7:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e7:SetProperty(CATEGORY_DESTROY)

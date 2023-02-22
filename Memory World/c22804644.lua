@@ -2,7 +2,7 @@
 --Virus Dragon
 local s,id=GetID()
 function s.initial_effect(c)
-	Fusion.AddProcMix(c,true,true,85800949,57728570)
+	Fusion.AddProcMix(c,false,true,true,85800949,57728570)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))

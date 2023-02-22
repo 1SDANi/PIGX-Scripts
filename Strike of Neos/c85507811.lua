@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Must be properly summoned before reviving
 	--Contact fusion procedure
-	Fusion.AddProcMix(c,true,true,CARD_NEOS,17732278)
+	Fusion.AddProcMix(c,false,true,true,CARD_NEOS,17732278)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	aux.EnableNeosReturn(c)
 	--Activate

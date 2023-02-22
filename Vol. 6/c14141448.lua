@@ -3,7 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
-	Fusion.AddProcMix(c,true,true,s.filter,40240595)
+	Fusion.AddProcMix(c,false,true,true,s.filter,40240595)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	local params = {aux.FilterBoolFunction(Card.IsRace,RACE_INSECT),Fusion.OnFieldMat(Card.IsAbleToRemove),s.fextra,Fusion.BanishMaterial}
 	--fusion summon

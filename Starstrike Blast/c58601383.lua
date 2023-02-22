@@ -2,7 +2,7 @@
 --Gaia the Fierce Knight of Earth and Wind
 local s,id=GetID()
 function s.initial_effect(c)
-	Fusion.AddProcMix(c,true,true,s.fusfilter,aux.FilterBoolFunctionEx(Card.IsType,TYPE_FUSION))
+	Fusion.AddProcMix(c,false,true,true,s.fusfilter,aux.FilterBoolFunctionEx(Card.IsType,TYPE_FUSION))
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	--cannot be target
 	local e2=Effect.CreateEffect(c)

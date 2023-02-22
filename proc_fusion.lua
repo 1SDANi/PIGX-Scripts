@@ -36,7 +36,7 @@ end
 --material_count: number of different names in material list
 --material: names in material list
 --Fusion monster, mixed materials
-function Fusion.AddProcMix(c,sub,insf,...)
+function Fusion.AddProcMix(c,synchro,sub,insf,...)
 	if c:IsStatus(STATUS_COPYING_EFFECT) then return end
 	local val={...}
 	local fun={}
@@ -72,11 +72,11 @@ function Fusion.AddProcMix(c,sub,insf,...)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
 	e1:SetCode(EFFECT_FUSION_MATERIAL)
 	e1:SetCondition(Fusion.ConditionMix(insf,sub,table.unpack(fun)))
-	e1:SetOperation(Fusion.OperationMix(insf,sub,table.unpack(fun)))
+	e1:SetOperation(Fusion.OperationMix(insf,synchro,sub,table.unpack(fun)))
 	c:RegisterEffect(e1)
 	return {e1}
 end
-function Fusion.AddProcMixWithDescription(c,desc,sub,insf,...)
+function Fusion.AddProcMixWithDescription(c,synchro,desc,sub,insf,...)
 	if c:IsStatus(STATUS_COPYING_EFFECT) then return end
 	local val={...}
 	local fun={}
@@ -113,7 +113,7 @@ function Fusion.AddProcMixWithDescription(c,desc,sub,insf,...)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
 	e1:SetCode(EFFECT_FUSION_MATERIAL)
 	e1:SetCondition(Fusion.ConditionMix(insf,sub,table.unpack(fun)))
-	e1:SetOperation(Fusion.OperationMix(insf,sub,table.unpack(fun)))
+	e1:SetOperation(Fusion.OperationMix(insf,synchro,sub,table.unpack(fun)))
 	c:RegisterEffect(e1)
 	return {e1}
 end
@@ -154,7 +154,7 @@ function Fusion.ConditionMix(insf,sub,...)
 				return mg:IsExists(Fusion.SelectMix,1,nil,tp,mg,sg,mustg,c,sub,sub,contact,sumtype,chkf,table.unpack(funs))
 			end
 end
-function Fusion.OperationMix(insf,sub,...)
+function Fusion.OperationMix(insf,synchro,sub,...)
 	local funs={...}
 	return	function(e,tp,eg,ep,ev,re,r,rp,gc,chkfnf)
 				local chkf=chkfnf&0xff
@@ -194,7 +194,7 @@ function Fusion.OperationMix(insf,sub,...)
 				end
 				while #sg<#funs do
 					Duel.Hint(HINT_SELECTMSG,p,HINTMSG_FMATERIAL)
-					local tc=Group.SelectUnselect(mg:Filter(Fusion.SelectMix,sg,tp,mg,sg,mustg:Filter(aux.TRUE,sg),c,sub,sub,contact,sumtype,chkf,table.unpack(funs)),sg,p,false,contact and #sg==0,#funs,#funs)
+					local tc=Group.SelectUnselect(mg:Filter(Fusion.SelectMix,sg,tp,mg,sg,mustg:Filter(aux.TRUE,sg),c,sub,sub,contact,sumtype,chkf,table.unpack(funs)),sg,p,false,false,#funs,#funs)
 					if not tc then break end
 					if #mustg==0 or not mustg:IsContains(tc) then
 						if not sg:IsContains(tc) then
@@ -293,7 +293,7 @@ function Fusion.SelectMix(c,tp,mg,sg,mustg,fc,sub,sub2,contact,sumtype,chkf,...)
 	return res
 end
 --Fusion monster, mixed material * minc to maxc + material + ...
-function Fusion.AddProcMixRep(c,sub,insf,fun1,minc,maxc,...)
+function Fusion.AddProcMixRep(c,synchro,sub,insf,fun1,minc,maxc,...)
 	if c:IsStatus(STATUS_COPYING_EFFECT) then return end
 	local val={fun1,...}
 	local fun={}
@@ -328,7 +328,7 @@ function Fusion.AddProcMixRep(c,sub,insf,fun1,minc,maxc,...)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
 	e1:SetCode(EFFECT_FUSION_MATERIAL)
 	e1:SetCondition(Fusion.ConditionMixRep(insf,sub,fun[1],minc,maxc,table.unpack(fun,2)))
-	e1:SetOperation(Fusion.OperationMixRep(insf,sub,fun[1],minc,maxc,table.unpack(fun,2)))
+	e1:SetOperation(Fusion.OperationMixRep(insf,synchro,sub,fun[1],minc,maxc,table.unpack(fun,2)))
 	c:RegisterEffect(e1)
 	return {e1}
 end
@@ -367,7 +367,7 @@ function Fusion.ConditionMixRep(insf,sub,fun1,minc,maxc,...)
 				return mg:IsExists(Fusion.SelectMixRep,1,nil,tp,mg,sg,mustg,c,sub,sub,contact,sumtype,chkf,fun1,minc,maxc,table.unpack(funs)) 
 			end
 end
-function Fusion.OperationMixRep(insf,sub,fun1,minc,maxc,...)
+function Fusion.OperationMixRep(insf,synchro,sub,fun1,minc,maxc,...)
 	local funs={...}
 	return	function(e,tp,eg,ep,ev,re,r,rp,gc,chkfnf)
 				local chkf=chkfnf&0xff
@@ -402,10 +402,11 @@ function Fusion.OperationMixRep(insf,sub,fun1,minc,maxc,...)
 				while #sg<maxc+#funs do
 					local cg=mg:Filter(Fusion.SelectMixRep,sg,tp,mg,sg,mustg,c,sub,sub,contact,sumtype,chkf,fun1,minc,maxc,table.unpack(funs))
 					if #cg==0 then break end
-					local finish=Fusion.CheckMixRepGoal(tp,mg,sg,mustg,c,sub,sub,contact,sumtype,chkf,fun1,minc,maxc,table.unpack(funs)) and not Fusion.CheckExact and not (Fusion.CheckMin and #sg<Fusion.CheckMin)
+					local finish=Fusion.CheckMixRepGoal(tp,mg,sg,mustg,c,sub,sub,contact,sumtype,chkf,fun1,minc,maxc,table.unpack(funs)) and not Fusion.CheckExact and
+						not (Fusion.CheckMin and #sg<Fusion.CheckMin) and ((synchro and sg:GetSum(Card.GetLevel)==e:GetHandler():GetLevel()) or not synchro)
 					local cancel=(contact and #sg==0)
 					Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FMATERIAL)
-					local tc=Group.SelectUnselect(cg,sg,p,finish,cancel)
+					local tc=Group.SelectUnselect(cg,sg,p,finish,false)
 					if not tc then break end
 					if #mustg==0 or not mustg:IsContains(tc) then
 						if not sg:IsContains(tc) then
@@ -571,7 +572,7 @@ function Fusion.SelectMixRep(c,tp,mg,sg,mustg,fc,sub,sub2,contact,sumtype,chkf,f
 end
 
 
-function Fusion.AddProcMixRepUnfix(c,sub,insf,...)
+function Fusion.AddProcMixRepUnfix(c,synchro,sub,insf,...)
 	if c:IsStatus(STATUS_COPYING_EFFECT) then return end
 	local val={...}
 	local fun={}
@@ -612,7 +613,7 @@ function Fusion.AddProcMixRepUnfix(c,sub,insf,...)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
 	e1:SetCode(EFFECT_FUSION_MATERIAL)
 	e1:SetCondition(Fusion.ConditionMixRepUnfix(insf,sub,minc,maxc,table.unpack(fun)))
-	e1:SetOperation(Fusion.OperationMixRepUnfix(insf,sub,minc,maxc,table.unpack(fun)))
+	e1:SetOperation(Fusion.OperationMixRepUnfix(insf,synchro,sub,minc,maxc,table.unpack(fun)))
 	c:RegisterEffect(e1)
 end
 function Fusion.ConditionMixRepUnfix(insf,sub,minc,maxc,...)
@@ -652,7 +653,7 @@ function Fusion.ConditionMixRepUnfix(insf,sub,minc,maxc,...)
 				return mg:IsExists(Fusion.SelectMixRepUnfix,1,nil,tp,mg,sg,mustg,c,sub,sub,minc,maxc,chkf,table.unpack(funs))
 			end
 end
-function Fusion.OperationMixRepUnfix(insf,sub,minc,maxc,...)
+function Fusion.OperationMixRepUnfix(insf,synchro,sub,minc,maxc,...)
 	local funs={...}
 	return	function(e,tp,eg,ep,ev,re,r,rp,gc,chkfnf)
 				local chkf=chkfnf&0xff
@@ -698,7 +699,7 @@ function Fusion.OperationMixRepUnfix(insf,sub,minc,maxc,...)
 					if #cg==0 then break end
 					local finish=(sg:IsExists(Fusion.CheckMixRepUnfixSelected,1,nil,tp,sg,sg,mustg,Group.CreateGroup(),c,sub,sub2,chkf,minc,maxc,table.unpack(funs))) and not Fusion.CheckExact
 					local cancel=(contact and #sg==0) and not Fusion.CheckExact
-					local tc=Group.SelectUnselect(cg,sg,p,finish,cancel,minc,maxc)
+					local tc=Group.SelectUnselect(cg,sg,p,finish,false,minc,maxc)
 					if not tc then break end
 					if #mustg==0 or not mustg:IsContains(tc) then
 						if not sg:IsContains(tc) then
@@ -938,75 +939,75 @@ function Fusion.ContactOp(op,f)
 	end
 end
 --Fusion monster, name + name
-function Fusion.AddProcCode2(c,code1,code2,sub,insf)
-	return Fusion.AddProcMix(c,sub,insf,code1,code2)
+function Fusion.AddProcCode2(c,synchro,code1,code2,sub,insf)
+	return Fusion.AddProcMix(c,synchro,sub,insf,code1,code2)
 end
 --Fusion monster, name + name + name
-function Fusion.AddProcCode3(c,code1,code2,code3,sub,insf)
-	return Fusion.AddProcMix(c,sub,insf,code1,code2,code3)
+function Fusion.AddProcCode3(c,synchro,code1,code2,code3,sub,insf)
+	return Fusion.AddProcMix(c,synchro,sub,insf,code1,code2,code3)
 end
 --Fusion monster, name + name + name + name
-function Fusion.AddProcCode4(c,code1,code2,code3,code4,sub,insf)
-	return Fusion.AddProcMix(c,sub,insf,code1,code2,code3,code4)
+function Fusion.AddProcCode4(c,synchro,code1,code2,code3,code4,sub,insf)
+	return Fusion.AddProcMix(c,synchro,sub,insf,code1,code2,code3,code4)
 end
 --Fusion monster, name * n
-function Fusion.AddProcCodeRep(c,code1,cc,sub,insf)
+function Fusion.AddProcCodeRep(c,synchro,code1,cc,sub,insf)
 	local code={}
 	for i=1,cc do
 		code[i]=code1
 	end
-	return Fusion.AddProcMix(c,sub,insf,table.unpack(code))
+	return Fusion.AddProcMix(c,synchro,sub,insf,table.unpack(code))
 end
 --Fusion monster, name * minc to maxc
-function Fusion.AddProcCodeRep2(c,code1,minc,maxc,sub,insf)
-	return Fusion.AddProcMixRep(c,sub,insf,code1,minc,maxc)
+function Fusion.AddProcCodeRep2(c,synchro,code1,minc,maxc,sub,insf)
+	return Fusion.AddProcMixRep(c,synchro,sub,insf,code1,minc,maxc)
 end
 --Fusion monster, name + condition * n
-function Fusion.AddProcCodeFun(c,code1,f,cc,sub,insf)
+function Fusion.AddProcCodeFun(c,synchro,code1,f,cc,sub,insf)
 	local fun={}
 	for i=1,cc do
 		fun[i]=f
 	end
-	return Fusion.AddProcMix(c,sub,insf,code1,table.unpack(fun))
+	return Fusion.AddProcMix(c,synchro,sub,insf,code1,table.unpack(fun))
 end
 --Fusion monster, condition + condition
-function Fusion.AddProcFun2(c,f1,f2,insf)
-	return Fusion.AddProcMix(c,false,insf,f1,f2)
+function Fusion.AddProcFun2(c,synchro,f1,f2,insf)
+	return Fusion.AddProcMix(c,synchro,false,insf,f1,f2)
 end
 --Fusion monster, condition * n
-function Fusion.AddProcFunRep(c,f,cc,insf)
+function Fusion.AddProcFunRep(c,synchro,f,cc,insf)
 	local fun={}
 	for i=1,cc do
 		fun[i]=f
 	end
-	return Fusion.AddProcMix(c,false,insf,table.unpack(fun))
+	return Fusion.AddProcMix(c,synchro,false,insf,table.unpack(fun))
 end
 --Fusion monster, condition * minc to maxc
-function Fusion.AddProcFunRep2(c,f,minc,maxc,insf)
-	return Fusion.AddProcMixRep(c,false,insf,f,minc,maxc)
+function Fusion.AddProcFunRep2(c,synchro,f,minc,maxc,insf)
+	return Fusion.AddProcMixRep(c,synchro,false,insf,f,minc,maxc)
 end
 --Fusion monster, condition1 + condition2 * n
-function Fusion.AddProcFunFun(c,f1,f2,cc,insf)
+function Fusion.AddProcFunFun(c,synchro,f1,f2,cc,insf)
 	local fun={}
 	for i=1,cc do
 		fun[i]=f2
 	end
-	return Fusion.AddProcMix(c,false,insf,f1,table.unpack(fun))
+	return Fusion.AddProcMix(c,synchro,false,insf,f1,table.unpack(fun))
 end
 --Fusion monster, condition1 + condition2 * minc to maxc
-function Fusion.AddProcFunFunRep(c,f1,f2,minc,maxc,insf)
-	return Fusion.AddProcMixRep(c,false,insf,f2,minc,maxc,f1)
+function Fusion.AddProcFunFunRep(c,synchro,f1,f2,minc,maxc,insf)
+	return Fusion.AddProcMixRep(c,synchro,false,insf,f2,minc,maxc,f1)
 end
 --Fusion monster, name + condition * minc to maxc
-function Fusion.AddProcCodeFunRep(c,code1,f,minc,maxc,sub,insf)
-	return Fusion.AddProcMixRep(c,sub,insf,f,minc,maxc,code1)
+function Fusion.AddProcCodeFunRep(c,synchro,code1,f,minc,maxc,sub,insf)
+	return Fusion.AddProcMixRep(c,synchro,sub,insf,f,minc,maxc,code1)
 end
 --Fusion monster, name + name + condition * minc to maxc
-function Fusion.AddProcCode2FunRep(c,code1,code2,f,minc,maxc,sub,insf)
-	return Fusion.AddProcMixRep(c,sub,insf,f,minc,maxc,code1,code2)
+function Fusion.AddProcCode2FunRep(c,synchro,code1,code2,f,minc,maxc,sub,insf)
+	return Fusion.AddProcMixRep(c,synchro,sub,insf,f,minc,maxc,code1,code2)
 end
 --Fusion monster, any number of name/condition * n - fixed
-function Fusion.AddProcMixN(c,sub,insf,...)
+function Fusion.AddProcMixN(c,synchro,sub,insf,...)
 	if c:IsStatus(STATUS_COPYING_EFFECT) then return end
 	local val={...}
 	local t={}
@@ -1026,5 +1027,5 @@ function Fusion.AddProcMixN(c,sub,insf,...)
 			table.insert(fun,t[i])
 		end
 	end
-	return Fusion.AddProcMix(c,sub,insf,table.unpack(fun))
+	return Fusion.AddProcMix(c,synchro,sub,insf,table.unpack(fun))
 end

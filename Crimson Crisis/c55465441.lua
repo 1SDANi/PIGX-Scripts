@@ -33,8 +33,9 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc1=e:GetLabelObject()
 	local g=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS)
-	local tc2=g:GetFirst()
-	if tc2==tc1 then tc2=g:GetNext() end
+	local tg=g:Filter(Card.IsRelateToEffect,nil,e)
+	local tc2=tg:GetFirst()
+	if tc2==tc1 then tc2=tg:GetNext() end
 	if tc2:IsRelateToEffect(e) and Duel.SpecialSummon(tc2,0,tp,1-tp,false,false,POS_FACEUP_DEFENSE)~=0
 		and tc1:IsFaceup() and tc1:IsRelateToEffect(e) then
 		local e1=Effect.CreateEffect(e:GetHandler())

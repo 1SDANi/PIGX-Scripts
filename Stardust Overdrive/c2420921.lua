@@ -29,7 +29,7 @@ function s.filter(c)
 end
 function s.value(e,c)
 	local ct=Duel.GetMatchingGroupCount(s.filter,c:GetControler(),LOCATION_GRAVE,0,nil)
-	return ct*500
+	return ct*100
 end
 function s.discon(e,tp,eg,ep,ev,re,r,rp)
 	return tp==Duel.GetTurnPlayer()

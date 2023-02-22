@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableCounterPermit(COUNTER_XYZ)
 	--fusion material
-	Fusion.AddProcMixRep(c,true,true,s.fusionfilter,3,99)
+	Fusion.AddProcMixRep(c,false,true,true,s.fusionfilter,3,99)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	local chaos=Effect.CreateEffect(c)
 	chaos:SetType(EFFECT_TYPE_IGNITION)
@@ -47,6 +47,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 s.counter_place_list={COUNTER_XYZ}
+s.listed_names={84013237}
 function s.atcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetAttacker()==e:GetHandler() and aux.bdcon(e,tp,eg,ep,ev,re,r,rp) and e:GetHandler():CanChainAttack(0)
 end
@@ -74,7 +75,6 @@ end
 function s.atcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	return aux.bdcon(e,tp,eg,ep,ev,re,r,rp) and c:CanChainAttack()
-		and c:GetOverlayGroup():IsExists(Card.IsCode,1,nil,3814632)
 end
 function s.atcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end

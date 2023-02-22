@@ -2,7 +2,7 @@
 --Goddess Bow
 local s,id=GetID()
 function s.initial_effect(c)
-	Fusion.AddProcMix(c,true,true,84565800,aux.FilterBoolFunction(Card.IsRace,RACE_FAIRY))
+	Fusion.AddProcMix(c,false,true,true,84565800,aux.FilterBoolFunction(Card.IsRace,RACE_FAIRY))
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	--equip
 	local e1=Effect.CreateEffect(c)

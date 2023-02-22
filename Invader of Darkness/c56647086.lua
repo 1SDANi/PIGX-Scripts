@@ -13,6 +13,5 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.aclimit(e,re,tp)
-	return re:GetHandler():IsType(TYPE_SPELL) and re:IsHasType(EFFECT_TYPE_ACTIVATE) and 
-		not re:GetHandler():IsType(TYPE_QUICKPLAY+TYPE_CONTINUOUS+TYPE_EQUIP+TYPE_FIELD+TYPE_RITUAL)
+	return re:GetHandler():IsType(TYPE_SPELL) and re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:GetHandler():IsType(TYPE_QUICKPLAY+TYPE_CONTINUOUS+TYPE_EQUIP+TYPE_FIELD+TYPE_RITUAL)
 end

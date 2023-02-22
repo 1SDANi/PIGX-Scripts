@@ -3,7 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--Fusion Material
-	Fusion.AddProcMix(c,true,true,38916461,aux.FilterBoolFunctionEx(Card.IsRace,RACE_MACHINE))
+	Fusion.AddProcMix(c,false,true,true,38916461,aux.FilterBoolFunctionEx(Card.IsRace,RACE_MACHINE))
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	--Fusion Summon "Super Robogal"
 	local e0=Effect.CreateEffect(c)

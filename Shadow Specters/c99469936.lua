@@ -1,10 +1,10 @@
 --FA－クリスタル・ゼロ・ランサー
---Chaos Xyz: Fully Armed Crystalzero Lancer
+--Chaos Number 94: Fully Armed Crystalzero Lancer
 local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableCounterPermit(COUNTER_XYZ)
 	--fusion material
-	Fusion.AddProcMixRep(c,true,true,s.fusionfilter,3,99)
+	Fusion.AddProcMixRep(c,false,true,true,s.fusionfilter,3,99)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	local chaos=Effect.CreateEffect(c)
 	chaos:SetType(EFFECT_TYPE_IGNITION)
@@ -25,6 +25,12 @@ function s.initial_effect(c)
 	xyz:SetTarget(s.xyztg)
 	xyz:SetOperation(s.xyzop)
 	c:RegisterEffect(xyz)
+	--battle indestructable
+	local e0=Effect.CreateEffect(c)
+	e0:SetType(EFFECT_TYPE_SINGLE)
+	e0:SetCode(EFFECT_INDESTRUCTABLE_BATTLE)
+	e0:SetValue(s.indes)
+	c:RegisterEffect(e0)
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_ATKDEFCHANGE)
@@ -39,7 +45,9 @@ function s.initial_effect(c)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
 end
+s.xyz_number=94
 s.counter_place_list={COUNTER_XYZ}
+s.listed_series={0x48}
 s.listed_names={62070231}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetCurrentPhase()~=PHASE_DAMAGE or not Duel.IsDamageCalculated()
@@ -90,6 +98,9 @@ function s.chaosop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SpecialSummonComplete()
 		e:GetHandler():CompleteProcedure()
 	end
+end
+function s.indes(e,c)
+	return not c:IsSetCard(0x48)
 end
 function s.xyzcn(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION)

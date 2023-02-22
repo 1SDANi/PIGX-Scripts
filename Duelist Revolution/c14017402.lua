@@ -2,7 +2,7 @@
 --Dragon Knight Draco-Equiste
 local s,id=GetID()
 function s.initial_effect(c)
-	Fusion.AddProcMix(c,true,true,s.ffilter,aux.FilterBoolFunctionEx(Card.IsRace,RACE_WARRIOR))
+	Fusion.AddProcMix(c,false,true,true,s.ffilter,aux.FilterBoolFunctionEx(Card.IsRace,RACE_WARRIOR))
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	--copy
 	local e1=Effect.CreateEffect(c)

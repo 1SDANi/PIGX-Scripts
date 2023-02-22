@@ -1,5 +1,5 @@
 --D・ステープラン
---Morphtronic Staplen
+--Deformer Staplen
 local s,id=GetID()
 function s.initial_effect(c)
 	--atk

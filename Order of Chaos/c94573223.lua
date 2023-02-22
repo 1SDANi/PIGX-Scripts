@@ -35,7 +35,7 @@ function s.initial_effect(c)
 	e5:SetCode(EFFECT_DESTROY_SUBSTITUTE)
 	e5:SetValue(s.repval)
 	c:RegisterEffect(e5)
-	--tohand
+	--special summon
 	local e6=Effect.CreateEffect(c)
 	e6:SetDescription(aux.Stringid(id,1))
 	e6:SetCategory(CATEGORY_SPECIAL_SUMMON)

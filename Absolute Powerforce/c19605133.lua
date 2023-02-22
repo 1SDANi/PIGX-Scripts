@@ -28,7 +28,7 @@ end
 s.listed_series={0x2a}
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	local ec=eg:GetFirst()
-	return ec:IsSetCard(0x2a) and ec:IsSummonType(SUMMON_TYPE_FUSION) and tc:IsControler(tp)
+	return ec:IsSetCard(0x2a) and ec:IsSummonType(SUMMON_TYPE_FUSION) and ec:IsControler(tp)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
