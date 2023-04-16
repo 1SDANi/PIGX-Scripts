@@ -18,7 +18,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local dc=Duel.TossDice(tp,1)
-	if dc==1 or dc==6 then
+	if not (dc>1 and dc<6) then
 		Duel.Draw(tp,2,REASON_EFFECT)
 	end
 	Duel.DiscardDeck(tp,dc,REASON_EFFECT)

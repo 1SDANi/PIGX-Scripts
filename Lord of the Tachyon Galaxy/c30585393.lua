@@ -19,12 +19,11 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local tc=eg:GetFirst()
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and tc:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP) end
-	tc:CreateEffectRelation(e)
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,eg,1,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,eg,1,tp,LOCATION_GRAVE)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=eg:GetFirst()
-	if tc:IsRelateToEffect(e) then
+	if tc then
 		Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)
 	end
 end

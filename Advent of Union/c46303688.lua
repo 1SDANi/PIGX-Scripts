@@ -19,8 +19,8 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_DICE,nil,0,tp,2)
 end
 function s.dfilter(c,lv)
-	if lv==6 then return c:IsFaceup() and c:GetLevel()>=lv end
-	return c:IsFaceup() and c:GetLevel()==lv
+	if lv<5 then return c:IsFaceup() and c:GetLevel()==lv end
+	return c:IsFaceup() and c:GetLevel()>=6
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local d1,d2=Duel.TossDice(tp,2)

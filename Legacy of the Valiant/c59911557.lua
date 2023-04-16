@@ -19,7 +19,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsLocation(LOCATION_GRAVE) and (r&REASON_EFFECT+REASON_BATTLE)~=0
 end
 function s.tgfilter(c)
-	return c:IsType(TYPE_MONSTER) and (tc:IsSetCard(0x54) or tc:IsSetCard(0x30a) or tc:IsSetCard(0x82) or tc:IsSetCard(0x59) or tc:IsSetCard(0x8f)) and c:IsAbleToGrave()
+	return c:IsType(TYPE_MONSTER) and (c:IsSetCard(0x54) or c:IsSetCard(0x30a) or c:IsSetCard(0x82) or c:IsSetCard(0x59) or c:IsSetCard(0x8f)) and c:IsAbleToGrave()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_DECK,0,1,nil) end

@@ -5,7 +5,7 @@ function s.initial_effect(c)
 	--fusion material
 	Fusion.AddProcMixRep(c,true,true,true,s.fusionfilter,2,99)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
-	--special summon
+	--to hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)

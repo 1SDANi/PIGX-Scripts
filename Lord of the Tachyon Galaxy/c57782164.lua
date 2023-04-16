@@ -13,7 +13,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x54,0x30a,0x82,0x59,0x8f}
 function s.spfilter(c,e,tp)
-	return (tc:IsSetCard(0x54) or tc:IsSetCard(0x30a) or tc:IsSetCard(0x82) or tc:IsSetCard(0x59) or tc:IsSetCard(0x8f)) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return (c:IsSetCard(0x54) or c:IsSetCard(0x30a) or c:IsSetCard(0x82) or c:IsSetCard(0x59) or c:IsSetCard(0x8f)) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND+LOCATION_DECK,0,1,nil,e,tp) end

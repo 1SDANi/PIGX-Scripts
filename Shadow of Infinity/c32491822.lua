@@ -1,9 +1,9 @@
 --降雷皇ハモン
---The Cursed Remains of Haman
+--The Phantasmal Wisdom of Gabriel
 local s,id=GetID()
 function s.initial_effect(c)
 	Fusion.AddProcMixRep(c,false,true,true,s.filter,1,99)
-	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
+	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION,nil,nil,nil,nil,nil,true)
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_SINGLE)
 	e0:SetCode(EFFECT_CANNOT_DISABLE_SPSUMMON)

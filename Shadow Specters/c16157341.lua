@@ -22,7 +22,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetReset(RESET_PHASE+PHASE_END)
 	e1:SetTarget(s.targ)
 	e1:SetOperation(s.op)
-	e:GetHandler():RegisterEffect(e1,tp)
+	Duel.RegisterEffect(e1,tp)
 end
 function s.targ(e,tp,eg,ep,ev,re,r,rp,chk)
 	local t=Duel.GetAttackTarget()

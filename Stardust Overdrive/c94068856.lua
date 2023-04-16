@@ -22,7 +22,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.SelectTarget(tp,s.filter,tp,LOCATION_MZONE,0,1,1,nil)
 	local lv=e:GetHandler():GetLevel()
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,0))
-	e:SetLabel(Duel.AnnounceLevel(tp,1,12,lv))
+	e:SetLabel(Duel.AnnounceLevel(tp,1,11,lv))
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

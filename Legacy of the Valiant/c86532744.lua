@@ -61,7 +61,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(Card.IsAttackPos,tp,0,LOCATION_MZONE,nil)
 	if Duel.Remove(g,POS_FACEUP,REASON_EFFECT)>0 then
 		local dg=Duel.GetOperatedGroup()
-		local dam=dg:GetSum(Card.GetAttack)
+		local dam=dg:GetSum(Card.GetPreviousAttackOnField)
 		Duel.Damage(1-tp,dam,REASON_EFFECT)
 	end
 end

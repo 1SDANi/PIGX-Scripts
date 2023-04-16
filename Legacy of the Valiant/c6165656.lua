@@ -61,7 +61,6 @@ end
 s.xyz_number=88
 s.counter_place_list={COUNTER_XYZ}
 s.listed_series={0x48}
-s.listed_names={48995978}
 function s.wincon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetLP(1-tp)<=2000 and not e:GetHandler():GetCounter(COUNTER_XYZ)>0
 end
@@ -69,16 +68,16 @@ function s.winop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Win(tp,WIN_REASON_DISASTER_LEO)
 end
 function s.counterfilter(c)
-	return c:IsCode(48995978)
+	return c:IsCode(48995978) or c:IsCode(6165656)
 end
 function s.sumlimit(e,c,sump,sumtype,sumpos,targetp,se)
-	return not c:IsCode(48995978)
+	return not (c:IsCode(48995978) or c:IsCode(6165656))
 end
 function s.aclimit(e,re,tp)
 	return re:IsActiveType(TYPE_MONSTER) and re:GetHandler()~=e:GetHandler()
 end
 function s.chainfilter(re,tp,cid)
-	return not (re:IsActiveType(TYPE_MONSTER) and re:GetHandler()~=e:GetHandler())
+	return re:GetHandler()~=e:GetHandler()) and not (re:IsActiveType(TYPE_MONSTER)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,COUNTER_XYZ,1,REASON_COST)

@@ -43,7 +43,7 @@ function s.initial_effect(c)
 	e4:SetCode(EFFECT_UPDATE_ATTACK)
 	e4:SetRange(LOCATION_FZONE)
 	e4:SetTargetRange(LOCATION_MZONE,LOCATION_MZONE)
-	e4:SetTarget(aux.TargetBoolFunction(s.filter)
+	e4:SetTarget(s.filter)
 	e4:SetValue(s.atkval)
 	c:RegisterEffect(e4)
 	local e6=e4:Clone()
@@ -51,8 +51,11 @@ function s.initial_effect(c)
 	c:RegisterEffect(e6)
 end
 s.listed_series={0x19}
-function s.filter(c)
+function s.filter(e,c)
 	return c:IsRace(RACE_BEAST+RACE_AQUATIC+RACE_REPTILE)
+end
+function s.atkval(e,c)
+	return e:GetHandler():GetCounter(0x7)*100
 end
 function s.repfilter(c,tp)
 	return c:IsFaceup() and c:IsLocation(LOCATION_MZONE) and s.filter(c) and c:IsReason(REASON_BATTLE+REASON_EFFECT) and not c:IsReason(REASON_REPLACE)

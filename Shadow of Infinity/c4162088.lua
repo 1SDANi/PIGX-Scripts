@@ -2,6 +2,8 @@
 --Cyber Laser Dragon
 local s,id=GetID()
 function s.initial_effect(c)
+	Fusion.AddProcMix(c,false,true,true,CARD_CYBER_DRAGON)
+	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	--change name
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -41,4 +43,10 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if c:IsFaceup() and c:IsRelateToEffect(e) and tc:IsRelateToEffect(e) then
 		Duel.Destroy(tc,REASON_EFFECT)
 	end
+end
+function s.contactfil(tp)
+	return Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)
+end
+function s.contactop(g)
+	Duel.SendtoGrave(g,REASON_COST+REASON_MATERIAL+REASON_FUSION)
 end

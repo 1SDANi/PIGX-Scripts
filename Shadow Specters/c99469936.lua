@@ -44,11 +44,21 @@ function s.initial_effect(c)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
+	local e2=Effect.CreateEffect(c)
+	e2:SetType(EFFECT_TYPE_SINGLE)
+	e2:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
+	e2:SetRange(LOCATION_MZONE)
+	e2:SetCode(EFFECT_UPDATE_ATTACK)
+	e2:SetValue(s.attackup)
+	c:RegisterEffect(e2)
 end
 s.xyz_number=94
 s.counter_place_list={COUNTER_XYZ}
 s.listed_series={0x48}
 s.listed_names={62070231}
+function s.attackup(e,c)
+	return 500*c:GetCounter(COUNTER_XYZ)
+end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetCurrentPhase()~=PHASE_DAMAGE or not Duel.IsDamageCalculated()
 end

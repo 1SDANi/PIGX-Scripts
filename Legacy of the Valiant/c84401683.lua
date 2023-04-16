@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	xyz:SetTarget(s.xyztg)
 	xyz:SetOperation(s.xyzop)
 	c:RegisterEffect(xyz)
-	--Negate effects
+	--change atk
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_ATKDEFCHANGE)
@@ -26,10 +26,10 @@ function s.initial_effect(c)
 	e1:SetHintTiming(TIMING_DAMAGE_STEP,TIMING_DAMAGE_STEP+TIMINGS_CHECK_MONSTER)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetCountLimit(1)
-	e1:SetCondition(s.negcon)
-	e1:SetCost(s.negcost)
-	e1:SetTarget(s.negtg)
-	e1:SetOperation(s.negop)
+	e1:SetCondition(s.atkcn)
+	e1:SetCost(s.atkcs)
+	e1:SetTarget(s.atktg)
+	e1:SetOperation(s.atkop)
 	c:RegisterEffect(e1)
 	--destroy
 	local e3=Effect.CreateEffect(c)
@@ -65,17 +65,17 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Destroy(tc,REASON_EFFECT)
 	end
 end
-function s.negcon(e,tp,eg,ep,ev,re,r,rp)
+function s.atkcn(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetCurrentPhase()~=PHASE_DAMAGE or not Duel.IsDamageCalculated()
 end
-function s.negcost(e,tp,eg,ep,ev,re,r,rp,chk)
+function s.atkcs(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,COUNTER_XYZ,1,REASON_COST) end
 	e:GetHandler():RemoveCounter(tp,COUNTER_XYZ,1,REASON_COST)
 end
 function s.filter(c)
 	return c:IsFaceup() and c:GetAttack()>0
 end
-function s.negtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
+function s.atktg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(1-tp) and chkc:IsLocation(LOCATION_MZONE) and s.filter(chkc) end
 	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,0,LOCATION_MZONE,1,nil) end
 	Duel.Hint(HINT_OPSELECTED,1-tp,e:GetDescription())
@@ -83,7 +83,7 @@ function s.negtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local g=Duel.SelectTarget(tp,s.filter,tp,0,LOCATION_MZONE,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_DISABLE,g,1,0,0)
 end
-function s.negop(e,tp,eg,ep,ev,re,r,rp)
+function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsFaceup() and tc:IsRelateToEffect(e) and tc:GetAttack()>0 then

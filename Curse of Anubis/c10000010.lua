@@ -30,15 +30,14 @@ function s.initial_effect(c)
 	e4:SetRange(LOCATION_MZONE)
 	e4:SetValue(aux.tgoval)
 	c:RegisterEffect(e4)
-	--One Turn Kill
-	local e6=Effect.CreateEffect(c)
-	e6:SetDescription(aux.Stringid(id,0))
-	e6:SetCategory(CATEGORY_ATKDEFCHANGE)
-	e6:SetType(EFFECT_TYPE_TRIGGER_O+EFFECT_TYPE_SINGLE)
-	e6:SetCode(EVENT_SUMMON_SUCCESS)
-	e6:SetCost(s.atkcost)
-	e6:SetOperation(s.atkop)
-	c:RegisterEffect(e6)
+	--extra attack
+	local e5=Effect.CreateEffect(c)
+	e5:SetDescription(aux.Stringid(id,0))
+	e5:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
+	e5:SetCode(EVENT_BATTLE_DESTROYING)
+	e5:SetCondition(s.atcon)
+	e5:SetOperation(s.atop)
+	c:RegisterEffect(e5)
 	--destroy
 	local e7=Effect.CreateEffect(c)
 	e7:SetDescription(aux.Stringid(id,1))
@@ -61,6 +60,13 @@ function s.initial_effect(c)
 	local e9=e8:Clone()
 	e9:SetCode(EFFECT_SET_BASE_DEFENSE)
 	c:RegisterEffect(e9)
+end
+function s.atcon(e,tp,eg,ep,ev,re,r,rp)
+	return Duel.GetAttacker()==e:GetHandler() and aux.bdcon(e,tp,eg,ep,ev,re,r,rp)
+		and e:GetHandler():CanChainAttack(0)
+end
+function s.atop(e,tp,eg,ep,ev,re,r,rp)
+	Duel.ChainAttack()
 end
 function s.tgcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_SPECIAL) and e:GetHandler():GetPreviousLocation()~=0
@@ -132,14 +138,14 @@ function s.aclimit(e,re,tp)
 	return re:IsActiveType(TYPE_SPELL+TYPE_TRAP)
 end
 function s.descost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.CheckLPCost(tp,2000) end
-	Duel.PayLPCost(tp,2000)
+	if chk==0 then return Duel.CheckLPCost(tp,1000) end
+	Duel.PayLPCost(tp,1000)
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_SZONE) and chkc:IsControler(1-tp) end
-	if chk==0 then return Duel.IsExistingTarget(aux.TRUE,tp,0,LOCATION_SZONE,1,nil) end
+	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(1-tp) end
+	if chk==0 then return Duel.IsExistingTarget(aux.TRUE,tp,0,LOCATION_MZONE,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
-	local g=Duel.SelectTarget(tp,aux.TRUE,tp,0,LOCATION_SZONE,1,1,nil)
+	local g=Duel.SelectTarget(tp,aux.TRUE,tp,0,LOCATION_MZONE,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,#g,0,0)
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)

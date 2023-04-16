@@ -26,6 +26,7 @@ function s.initial_effect(c)
 	e2:SetValue(s.atkval)
 	c:RegisterEffect(e2)
 end
+s.material_attribute={ATTRIBUTE_WIND}
 s.listed_series={0x29}
 function s.eqval(ec,c,tp)
 	return ec:IsControler(tp) and ec:IsSetCard(0x29) and ec:IsType(TYPE_UNION)

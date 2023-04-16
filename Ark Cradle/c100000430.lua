@@ -26,14 +26,15 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local sg=Duel.GetMatchingGroup(aux.TRUE,tp,0,LOCATION_MZONE,nil)
-	Duel.Destroy(sg,REASON_EFFECT)
-	local dg=Duel.GetOperatedGroup()
-	local tc=dg:GetFirst()
-	local dam=0
-	for tc in aux.Next(dg) do
-		local atk=tc:GetTextAttack()
-		if atk<0 then atk=0 end
-		dam=dam+atk
+	if Duel.Destroy(sg,REASON_EFFECT) then
+		local dg=Duel.GetOperatedGroup()
+		local tc=dg:GetFirst()
+		local dam=0
+		for tc in aux.Next(dg) do
+			local atk=tc:GetTextAttack()
+			if atk<0 then atk=0 end
+			dam=dam+atk
+		end
+		Duel.Damage(1-tp,dam,REASON_EFFECT)
 	end
-	Duel.Damage(1-tp,dam,REASON_EFFECT)
 end

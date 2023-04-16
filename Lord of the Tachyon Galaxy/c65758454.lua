@@ -22,7 +22,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x54,0x30a,0x82,0x59,0x8f}
 function s.filter(c,e,sp)
-	return (tc:IsSetCard(0x54) or tc:IsSetCard(0x30a) or tc:IsSetCard(0x82) or tc:IsSetCard(0x59) or tc:IsSetCard(0x8f)) and c:IsCanBeSpecialSummoned(e,0,sp,false,false)
+	return (c:IsSetCard(0x54) or c:IsSetCard(0x30a) or c:IsSetCard(0x82) or c:IsSetCard(0x59) or c:IsSetCard(0x8f)) and c:IsCanBeSpecialSummoned(e,0,sp,false,false)
 end
 function s.sumcs(e,tp,eg,ep,ev,re,r,rp,chk)
 	local eg=Group.CreateGroup()

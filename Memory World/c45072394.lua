@@ -22,7 +22,7 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local tc=Duel.GetFirstTarget()
-	if c:IsRelateToEffect(e) and tc:IsRelateToEffect(e) then
+	if c:IsRelateToEffect(e) and tc:IsRelateToEffect(e) and Duel.Destroy(tc,REASON_EFFECT) then
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 		e1:SetCode(EVENT_PHASE+PHASE_STANDBY)
@@ -47,8 +47,7 @@ end
 function s.rettg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local tc=e:GetLabelObject()
 	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) end
-	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and tc:IsLocation(LOCATION_GRAVE) and tc:IsControler(tp) end
+	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and tc:IsLocation(LOCATION_GRAVE) and tc:IsControler(tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g=Duel.SetTargetCard(tc)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,tc,1,0,0)

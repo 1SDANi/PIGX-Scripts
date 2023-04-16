@@ -3,7 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--perform a fusion summon
-	local params = {aux.FilterBoolFunction(Card.IsRace,RACE_FIEND)}
+	local params = {aux.FilterBoolFunction(Card.IsRace,RACE_FIEND),nil,nil,nil,Fusion.ForcedHandler}
 	local e2=Effect.CreateEffect(c)
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_FUSION_SUMMON)
 	e2:SetType(EFFECT_TYPE_QUICK_O)

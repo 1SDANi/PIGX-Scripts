@@ -11,7 +11,7 @@ function s.initial_effect(c)
 	e0:SetValue(RACE_MACHINE)
 	c:RegisterEffect(e0)
 	--perform a fusion summon
-	local params = {aux.FilterBoolFunction(Card.IsSetCard,0x27)}
+	local params = {aux.FilterBoolFunction(Card.IsSetCard,0x27),nil,nil,nil,Fusion.ForcedHandler}
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_FUSION_SUMMON)
 	e1:SetType(EFFECT_TYPE_IGNITION)

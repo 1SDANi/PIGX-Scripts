@@ -13,6 +13,9 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 s.listed_series={0x6e}
+function s.chlimit(e,ep,tp)
+	return tp==ep
+end
 function s.filter(c)
 	return c:IsRace(RACE_SPELLCASTER) and c:IsAbleToHand()
 end
@@ -22,6 +25,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_GRAVE,0,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,g,1,0,0)
+	Duel.SetChainLimit(s.chlimit)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()

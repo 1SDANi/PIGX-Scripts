@@ -35,7 +35,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		local g2=sg:Filter(Card.IsLocation,nil,LOCATION_GRAVE)
 		if Duel.SpecialSummon(g2,0,tp,tp,false,false,POS_FACEUP) then
 			if g2:GetFirst():IsCanAddCounter(COUNTER_XYZ,1) and
-				g1:GetFirst():GetOverlayCount()>0 and
+				g1:GetFirst():GetCounter(COUNTER_XYZ)>0 and
 				g1:GetFirst():IsCanRemoveCounter(tp,COUNTER_XYZ,1,REASON_EFFECT) and
 				g1:GetFirst():RemoveCounter(tp,COUNTER_SPELL,1,REASON_EFFECT)>0 then
 				g2:GetFirst():AddCounter(COUNTER_XYZ,2)

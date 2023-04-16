@@ -17,15 +17,17 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_GRAVE,LOCATION_GRAVE,nil,e,tp,Duel.GetTurnCount())
 	local tid=Duel.GetTurnCount()
-	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>#g-1
-		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,nil,e,tp,Duel.GetTurnCount()) end
+	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,nil,e,tp,Duel.GetTurnCount()) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,#g,0,0)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_GRAVE,LOCATION_GRAVE,nil,e,tp,Duel.GetTurnCount())
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-	if ft>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
-	if ft<=#g-1 then return end
+	if ft<=0 then return end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
+	if ft<#g then
+		g=g:Select(tp,ft,ft,nil)
+	end
 	if #g>0 then
 		local tc=g:GetFirst()
 		for tc in aux.Next(g) do

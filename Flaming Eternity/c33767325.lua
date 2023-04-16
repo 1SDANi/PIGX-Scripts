@@ -25,5 +25,11 @@ function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
-	Duel.Damage(p,d,REASON_EFFECT)
+	if Duel.SelectYesNo(tp,Stringid(id,0)) then
+		Duel.Damage(tp,d,REASON_EFFECT)
+		Duel.Damage(1-tp,d,REASON_EFFECT)
+		Duel.RDComplete()
+	else
+		Duel.Damage(p,d,REASON_EFFECT)
+	end
 end

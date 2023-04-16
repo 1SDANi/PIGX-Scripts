@@ -25,7 +25,6 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_HAND,0,1,1,nil,e,tp)
 	local tc=g:GetFirst()
 	if tc then
-		local atk=tc:GetAttack()
 		if Duel.SpecialSummonStep(tc,0,tp,tp,false,false,POS_FACEUP) then
 			local e2=Effect.CreateEffect(e:GetHandler())
 			e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)

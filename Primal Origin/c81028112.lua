@@ -1,0 +1,39 @@
+--エレキック・ファイター
+--Watt Fighter
+local s,id=GetID()
+function s.initial_effect(c)
+	--direct attack
+	local e1=Effect.CreateEffect(c)
+	e1:SetType(EFFECT_TYPE_SINGLE)
+	e1:SetCode(EFFECT_DIRECT_ATTACK)
+	c:RegisterEffect(e1)
+	--act limit
+	local e2=Effect.CreateEffect(c)
+	e2:SetDescription(aux.Stringid(id,0))
+	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
+	e2:SetCode(EVENT_BATTLE_DAMAGE)
+	e2:SetCondition(s.condition)
+	e2:SetOperation(s.operation)
+	c:RegisterEffect(e2)
+end
+function s.condition(e,tp,eg,ep,ev,re,r,rp)
+	return ep~=tp
+end
+function s.operation(e,tp,eg,ep,ev,re,r,rp)
+	--Cannot remove
+	local e2=Effect.CreateEffect(e:GetHandler())
+	e2:SetType(EFFECT_TYPE_FIELD)
+	e2:SetCode(EFFECT_CANNOT_REMOVE)
+	e2:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
+	e2:SetTargetRange(0,1)
+	e2:SetReset(RESET_PHASE+PHASE_STANDBY+RESET_SELF_TURN)
+	Duel.RegisterEffect(e2,tp)
+	--Imperial Iron Wall check
+	local e3=Effect.CreateEffect(e:GetHandler())
+	e3:SetType(EFFECT_TYPE_FIELD)
+	e3:SetCode(30459350)
+	e3:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
+	e3:SetTargetRange(0,1)
+	e3:SetReset(RESET_PHASE+PHASE_STANDBY+RESET_SELF_TURN)
+	Duel.RegisterEffect(e3,tp)
+end

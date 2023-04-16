@@ -2,7 +2,6 @@
 --Everz Thunderbird
 local s,id=GetID()
 function s.initial_effect(c)
-	--Place 1 venom counter on 1 of opponent's monsters
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_REMOVE)
@@ -10,6 +9,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_QUICK_O)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetRange(LOCATION_MZONE)
+	e1:SetCountLimit(1)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)

@@ -30,16 +30,16 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local d=Duel.TossDice(tp,1)
-	if d==6 then
-		local g=Duel.GetMatchingGroup(aux.TRUE,tp,0,LOCATION_MZONE,nil)
+	if d<4 then
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
+		local g=Duel.SelectMatchingCard(tp,aux.TRUE,tp,0,LOCATION_MZONE,1,1,nil)
 		Duel.Destroy(g,REASON_EFFECT)
 	elseif d==4 or d==5 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
 		local g=Duel.SelectMatchingCard(tp,aux.TRUE,tp,0,LOCATION_MZONE,1,2,nil)
 		Duel.Destroy(g,REASON_EFFECT)
 	else
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
-		local g=Duel.SelectMatchingCard(tp,aux.TRUE,tp,0,LOCATION_MZONE,1,1,nil)
+		local g=Duel.GetMatchingGroup(aux.TRUE,tp,0,LOCATION_MZONE,nil)
 		Duel.Destroy(g,REASON_EFFECT)
 	end
 end

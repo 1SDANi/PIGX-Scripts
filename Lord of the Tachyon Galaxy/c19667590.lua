@@ -17,7 +17,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x54,0x30a,0x82,0x59,0x8f}
 function s.cfilter(c,tp)
-	return c:IsFaceup() and c:IsSummonPlayer(tp) and (tc:IsSetCard(0x54) or tc:IsSetCard(0x30a) or tc:IsSetCard(0x82) or tc:IsSetCard(0x59) or tc:IsSetCard(0x8f))
+	return c:IsFaceup() and c:IsSummonPlayer(tp) and (c:IsSetCard(0x54) or c:IsSetCard(0x30a) or c:IsSetCard(0x82) or c:IsSetCard(0x59) or c:IsSetCard(0x8f))
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.cfilter,1,nil,tp)

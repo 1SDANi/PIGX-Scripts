@@ -18,7 +18,7 @@ s.listed_series={0x41}
 function s.filter(c)
 	return c:IsSetCard(0x41) and c:IsType(TYPE_MONSTER) and c:IsAbleToDeck()
 end
-function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
+function s.tg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_GRAVE) and s.filter(chkc) end
 	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,LOCATION_GRAVE,0,2,nil) and Duel.IsPlayerCanDraw(tp,1) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
@@ -28,7 +28,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,g,2,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,1)
 end
-function s.activate(e,tp,eg,ep,ev,re,r,rp)
+function s.op(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS)
 	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
 	local sg=g:Filter(Card.IsRelateToEffect,nil,e)

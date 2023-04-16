@@ -2,7 +2,7 @@
 --Psy-Fusion
 local s,id=GetID()
 function s.initial_effect(c)
-	local e1=Fusion.CreateSummonEff(c,aux.FilterBoolFunction(Card.IsRace,RACE_PSYCHIC),Fusion.OnFieldMat(Card.IsAbleToDeck),s.fextra,Fusion.ShuffleMaterial)
+	local e1=Fusion.CreateSummonEff(c,aux.FilterBoolFunction(Card.IsRace,RACE_PSYCHIC),aux.FALSE,s.fextra,Fusion.ShuffleMaterial)
 	e1:SetCost(s.cost)
 	c:RegisterEffect(e1)
 end

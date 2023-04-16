@@ -12,9 +12,6 @@ function s.initial_effect(c)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
 end
-function s.filter(c,e,tp)
-	return c:GetLevel()==1 and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
-end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local eg=Group.CreateGroup()
 	eg:AddCard(e:GetHandler())

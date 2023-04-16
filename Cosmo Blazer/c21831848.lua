@@ -14,7 +14,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x54,0x30a,0x82,0x59,0x8f}
 function s.filter(c)
-	return (tc:IsSetCard(0x54) or tc:IsSetCard(0x30a) or tc:IsSetCard(0x82) or tc:IsSetCard(0x59) or tc:IsSetCard(0x8f)) and c:IsType(TYPE_MONSTER) and c:IsAbleToDeck()
+	return (c:IsSetCard(0x54) or c:IsSetCard(0x30a) or c:IsSetCard(0x82) or c:IsSetCard(0x59) or c:IsSetCard(0x8f)) and c:IsType(TYPE_MONSTER) and c:IsAbleToDeck()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_GRAVE) and s.filter(chkc) end

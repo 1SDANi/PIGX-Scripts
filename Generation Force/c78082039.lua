@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	e2:SetTarget(aux.OR(aux.TargetBoolFunction(Card.IsRace,RACE_BEAST),aux.TargetBoolFunction(Card.IsRace,RACE_AQUATIC)))
 	e2:SetValue(s.val)
 	c:RegisterEffect(e2)
-	--Search a Plant, Beast, or Insect monster
+	--Special Summon
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,1))
 	e4:SetCategory(CATEGORY_SEARCH+CATEGORY_SPECIAL_SUMMON)
@@ -37,7 +37,8 @@ function s.initial_effect(c)
 	end)
 end
 function s.regfilter(c)
-	return c:IsReason(REASON_DESTROY) and (c:IsPreviousLocation(LOCATION_MZONE) or (not c:IsPreviousLocation(LOCATION_MZONE) and c:IsType(TYPE_MONSTER)))
+	return c:IsReason(REASON_DESTROY) and c:IsReason(REASON_EFFECT+REASON_BATTLE) and c:IsLocation(LOCATION_GRAVE) and
+		(c:IsPreviousLocation(LOCATION_MZONE) or (not c:IsPreviousLocation(LOCATION_MZONE) and c:IsType(TYPE_MONSTER)))
 end
 function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=eg:GetFirst()

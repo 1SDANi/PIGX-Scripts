@@ -38,6 +38,7 @@ function s.initial_effect(c)
 	e4:SetValue(s.repval)
 	c:RegisterEffect(e4)
 end
+s.listed_series={0x7f}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	local ec=eg:GetFirst()
 	local bc=ec:GetBattleTarget()

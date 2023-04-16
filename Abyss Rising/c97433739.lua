@@ -18,8 +18,8 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_GRAVE,0,nil,e,tp)
 	if chkc then return true end
-	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>-2 and g:GetClassCount(Card.GetLevel)>=3 end
-	local tg=aux.SelectUnselectGroup(g,e,tp,3,3,aux.dpcheck(Card.GetLevel),1,tp,HINTMSG_TODECK)
+	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>2 and g:GetClassCount(Card.GetLevel)>=3 end
+	local tg=aux.SelectUnselectGroup(g,e,tp,3,3,aux.dpcheck(Card.GetLevel),1,tp,HINTMSG_TOGRAVE)
 	Duel.SetTargetCard(tg)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,#g,0,0)
 end

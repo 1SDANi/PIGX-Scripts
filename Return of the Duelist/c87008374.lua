@@ -47,6 +47,7 @@ function s.tktg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local q=e:GetHandler():GetEquipTarget()
 	if chk ==0 then	return (a==q and d~=nil) or (a~=nil and d==q) end
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,t,1,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,e:GetHandler():GetAttack())
 end
 function s.tkop(e,tp,eg,ep,ev,re,r,rp)
 	local t=Duel.GetAttackTarget()

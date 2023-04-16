@@ -44,5 +44,12 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.SelectMatchingCard(tp,nil,tp,0,LOCATION_ONFIELD,1,1,nil)
-	if #g>0 then Duel.NegateAttack() end
+	if #g>0 then
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
+		local g1=Duel.SelectMatchingCard(tp,aux.TRUE,tp,LOCATION_ONFIELD,0,1,1,nil)
+		Duel.HintSelection(g1,true)
+		if g1 and Duel.Destroy(g1,REASON_EFFECT) then
+			Duel.NegateAttack()
+		end
+	end
 end

@@ -1,5 +1,5 @@
 --シューティング・スター・ドラゴン
---Shooting Star Dragon
+--Shooting Stardust Dragon
 local s,id=GetID()
 function s.initial_effect(c)
 	Fusion.AddProcMixRep(c,true,true,true,s.fusionfilter,2,99)

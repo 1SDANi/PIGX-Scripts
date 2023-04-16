@@ -26,11 +26,11 @@ function s.initial_effect(c)
 	aux.AddEREquipLimit(c,nil,s.eqval,aux.EquipByEffectAndLimitRegister,e3)
 end
 s.listed_series={0x29}
-function s.filter(c)
+function s.adfilter(c)
 	return c:IsFaceup() and c:IsSetCard(0x29)
 end
 function s.val(e,c)
-	local g=Duel.GetMatchingGroup(s.filter,c:GetControler(),LOCATION_ONFIELD,0,nil)
+	local g=Duel.GetMatchingGroup(s.adfilter,c:GetControler(),LOCATION_ONFIELD,0,nil)
 	return #g*1000
 end
 function s.filter(c)
@@ -52,4 +52,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	if tc and tc:IsRelateToEffect(e) then
 		aux.EquipByEffectAndLimitRegister(c,e,tp,tc)
 	end
+end
+function s.eqval(ec,c,tp)
+	return ec:IsSetCard(0x29) and ec:IsType(TYPE_UNION)
 end

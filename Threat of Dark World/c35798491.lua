@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	--selfdestroy
 	local e5=Effect.CreateEffect(c)
 	e5:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
-	e5:SetCategory(CATEGORY_DESTROY)
+	e5:SetCategory(CATEGORY_DESTROY+CATEGORY_NEGATE+CATEGORY_DICE)
 	e5:SetCode(EVENT_ADJUST)
 	e5:SetRange(LOCATION_MZONE)
 	e5:SetTarget(s.sdtg)

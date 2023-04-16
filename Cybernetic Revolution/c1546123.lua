@@ -65,7 +65,21 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)+1
 	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then c=1 end
 	if #g==0 or ft<#g then return end
-	Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
+	local tc=g:GetFirst()
+	for tc in aux.Next(g) do
+		Duel.SpecialSummonStep(tc,0,tp,tp,false,false,POS_FACEUP)
+		local e1=Effect.CreateEffect(e:GetHandler())
+		e1:SetType(EFFECT_TYPE_SINGLE)
+		e1:SetCode(EFFECT_DISABLE)
+		e1:SetReset(RESET_EVENT+RESETS_STANDARD)
+		tc:RegisterEffect(e1,true)
+		local e2=Effect.CreateEffect(e:GetHandler())
+		e2:SetType(EFFECT_TYPE_SINGLE)
+		e2:SetCode(EFFECT_DISABLE_EFFECT)
+		e2:SetReset(RESET_EVENT+RESETS_STANDARD)
+		tc:RegisterEffect(e2,true)
+	end
+	Duel.SpecialSummonComplete()
 end
 function s.contactfil(tp)
 	return Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)

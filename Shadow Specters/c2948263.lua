@@ -24,7 +24,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x54,0x30a,0x82,0x59,0x8f}
 function s.filter(c)
-	return c:IsFaceup() and (tc:IsSetCard(0x54) or tc:IsSetCard(0x30a) or tc:IsSetCard(0x82) or tc:IsSetCard(0x59) or tc:IsSetCard(0x8f))
+	return c:IsFaceup() and (c:IsSetCard(0x54) or c:IsSetCard(0x30a) or c:IsSetCard(0x82) or c:IsSetCard(0x59) or c:IsSetCard(0x8f))
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.CheckReleaseGroupCost(tp,s.filter,1,false,nil,nil) end

@@ -9,14 +9,14 @@ function s.initial_effect(c)
 	e1:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_DAMAGE_STEP)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
 	e1:SetCode(EVENT_TO_GRAVE)
-	e1:SetCondition(s.spcon)
-	e1:SetTarget(s.sptg)
-	e1:SetOperation(s.spop)
+	e1:SetCondition(s.cn)
+	e1:SetTarget(s.tg)
+	e1:SetOperation(s.op)
 	c:RegisterEffect(e1)
 end
 s.listed_names={id}
 s.listed_series={0x35}
-function s.spcon(e,tp,eg,ep,ev,re,r,rp)
+function s.cn(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetPreviousLocation()==LOCATION_HAND and (r&REASON_DISCARD)~=0
 end
 function s.filter(c)

@@ -16,12 +16,8 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	local a=Duel.GetAttacker()
 	local d=Duel.GetAttackTarget()
 	if not d then return false end
-	if a:IsControler(1-tp) then
-		a,d=d,a
-	end
-	return d and a:IsControler(tp) and d:IsControler(1-tp) and 
-		Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)==0 and
-		Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)==0
+	if a:IsControler(1-tp) then a,d=d,a end
+	return d and a:IsControler(tp) and d:IsControler(1-tp) and Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)==0 and Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)==0
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end

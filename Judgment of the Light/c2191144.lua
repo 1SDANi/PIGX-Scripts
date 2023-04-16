@@ -48,16 +48,16 @@ end
 function s.adtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return eg:IsContains(chkc) and s.cfilter(chkc,e,1-tp) end
 	if chk==0 then return eg:IsExists(s.cfilter,1,nil,e,1-tp) end
-	Duel.SetOperationInfo(0,CATEGORY_COUNTER,nil,1,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_COUNTER,nil,1,0,COUNTER_XYZ)
 end
 function s.adop(e,tp,eg,ep,ev,re,r,rp)
-	if e:GetHandler() and e:GetHandler():IsRelateToEffect(e) and tc:IsCanAddCounter(COUNTER_XYZ,1) then
+	if e:GetHandler() and e:GetHandler():IsRelateToEffect(e) and e:GetHandler():IsCanAddCounter(COUNTER_XYZ,1) then
 		e:GetHandler():AddCounter(COUNTER_XYZ,1)
 	end
 end
 function s.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end
-	e:GetHandler():RemoveOverlayCard(tp,1,1,REASON_COST)
+	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,COUNTER_XYZ,1,REASON_COST) end
+	e:GetHandler():RemoveCounter(tp,COUNTER_XYZ,1,REASON_COST)
 end
 function s.atktg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetCounter(0,1,1,COUNTER_XYZ)>1 end

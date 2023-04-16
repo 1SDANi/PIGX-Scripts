@@ -77,8 +77,8 @@ function s.atcon(e,tp,eg,ep,ev,re,r,rp)
 	return aux.bdcon(e,tp,eg,ep,ev,re,r,rp) and c:CanChainAttack()
 end
 function s.atcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end
-	e:GetHandler():RemoveOverlayCard(tp,1,1,REASON_COST)
+	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,COUNTER_XYZ,1,REASON_COST) end
+	e:GetHandler():RemoveCounter(tp,COUNTER_XYZ,1,REASON_COST)
 end
 function s.atop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.ChainAttack()

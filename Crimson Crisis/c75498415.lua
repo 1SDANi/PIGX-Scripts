@@ -67,12 +67,8 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsFaceup() and tc:IsRelateToEffect(e) then
-		local atk=0
 		local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_MZONE,LOCATION_MZONE,tc)
-		local bc=g:GetFirst()
-		for bc in aux.Next(g) do
-			atk=atk+bc:GetAttack()
-		end
+		local atk=g:GetSum(Card.GetAttack)
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_UPDATE_ATTACK)

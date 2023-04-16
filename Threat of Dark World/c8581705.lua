@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 	--disable and destroy
 	local e4=Effect.CreateEffect(c)
-	e4:SetCategory(CATEGORY_DESTROY+CATEGORY_NEGATE)
+	e4:SetCategory(CATEGORY_DESTROY+CATEGORY_NEGATE+CATEGORY_DICE)
 	e4:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e4:SetCode(EVENT_CHAIN_SOLVING)
 	e4:SetRange(LOCATION_MZONE)
@@ -60,7 +60,7 @@ function s.disop(e,tp,eg,ep,ev,re,r,rp)
 	if not tg or not tg:IsContains(e:GetHandler()) or not Duel.IsChainDisablable(ev) then return false end
 	local rc=re:GetHandler()
 	local dc=Duel.TossDice(tp,1)
-	if dc~=2 and dc~=3 and dc~=4 and dc~=5 and dc~=6 then return end
+	if dc~=2 and dc~=3 and dc~=4 and dc~=5 and dc~=6 and dc~=7 then return end
 	if Duel.NegateEffect(ev) and rc:IsRelateToEffect(re) then
 		Duel.Destroy(rc,REASON_EFFECT)
 	end

@@ -48,6 +48,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		e2:SetCondition(s.descon)
 		e2:SetOperation(s.desop)
 		tc:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD,0,1)
+		e2:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
 		Duel.RegisterEffect(e2,tp)
 	end
 end

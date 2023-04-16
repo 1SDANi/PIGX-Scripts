@@ -10,6 +10,12 @@ function s.initial_effect(c)
 	e1:SetCondition(s.con)
 	e1:SetOperation(s.op)
 	c:RegisterEffect(e1)
+	--
+	local e2=Effect.CreateEffect(c)
+	e2:SetType(EFFECT_TYPE_SINGLE)
+	e2:SetCode(EFFECT_AVOID_BATTLE_DAMAGE)
+	e2:SetValue(1)
+	c:RegisterEffect(e2)
 end
 function s.con(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsLocation(LOCATION_GRAVE) and (r&REASON_EFFECT+REASON_BATTLE)~=0

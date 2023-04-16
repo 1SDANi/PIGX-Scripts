@@ -2,6 +2,17 @@
 --Sylvan Guardioak
 local s,id=GetID()
 function s.initial_effect(c)
+	local e0=Effect.CreateEffect(c)
+	e0:SetDescription(aux.Stringid(id,3))
+	e0:SetCategory(CATEGORY_SPECIAL_SUMMON)
+	e0:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
+	e0:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_DAMAGE_STEP)
+	e0:SetRange(LOCATION_HAND)
+	e0:SetCode(EVENT_TO_GRAVE)
+	e0:SetCondition(s.spcon)
+	e0:SetTarget(s.sptg)
+	e0:SetOperation(s.spop)
+	c:RegisterEffect(e0)
 	--deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -23,6 +34,21 @@ function s.initial_effect(c)
 	e2:SetTarget(s.tg)
 	e2:SetOperation(s.op)
 	c:RegisterEffect(e2)
+end
+function s.spfilter(c,tp)
+	return c:IsPreviousLocation(LOCATION_DECK) and c:IsPreviousControler(tp) and c:IsType(TYPE_MONSTER)
+end
+function s.spcon(e,tp,eg,ep,ev,re,r,rp)
+	return eg:IsExists(s.spfilter,1,nil,tp)
+end
+function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return e:GetHandler():IsRelateToEffect(e) and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and e:GetHandler():IsCanBeSpecialSummoned(e,0,tp,false,false) end
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,e:GetHandler(),1,0,0)
+end
+function s.spop(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	if not c:IsRelateToEffect(e) then return end
+	Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDiscardDeck(tp,1) end
@@ -63,6 +89,6 @@ end
 function s.op(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsRelateToEffect(e) then
-		Duel.SendtoDeck(tc,nil,0,REASON_EFFECT)
+		Duel.SendtoDeck(tc,nil,SEQ_DECKTOP,REASON_EFFECT)
 	end
 end

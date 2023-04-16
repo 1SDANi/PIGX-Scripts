@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.cfilter(c,ft,tp)
-	return ft>0 or (c:IsControler(tp) and c:GetSequence()<5) and c:IsRace(RACE_BEAST)
+	return (ft>0 or (c:IsControler(tp) and c:GetSequence()<5)) and c:IsRace(RACE_BEAST)
 end
 function s.spcs(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)

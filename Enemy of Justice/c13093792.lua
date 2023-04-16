@@ -51,7 +51,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 			tc:RegisterEffect(e1)
 		end
 	else
-		Duel.MoveSequence(tc,1)
+		Duel.MoveSequence(tc,SEQ_DECKBOTTOM)
 	end
 end
 function s.spellcon(e,tp,eg,ep,ev,re,r,rp,chk)

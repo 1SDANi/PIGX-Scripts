@@ -67,7 +67,7 @@ function s.recop(e,tp,eg,ep,ev,re,r,rp)
 	if rec<0 then rec=0 end
 	local dam=Duel.Recover(tp,rec,REASON_EFFECT)
 	if dam>0 then
-		Duel.Damage(1-tp,dam,REASON_EFFECT)
+		Duel.Damage(1-tp,dam/4,REASON_EFFECT)
 	end
 end
 function s.fusionfilter(c,fc,sumtype,sp,sub,mg,sg)

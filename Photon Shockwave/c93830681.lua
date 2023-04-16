@@ -22,8 +22,9 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsFaceup,tp,0,LOCATION_MZONE,1,nil) end
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
+	local g=Duel.GetMatchingGroup(Card.IsFaceup,tp,0,LOCATION_MZONE,nil)
 	local tc=Duel.GetAttacker()
-	if Duel.NegateAttack() and #g>0 then
+	if Duel.NegateAttack() and g and #g>0 then
 		local tc=g:GetFirst()
 		for tc in aux.Next(g) do
 			local e1=Effect.CreateEffect(e:GetHandler())

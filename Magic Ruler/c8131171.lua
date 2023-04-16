@@ -2,47 +2,42 @@
 --Sinister Serpent
 local s,id=GetID()
 function s.initial_effect(c)
-	--to hand
+	--Special Summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetType(EFFECT_TYPE_TRIGGER_O+EFFECT_TYPE_FIELD)
 	e1:SetCategory(CATEGORY_TOHAND)
-	e1:SetCode(EVENT_PHASE+PHASE_STANDBY)
-	e1:SetRange(LOCATION_GRAVE)
-	e1:SetCountLimit(1,id)
+	e1:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_DAMAGE_STEP)
+	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
+	e1:SetCode(EVENT_TO_GRAVE)
 	e1:SetCondition(s.condition)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetTurnPlayer()==tp
+	local loc=e:GetHandler():GetPreviousLocation()
+	return (loc==LOCATION_HAND or loc==LOCATION_DECK) and (r&REASON_EFFECT)~=0
 end
-function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
+function s.operation(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsAbleToHand() end
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,e:GetHandler(),1,0,0)
 end
-function s.operation(e,tp,eg,ep,ev,re,r,rp)
-	if e:GetHandler():IsRelateToEffect(e) then
-		Duel.SendtoHand(e:GetHandler(),nil,REASON_EFFECT)
+function s.rmtarget(e,c)
+	return Duel.IsPlayerCanRemove(e:GetHandler():GetControler(),c)
+end
+function s.thop(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	if c:IsRelateToEffect(e) and Duel.SendtoHand(c,nil,REASON_EFFECT) then
+		Duel.ConfirmCards(1-tp,c)
+		--remove
+		local e1=Effect.CreateEffect(c)
+		e1:SetType(EFFECT_TYPE_FIELD)
+		e1:SetProperty(EFFECT_FLAG_SET_AVAILABLE+EFFECT_FLAG_IGNORE_RANGE+EFFECT_FLAG_IGNORE_IMMUNE)
+		e1:SetCode(EFFECT_TO_GRAVE_REDIRECT)
+		e1:SetTargetRange(0xff,0xff)
+		e1:SetTarget(s.rmtarget)
+		e1:SetValue(LOCATION_REMOVED)
+		e1:SetReset(RESET_PHASE+PHASE_END)
+		Duel.RegisterEffect(e1,tp)
 	end
-	local e1=Effect.CreateEffect(e:GetHandler())
-	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
-	e1:SetCode(EVENT_PHASE+PHASE_END)
-	e1:SetCountLimit(1)
-	e1:SetCondition(s.rmcon)
-	e1:SetOperation(s.rmop)
-	e1:SetReset(RESET_PHASE+PHASE_END+RESET_OPPO_TURN)
-	Duel.RegisterEffect(e1,tp)
-end
-function s.rmcon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetTurnPlayer()~=tp
-end
-function s.filter(c)
-	return c:IsCode(id) and c:IsAbleToRemove() and aux.SpElimFilter(c,true)
-end
-function s.rmop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,1,nil)
-	Duel.Remove(g,POS_FACEUP,REASON_EFFECT)
 end

@@ -27,7 +27,6 @@ function s.initial_effect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e3:SetCode(EVENT_REMOVE)
 	e3:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY)
-	e3:SetCondition(s.spcn)
 	e3:SetTarget(s.spop)
 	e3:SetOperation(s.spop)
 	c:RegisterEffect(e3)
@@ -75,9 +74,6 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.filter(c,e,sp)
 	return c:IsCanBeSpecialSummoned(e,0,sp,false,false) and s.dragonrulerfilter(c)
-end
-function s.spcn(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsPreviousLocation(LOCATION_GRAVE) and e:GetHandler():IsReason(REASON_EFFECT)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_HAND,0,1,nil,e,tp) end

@@ -16,6 +16,7 @@ function s.initial_effect(c)
 	e3:SetOperation(s.operation)
 	c:RegisterEffect(e3)
 end
+s.material_attribute={ATTRIBUTE_WIND}
 s.listed_series={0x33}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION)

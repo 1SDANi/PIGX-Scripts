@@ -1,9 +1,9 @@
 --神炎皇ウリア
---The Flaming Wrath of Uriah
+--The Phantasmal Fury of Uriel
 local s,id=GetID()
 function s.initial_effect(c)
 	Fusion.AddProcMixN(c,false,true,true,s.filter,3)
-	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
+	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION,nil,nil,nil,nil,nil,true)
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_SINGLE)
 	e0:SetCode(EFFECT_CANNOT_DISABLE_SPSUMMON)

@@ -37,6 +37,12 @@ function s.initial_effect(c)
 	e2:SetCondition(s.ccon)
 	e2:SetValue(aux.imval1)
 	c:RegisterEffect(e2)
+	local e3=Effect.CreateEffect(c)
+	e3:SetType(EFFECT_TYPE_FIELD)
+	e3:SetCode(EFFECT_MUST_ATTACK)
+	e3:SetRange(LOCATION_MZONE)
+	e3:SetTargetRange(0,LOCATION_MZONE)
+	c:RegisterEffect(e3)
 end
 s.counter_place_list={COUNTER_XYZ}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)

@@ -27,13 +27,13 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_NEGATE,eg,1,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_NEGATE,re:GetHandler(),1,0,0)
 	if re:GetHandler():IsDestructable() and re:GetHandler():IsRelateToEffect(re) then
-		Duel.SetOperationInfo(0,CATEGORY_DESTROY,eg,1,0,0)
+		Duel.SetOperationInfo(0,CATEGORY_DESTROY,re:GetHandler(),1,0,0)
 	end
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.NegateActivation(ev) and re:GetHandler():IsRelateToEffect(re) then
-		Duel.Destroy(eg,REASON_EFFECT)
+		Duel.Destroy(re:GetHandler(),REASON_EFFECT)
 	end
 end

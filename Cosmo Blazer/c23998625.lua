@@ -43,17 +43,16 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 	aux.AddEREquipLimit(c,nil,aux.TRUE,s.equipop,e1)
 	--fusion summon
-	local params = {nil,Fusion.CheckWithHandler(Fusion.OnFieldMat(aux.FilterBoolFunction(Card.IsCode,97403510))),nil,nil,Fusion.ForcedHandler}
 	local e2=Effect.CreateEffect(c)
-	e2:SetDescription(aux.Stringid(id,0))
+	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_FUSION_SUMMON)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e2:SetProperty(EFFECT_FLAG_DELAY)
 	e2:SetCode(EVENT_ATTACK_ANNOUNCE)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetCondition(s.condition)
-	e2:SetTarget(Fusion.SummonEffTG(table.unpack(params)))
-	e2:SetOperation(Fusion.SummonEffOP(table.unpack(params)))
+	e2:SetTarget(s.target)
+	e2:SetOperation(s.operation)
 	c:RegisterEffect(e2)
 end
 s.xyz_number=53
@@ -61,8 +60,29 @@ s.counter_place_list={COUNTER_XYZ}
 s.listed_series={0x48}
 s.listed_names={97403510}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler()==Duel.GetAttacker() or e:GetHandler()==Duel.GetAttackTarget() and e:GetHandler():IsRelateToEffect(e)
-		and Duel.GetAttacker():IsFaceup() and Duel.GetAttackTarget():IsFaceup() and e:GetHandler():GetCounter(COUNTER_XYZ)<=0
+	return (e:GetHandler()==Duel.GetAttacker() or e:GetHandler()==Duel.GetAttackTarget()) and e:GetHandler():IsFaceup() and e:GetHandler():GetCounter(COUNTER_XYZ)<=0
+end
+function s.filter(c,e,tp)
+	return c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_FUSION,tp,false,false) and c:IsCode(97403510)
+end
+function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_EXTRA,0,1,nil,e,tp) and e:GetHandler():IsCanBeFusionMaterial() and e:GetHandler():IsFaceup() end
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
+end
+function s.operation(e,tp,eg,ep,ev,re,r,rp)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_CONFIRM)
+	local tc=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp):GetFirst()
+	if e:GetHandler():IsFaceup() and e:GetHandler():IsCanBeFusionMaterial() and not e:GetHandler():IsImmuneToEffect(e) then
+		tc:SetMaterial(e:GetHandler())
+		local ct=e:GetHandler():GetCounter(COUNTER_XYZ)
+		Duel.SendtoGrave(e:GetHandler(),REASON_EFFECT+REASON_MATERIAL+REASON_FUSION)
+		Duel.BreakEffect()
+		if Duel.SpecialSummonStep(tc,SUMMON_TYPE_FUSION,tp,tp,false,false,POS_FACEUP) and ct>0 then
+			tc:AddCounter(COUNTER_XYZ,ct)
+		end
+		Duel.SpecialSummonComplete()
+		tc:CompleteProcedure()
+	end
 end
 function s.equipop(c,e,tp,tc)
 	if not aux.EquipByEffectAndLimitRegister(c,e,tp,tc,id) then return false end
@@ -76,7 +96,7 @@ function s.eqcs(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	e:GetHandler():RemoveCounter(tp,COUNTER_XYZ,1,REASON_COST)
 end
 function s.eqtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and s.filter(chkc) and chkc:IsControler(tp) end
+	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) end
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0 and Duel.IsExistingTarget(aux.TRUE,tp,LOCATION_GRAVE,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
 	local g=Duel.SelectTarget(tp,aux.TRUE,tp,LOCATION_GRAVE,0,1,1,nil)

@@ -28,7 +28,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetCountLimit(1)
 	e1:SetRange(LOCATION_MZONE)
-	e1:SetCost(aux.dxmcostgen(1,1,nil))
+	e1:SetCost(s.ctcs)
 	e1:SetTarget(s.cttg)
 	e1:SetOperation(s.ctop)
 	c:RegisterEffect(e1,false,REGISTER_FLAG_DETACH_XMAT)
@@ -47,6 +47,10 @@ end
 s.xyz_number=40
 s.counter_place_list={COUNTER_XYZ,0x1024}
 s.listed_series={0x48}
+function s.ctcs(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
+	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,COUNTER_XYZ,1,REASON_COST) end
+	e:GetHandler():RemoveCounter(tp,COUNTER_XYZ,1,REASON_COST)
+end
 function s.cttg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsFaceup,tp,LOCATION_MZONE,LOCATION_MZONE,1,e:GetHandler()) end
 end

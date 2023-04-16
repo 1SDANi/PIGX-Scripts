@@ -17,23 +17,16 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,e:GetHandler()) end
 	Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST+REASON_DISCARD)
 end
-function s.swapfilter(c)
-	return c:IsAbleToChangeControler()
-end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return false end
-	if chk==0 then return true end
-	if Duel.IsExistingTarget(s.swapfilter,tp,0,LOCATION_MZONE,1,nil) then
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_CONTROL)
-		local mon=Duel.SelectTarget(tp,s.swapfilter,tp,0,LOCATION_MZONE,1,1,nil)
-		mon:AddCard(e:GetHandler())
-		Duel.SetOperationInfo(0,CATEGORY_CONTROL,mon,2,0,0)
-	end
+	if chkc then return chkc:IsAbleToChangeControler() and chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(1-tp) end
+	if chk==0 then return Duel.IsExistingTarget(Card.IsAbleToChangeControler,tp,0,LOCATION_MZONE,1,nil) end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_CONTROL)
+	local mon=Duel.SelectTarget(tp,Card.IsAbleToChangeControler,tp,0,LOCATION_MZONE,1,1,nil)
+	mon:AddCard(e:GetHandler())
+	Duel.SetOperationInfo(0,CATEGORY_CONTROL,mon,2,0,0)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	local c=e:GetHandler()
-	if c:IsRelateToEffect(e) and tc and tc:IsRelateToEffect(e) then
-		Duel.SwapControl(c,tc)
-	end
+	Duel.SwapControl(c,tc)
 end

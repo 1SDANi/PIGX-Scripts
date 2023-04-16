@@ -13,13 +13,14 @@ function s.initial_effect(c)
 	e1:SetTarget(s.drtg)
 	e1:SetOperation(s.drop)
 	c:RegisterEffect(e1)
-	--atkup
+	--level up
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
+	e2:SetCategory(CATEGORY_LVCHANGE)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetCountLimit(1)
-	e2:SetOperation(s.atkop)
+	e2:SetOperation(s.lvop)
 	c:RegisterEffect(e2)
 end
 function s.drcon(e,tp,eg,ep,ev,re,r,rp)
@@ -36,7 +37,7 @@ function s.drop(e,tp,eg,ep,ev,re,r,rp)
 	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
 	Duel.Draw(p,d,REASON_EFFECT)
 end
-function s.atkop(e,tp,eg,ep,ev,re,r,rp)
+function s.lvop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsFaceup() and c:IsRelateToEffect(e) then
 		local e2=Effect.CreateEffect(c)

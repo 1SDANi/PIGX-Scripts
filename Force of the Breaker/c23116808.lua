@@ -60,7 +60,7 @@ function s.tktg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.tkop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)>0 
-		and Duel.IsPlayerCanSpecialSummonMonster(tp,TOKEN_FIREBALL,0,TYPES_TOKEN,100,100,1,RACE_PYRO,ATTRIBUTE_FIRE) then
+		and Duel.IsPlayerCanSpecialSummonMonster(tp,TOKEN_FIREBALL,0,TYPES_TOKEN,100,100,1,RACE_ELEMENTAL,ATTRIBUTE_FIRE) then
 		local token=Duel.CreateToken(tp,TOKEN_FIREBALL)
 		Duel.SpecialSummon(token,0,tp,tp,false,false,POS_FACEUP_DEFENSE)
 	end

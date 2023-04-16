@@ -11,7 +11,7 @@ function s.initial_effect(c)
 	e2:SetCode(EVENT_SUMMON_SUCCESS)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetTarget(s.target)
-	e2:SetOperation(s.activate)
+	e2:SetOperation(s.operation)
 	c:RegisterEffect(e2)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
@@ -21,7 +21,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local g=Duel.SelectTarget(tp,aux.TRUE,tp,0,LOCATION_MZONE,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_CONTROL,g,#g,0,0)
 end
-function s.posop(e,tp,eg,ep,ev,re,r,rp)
+function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsRelateToEffect(e) then
 		Duel.ChangePosition(tc,POS_FACEUP_DEFENSE,POS_FACEUP_DEFENSE,POS_FACEUP_ATTACK,POS_FACEUP_ATTACK)

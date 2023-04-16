@@ -1,7 +1,7 @@
 --The Wicked God Zorc Necrophades
 local s,id=GetID()
 function s.initial_effect(c)
-	Fusion.AddProcMixN(c,false,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0x302),7)
+	Fusion.AddProcMixN(c,false,true,true,s.fusfilter,7)
 	--spsummon condition
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_SINGLE)
@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
 	e2:SetCode(EVENT_SPSUMMON_SUCCESS)
-	e2:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_CANNOT_NEGATE+EFFECT_FLAG_DAMAGE_STEP)
+	e2:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_CANNOT_INACTIVATE+EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_CANNOT_NEGATE+EFFECT_FLAG_DAMAGE_STEP)
 	e2:SetCondition(s.condition)
 	e2:SetTarget(s.target)
 	e2:SetOperation(s.operation)
@@ -63,6 +63,9 @@ function s.initial_effect(c)
 end
 s.listed_series={0x40,0x302}
 s.material_setcode={0x302}
+function s.fusfilter(c)
+	return c:IsSetCard(0x302) and c:IsType(TYPE_MONSTER+TYPE_UNION) and c:IsType(TYPE_FUSION)
+end
 function s.valcon(e,re,r,rp)
 	return (r&REASON_BATTLE)~=0 or (r&REASON_EFFECT)~=0
 end
@@ -111,8 +114,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION)
 end
 function s.filter(c,e,tp)
-	return c:IsCode(1000009) and Duel.GetLocationCountFromEx(tp,tp,nil,c)>0 and
-		c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_FUSION,tp,true,false)
+	return c:IsCode(1000009) and Duel.GetLocationCountFromEx(tp,tp,nil,c)>0 and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_FUSION,tp,true,false)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_EXTRA) and s.filter(chkc,e,tp) end

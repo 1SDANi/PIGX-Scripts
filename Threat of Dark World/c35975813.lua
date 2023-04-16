@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--disable and destroy
 	local e4=Effect.CreateEffect(c)
-	e4:SetCategory(CATEGORY_DESTROY+CATEGORY_NEGATE)
+	e4:SetCategory(CATEGORY_DESTROY+CATEGORY_NEGATE+CATEGORY_DICE)
 	e4:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e4:SetCode(EVENT_CHAIN_SOLVING)
 	e4:SetRange(LOCATION_MZONE)

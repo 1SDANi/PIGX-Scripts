@@ -86,8 +86,8 @@ end
 function s.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return c:IsDestructable(e) and eg:IsExists(s.repfilter,1,nil,tp) end
-	if c:CheckRemoveOverlayCard(tp,1,REASON_EFFECT) and Duel.SelectEffectYesNo(tp,c,96) then
-		c:RemoveOverlayCard(tp,1,1,REASON_EFFECT)
+	if c:IsCanRemoveCounter(tp,COUNTER_XYZ,1,REASON_EFFECT+REASON_REPLACE) and Duel.SelectEffectYesNo(tp,c,96) then
+		c:RemoveCounter(tp,1,COUNTER_XYZ,REASON_EFFECT+REASON_REPLACE)
 		local g=eg:Filter(s.repfilter,nil,tp)
 		if #g==1 then
 			e:SetLabelObject(g:GetFirst())

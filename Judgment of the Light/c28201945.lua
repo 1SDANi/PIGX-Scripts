@@ -2,13 +2,13 @@
 --Traptrix Nepenthes
 local s,id=GetID()
 function s.initial_effect(c)
-	--immune
-	local e1=Effect.CreateEffect(c)
-	e1:SetType(EFFECT_TYPE_SINGLE)
-	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
-	e1:SetRange(LOCATION_MZONE)
-	e1:SetCode(EFFECT_IMMUNE_EFFECT)
-	e1:SetValue(s.efilter)
+	--immune trap
+	local e0=Effect.CreateEffect(c)
+	e0:SetType(EFFECT_TYPE_SINGLE)
+	e0:SetCode(EFFECT_IMMUNE_EFFECT)
+	e0:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
+	e0:SetRange(LOCATION_MZONE)
+	e0:SetValue(s.efilter)
 	c:RegisterEffect(e1)
 	--spsummon
 	local e3=Effect.CreateEffect(c)
@@ -27,7 +27,7 @@ end
 s.listed_series={0x4c,0x108a}
 s.listed_names={id}
 function s.efilter(e,te)
-	return te:GetHandler():IsType(TYPE_TRAP) and te:GetHandler():IsSetCard(0x4c)
+	return te:IsActiveType(TYPE_TRAP) and te:GetHandler():GetControler()~=e:GetHandler():GetControler()
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=re:GetHandler()

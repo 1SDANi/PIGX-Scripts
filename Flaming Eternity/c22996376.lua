@@ -52,7 +52,7 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS)
 	local tg=g:Filter(Card.IsRelateToEffect,nil,e)
-	if #tg==2 then
+	if #tg>0 then
 		Duel.Destroy(tg,REASON_EFFECT)
 	end
 end

@@ -37,7 +37,7 @@ function s.initial_effect(c)
 	e3:SetCost(s.cost)
 	e3:SetTarget(s.target)
 	e3:SetOperation(s.operation)
-	c:RegisterEffect(e3,false,REGISTER_FLAG_DETACH_XMAT)
+	c:RegisterEffect(e3)
 end
 s.counter_place_list={COUNTER_XYZ}
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk,chkc)

@@ -3,7 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	Fusion.AddProcMix(c,false,true,true,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_LIGHT),aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_DARK))
-	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
+	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION,nil,nil,nil,nil,nil,true)
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_SINGLE)
 	e0:SetCode(EFFECT_CANNOT_DISABLE_SPSUMMON)
@@ -23,10 +23,10 @@ function s.initial_effect(c)
 	e2:SetLabelObject(e1)
 	e2:SetValue(s.val2)
 	c:RegisterEffect(e2)
-	--destroy
+	--hand
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,0))
-	e3:SetCategory(CATEGORY_DESTROY)
+	e3:SetCategory(CATEGORY_TOHAND)
 	e3:SetType(EFFECT_TYPE_IGNITION)
 	e3:SetRange(LOCATION_MZONE)
 	e3:SetCountLimit(5)
@@ -41,7 +41,6 @@ function s.initial_effect(c)
 	e4:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY)
 	e4:SetCode(EVENT_LEAVE_FIELD)
 	e4:SetCondition(s.cn)
-	e4:SetOperation(s.op)
 	e4:SetLabelObject(e1)
 	c:RegisterEffect(e4)
 	--cannot be target
@@ -72,7 +71,7 @@ end
 function s.effcon(e)
 	return e:GetHandler():GetSummonType()==SUMMON_TYPE_FUSION
 end
-function s.anctg(e,tp,eg,ep,ev,re,r,rp,chk)
+function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
 		local g=Duel.GetDecktopGroup(tp,1)
 		return g:FilterCount(Card.IsAbleToHand,nil)>0

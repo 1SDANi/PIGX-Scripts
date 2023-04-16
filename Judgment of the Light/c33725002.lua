@@ -43,10 +43,17 @@ function s.descost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.RemoveCounter(tp,1,0,COUNTER_XYZ,1,REASON_COST)
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(aux.TRUE,tp,0,LOCATION_MZONE,1,nil) and c:GetEquipTarget() end
+	if chk==0 then return Duel.IsExistingMatchingCard(aux.TRUE,tp,0,LOCATION_MZONE,1,nil) and e:GetHandler():GetEquipTarget() end
 	local g=Duel.GetMatchingGroup(aux.TRUE,tp,0,LOCATION_MZONE,nil)
+	local tc=g:GetFirst()
+	local dam=0
+	for tc in aux.Next(g) do
+		local atk=tc:GetTextAttack()
+		if atk<0 then atk=0 end
+		dam=dam+atk
+	end
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,#g,0,0)
-	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,#g*1000)
+	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,dam)
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -64,16 +71,17 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 		ec:RegisterEffect(e2)
 	end
 	local sg=Duel.GetMatchingGroup(aux.TRUE,tp,0,LOCATION_MZONE,nil)
-	Duel.Destroy(sg,REASON_EFFECT)
-	local dg=Duel.GetOperatedGroup()
-	local tc=dg:GetFirst()
-	local dam=0
-	for tc in aux.Next(dg) do
-		local atk=tc:GetTextAttack()
-		if atk<0 then atk=0 end
-		dam=dam+atk
+	if Duel.Destroy(sg,REASON_EFFECT) then
+		local dg=Duel.GetOperatedGroup()
+		local tc=dg:GetFirst()
+		local dam=0
+		for tc in aux.Next(dg) do
+			local atk=tc:GetTextAttack()
+			if atk<0 then atk=0 end
+			dam=dam+atk
+		end
+		Duel.Damage(1-tp,dam,REASON_EFFECT)
 	end
-	Duel.Damage(1-tp,dam,REASON_EFFECT)
 end
 function s.filter(c,e,tp)
 	return c:IsSetCard(0x7f) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)

@@ -7,7 +7,7 @@ function s.initial_effect(c)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_DESTROY)
+	e1:SetCategory(CATEGORY_REMOVE)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e1:SetCode(EVENT_SPSUMMON_SUCCESS)
 	e1:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_DAMAGE_STEP)
@@ -31,11 +31,20 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 s.material_attribute={ATTRIBUTE_FIRE}
-function s.value(e,c)
-	return Duel.GetFieldGroupCount(c:GetControler(),LOCATION_REMOVED,LOCATION_REMOVED)*1000
-end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION)
+end
+function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.IsExistingMatchingCard(aux.TRUE,tp,0,LOCATION_GRAVE,1,e:GetHandler()) end
+	local g=Duel.GetMatchingGroup(aux.TRUE,tp,0,LOCATION_GRAVE,e:GetHandler())
+	Duel.SetOperationInfo(0,CATEGORY_REMOVE,g,#g,0,0)
+end
+function s.operation(e,tp,eg,ep,ev,re,r,rp)
+	local g=Duel.GetMatchingGroup(aux.TRUE,tp,0,LOCATION_GRAVE,e:GetHandler())
+	Duel.Remove(g,POS_FACEUP,REASON_EFFECT)
+end
+function s.value(e,c)
+	return Duel.GetFieldGroupCount(c:GetControler(),LOCATION_REMOVED,LOCATION_REMOVED)*1000
 end
 function s.contactfil(tp)
 	return Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)

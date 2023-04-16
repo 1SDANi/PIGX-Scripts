@@ -32,12 +32,13 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,1))
 		gd=gd:Select(tp,1,1,nil)
 	end
-	Duel.NegateAttack()
-	local a=ga:GetFirst()
-	local d=gd:GetFirst()
-	if a:CanAttack() and not a:IsImmuneToEffect(e) then 
-		Duel.CalculateDamage(a,d)
+	if Duel.NegateAttack() then
+		local a=ga:GetFirst()
+		local d=gd:GetFirst()
+		if a:CanAttack() and not a:IsImmuneToEffect(e) then 
+			Duel.CalculateDamage(a,d)
+		end
+		Duel.BreakEffect()
+		Duel.SkipPhase(1-tp,PHASE_BATTLE,RESET_PHASE+PHASE_BATTLE_STEP,1)
 	end
-	Duel.BreakEffect()
-	Duel.SkipPhase(1-tp,PHASE_BATTLE,RESET_PHASE+PHASE_BATTLE_STEP,1)
 end

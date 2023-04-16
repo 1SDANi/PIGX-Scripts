@@ -22,7 +22,7 @@ function s.initial_effect(c)
 	e1:SetCountLimit(1)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.operation)
-	c:RegisterEffect(e1
+	c:RegisterEffect(e1)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsFaceup,tp,0,LOCATION_MZONE,1,nil) end

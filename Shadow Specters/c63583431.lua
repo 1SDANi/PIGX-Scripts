@@ -33,7 +33,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x54,0x30a,0x82,0x59,0x8f}
 function s.tg(e,c)
-	if c:IsFaceup() and (tc:IsSetCard(0x54) or tc:IsSetCard(0x30a) or tc:IsSetCard(0x82) or tc:IsSetCard(0x59) or tc:IsSetCard(0x8f)) then return true end
+	if c:IsFaceup() and (c:IsSetCard(0x54) or c:IsSetCard(0x30a) or c:IsSetCard(0x82) or c:IsSetCard(0x59) or c:IsSetCard(0x8f)) then return true end
 end
 function s.valcon(e,re,r,rp)
 	return (r&REASON_BATTLE)~=0

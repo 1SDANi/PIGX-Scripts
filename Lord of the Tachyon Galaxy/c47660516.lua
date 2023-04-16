@@ -32,6 +32,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_CONFIRM)
 	local tc=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_MZONE,0,1,1,nil,e,tp):GetFirst()
 	if tc:IsFaceup() and tc:IsCanBeFusionMaterial() and not tc:IsImmuneToEffect(e) then
+		local n=tc:GetCounter(COUNTER_XYZ)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		local sg=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,tc)
 		local sc=sg:GetFirst()
@@ -41,12 +42,13 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			Duel.BreakEffect()
 			if Duel.SpecialSummon(sc,SUMMON_TYPE_FUSION,tp,tp,false,false,POS_FACEUP) then
 				sc:CompleteProcedure()
+				tc:AddCounter(COUNTER_XYZ,n)
 				Duel.BreakEffect()
 				local ct=0
 				for ic in Duel.GetMatchingGroup(s.filter,tp,0,LOCATION_MZONE,nil):Iter() do
-					local cc=ic:GetCounter(COUNTER_VENOM)
+					local cc=ic:GetCounter(COUNTER_XYZ)
 					ct=ct+cc
-					ic:RemoveCounter(tp,COUNTER_VENOM,cc,REASON_EFFECT)
+					ic:RemoveCounter(tp,COUNTER_XYZ,cc,REASON_EFFECT)
 				end
 				if ct>0 then
 					tc:AddCounter(COUNTER_XYZ,ct)

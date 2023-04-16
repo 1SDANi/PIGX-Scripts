@@ -42,6 +42,9 @@ end
 function s.filter(c)
 	return c:IsReleasable()
 end
+function s.spcheck(sg,e,tp,mg)
+	return Duel.GetMZoneCount(1-tp,sg,tp)>0
+end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local mg=Duel.GetMatchingGroup(s.filter,tp,0,LOCATION_MZONE,nil)
 	if chk==0 then return aux.SelectUnselectGroup(mg,e,tp,1,1,s.spcheck,0) end

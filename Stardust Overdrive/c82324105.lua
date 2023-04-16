@@ -12,6 +12,9 @@ function s.initial_effect(c)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
+	Duel.AddCustomActivityCounter(id,ACTIVITY_SUMMON,s.counterfilter)
+	Duel.AddCustomActivityCounter(id,ACTIVITY_SPSUMMON,s.counterfilter)
+	Duel.AddCustomActivityCounter(id,ACTIVITY_FLIPSUMMON,s.counterfilter)
 end
 s.listed_names={82324106}
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -38,6 +41,9 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e4:SetReset(RESET_PHASE+PHASE_END)
 	e4:SetTargetRange(1,0)
 	Duel.RegisterEffect(e4,tp)
+end
+function s.counterfilter(c)
+	return c:IsAttribute(ATTRIBUTE_FIRE)
 end
 function s.sumlimit(e,c,sump,sumtype,sumpos,targetp,se)
 	return not c:IsAttribute(ATTRIBUTE_FIRE)

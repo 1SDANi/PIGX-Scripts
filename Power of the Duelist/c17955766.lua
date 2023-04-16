@@ -19,6 +19,8 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetFieldGroupCount(tp,0,LOCATION_HAND)>0 end
+	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,500)
+	Duel.SetOperationInfo(0,CATEGORY_DESTROY,nil,1,0,0)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetFieldGroup(tp,0,LOCATION_HAND)

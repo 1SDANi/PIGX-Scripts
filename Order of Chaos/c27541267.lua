@@ -12,7 +12,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0xa}
 function s.cfilter(c)
-	return c:IsFaceup() and c:IsSetCard(0xa)
+	return c:IsFaceup() and c:IsSetCard(0x2a)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE,0,1,nil)
@@ -23,16 +23,10 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e1:SetCode(EFFECT_CANNOT_ACTIVATE)
 	e1:SetTargetRange(0,1)
-	e1:SetValue(s.actlimit)
+	e1:SetValue(s.aclimit)
 	e1:SetReset(RESET_PHASE+PHASE_END)
 	Duel.RegisterEffect(e1,tp)
-	local e3=Effect.CreateEffect(e:GetHandler())
-	e3:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_CLIENT_HINT)
-	e3:SetDescription(aux.Stringid(id,0))
-	e3:SetReset(RESET_PHASE+PHASE_END)
-	e3:SetTargetRange(0,1)
-	Duel.RegisterEffect(e3,tp)
 end
-function s.actlimit(e,re,tp)
-	return re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_TRAP+TYPE_SPELL)
+function s.aclimit(e,re,tp)
+	return (re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_TRAP+TYPE_SPELL)) or re:IsActiveType(TYPE_MONSTER)
 end

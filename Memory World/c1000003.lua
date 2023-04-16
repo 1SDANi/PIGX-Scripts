@@ -45,7 +45,7 @@ function s.initial_effect(c)
 	e4:SetValue(s.valcon)
 	c:RegisterEffect(e4)
 end
-s.listed_names={id,2926176}
+s.listed_names={id,2926176,51644030}
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return (e:GetHandler():IsLocation(LOCATION_REMOVED) and e:GetHandler():GetFlagEffect(id+(1-tp))==0) or
 		(e:GetHandler():IsLocation(LOCATION_EXTRA) and e:GetHandler():GetFlagEffect(id+tp)==0) end
@@ -82,7 +82,7 @@ function s.hidefilter(c,tp)
 	return c:IsCode(2926176) and c:IsControler(tp)
 end
 function s.hidecon(e,tp,eg,ep,ev,re,r,rp)
-	return eg:IsExists(s.hidefilter,1,nil,tp)
+	return eg:IsExists(s.hidefilter,1,nil,tp) and re and re:GetHandler() and re:GetHandler():IsCode(51644030)
 end
 function s.hideop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.SendtoDeck(e:GetHandler(),nil,2,REASON_EFFECT)

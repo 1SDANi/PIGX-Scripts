@@ -34,7 +34,7 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsRelateToEffect(e) then
-	Duel.SpecialSummonStep(tc,0,tp,tp,false,false,POS_FACEUP)
+	if Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP) then
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 		e1:SetCode(EVENT_PHASE+PHASE_END)
@@ -44,7 +44,6 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetOperation(s.rmop)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD)
 		tc:RegisterEffect(e1)
-	Duel.SpecialSummonComplete()
 	end
 end
 function s.rmop(e,tp,eg,ep,ev,re,r,rp)

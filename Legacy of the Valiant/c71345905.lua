@@ -28,7 +28,9 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_CONFIRM)
 	local tc=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,1,nil,e,tp):GetFirst()
-	if tc:IsFaceup() and tc:IsCanBeFusionMaterial() and not tc:IsImmuneToEffect(e) then
+	local n=0
+	if tc:IsFaceup and tc:IsLocation(LOCATION_MZONE) then tc:GetCounter(COUNTER_XYZ) end
+	if tc:IsCanBeFusionMaterial() and not tc:IsImmuneToEffect(e) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		local sg=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,tc)
 		local sc=sg:GetFirst()
@@ -38,6 +40,9 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			Duel.BreakEffect()
 			if Duel.SpecialSummon(sc,SUMMON_TYPE_FUSION,tp,tp,false,false,POS_FACEUP) then
 				sc:CompleteProcedure()
+				if n>0 then
+					tc:AddCounter(COUNTER_XYZ,n)
+				end
 			end
 		end
 	end

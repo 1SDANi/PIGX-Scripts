@@ -42,7 +42,7 @@ function s.spfilter(c)
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_ONFIELD,0,1,e:GetHandler()) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local cg=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_ONFIELD,0,1,1,e:GetHandler())
 	Duel.SendtoGrave(cg,REASON_COST)
 end

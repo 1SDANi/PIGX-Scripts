@@ -11,7 +11,7 @@ function s.initial_effect(c)
 	--roll and destroy
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
-	e2:SetCategory(CATEGORY_DESTROY)
+	e2:SetCategory(CATEGORY_DESTROY+CATEGORY_DICE)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
 	e2:SetRange(LOCATION_SZONE)
 	e2:SetCountLimit(1)
@@ -32,15 +32,15 @@ end
 function s.rdop(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
 	local d1=Duel.TossDice(tp,1)
-	if d1==6 then
-		local tg=Duel.GetFieldGroup(1-tp,LOCATION_MZONE,0)
-		if tg then
-			Duel.Destroy(tg,REASON_EFFECT)
-		end
-	else
+	if d1<6 then
 		local tc=Duel.GetFieldCard(1-tp,LOCATION_MZONE,d1-1)
 		if tc then
 			Duel.Destroy(tc,REASON_EFFECT)
+		end
+	else
+		local tg=Duel.GetFieldGroup(1-tp,LOCATION_MZONE,0)
+		if tg then
+			Duel.Destroy(tg,REASON_EFFECT)
 		end
 	end
 end

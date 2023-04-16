@@ -6,7 +6,7 @@ function s.initial_effect(c)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_DOUBLE_TRIBUTE)
-	e1:SetValue(s.condition)
+	e1:SetValue(s.cn)
 	c:RegisterEffect(e1)
 	--Draw
 	local e3=Effect.CreateEffect(c)
@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e3:SetOperation(s.operation)
 	c:RegisterEffect(e3)
 end
-function s.condition(e,c)
+function s.cn(e,c)
 	return c:IsRace(RACE_PLANT)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)

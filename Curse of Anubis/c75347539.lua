@@ -14,6 +14,7 @@ function s.initial_effect(c)
 	e2:SetCode(EVENT_FREE_CHAIN)
 	e2:SetHintTiming(0,TIMING_END_PHASE)
 	e2:SetRange(LOCATION_MZONE)
+	e2:SetCountLimit(1)
 	e2:SetTarget(s.target)
 	e2:SetOperation(s.operation)
 	c:RegisterEffect(e2)
@@ -35,9 +36,7 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return s.ctfilter(chkc) and chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) end
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)+1
-	if chk==0 then return e:GetHandler():GetFlagEffect(id)==0 and ft>0 and e:GetHandler():IsReleasable() and
-		Duel.IsExistingTarget(s.ctfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp)  end
-	e:GetHandler():RegisterFlagEffect(id,RESET_CHAIN,0,1)
+	if chk==0 then return ft>0 and e:GetHandler():IsReleasable() and Duel.IsExistingTarget(s.ctfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp) end
 	local g=Duel.GetMatchingGroup(s.ctfilter,tp,LOCATION_GRAVE,0,nil,e,tp)
 	local c=ft
 	if c>3 then c=3 end

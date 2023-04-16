@@ -18,18 +18,18 @@ function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	local atk=c:GetMaterial()*2500
-	if atk~=0 then
+	local g=c:GetMaterial()
+	if g and #g>0 then
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_SET_BASE_ATTACK)
-		e1:SetValue(atk)
+		e1:SetValue(#g*2500)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD_DISABLE)
 		c:RegisterEffect(e1)
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_SET_BASE_DEFENSE)
-		e1:SetValue(def)
+		e1:SetValue(#g*2500)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD_DISABLE)
 		c:RegisterEffect(e1)
 	end

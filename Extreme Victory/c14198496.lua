@@ -23,13 +23,11 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,1)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
-	local ct=Duel.Draw(tp,1,REASON_EFFECT)
-	if ct==0 then return end
-	local dc=Duel.GetOperatedGroup():GetFirst()
-	Duel.ConfirmCards(1-tp,dc)
-	if dc:GetLevel()==1 and Duel.IsPlayerCanDraw(tp,1) and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
+	local g=Duel.GetDecktopGroup(tp,1)
+	local tc=g:GetFirst()
+	Duel.Draw(tp,1,REASON_EFFECT)
+	if tc and tc:IsLevel(1) and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 		Duel.BreakEffect()
-		Duel.Draw(tp,1,REASON_EFFECT)
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_FIELD)
 		e1:SetCode(EFFECT_CANNOT_TO_HAND)
