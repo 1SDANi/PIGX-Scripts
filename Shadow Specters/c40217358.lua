@@ -35,9 +35,9 @@ function s.initial_effect(c)
 	c:RegisterEffect(e5)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.GetFieldGroup(c:GetPreviousControler(),LOCATION_HAND,0)>0 end
-	Duel.SetTargetPlayer(c:GetPreviousControler())
-	Duel.SetOperationInfo(0,CATEGORY_HANDES,nil,0,c:GetPreviousControler(),1)
+	if chk==0 then return Duel.GetFieldGroup(e:GetHandler():GetPreviousControler(),LOCATION_HAND,0)>0 end
+	Duel.SetTargetPlayer(e:GetHandler():GetPreviousControler())
+	Duel.SetOperationInfo(0,CATEGORY_HANDES,nil,0,e:GetHandler():GetPreviousControler(),1)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)

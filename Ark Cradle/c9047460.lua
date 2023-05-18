@@ -16,7 +16,7 @@ end
 s.listed_names={9047461}
 function s.tkcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return c:IsPreviousPosition(POS_FACEUP) and c:GetLocation()~=LOCATION_DECK
+	return c:IsPreviousPosition(POS_FACEUP)
 end
 function s.tktg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

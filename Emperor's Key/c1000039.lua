@@ -68,7 +68,7 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(Card.IsAbleToDeck,tp,0,LOCATION_REMOVED,1,nil)
 	Duel.SendtoDeck(g,nil,2,REASON_EFFECT)
 	local dg=Duel.GetOperatedGroup()
-	if dg and #dg>0 and Duel.IsExistingMatchingCard(Card.IsAbleToGrave,tp,LOCATION_REMOVED,0,1,nil) and Duel.SelectYesNo(tp,aux.Stringid(id,3) then
+	if dg and #dg>0 and Duel.IsExistingMatchingCard(Card.IsAbleToGrave,tp,LOCATION_REMOVED,0,1,nil) and Duel.SelectYesNo(tp,aux.Stringid(id,3)) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 		local sg=Duel.SelectMatchingCard(tp,Card.IsAbleToGrave,tp,LOCATION_REMOVED,0,1,#dg,nil)
 		Duel.SendtoGrave(sg,REASON_EFFECT)

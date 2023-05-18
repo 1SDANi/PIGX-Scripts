@@ -2,18 +2,6 @@
 --Volcanic Counter
 local s,id=GetID()
 function s.initial_effect(c)
-	--remove
-	local e1=Effect.CreateEffect(c)
-	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_TOGRAVE+CATEGORY_DAMAGE)
-	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
-	e1:SetProperty(EFFECT_FLAG_DELAY)
-	e1:SetRange(LOCATION_GRAVE)
-	e1:SetCode(EVENT_DAMAGE)
-	e1:SetCondition(s.condition)
-	e1:SetTarget(s.target)
-	e1:SetOperation(s.operation)
-	c:RegisterEffect(e1)
 	--damage
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
@@ -64,6 +52,6 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.RegisterEffect(e3,tp)
 		Duel.Damage(tp,ev,REASON_EFFECT)
 		Duel.Damage(1-tp,ev,REASON_EFFECT)
-		Duel.RDComplete())
+		Duel.RDComplete()
 	end
 end

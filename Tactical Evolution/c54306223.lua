@@ -11,7 +11,7 @@ function s.initial_effect(c)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e1:SetCode(EVENT_ADJUST)
-	e1:SetRange(LOCATION_MZONE)
+	e1:SetRange(LOCATION_FZONE)
 	e1:SetTarget(s.tg)
 	e1:SetOperation(s.op)
 	c:RegisterEffect(e1)
@@ -28,7 +28,7 @@ function s.initial_effect(c)
 end
 s.counter_place_list={0x1009}
 function s.filter(c)
-	return c:IsFaceup() and (c:IsAttackBelow(0) or c:IsDefenseBelow(0))
+	return c:IsFaceup() and (c:IsAttack(0) or c:IsDefense(0)) and (not c:IsRace(RACE_REPTILE))
 end
 function s.tg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_MZONE,LOCATION_MZONE,1,nil) end

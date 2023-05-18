@@ -33,7 +33,7 @@ function s.initial_effect(c)
 	e1:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE)
 	e1:SetRange(LOCATION_SZONE)
 	e1:SetCode(EFFECT_INDESTRUCTABLE)
-	e1:SetTarget(s.tg)
+	e1:SetTarget(aux.TargetBoolFunction(Card.IsType,TYPE_UNION))
 	e1:SetValue(s.valcon)
 	c:RegisterEffect(e1)
 	--untargetable

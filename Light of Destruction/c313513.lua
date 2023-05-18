@@ -89,6 +89,6 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if (Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) and ct>1) or Duel.GetLocationCount(tp,LOCATION_MZONE)<ct then return end
 	local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_DECK+LOCATION_HAND,0,nil,e,tp)
 	g:Filter(s.spfilter2,nil,g,ct)
-	local sg=aux.SelectUnselectGroup(g,e,tp,ct,ct,s.rescon,1,tp,HINTMSG_REMOVE,nil,nil,true)
+	local sg=aux.SelectUnselectGroup(g,e,tp,ct,ct,s.rescon,1,tp,HINTMSG_SPSUMMON,nil,nil,true)
 	Duel.SpecialSummon(sg,0,tp,tp,false,false,POS_FACEUP)
 end

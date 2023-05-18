@@ -15,7 +15,6 @@ function s.initial_effect(c)
 	e2:SetCode(EVENT_PHASE+PHASE_STANDBY)
 	e2:SetRange(LOCATION_SZONE)
 	e2:SetCountLimit(1)
-	e2:SetCondition(s.descon)
 	e2:SetTarget(s.destg)
 	e2:SetOperation(s.desop)
 	c:RegisterEffect(e2)
@@ -30,14 +29,10 @@ function s.initial_effect(c)
 	c:RegisterEffect(e5)
 end
 s.listed_series={0x1d}
-function s.descon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetTurnPlayer()==tp
-		and Duel.GetFieldGroupCount(tp,LOCATION_MZONE,0)<Duel.GetFieldGroupCount(tp,0,LOCATION_MZONE)
-end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return true end
 	local g=Duel.GetMatchingGroup(aux.TRUE,tp,0,LOCATION_MZONE,nil)
 	local ct=Duel.GetFieldGroupCount(tp,0,LOCATION_MZONE)-Duel.GetFieldGroupCount(tp,LOCATION_MZONE,0)
+	if chk==0 then return Duel.GetTurnPlayer()==tp and (ct>1 or (e:GetHandler():IsLocation(LOCATION_ONFIELD) and ct>0)) end
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,ct,0,0)
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)

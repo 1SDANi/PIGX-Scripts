@@ -30,6 +30,9 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 s.material_race={RACE_WARRIOR+RACE_BEAST}
+function s.valcon(e,re,r,rp)
+	return (r&REASON_BATTLE)~=0 or (r&REASON_EFFECT)~=0
+end
 function s.discon(e,tp,eg,ep,ev,re,r,rp)
 	return not e:GetHandler():IsStatus(STATUS_BATTLE_DESTROYED) and re:IsActiveType(TYPE_SPELL+TYPE_TRAP) and re:IsHasType(EFFECT_TYPE_ACTIVATE) and Duel.IsChainNegatable(ev)
 end

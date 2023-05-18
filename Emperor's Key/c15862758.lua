@@ -88,7 +88,7 @@ end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return Duel.IsPlayerAffectedByEffect(tp,CARD_NUMERON_NETWORK) or e:GetHandler():IsCanRemoveCounter(tp,COUNTER_XYZ,1,REASON_COST) end
 	if not Duel.IsPlayerAffectedByEffect(tp,CARD_NUMERON_NETWORK) then
-		if e:GetHandler():RemoveCounter(tp,COUNTER_XYZ,1,REASON_COST)
+		e:GetHandler():RemoveCounter(tp,COUNTER_XYZ,1,REASON_COST)
 	end
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)

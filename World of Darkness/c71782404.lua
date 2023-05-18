@@ -22,10 +22,10 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return eg and eg:IsExists(s.cfilter,1,nil,tp)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return eg:IsContains(chkc) and s.cfilter(chkc,e,tp) end
-	if chk==0 then return eg:IsExists(s.cfilter,1,nil,e,tp) end
+	if chkc then return eg:IsContains(chkc) and s.cfilter(chkc,tp) end
+	if chk==0 then return eg:IsExists(s.cfilter,1,nil,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	local g=eg:FilterSelect(tp,s.cfilter,1,1,nil,e,tp)
+	local g=eg:FilterSelect(tp,s.cfilter,1,1,nil,tp)
 	Duel.SetTargetCard(g)
 	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,0,0,PLAYER_ALL,g:GetFirst():GetBaseAttack())
 end

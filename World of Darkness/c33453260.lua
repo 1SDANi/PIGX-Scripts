@@ -19,7 +19,6 @@ function s.initial_effect(c)
 	local e5=Effect.CreateEffect(c)
 	e5:SetType(EFFECT_TYPE_EQUIP)
 	e5:SetCode(EFFECT_DIRECT_ATTACK)
-	e5:SetCondition(s.dircon)
 	c:RegisterEffect(e5)
 	--Self destruction
 	local e6=Effect.CreateEffect(c)
@@ -45,12 +44,6 @@ function s.eqlimit(e,c)
 end
 function s.cval(e,c)
 	return e:GetHandlerPlayer()
-end
-function s.dirfilter(c)
-	return c:IsFaceup() and c:IsType(TYPE_TOON)
-end
-function s.dircon(e)
-	return not Duel.IsExistingMatchingCard(s.dirfilter,e:GetHandlerPlayer(),0,LOCATION_MZONE,1,nil)
 end
 function s.descon(e)
 	return not Duel.IsExistingMatchingCard(s.cfilter,e:GetHandlerPlayer(),LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil)

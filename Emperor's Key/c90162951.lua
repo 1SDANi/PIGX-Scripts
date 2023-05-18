@@ -46,7 +46,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if not tc then return end
 	local c=e:GetHandler()
 	local dif=Duel.GetLP(1-e:GetHandlerPlayer())-Duel.GetLP(e:GetHandlerPlayer())
-	if dif<0 then Duel.GetLP(e:GetHandlerPlayer())-Duel.GetLP(1-e:GetHandlerPlayer()) end
+	if dif<0 then dif=Duel.GetLP(e:GetHandlerPlayer())-Duel.GetLP(1-e:GetHandlerPlayer()) end
 	for tc in aux.Next(g) do
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)

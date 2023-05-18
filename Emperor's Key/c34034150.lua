@@ -69,7 +69,6 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_DECK+LOCATION_HAND)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)>0 then return end
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	if ft<=0 then return end
 	if ft>3 then ft=3 end

@@ -47,11 +47,11 @@ function s.filter(c,e,tp)
 	local no=c.xyz_number
 	return c:IsSetCard(0x48) and no and no>0 and no<100 and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_FUSION,tp,false,false) and not c:IsSetCard(0x1048)
 end
-function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
+function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_EXTRA,0,1,nil,e,tp) and e:GetHandler():IsCanBeFusionMaterial() and e:GetHandler():IsFaceup() end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
 end
-function s.operation(e,tp,eg,ep,ev,re,r,rp)
+function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_EXTRA,0,nil,e,tp)
 	if g and #g>0 and e:GetHandler():IsFaceup() and e:GetHandler():IsCanBeFusionMaterial() and not e:GetHandler():IsImmuneToEffect(e) then
 		local tc=g:RandomSelect(1-tp,1)

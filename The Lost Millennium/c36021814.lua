@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	e1:SetValue(s.atkval)
 	c:RegisterEffect(e1)
 	local e12=e1:Clone()
-	e1:SetCode(EFFECT_SET_BASE_DEFENSE)
+	e12:SetCode(EFFECT_SET_BASE_DEFENSE)
 	c:RegisterEffect(e12)
 	--Special summon itself from GY
 	local e2=Effect.CreateEffect(c)

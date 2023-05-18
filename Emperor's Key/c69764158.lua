@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return (Duel.GetAttacker():IsControler(1-tp) or (Duel.GetAttackTarget() and Duel.GetAttackTarget():IsControler(1-tp)) and ep==tp
+	return (Duel.GetAttacker():IsControler(1-tp) or (Duel.GetAttackTarget() and Duel.GetAttackTarget():IsControler(1-tp))) and ep==tp
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local a=Duel.GetAttacker():GetControler()

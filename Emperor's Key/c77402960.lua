@@ -15,9 +15,9 @@ function s.initial_effect(c)
 	Duel.AddCustomActivityCounter(id,ACTIVITY_SPSUMMON,s.counterfilter)
 end
 s.listed_names={CARD_NUMERON_NETWORK}
-s.listed_series={0x114b}
+s.listed_series={0x114b,0x14b}
 function s.counterfilter(c)
-	return c:IsSetCard(0x114b)
+	return c:IsSetCard(0x14b)
 end
 function s.filter(c)
 	return c:IsFaceup() and c:IsCode(CARD_NUMERON_NETWORK)
@@ -26,7 +26,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil) and Duel.GetFieldGroupCount(tp,LOCATION_MZONE,0)==0
 end
 function s.sumlimit(e,c,sump,sumtype,sumpos,targetp,se)
-	return not c:IsSetCard(0x114b)
+	return not c:IsSetCard(0x14b)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetActivityCount(tp,ACTIVITY_NORMALSUMMON)==0 and Duel.GetCustomActivityCount(id,tp,ACTIVITY_SPSUMMON)==0 and Duel.GetCustomActivityCount(id,tp,ACTIVITY_FLIPSUMMON)==0 end
@@ -54,7 +54,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.RegisterEffect(e4,tp)
 end
 function s.spfilter(c,e,tp)
-	return c:GetLevel(1) and c:IsSetCard(0x14b) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsLevel(1) and c:IsSetCard(0x114b) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp) end
@@ -63,22 +63,24 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	if ft<=0 then return end
-	if ft>4 then ft=4 end
 	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_EXTRA,0,1,ft,nil,e,tp)
-	local tc=g:GetFirst()
-	for tc in aux.Next(g) do
-		Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)
-		local e1=Effect.CreateEffect(e:GetHandler())
-		e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
-		e1:SetCode(EVENT_PHASE+PHASE_END)
-		e1:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE)
-		e1:SetCountLimit(1)
-		e1:SetRange(LOCATION_MZONE)
-		e1:SetOperation(s.rmop)
-		e1:SetReset(RESET_EVENT+RESETS_STANDARD)
-		tc:RegisterEffect(e1)
+	local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_EXTRA,0,nil,e,tp)
+	if ft>4 then ft=4 end
+	if #g==0 then return end
+	local sg=aux.SelectUnselectGroup(g,e,tp,1,ft,aux.dncheck,1,tp,HINTMSG_SPSUMMON)
+	if #sg>0 then
+		for tc in aux.Next(sg) do
+			Duel.SpecialSummonStep(tc,0,tp,tp,false,false,POS_FACEUP)
+			local e1=Effect.CreateEffect(e:GetHandler())
+			e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
+			e1:SetCode(EVENT_PHASE+PHASE_END)
+			e1:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE)
+			e1:SetCountLimit(1)
+			e1:SetRange(LOCATION_MZONE)
+			e1:SetOperation(s.rmop)
+			e1:SetReset(RESET_EVENT+RESETS_STANDARD)
+			tc:RegisterEffect(e1)
+		end
 	end
 	Duel.SpecialSummonComplete()
 end

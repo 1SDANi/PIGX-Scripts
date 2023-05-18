@@ -20,9 +20,9 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	Duel.SetTargetPlayer(1-tp)
-	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,e:GetAttack())
+	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,e:GetHandler():GetAttack())
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
-	Duel.Damage(p,e:GetAttack(),REASON_EFFECT)
+	Duel.Damage(p,e:GetHandler():GetAttack(),REASON_EFFECT)
 end

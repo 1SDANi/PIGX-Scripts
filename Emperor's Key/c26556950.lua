@@ -62,7 +62,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.chaosfilter(c,e,tp)
 	return c:IsFaceup() and c:IsCanBeFusionMaterial() and c:IsLevel(10) and c:IsRace(RACE_INSECT) and
-		c:IsType(TYPE_FUSION) and c:IsCanRemoveCounter(tp,COUNTER_XYZ,1,REASON_EFFECT+REASON_MATERIAL+REASON_FUSION)
+		c:IsType(TYPE_FUSION) and c:IsCanRemoveCounter(tp,COUNTER_XYZ,2,REASON_EFFECT+REASON_MATERIAL+REASON_FUSION)
 end
 function s.chaostg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.chaosfilter,tp,LOCATION_MZONE,0,1,nil,e,tp) and e:GetHandler():IsCanBeSpecialSummoned(e,SUMMON_TYPE_FUSION,tp,false,false) end

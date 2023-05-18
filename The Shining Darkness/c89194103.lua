@@ -18,7 +18,14 @@ s.material_race={RACE_FIEND,RACE_BEAST}
 function s.valcon(e,re,r,rp)
 	return ((r&REASON_BATTLE)~=0 or (r&REASON_EFFECT)~=0) and Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)==0
 end
-
+function s.chaosfilter(c,rac,rg,st,mg)
+	local sg=rg-c
+	if (not c:IsRace(rac)) or sg:CheckWithSumEqual(s.chaosfilter,st-c:GetLevel(),1,99,c:GetRace(),sg,st-c:GetLevel(),mg) or mg:IsExists(aux.NOT(Card.IsRace),1,nil,rac) then
+		return c:GetLevel()
+	else
+		return 0
+	end
+end
 function s.fusionfilter(c,fc,sumtype,sp,sub,mg,sg)
 	local tg=fc:GetLevel()
 	local rg
@@ -29,10 +36,8 @@ function s.fusionfilter(c,fc,sumtype,sp,sub,mg,sg)
 	if sg then
 		st=sg:GetSum(Card.GetLevel)
 	end
-	return c:IsLevelAbove(1) and (not rg or not sg or (st==tg and #sg>1) or (st<tg and rg:CheckWithSumEqual(Card.GetLevel,tg-st,1,99))) and
-		c:IsRace(RACE_BEAST+RACE_FIEND) and
-		(not sg or sg:FilterCount(aux.TRUE,c)==0 or sg:FilterCount(aux.TRUE,c)>1 or
-		((not sg:IsExists(Card.IsRace,1,c,c:GetRace()))))
+	return c:IsLevelAbove(1) and (not rg or not sg or (st==tg and #sg>1) or (st<tg and rg:CheckWithSumEqual(s.chaosfilter,tg-st,1,99,c:GetAttribute(),rg,tg-st,mg))) and
+		c:IsRace(RACE_BEAST+RACE_FIEND) and (not sg or sg:FilterCount(aux.TRUE,c)==0 or sg:FilterCount(aux.TRUE,c)>1 or (not sg:IsExists(Card.IsRace,1,c,c:GetRace())))
 end
 function s.contactfil(tp)
 	return Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)

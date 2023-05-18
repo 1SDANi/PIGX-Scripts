@@ -119,7 +119,7 @@ function s.tgcon(e)
 	return Duel.IsExistingMatchingCard(s.ft,tp,LOCATION_MZONE,0,1,nil)
 end
 function s.distg(e,c)
-	return c:IsRace(RACE_DRAGON)>0 and c:GetControler()~=e:GetHandler():GetControler()
+	return c:IsRace(RACE_DRAGON) and c:GetControler()~=e:GetHandler():GetControler()
 end
 function s.indes(e,c)
 	return not c:IsSetCard(0x48)

@@ -12,14 +12,14 @@ function s.initial_effect(c)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
 end
-s.listed_series={0x5048}
+s.listed_series={0x7f}
 s.counter_place_list={COUNTER_XYZ}
 function s.spfilter(c,e,tp,mc)
 	if Duel.GetLocationCountFromEx(tp,tp,mc,c)<=0 then return false end
 	return c:IsType(TYPE_FUSION) and c:IsLevelBelow(mc:GetLevel()-1) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_FUSION,tp,false,false)
 end
 function s.tgfilter(c,e,tp)
-	return c:IsFaceup() and c:IsCanBeFusionMaterial() and c:IsAbleToRemove() and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp,c) and c:IsSetCard(0x5048)
+	return c:IsFaceup() and c:IsCanBeFusionMaterial() and c:IsAbleToRemove() and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp,c) and c:IsSetCard(0x7f)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,nil,e,tp) end

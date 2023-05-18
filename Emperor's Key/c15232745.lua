@@ -44,14 +44,17 @@ end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return Duel.IsPlayerAffectedByEffect(tp,CARD_NUMERON_NETWORK) or e:GetHandler():IsCanRemoveCounter(tp,COUNTER_XYZ,1,REASON_COST) end
 	if not Duel.IsPlayerAffectedByEffect(tp,CARD_NUMERON_NETWORK) then
-		if e:GetHandler():RemoveCounter(tp,COUNTER_XYZ,1,REASON_COST)
+		e:GetHandler():RemoveCounter(tp,COUNTER_XYZ,1,REASON_COST)
 	end
 end
+function s.filter(c)
+	return c:IsFaceup() and c:IsSetCard(0x14b)
+end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsSetCard,0x14b),tp,LOCATION_MZONE,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_MZONE,0,1,nil) end
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(aux.FaceupFilter(Card.IsSetCard,0x14b),tp,LOCATION_MZONE,0,nil)
+	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_MZONE,0,nil)
 	for tc in g:Iter() do
 		--Double ATK until the end of this turn
 		local e1=Effect.CreateEffect(e:GetHandler())

@@ -45,7 +45,7 @@ function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	else return false end
 end
 function s.value(e,c)
-	return c:IsLocation(LOCATION_MZONE) and and not c:IsReason(REASON_REPLACE) and c:IsControler(e:GetHandlerPlayer())
+	return c:IsLocation(LOCATION_MZONE) and not c:IsReason(REASON_REPLACE) and c:IsControler(e:GetHandlerPlayer())
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	e:GetHandler():RemoveCounter(tp,COUNTER_XYZ,1,REASON_COST)

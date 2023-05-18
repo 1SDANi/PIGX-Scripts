@@ -43,7 +43,6 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetLabelObject(e3)
 	e2:SetLabelObject(e3)
 end
-s.listed_names={id}
 function s.regcon(e,tp,eg,ep,ev,re,r,rp)
 	return re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_SPELL) and re:GetHandler():IsType(TYPE_QUICKPLAY) and rp==tp
 end
@@ -60,7 +59,7 @@ function s.effcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetLabel()>1
 end
 function s.sfilter(c)
-	return c:IsSetCard(0x106e) and c:IsType(TYPE_SPELL) and re:GetHandler():IsType(TYPE_QUICKPLAY) and c:IsAbleToHand() and not c:IsCode(id)
+	return c:IsSetCard(0x106e) and c:IsType(TYPE_SPELL) and re:GetHandler():IsType(TYPE_QUICKPLAY) and c:IsAbleToHand()
 end
 function s.effop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_CARD,0,id)

@@ -29,7 +29,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.atkval(e,c)
-	return Duel.GetMatchingGroupCount(aux.IsType,tp,LOCATION_ONFIELD,0,nil,TYPE_EQUIP)*500
+	return Duel.GetMatchingGroupCount(aux.IsType,e:GetHandler():GetControler(),LOCATION_ONFIELD,0,nil,TYPE_EQUIP)*500
 end
 function s.eqfilter(c)
 	return c:IsFaceup() and c:IsType(TYPE_UNION)

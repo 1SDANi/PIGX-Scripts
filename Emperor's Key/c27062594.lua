@@ -20,8 +20,8 @@ function s.initial_effect(c)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetCode(EVENT_PHASE+PHASE_END)
 	e2:SetCost(s.cs)
-	e2:SetTarget(s.sptg)
-	e2:SetOperation(s.spop)
+	e2:SetTarget(s.tg)
+	e2:SetOperation(s.op)
 	c:RegisterEffect(e2)
 end
 s.listed_series={0x48}

@@ -47,8 +47,8 @@ function s.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 s.xyz_number=2
-s.counter_place_list={COUNTER_XYZ}
-s.listed_series={0x48,0x1101}
+s.counter_place_list={COUNTER_XYZ,0x1101}
+s.listed_series={0x48}
 function s.hcounter(c)
 	return c:IsFaceup() and c:GetCounter(0x1101)>0 and c:GetAttack()>0
 end

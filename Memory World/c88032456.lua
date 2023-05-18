@@ -17,12 +17,8 @@ s.listed_names={15259703}
 function s.cfilter1(c)
 	return c:IsFaceup() and c:IsCode(15259703)
 end
-function s.cfilter2(c)
-	return c:IsFaceup() and c:IsType(TYPE_TOON)
-end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(s.cfilter1,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil)
-		and Duel.IsExistingMatchingCard(s.cfilter2,tp,LOCATION_MZONE,0,1,nil)
 end
 function s.filter(c,e,tp)
 	if c:IsMonster() then

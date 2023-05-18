@@ -49,7 +49,7 @@ function s.poscs(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:GetHandler():RemoveCounter(tp,COUNTER_XYZ,1,REASON_COST)
 end
 function s.filter(c)
-	return c:IsCanChangePosition() and c:IsPosition
+	return c:IsCanChangePosition() and c:IsPosition()
 end
 function s.postg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(1-tp) and chkc:IsAttackPos() end

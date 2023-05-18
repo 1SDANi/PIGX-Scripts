@@ -45,8 +45,7 @@ function s.cfilter(c,e,tp)
 	local pp=c:GetPreviousPosition()
 	return c:IsControler(tp) and ((pp==0x1 and np==0x4) or (pp==0x4 and np==0x1) or (pp==0x8 and np==0x1))
 end
-function s.adtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return eg:IsContains(chkc) and s.cfilter(chkc,e,1-tp) end
+function s.adtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return eg:IsExists(s.cfilter,1,nil,e,1-tp) end
 	Duel.SetOperationInfo(0,CATEGORY_COUNTER,nil,1,0,COUNTER_XYZ)
 end

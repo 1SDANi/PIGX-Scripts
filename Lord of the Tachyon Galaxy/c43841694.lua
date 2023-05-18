@@ -13,8 +13,10 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 s.listed_series={0x106e}
+s.listed_names={id}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return re:GetActiveType()==TYPE_SPELL and re:GetHandler():IsType(TYPE_QUICKPLAY) and re:GetHandler():IsSetCard(0x106e) and re:IsHasType(EFFECT_TYPE_ACTIVATE) and rp==tp
+	return re:GetActiveType()==TYPE_SPELL and re:GetHandler():IsType(TYPE_QUICKPLAY) and re:GetHandler():IsSetCard(0x106e)
+		and re:IsHasType(EFFECT_TYPE_ACTIVATE) and rp==tp and not re:GetHandler():IsCode(id)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local ftg=re:GetTarget()

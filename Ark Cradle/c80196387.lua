@@ -13,7 +13,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x123}
 function s.filter(c)
-	return c:IsSetCard(0x123) and c:IsAbleToHand()
+	return c:IsSetCard(0x123) and c:IsAbleToHand() and c:IsType(TYPE_MONSTER)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDiscardDeck(tp,1)

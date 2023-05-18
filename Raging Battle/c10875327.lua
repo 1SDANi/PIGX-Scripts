@@ -46,29 +46,6 @@ function s.initial_effect(c)
 	e4:SetTarget(s.destg)
 	e4:SetOperation(s.desop)
 	c:RegisterEffect(e4)
-	--special summon
-	local e1=Effect.CreateEffect(c)
-	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
-	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
-	e1:SetProperty(EFFECT_FLAG_DELAY)
-	e1:SetCode(EVENT_DESTROYED)
-	e1:SetCondition(s.condition)
-	e1:SetTarget(s.target)
-	e1:SetOperation(s.operation)
-	c:RegisterEffect(e1)
-end
-function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsLocation(LOCATION_GRAVE) and (r&REASON_EFFECT+REASON_BATTLE)~=0 and (re:GetOwner()~=c or not re)
-end
-function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return true end
-	local g=Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,nil)
-	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,#g,0,0)
-end
-function s.operation(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,nil)
-	Duel.Destroy(g,REASON_EFFECT)
 end
 function s.efilter(e,re,rp)
 	return (re:GetHandler():IsType(TYPE_SPELL) or re:GetHandler():IsType(TYPE_TRAP))

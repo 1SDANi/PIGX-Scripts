@@ -28,6 +28,7 @@ function s.initial_effect(c)
 	e4:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_DAMAGE_STEP)
 	e4:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
 	e4:SetCode(EVENT_BE_MATERIAL)
+	e4:SetCondition(s.spcn)
 	e4:SetCondition(s.sptg)
 	e4:SetOperation(s.spop)
 	c:RegisterEffect(e4)
@@ -61,6 +62,9 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD)
 		tc:RegisterEffect(e1)
 	end
+end
+function s.spcn(e,tp,eg,ep,ev,re,r,rp)
+	return e:GetHandler():IsLocation(LOCATION_GRAVE) and r==REASON_FUSION
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 end

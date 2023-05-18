@@ -129,7 +129,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.desreptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return not c:IsReason(REASON_REPLACE) and c:IsOnField() and c:IsFaceup() and c:IsDestructable(e) end
+	if chk==0 then return not c:IsReason(REASON_REPLACE) and c:IsOnField() and c:IsFaceup() and c:IsAbleToGraveAsCost() end
 	if Duel.SelectEffectYesNo(tp,c,96) then return true else return false end
 end
 function s.desrepop(e,tp,eg,ep,ev,re,r,rp)

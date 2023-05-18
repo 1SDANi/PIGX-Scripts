@@ -25,7 +25,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 s.counter_place_list={COUNTER_XYZ}
-function s.xyzfilter(c)
+function s.xyzfilter(c,tp)
 	return c:IsFaceup() and c:IsCanAddCounter(COUNTER_XYZ,1) and c:IsType(TYPE_FUSION) and c:IsControler(tp)
 end
 function s.cs(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -33,10 +33,10 @@ function s.cs(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Release(e:GetHandler(),REASON_COST)
 end
 function s.tg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsOnField() and s.xyzfilter(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(s.xyzfilter,tp,LOCATION_ONFIELD,0,1,nil) end
+	if chkc then return chkc:IsOnField() and s.xyzfilter(chkc,tp) end
+	if chk==0 then return Duel.IsExistingTarget(s.xyzfilter,tp,LOCATION_ONFIELD,0,1,nil,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,0))
-	Duel.SelectTarget(tp,s.xyzfilter,tp,LOCATION_ONFIELD,0,1,1,nil)
+	Duel.SelectTarget(tp,s.xyzfilter,tp,LOCATION_ONFIELD,0,1,1,nil,tp)
 	Duel.SetOperationInfo(0,CATEGORY_COUNTER,nil,1,0,COUNTER_XYZ)
 end
 function s.op(e,tp,eg,ep,ev,re,r,rp)

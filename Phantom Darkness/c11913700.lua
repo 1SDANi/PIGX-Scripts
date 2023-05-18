@@ -3,10 +3,16 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	aux.AddEquipProcedure(c,nil,s.eqfilter)
-	--equip effect
-	local e1=Effect.CreateEffect(c)
-	e1:SetType(EFFECT_TYPE_EQUIP)
-	e1:SetCode(42015635)
+	local e0=Effect.CreateEffect(c)
+	e0:SetType(EFFECT_TYPE_FIELD)
+	e0:SetCode(EFFECT_CANNOT_TO_DECK)
+	e0:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE+EFFECT_FLAG_SET_AVAILABLE)
+	e0:SetRange(LOCATION_FZONE)
+	e0:SetTargetRange(LOCATION_MZONE,LOCATION_MZONE)
+	e0:SetTarget(s.etarget)
+	c:RegisterEffect(e0)
+	local e1=e0:Clone()
+	e1:SetCode(EFFECT_CANNOT_TO_HAND)
 	c:RegisterEffect(e1)
 	--Atk up
 	local e2=Effect.CreateEffect(c)
@@ -31,6 +37,9 @@ function s.initial_effect(c)
 end
 s.listed_names={CARD_NEOS}
 s.listed_series={0x9}
+function s.etarget(e,c)
+	return c:GetOriginalType()&TYPE_EXTRA~=0
+end
 function s.eqfilter(c)
 	return c:IsSetCard(0x9)
 end

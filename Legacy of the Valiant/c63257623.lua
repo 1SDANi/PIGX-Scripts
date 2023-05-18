@@ -30,14 +30,24 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if not Duel.IsPlayerCanDiscardDeck(tp,1) then return end
-	Duel.ConfirmDecktop(tp,1)
-	local g=Duel.GetDecktopGroup(tp,1)
-	local tc=g:GetFirst()
-	if tc:IsType(TYPE_MONSTER) then
+	local ct=Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)
+	if ct==0 then return end
+	if ct>2 then ct=2 end
+	local t={}
+	for i=1,ct do t[i]=i end
+	Duel.Hint(HINTMSG_NUMBER,tp,HINT_NUMBER)
+	local ac=Duel.AnnounceNumber(tp,table.unpack(t))
+	Duel.ConfirmDecktop(tp,ac)
+	local g=Duel.GetDecktopGroup(tp,ac)
+	local sg=g:Filter(Card.IsType,nil,TYPE_MONSTER)
+	if #sg>0 then
 		Duel.DisableShuffleCheck()
-		Duel.SendtoGrave(g,REASON_EFFECT+REASON_REVEAL)
-	else
-		Duel.MoveSequence(tc,SEQ_DECKBOTTOM)
+		Duel.SendtoGrave(sg,REASON_EFFECT+REASON_REVEAL)
+	end
+	ac=ac-#sg
+	if ac>0 then
+		Duel.MoveToDeckBottom(ac,tp)
+		Duel.SortDeckbottom(tp,tp,ac)
 	end
 end
 function s.cn(e,tp,eg,ep,ev,re,r,rp)
@@ -53,17 +63,19 @@ function s.cs(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST+REASON_DISCARD,eg)
 end
 function s.filter(c,e,tp)
-	return c:IsLevel(1) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP) and c:IsLevelBelow(4)
 end
 function s.tg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK+LOCATION_HAND,0,1,nil,e,tp) end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_DECK+LOCATION_HAND)
-end
-function s.op(e,tp,eg,ep,ev,re,r,rp,chk)
-	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
+	local c=e:GetHandler()
+	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.filter(chkc,e,tp) and chkc~=c end
+	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,LOCATION_GRAVE,0,1,e:GetHandler(),e,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_DECK+LOCATION_HAND,0,1,1,nil,e,tp)
-	if g and #g>0 and Duel.SpecialSummonStep(g:GetFirst(),0,tp,tp,false,false,POS_FACEUP) then
+	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_GRAVE,0,1,1,e:GetHandler(),e,tp)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,0,0)
+end
+function s.op(e,tp,eg,ep,ev,re,r,rp)
+	local tc=Duel.GetFirstTarget()
+	if tc:IsRelateToEffect(e) and Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)>0 then
 		--Banish it if it leaves the field
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetDescription(3300)
@@ -72,7 +84,6 @@ function s.op(e,tp,eg,ep,ev,re,r,rp,chk)
 		e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_CLIENT_HINT)
 		e1:SetReset(RESET_EVENT+RESETS_REDIRECT)
 		e1:SetValue(LOCATION_REMOVED)
-		g:GetFirst():RegisterEffect(e1,true)
+		tc:RegisterEffect(e1,true)
 	end
-	Duel.SpecialSummonComplete()
 end

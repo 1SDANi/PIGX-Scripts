@@ -77,7 +77,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if not Duel.IsPlayerCanDiscardDeck(tp,1) then return end
 	local ct=Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)
 	if ct==0 then return end
-	if ct>6 then ct=6 end
+	if ct>7 then ct=7 end
 	local t={}
 	for i=1,ct do t[i]=i end
 	Duel.Hint(HINTMSG_NUMBER,tp,HINT_NUMBER)

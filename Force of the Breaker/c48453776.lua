@@ -57,8 +57,7 @@ function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local rg2=Duel.GetMatchingGroup(s.spfilter1,tp,LOCATION_MZONE+LOCATION_GRAVE,0,nil,RACE_FIEND)
 	local rg=rg1:Clone()
 	rg:Merge(rg2)
-	if chk==0 then return #rg1>1 and #rg2>1 and aux.SelectUnselectGroup(rg,e,tp,4,4,s.rescon,0) and
-		Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,e:GetHandler()) end
+	if chk==0 then return #rg1>1 and #rg2>1 and aux.SelectUnselectGroup(rg,e,tp,4,4,s.rescon,0) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
 	local rg=Duel.GetMatchingGroup(s.spfilter1,tp,LOCATION_MZONE+LOCATION_GRAVE,0,nil,RACE_FAIRY+RACE_FIEND)
 	local g=aux.SelectUnselectGroup(rg,e,tp,4,4,s.rescon,1,tp,HINTMSG_REMOVE,nil,nil,true)

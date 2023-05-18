@@ -36,6 +36,29 @@ function s.initial_effect(c)
 	e5:SetRange(LOCATION_MZONE)
 	e5:SetValue(s.efilter)
 	c:RegisterEffect(e5)
+	--destroy
+	local e1=Effect.CreateEffect(c)
+	e1:SetDescription(aux.Stringid(id,0))
+	e1:SetCategory(CATEGORY_DESTROY)
+	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
+	e1:SetProperty(EFFECT_FLAG_DELAY)
+	e1:SetCode(EVENT_DESTROYED)
+	e1:SetCondition(s.condition)
+	e1:SetTarget(s.target)
+	e1:SetOperation(s.operation)
+	c:RegisterEffect(e1)
+end
+function s.condition(e,tp,eg,ep,ev,re,r,rp)
+	return e:GetHandler():IsLocation(LOCATION_GRAVE) and (r&REASON_EFFECT+REASON_BATTLE)~=0 and (re:GetOwner()~=c or not re)
+end
+function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return true end
+	local g=Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,nil)
+	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,#g,0,0)
+end
+function s.operation(e,tp,eg,ep,ev,re,r,rp)
+	local g=Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,nil)
+	Duel.Destroy(g,REASON_EFFECT)
 end
 function s.efilter(e,re,rp)
 	return (re:GetHandler():IsType(TYPE_SPELL) or re:GetHandler():IsType(TYPE_TRAP))

@@ -8,7 +8,14 @@ function s.initial_effect(c)
 	e1:SetCode(EFFECT_INDESTRUCTABLE_EFFECT)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetTargetRange(LOCATION_MZONE,0)
-	e1:SetTarget(aux.AND(aux.TargetBoolFunction(Card.IsAttribute,ATTRIBUTE_FIRE),aux.TargetBoolFunction(Card.IsAttribute,ATTRIBUTE_DARK)))
-	e1:SetValue(1)
+	e1:SetTarget(aux.TRUE)
+	e1:SetValue(s.value)
 	c:RegisterEffect(e1)
+end
+function s.value(e)
+	if Duel.GetFieldGroupCount(e:GetHandlerPlayer(),LOCATION_HAND,0)==0 then
+		return 1
+	else
+		return 0
+	end
 end

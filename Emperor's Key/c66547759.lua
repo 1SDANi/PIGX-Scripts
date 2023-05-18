@@ -26,7 +26,7 @@ function s.initial_effect(c)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_DIRECT_ATTACK)
-	c:RegisterEffect(e1
+	c:RegisterEffect(e1)
 	--destroy
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
@@ -37,7 +37,7 @@ function s.initial_effect(c)
 	e2:SetCost(s.cs)
 	e2:SetTarget(s.tg)
 	e2:SetOperation(s.op)
-	c:RegisterEffect(e2))
+	c:RegisterEffect(e2)
 end
 s.xyz_number=23
 s.counter_place_list={COUNTER_XYZ}

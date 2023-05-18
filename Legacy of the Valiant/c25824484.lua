@@ -57,7 +57,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if not Duel.IsPlayerCanDiscardDeck(tp,1) then return end
 	local ct=Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)
 	if ct==0 then return end
-	if ct>6 then ct=6 end
+	if ct>8 then ct=8 end
 	local t={}
 	for i=1,ct do t[i]=i end
 	Duel.Hint(HINTMSG_NUMBER,tp,HINT_NUMBER)
@@ -106,9 +106,9 @@ function s.cn(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.tg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_GRAVE) and chkc:IsType(TYPE_MONSTER) end
-	if chk==0 then return Duel.IsExistingTarget(Card.IsType,tp,LOCATION_GRAVE,0,1,nil,TYPE_MONSTER) and Duel.IsPlayerCanDiscardDeck(tp,1) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectTarget(tp,Card.IsType,tp,LOCATION_GRAVE,0,1,1,nil,TYPE_MONSTER)
+	if chk==0 then return Duel.IsExistingTarget(Card.IsType,tp,LOCATION_GRAVE,0,1,e:GetHandler(),TYPE_MONSTER) and Duel.IsPlayerCanDiscardDeck(tp,1) end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
+	local g=Duel.SelectTarget(tp,Card.IsType,tp,LOCATION_GRAVE,0,1,1,e:GetHandler(),TYPE_MONSTER)
 end
 function s.op(e,tp,eg,ep,ev,re,r,rp)
 	if not Duel.IsPlayerCanDiscardDeck(tp,1) then return end

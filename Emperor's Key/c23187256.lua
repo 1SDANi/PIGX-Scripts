@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableCounterPermit(COUNTER_XYZ)
 	--fusion material
-	Fusion.AddProcMixRep(c,false,true,true,s.fusionfilter,2,99)
+	Fusion.AddProcMixRep(c,true,true,true,s.fusionfilter,2,99)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	local xyz=Effect.CreateEffect(c)
 	xyz:SetDescription(6666)
@@ -178,7 +178,7 @@ function s.counterfilter(c)
 	return c:IsCode(id)
 end
 function s.sumlimit(e,c,sump,sumtype,sumpos,targetp,se)
-	return not c:IsCode(id)
+	return not (c:IsCode(id) or e:GetLabelObject()==se:GetHandler())
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,COUNTER_XYZ,1,REASON_COST)
@@ -191,6 +191,7 @@ function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_OATH)
 	e1:SetCode(EFFECT_CANNOT_SPECIAL_SUMMON)
 	e1:SetReset(RESET_PHASE+PHASE_END)
+	e1:SetLabelObject(e:GetHandler())
 	e1:SetTargetRange(1,0)
 	e1:SetTarget(s.sumlimit)
 	Duel.RegisterEffect(e1,tp)
@@ -261,8 +262,8 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 			e6:SetCode(EFFECT_CANNOT_BE_FUSION_MATERIAL)
 			e6:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_CLIENT_HINT)
 			e6:SetValue(1)
-			e5:SetReset(RESET_EVENT+RESETS_STANDARD)
-			e6:RegisterEffect(e6,true)
+			e6:SetReset(RESET_EVENT+RESETS_STANDARD)
+			tc:RegisterEffect(e6,true)
 		end
 	end
 end
@@ -283,18 +284,29 @@ function s.xyzop(e,tp,eg,ep,ev,re,r,rp)
 		e:GetHandler():AddCounter(COUNTER_XYZ,ct)
 	end
 end
+function s.number(c)
+	local no=c.xyz_number
+	if no then
+		return no
+	else
+		return 0
+	end
+end
+function s.numbercompare(c,no)
+	return c.xyz_number and c.xyz_number<no
+end
 function s.fusionfilter(c,fc,sumtype,sp,sub,mg,sg)
-	local tg=fc:GetLevel()
+	local tg=fc.xyz_number
 	local rg
 	local st
-	local no=c.xyz_number
 	if mg then
+		mg:Filter(s.numbercompare,nil,tg)
 		rg=mg-sg
 	end
 	if sg then
-		st=sg:GetSum(Card.GetLevel)
+		st=sg:GetSum(s.number)
 	end
-	return no and (not rg or not sg or (st==tg and #sg>1) or (st<tg and rg:CheckWithSumEqual(no,tg-st,1,99)))
+	return s.numbercompare(c,tg) and (not rg or not sg or (st==tg and #sg>1) or (st<tg and rg:CheckWithSumEqual(s.number,tg-st,1,99)))
 end
 function s.contactfil(tp)
 	return Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)

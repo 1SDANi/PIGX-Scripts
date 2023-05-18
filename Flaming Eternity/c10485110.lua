@@ -20,7 +20,7 @@ function s.initial_effect(c)
 end
 s.listed_names={CARD_UMI}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	local g=c:GetMaterial()
+	local g=e:GetHandler():GetMaterial()
 	return Duel.IsEnvironment(CARD_UMI) and e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION) and g and #g==1 and
 		g:GetFirst():IsPreviousLocation(LOCATION_ONFIELD) and g:GetFirst():IsPreviousControler(tp) and g:GetFirst():IsPreviousPosition(POS_FACEUP)
 end

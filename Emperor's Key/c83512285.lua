@@ -22,8 +22,7 @@ function s.atchk1(c,sg,tp)
 	return c:IsControler(tp) and sg:FilterCount(Card.IsControler,c,1-tp)==1
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	local mg1=Duel.GetMatchingGroup(s.filter,tp,LOCATION_MZONE,0,nil)
-	local mg2=Duel.GetMatchingGroup(s.filter,tp,0,LOCATION_MZONE,nil)
+	local mg=Duel.GetMatchingGroup(s.filter,tp,LOCATION_MZONE,LOCATION_MZONE,nil)
 	if chk==0 then return aux.SelectUnselectGroup(mg,e,tp,2,2,s.spcheck,0) end
 	local g=aux.SelectUnselectGroup(mg,e,tp,2,2,s.spcheck,1,tp,HINTMSG_RELEASE,nil,nil,false)
 	Duel.Release(g,REASON_COST)

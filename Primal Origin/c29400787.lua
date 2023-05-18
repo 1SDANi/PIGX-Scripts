@@ -28,7 +28,7 @@ function s.initial_effect(c)
 	e4:SetDescription(aux.Stringid(id,0))
 	e4:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
 	e4:SetProperty(EFFECT_FLAG_DELAY)
-	e4:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
+	e4:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
 	e4:SetCode(EVENT_ATTACK_ANNOUNCE)
 	e4:SetRange(LOCATION_FZONE)
 	e4:SetCondition(s.thcon)
@@ -36,26 +36,25 @@ function s.initial_effect(c)
 	e4:SetOperation(s.thop)
 	c:RegisterEffect(e4)
 end
-s.listed_series={0x8d}
 function s.dirtg(e,c)
 	return not Duel.IsExistingMatchingCard(Card.IsFaceup,c:GetControler(),0,LOCATION_MZONE,1,nil)
 end
 function s.thcon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetAttacker():IsControler(1-tp) and Duel.GetAttackTarget()==nil
+	return Duel.GetAttackTarget()==nil
 end
 function s.filter(c)
-	return c:IsSetCard(0x8d) and c:IsAbleToHand()
+	return c:IsType(TYPE_FLIP) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,Duel.GetAttacker():GetControler(),LOCATION_DECK,0,1,nil) end
+	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,Duel.GetAttacker():GetControler(),LOCATION_DECK)
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_DECK,0,1,1,nil)
+	Duel.Hint(HINT_SELECTMSG,Duel.GetAttacker():GetControler(),HINTMSG_ATOHAND)
+	local g=Duel.SelectMatchingCard(Duel.GetAttacker():GetControler(),s.filter,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 then
 		Duel.SendtoHand(g,nil,REASON_EFFECT)
-		Duel.ConfirmCards(1-tp,g)
+		Duel.ConfirmCards(1-Duel.GetAttacker():GetControler(),g)
 	end
 end

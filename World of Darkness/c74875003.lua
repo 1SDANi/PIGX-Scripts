@@ -36,7 +36,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local g=tg:Select(tp,ft,ft,nil)
 	if #g>0 then
 		for tc in aux.Next(g) do
-			Duel.SpecialSummonStep(g,0,tp,tp,false,false,POS_FACEUP)
+			Duel.SpecialSummonStep(tc,0,tp,tp,false,false,POS_FACEUP)
 			--Cannot be used as fusion material
 			local e1=Effect.CreateEffect(e:GetHandler())
 			e1:SetDescription(3309)
@@ -45,7 +45,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 			e1:SetCode(EFFECT_CANNOT_BE_FUSION_MATERIAL)
 			e1:SetReset(RESET_EVENT+RESETS_STANDARD)
 			e1:SetValue(1)
-			g:RegisterEffect(e1,true)
+			tc:RegisterEffect(e1,true)
 		end
 		Duel.SpecialSummonComplete()
 	end

@@ -39,9 +39,9 @@ function s.filter(c)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsOnField() and s.filter(chkc) and chkc~=e:GetHandler() end
-	if chk==0 then return Duel.IsExistingTarget(s.filter,c:GetPreviousControler(),LOCATION_ONFIELD,0,1,e:GetHandler()) end
-	Duel.Hint(HINT_SELECTMSG,c:GetPreviousControler(),HINTMSG_DESTROY)
-	local g=Duel.SelectTarget(c:GetPreviousControler(),s.filter,c:GetPreviousControler(),LOCATION_ONFIELD,0,1,1,e:GetHandler())
+	if chk==0 then return Duel.IsExistingTarget(s.filter,e:GetHandler():GetPreviousControler(),LOCATION_ONFIELD,0,1,e:GetHandler()) end
+	Duel.Hint(HINT_SELECTMSG,e:GetHandler():GetPreviousControler(),HINTMSG_DESTROY)
+	local g=Duel.SelectTarget(e:GetHandler():GetPreviousControler(),s.filter,e:GetHandler():GetPreviousControler(),LOCATION_ONFIELD,0,1,1,e:GetHandler())
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,1,0,0)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)

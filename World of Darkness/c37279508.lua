@@ -124,7 +124,7 @@ end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g1=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_GRAVE,0,nil,e,tp)
 	local g2=Duel.GetMatchingGroup(s.spfilter,1-tp,LOCATION_GRAVE,0,nil,e,1-tp)
-	if chk==0 then return ((#g1>0 and Duel.GetLocationCount(tp,LOCATION_MZONE)>0) or (#g2>0 and Duel.GetLocationCount(1-tp,LOCATION_MZONE)>0)) and  end
+	if chk==0 then return ((#g1>0 and Duel.GetLocationCount(tp,LOCATION_MZONE)>0) or (#g2>0 and Duel.GetLocationCount(1-tp,LOCATION_MZONE)>0)) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g1+g2,(#g1)+(#g2),0,0)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)

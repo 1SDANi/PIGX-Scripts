@@ -21,7 +21,7 @@ function s.initial_effect(c)
 end
 function s.checkop(e,tp,eg,ep,ev,re,r,rp)
 	local rc=re:GetHandler()
-	if (re:IsHasType(EFFECT_TYPE_ACTIVATE) and rc:GetType()==TYPE_TRAP) then
+	if (re:IsHasType(EFFECT_TYPE_ACTIVATE) and rc:IsType(TYPE_TRAP+TYPE_SPELL)) then
 		Duel.RegisterFlagEffect(0,id,RESET_PHASE+PHASE_END,0,1)
 	end
 end
@@ -31,12 +31,15 @@ function s.spcs(e,tp,eg,ep,ev,re,r,rp,chk)
 	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_OATH+EFFECT_FLAG_CLIENT_HINT)
-	e3:SetDescription(aux.Stringid(id,1))
+	e1:SetDescription(aux.Stringid(id,1))
 	e1:SetCode(EFFECT_CANNOT_ACTIVATE)
 	e1:SetReset(RESET_PHASE+PHASE_END)
 	e1:SetTargetRange(1,0)
-	e1:SetValue(aux.TRUE)
+	e1:SetValue(s.actlimit)
 	Duel.RegisterEffect(e1,tp)
+end
+function s.actlimit(e,re,tp)
+	return re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_TRAP+TYPE_SPELL)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()

@@ -28,5 +28,5 @@ function s.drcon1(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.cfilter,1,nil,1-tp) and Duel.GetCurrentPhase()~=PHASE_DRAW
 end
 function s.drop1(e,tp,eg,ep,ev,re,r,rp)
-	Duel.Draw(tp,2,REASON_EFFECT)
+	Duel.Draw(tp,1,REASON_EFFECT)
 end

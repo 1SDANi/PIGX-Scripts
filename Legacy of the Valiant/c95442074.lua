@@ -100,7 +100,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCountFromEx(tp,tp,nil,c)<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp)
-	if #g>0 and Duel.SpecialSummon(g,SUMMON_TYPE_FUSION,tp,tp,false,false,POS_FACEUP_ATTACK)>0 then
+	if #g>0 and Duel.SpecialSummon(g,SUMMON_TYPE_FUSION,tp,1-tp,false,false,POS_FACEUP_ATTACK)>0 then
 		sc:CompleteProcedure()
 		--Cannot be tributed
 		local e3=Effect.CreateEffect(c)

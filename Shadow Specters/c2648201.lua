@@ -40,7 +40,7 @@ function s.initial_effect(c)
 	e4:SetOperation(s.spop)
 	c:RegisterEffect(e4)
 end
-s.listed_series={0x7f}
+s.listed_series={0x7f,0x7e}
 s.listed_names={84013237}
 function s.spcn(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -85,7 +85,7 @@ function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	ec:RegisterEffect(e1)
 end
 function s.eqfilter(c)
-	return c:IsFaceup() and c:IsSetCard(0x7f)
+	return c:IsFaceup() and (c:IsSetCard(0x7f) or c:IsSetCard(0x7e))
 end
 function s.eqtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) and s.eqfilter(chkc) end

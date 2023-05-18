@@ -36,7 +36,7 @@ function s.filter(c,g)
 	return not g:Contains(c)
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
-	return eg and eg:IsExists(s.cfilter,1,nil,tp) and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_MZONE,0,1,nil,eg)
+	return eg and eg:IsExists(s.cfilter,1,nil,tp) and Duel.GetFieldGroupCount(tp,LOCATION_MZONE,0)==0
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()

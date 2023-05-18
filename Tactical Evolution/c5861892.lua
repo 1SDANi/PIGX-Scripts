@@ -30,7 +30,6 @@ function s.initial_effect(c)
 	e4:SetCondition(s.thcon)
 	e4:SetTarget(s.thtg)
 	e4:SetOperation(s.thop)
-	e4:SetReset(RESET_EVENT+RESETS_STANDARD)
 	c:RegisterEffect(e4)
 	--
 	local e7=Effect.CreateEffect(c)
@@ -43,7 +42,6 @@ function s.initial_effect(c)
 	e7:SetCondition(s.negcon)
 	e7:SetTarget(s.negtg)
 	e7:SetOperation(s.negop)
-	e7:SetReset(RESET_EVENT+RESETS_STANDARD)
 	c:RegisterEffect(e7)
 end
 s.toss_coin=true
@@ -87,7 +85,7 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.negcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return c:GetFlagEffectLabel(36690018)==0 and re:IsActiveType(TYPE_MONSTER) and c:GetDefense()>=1000 and c:GetAttack()>=1000
+	return c:GetFlagEffectLabel(36690018)==0 and re:IsActiveType(TYPE_MONSTER) and c:GetDefense()>=2000 and c:GetAttack()>=2000
 end
 function s.negtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()

@@ -85,7 +85,7 @@ function s.fusionfilter(c,fc,sumtype,sp,sub,mg,sg)
 		st=sg:GetSum(Card.GetLevel)
 	end
 	return c:IsLevelAbove(1) and (not rg or not sg or (st==tg and #sg>1) or (st<tg and rg:CheckWithSumEqual(Card.GetLevel,tg-st,1,99))) and
-		(c:IsCode(CARD_STARDUST_DRAGON) or (not sg or sg:IsExists(Card.IsCode,1,c,CARD_STARDUST_DRAGON)))
+		(c:IsCode(2403771) or (not sg or sg:IsExists(Card.IsCode,1,c,2403771)))
 end
 function s.contactfil(tp)
 	return Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)

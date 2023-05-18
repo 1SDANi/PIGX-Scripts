@@ -2,7 +2,7 @@
 --Necroid Synchro
 local s,id=GetID()
 function s.initial_effect(c)
-	c:RegisterEffect(Fusion.CreateSummonEff(c,aux.TRUE,nil,s.fextra,Fusion.BanishMaterial,nil,s.stage2))
+	c:RegisterEffect(Fusion.CreateSummonEff(c,aux.TRUE,aux.FALSE,s.fextra,Fusion.BanishMaterial,nil,s.stage2))
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,e:GetHandler()) end

@@ -157,6 +157,8 @@ end
 function Fusion.OperationMix(insf,synchro,sub,...)
 	local funs={...}
 	return	function(e,tp,eg,ep,ev,re,r,rp,gc,chkfnf)
+				local cond=Fusion.ConditionMix(insf,sub,table.unpack(funs))
+				if not cond then return false end
 				local chkf=chkfnf&0xff
 				local c=e:GetHandler()
 				local tp=c:GetControler()
@@ -370,6 +372,8 @@ end
 function Fusion.OperationMixRep(insf,synchro,sub,fun1,minc,maxc,...)
 	local funs={...}
 	return	function(e,tp,eg,ep,ev,re,r,rp,gc,chkfnf)
+				local cond=Fusion.ConditionMixRep(insf,sub,fun1,minc,maxc,table.unpack(funs))
+				if not cond then return false end
 				local chkf=chkfnf&0xff
 				local c=e:GetHandler()
 				local tp=c:GetControler()

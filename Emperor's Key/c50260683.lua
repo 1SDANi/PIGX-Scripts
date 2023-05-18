@@ -63,7 +63,7 @@ end
 s.xyz_number=39
 s.counter_place_list={COUNTER_XYZ}
 s.listed_series={0x48}
-function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
+function s.tg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
 	if chk==0 then return Duel.IsExistingTarget(aux.TRUE,tp,0,LOCATION_MZONE,1,nil) and Duel.IsExistingTarget(aux.TRUE,tp,LOCATION_MZONE,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
@@ -73,7 +73,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g1,1,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_CONTROL,g2,1,0,0)
 end
-function s.activate(e,tp,eg,ep,ev,re,r,rp)
+function s.op(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS)
 	local tg=g:Filter(Card.IsRelateToEffect,nil,e)
 	if #tg>0 then

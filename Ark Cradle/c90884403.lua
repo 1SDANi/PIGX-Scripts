@@ -148,7 +148,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.val(e,c)
 	local g=Duel.GetMatchingGroup(aux.TRUE,c:GetControler(),LOCATION_MZONE,LOCATION_MZONE,nil)
-	return #g
+	return #g*1000
 end
 function s.xyzcn(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION)

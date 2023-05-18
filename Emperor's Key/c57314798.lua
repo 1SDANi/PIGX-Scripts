@@ -33,7 +33,7 @@ function s.initial_effect(c)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
-	--destroy
+	--change atk
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_ATKDEFCHANGE)
@@ -44,6 +44,8 @@ function s.initial_effect(c)
 	e2:SetTarget(s.tg)
 	e2:SetOperation(s.op)
 	c:RegisterEffect(e2)
+	--destroy
+	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,2))
 	e3:SetCategory(CATEGORY_DESTROY)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
@@ -70,8 +72,10 @@ function s.dsop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Destroy(g,REASON_EFFECT)
 end
 function s.cs(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,COUNTER_XYZ,1,REASON_COST) end
-	e:GetHandler():RemoveCounter(tp,COUNTER_XYZ,1,REASON_COST)
+	if chk==0 then return Duel.IsPlayerAffectedByEffect(tp,CARD_NUMERON_NETWORK) or e:GetHandler():IsCanRemoveCounter(tp,COUNTER_XYZ,1,REASON_COST) end
+	if not Duel.IsPlayerAffectedByEffect(tp,CARD_NUMERON_NETWORK) then
+		e:GetHandler():RemoveCounter(tp,COUNTER_XYZ,1,REASON_COST)
+	end
 end
 function s.tg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local t=Duel.GetAttackTarget()

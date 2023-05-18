@@ -31,7 +31,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.IsExistingMatchingCard(s.filter2,tp,LOCATION_GRAVE,0,1,nil,e,tp) and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		local g=Duel.SelectMatchingCard(tp,s.filter2,tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
-		if #g>0 and and c:IsSSetable() then
+		if #g>0 and c:IsSSetable() then
 			Duel.SSet(tp,g)
 		end
 	end

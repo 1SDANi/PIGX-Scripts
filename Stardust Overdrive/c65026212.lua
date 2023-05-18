@@ -55,7 +55,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.spfilter(c)
-	return c:IsDiscardable() c:IsSetCard(0x1d)
+	return c:IsDiscardable() and c:IsSetCard(0x1d)
 end
 function s.spcs(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND,0,1,e:GetHandler()) end

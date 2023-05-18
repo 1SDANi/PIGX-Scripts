@@ -45,7 +45,8 @@ function s.initial_effect(c)
 	e4:SetValue(s.valcon)
 	c:RegisterEffect(e4)
 end
-s.listed_names={id,2926176,51644030}
+s.listed_names={id,2926176,51644030,1000007}
+s.listed_series={0x302}
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return (e:GetHandler():IsLocation(LOCATION_REMOVED) and e:GetHandler():GetFlagEffect(id+(1-tp))==0) or
 		(e:GetHandler():IsLocation(LOCATION_EXTRA) and e:GetHandler():GetFlagEffect(id+tp)==0) end
@@ -66,15 +67,25 @@ function s.tg(e,c)
 	end
 end
 function s.valcon(e,re,r,rp)
-	return (e:GetHandler():IsLocation(LOCATION_EXTRA) or e:GetHandler():IsFaceup()) and ((r&REASON_BATTLE)~=0 or (r&REASON_EFFECT)~=0)
+	if (e:GetHandler():IsLocation(LOCATION_EXTRA) or e:GetHandler():IsFaceup()) and ((r&REASON_BATTLE)~=0 or (r&REASON_EFFECT)~=0) then
+		if not Duel.IsExistingMatchingCard(s.millenniumfilter,tp,LOCATION_EXTRA+LOCATION_REMOVED,0,1,e:GetHandler()) then
+			Duel.Remove(e:GetHandler(),POS_FACEDOWN,REASON_EFFECT)
+		end
+		return true
+	else
+		return false
+	end
 end
 function s.publicfilter(c)
 	return c:IsCode(id) and (c:IsFaceup() or c:IsLocation(LOCATION_EXTRA))
 end
+function s.millenniumfilter(c)
+	return (c:IsSetCard(0x302) or c:IsCode(1000007)) and (c:IsFaceup() or c:IsLocation(LOCATION_EXTRA))
+end
 function s.publicop(e,tp,eg,ev,ep,re,r,rp)
 	if Duel.IsExistingMatchingCard(s.publicfilter,tp,LOCATION_EXTRA+LOCATION_REMOVED,0,1,e:GetHandler()) then
 		Duel.Remove(e:GetHandler(),POS_FACEDOWN,REASON_EFFECT)
-	else
+	else if Duel.IsExistingMatchingCard(s.millenniumfilter,tp,LOCATION_EXTRA+LOCATION_REMOVED,0,1,e:GetHandler()) then
 		Duel.Remove(e:GetHandler(),POS_FACEUP,REASON_EFFECT)
 	end
 end

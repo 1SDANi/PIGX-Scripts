@@ -23,7 +23,7 @@ function s.cfilter(c)
 	return c:IsFaceup() and c:IsCode(15259703)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsType,TYPE_TOON),tp,LOCATION_MZONE,0,1,nil) and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil)
+	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil)
 end
 function s.filter(c,tp)
 	return c:IsSummonPlayer(tp) and c:IsAbleToDeck() and c:IsLocation(LOCATION_MZONE)

@@ -6,7 +6,7 @@ function s.initial_effect(c)
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_FUSION_SUMMON)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
-	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
+	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_CANNOT_NEGATE+EFFECT_FLAG_CANNOT_INACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.activate)
@@ -15,6 +15,7 @@ function s.initial_effect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_TOHAND)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
+	e2:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_CANNOT_NEGATE+EFFECT_FLAG_CANNOT_INACTIVATE)
 	e2:SetCode(EVENT_PREDRAW)
 	e2:SetRange(LOCATION_GRAVE)
 	e2:SetCondition(s.cn)
@@ -54,10 +55,15 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.spfilter(c,e,tp,mc)
 	if Duel.GetLocationCountFromEx(tp,tp,mc,c)<=0 then return false end
-	return c:IsType(TYPE_FUSION) and (c:IsLevel(mc:GetLevel()+1) or c:IsLevel(mc:GetLevel()+2)) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_FUSION,tp,false,false) and c:IsAttribute(ATTRIBUTE_DIVINE)
+	local NewOrder=false
+	if c:IsCode(100010001) then
+		NewOrder=true
+	end
+	return c:IsType(TYPE_FUSION) and (c:IsLevel(mc:GetLevel()+1) or c:IsLevel(mc:GetLevel()+2)) and
+		c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_FUSION,tp,NewOrder,NewOrder) and c:IsAttribute(ATTRIBUTE_DIVINE)
 end
 function s.tgfilter(c,e,tp)
-	return c:IsFaceup() and c:IsCanBeFusionMaterial() and c:IsAbleToGrave() and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp,c)
+	return c:IsFaceup() and c:IsCanBeFusionMaterial() and c:IsType(TYPE_MONSTER) and c:IsAbleToGrave() and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp,c)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_MZONE,0,1,nil,e,tp) end
@@ -78,7 +84,11 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			sc:SetMaterial(Group.FromCards(tc))
 			Duel.SendtoGrave(tc,REASON_EFFECT+REASON_MATERIAL+REASON_FUSION)
 			Duel.BreakEffect()
-			if Duel.SpecialSummon(sc,SUMMON_TYPE_FUSION,tp,tp,false,false,POS_FACEUP) then
+			local NewOrder=false
+			if sc:IsCode(100010001) then
+				NewOrder=true
+			end
+			if Duel.SpecialSummon(sc,SUMMON_TYPE_FUSION,tp,tp,NewOrder,f,POS_FACEUP) then
 				sc:CompleteProcedure()
 				tc:AddCounter(COUNTER_XYZ,n)
 			end

@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
 end
-function s.condition(e,tp,eg,ep,ev,re,r,rp)
+function s.spcn(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetCurrentPhase()==PHASE_MAIN1 and not Duel.CheckPhaseActivity()
 end
 function s.filter(c,e,tp)

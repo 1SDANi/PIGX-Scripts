@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
 	local e1=Effect.CreateEffect(c)
-	e1:SetCategory(CATEGORY_TODECK+CATEGORY_DESTROY)
+	e1:SetCategory(CATEGORY_TODECK+CATEGORY_REMOVE)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e1:SetCode(EVENT_FREE_CHAIN)
@@ -24,12 +24,12 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
 	local g2=Duel.SelectTarget(tp,aux.TRUE,tp,0,LOCATION_ONFIELD,1,1,e:GetHandler())
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,g1,2,0,0)
-	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g2,1,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_REMOVE,g2,1,0,0)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local ex,g1=Duel.GetOperationInfo(0,CATEGORY_TODECK)
-	local ex,g2=Duel.GetOperationInfo(0,CATEGORY_DESTROY)
+	local ex,g2=Duel.GetOperationInfo(0,CATEGORY_REMOVE)
 	if g1:GetFirst():IsRelateToEffect(e) and g1:GetNext():IsRelateToEffect(e) and Duel.SendtoDeck(g1,nil,2,REASON_EFFECT)>0 and g2:GetFirst():IsRelateToEffect(e) then
-		Duel.Destroy(g2,REASON_EFFECT)
+		Duel.Remove(g2,POS_FACEUP,REASON_EFFECT)
 	end
 end

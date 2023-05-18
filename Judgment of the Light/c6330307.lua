@@ -43,7 +43,7 @@ function s.initial_effect(c)
 	e4:SetOperation(s.operation)
 	c:RegisterEffect(e4)
 end
-s.listed_series={0x7f}
+s.listed_series={0x7f,0x7e}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetEquipTarget() and e:GetHandler():GetEquipTarget()==Duel.GetAttacker() and Duel.GetAttackTarget() and Duel.GetBattleDamage(tp)>0
 end
@@ -66,7 +66,7 @@ function s.cnop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.eqfilter(c)
-	return c:IsFaceup() and c:IsSetCard(0x7f)
+	return c:IsFaceup() and (c:IsSetCard(0x7f) or c:IsSetCard(0x7e))
 end
 function s.eqtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) and s.eqfilter(chkc) end

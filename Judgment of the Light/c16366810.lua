@@ -35,13 +35,14 @@ function s.initial_effect(c)
 	c:RegisterEffect(e5)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsLocation(LOCATION_GRAVE) and (r&REASON_EFFECT+REASON_BATTLE)~=0 end
-	local c=e:GetHandler()
-	Duel.SetTargetPlayer(c:GetPreviousControler())
-	Duel.SetTargetParam(500)
-	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,c:GetPreviousControler(),500)
+	local g=Duel.GetMatchingGroup(Card.IsAbleToDeck,tp,LOCATION_GRAVE,0,1,nil)
+	if chk==0 then return e:GetHandler():IsLocation(LOCATION_GRAVE) and (r&REASON_EFFECT+REASON_BATTLE)~=0 and g and #g>0 end
+	Duel.SetTargetPlayer(e:GetHandler():GetPreviousControler())
+	Duel.SetOperationInfo(0,CATEGORY_TODECK,g,#g,0,0)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
-	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
-	Duel.Damage(p,d,REASON_EFFECT)
+	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
+	local g=Duel.GetMatchingGroup(Card.IsAbleToDeck,tp,LOCATION_GRAVE,0,1,nil)
+	if not g then return end
+	Duel.SendtoDeck(g,nil,2,REASON_EFFECT)
 end

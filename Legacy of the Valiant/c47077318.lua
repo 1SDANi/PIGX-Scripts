@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	e2:SetDescription(aux.Stringid(id,2))
 	e2:SetCategory(CATEGORY_DRAW)
 	e2:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_PLAYER_TARGET)
-	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
+	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e2:SetCode(EVENT_TO_GRAVE)
 	e2:SetCondition(s.cn)
 	e2:SetCost(s.cs)
@@ -32,7 +32,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if not Duel.IsPlayerCanDiscardDeck(tp,1) then return end
 	local ct=Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)
 	if ct==0 then return end
-	if ct>6 then ct=6 end
+	if ct>3 then ct=3 end
 	local t={}
 	for i=1,ct do t[i]=i end
 	Duel.Hint(HINTMSG_NUMBER,tp,HINT_NUMBER)

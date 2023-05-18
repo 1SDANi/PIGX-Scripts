@@ -23,11 +23,11 @@ end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local c=e:GetHandler()
 	if chkc then return chkc:IsLocation(LOCATION_REMOVED) and chkc:IsControler(tp) and s.filter(chkc,e,tp) end
-	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,true,true) end
+	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and
+		c:IsCanBeSpecialSummoned(e,0,tp,true,true) and Duel.IsExistingTarget(s.filter,tp,0,LOCATION_MZONE,1,nil,e,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_REMOVED,0,1,1,nil,e,tp)
-	local g2=Group:CreateGroup()
-	g2:Add(g)
+	local g2=Group.CreateGroup(g)
 	g2:Add(c)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g2,#g2,0,0)
 end

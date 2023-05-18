@@ -48,6 +48,14 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)
 	end
 end
+function s.chaosfilter(c,att,rg,st,mg)
+	local sg=rg-c
+	if (not c:IsAttribute(att)) or sg:CheckWithSumEqual(s.chaosfilter,st-c:GetLevel(),1,99,c:GetAttribute(),sg,st-c:GetLevel(),mg) or mg:IsExists(aux.NOT(Card.IsAttribute),1,nil,att) then
+		return c:GetLevel()
+	else
+		return 0
+	end
+end
 function s.fusionfilter(c,fc,sumtype,sp,sub,mg,sg)
 	local tg=fc:GetLevel()
 	local rg
@@ -58,11 +66,8 @@ function s.fusionfilter(c,fc,sumtype,sp,sub,mg,sg)
 	if sg then
 		st=sg:GetSum(Card.GetLevel)
 	end
-	return c:IsLevelAbove(1) and (not rg or not sg or (st==tg and #sg>1) or (st<tg and rg:CheckWithSumEqual(Card.GetLevel,tg-st,1,99))) and
-		c:IsAttribute(ATTRIBUTE_DARK+ATTRIBUTE_LIGHT) and
-		(not sg or sg:FilterCount(aux.TRUE,c)==0 or sg:FilterCount(aux.TRUE,c)>1 or
-		((not sg:IsExists(Card.IsAttribute,1,c,c:GetAttribute()))))
-		
+	return c:IsLevelAbove(1) and (not rg or not sg or (st==tg and #sg>1) or (st<tg and rg:CheckWithSumEqual(s.chaosfilter,tg-st,1,99,c:GetAttribute(),rg,tg-st,mg))) and
+		c:IsAttribute(ATTRIBUTE_DARK+ATTRIBUTE_LIGHT) and (not sg or sg:FilterCount(aux.TRUE,c)==0 or sg:FilterCount(aux.TRUE,c)>1 or (not sg:IsExists(Card.IsAttribute,1,c,c:GetAttribute())))
 end
 function s.contactfil(tp)
 	return Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)

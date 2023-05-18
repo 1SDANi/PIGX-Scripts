@@ -30,7 +30,6 @@ function s.initial_effect(c)
 end
 s.xyz_number=39
 s.listed_series={0x1048}
-s.counter_place_list={COUNTER_XYZ}
 function s.attackup(e,c)
 	return 1000*c:GetCounter(COUNTER_XYZ)
 end

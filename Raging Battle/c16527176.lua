@@ -26,7 +26,7 @@ end
 function s.cfilter(c)
 	return c:IsSetCard(0x2a) and not c:IsStatus(STATUS_BATTLE_DESTROYED)
 end
-function s.cost(e,tp,eg,ep,ev,re,r,rp)
+function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return Duel.CheckReleaseGroupCost(tp,s.cfilter,1,false,nil,nil) end
 	local g=Duel.SelectReleaseGroupCost(tp,s.cfilter,1,1,false,nil,nil)

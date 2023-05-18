@@ -1,5 +1,5 @@
 --イエロー・ダストン
---Yellow Duston
+--Red Duston
 local s,id=GetID()
 function s.initial_effect(c)
 	--destroyed
@@ -36,14 +36,11 @@ function s.initial_effect(c)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsLocation(LOCATION_GRAVE) and (r&REASON_EFFECT+REASON_BATTLE)~=0 end
-	local c=e:GetHandler()
-	Duel.SetTargetPlayer(c:GetPreviousControler())
-	g=Duel.GetMatchingGroup(Card.IsAbleToDeck,c:GetPreviousControler(),LOCATION_GRAVE,0,nil)
+	Duel.SetTargetPlayer(e:GetHandler():GetPreviousControler())
+	Duel.SetTargetParam(1000)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,g,#g,0,0)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
-	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
-	g=Duel.GetMatchingGroup(Card.IsAbleToDeck,p,LOCATION_GRAVE,0,nil)
-	if not g then return end
-	Duel.SendtoDeck(g,nil,2,REASON_EFFECT)
+	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
+	Duel.Damage(p,d,REASON_EFFECT)
 end

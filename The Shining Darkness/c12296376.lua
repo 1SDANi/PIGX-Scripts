@@ -25,11 +25,7 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local a=Duel.GetAttackTarget()
 	if a and Duel.NegateAttack() then
-		local e1=Effect.CreateEffect(e:GetHandler())
-		e1:SetType(EFFECT_TYPE_SINGLE)
-		e1:SetCode(EFFECT_CANNOT_ATTACK)
-		e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_STANDBY+RESET_SELF_TURN)
-		a:RegisterEffect(e1)
+		Duel.ChangePosition(a,POS_FACEUP_DEFENSE,POS_FACEUP_ATTACK,POS_FACEUP_ATTACK,POS_FACEUP_ATTACK)
 		local e2=Effect.CreateEffect(e:GetHandler())
 		e2:SetType(EFFECT_TYPE_SINGLE)
 		e2:SetCode(EFFECT_CANNOT_CHANGE_POSITION)

@@ -50,5 +50,5 @@ function s.etarget(e,c)
 	return c:IsAttribute(ATTRIBUTE_DIVINE)
 end
 function s.efilter(e,re)
-	return re:GetHandler()~=e:GetHandler()
+	return re:GetHandler():GetControler()~=e:GetHandler():GetControler()
 end

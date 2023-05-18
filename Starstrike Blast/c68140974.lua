@@ -2,6 +2,14 @@
 --Meklord Emperor Wisel
 local s,id=GetID()
 function s.initial_effect(c)
+	--Type Machine
+	local e0=Effect.CreateEffect(c)
+	e0:SetType(EFFECT_TYPE_SINGLE)
+	e0:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
+	e0:SetCode(EFFECT_ADD_RACE)
+	e0:SetRange(LOCATION_ALL)
+	e0:SetValue(RACE_MACHINE)
+	c:RegisterEffect(e0)
 	--special summon
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))

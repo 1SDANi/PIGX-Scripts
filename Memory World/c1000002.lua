@@ -50,7 +50,8 @@ function s.initial_effect(c)
 	e5:SetCode(EFFECT_UPDATE_DEFENSE)
 	c:RegisterEffect(e5)
 end
-s.listed_names={id}
+s.listed_names={id,1000007}
+s.listed_series={0x302}
 function s.con(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsLocation(LOCATION_EXTRA) or e:GetHandler():IsFaceup()
 end
@@ -61,10 +62,13 @@ end
 function s.publicfilter(c)
 	return c:IsCode(id) and (c:IsFaceup() or c:IsLocation(LOCATION_EXTRA))
 end
+function s.millenniumfilter(c)
+	return (c:IsSetCard(0x302) or c:IsCode(1000007)) and (c:IsFaceup() or c:IsLocation(LOCATION_EXTRA))
+end
 function s.publicop(e,tp,eg,ev,ep,re,r,rp)
 	if Duel.IsExistingMatchingCard(s.publicfilter,tp,LOCATION_EXTRA+LOCATION_REMOVED,0,1,e:GetHandler()) then
 		Duel.Remove(e:GetHandler(),POS_FACEDOWN,REASON_EFFECT)
-	else
+	else if Duel.IsExistingMatchingCard(s.millenniumfilter,tp,LOCATION_EXTRA+LOCATION_REMOVED,0,1,e:GetHandler()) then
 		Duel.Remove(e:GetHandler(),POS_FACEUP,REASON_EFFECT)
 	end
 end

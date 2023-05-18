@@ -74,10 +74,10 @@ function s.sumlimit(e,c,sump,sumtype,sumpos,targetp,se)
 	return not (c:IsCode(48995978) or c:IsCode(6165656))
 end
 function s.aclimit(e,re,tp)
-	return re:IsActiveType(TYPE_MONSTER) and re:GetHandler()~=e:GetHandler()
+	return re:IsActiveType(TYPE_MONSTER)
 end
 function s.chainfilter(re,tp,cid)
-	return re:GetHandler()~=e:GetHandler()) and not (re:IsActiveType(TYPE_MONSTER)
+	return not re:IsActiveType(TYPE_MONSTER)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,COUNTER_XYZ,1,REASON_COST)

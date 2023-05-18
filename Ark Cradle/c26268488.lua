@@ -66,7 +66,7 @@ function s.fusionfilter(c,fc,sumtype,sp,sub,mg,sg)
 	if sg then
 		st=sg:GetSum(Card.GetLevel)
 	end
-	return c:IsType(TYPE_FUSION) and (not rg or not sg or (st==tg and #sg>1) or (st<tg and rg:CheckWithSumEqual(Card.GetLevel,tg-st,1,99)))
+	return c:IsType(TYPE_FUSION) and (not rg or not sg or (st==tg and #sg>2) or (st<tg and rg:CheckWithSumEqual(Card.GetLevel,tg-st,3-#sg,99)))
 end
 function s.contactfil(tp)
 	return Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)

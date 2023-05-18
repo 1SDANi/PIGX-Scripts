@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	--double tribute
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
-	e2:SetCode(EFFECT_DOUBLE_TRIBUTE)
+	e2:SetCode(EFFECT_TRIPLE_TRIBUTE)
 	e2:SetValue(s.condition)
 	c:RegisterEffect(e2)
 	--search

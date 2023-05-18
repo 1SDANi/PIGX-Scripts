@@ -50,7 +50,7 @@ function s.spfilter2(c,e,tp,lv)
 end
 function s.sptg1(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
-	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and and Duel.GetLocationCount(1-tp,LOCATION_MZONE)>0
+	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.GetLocationCount(1-tp,LOCATION_MZONE)>0 and
 		Duel.IsExistingTarget(s.spfilter1,tp,LOCATION_GRAVE,0,1,nil,e,tp) and Duel.IsExistingTarget(s.spfilter2,tp,0,LOCATION_GRAVE,1,nil,e,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g1=Duel.SelectTarget(tp,s.spfilter1,tp,LOCATION_GRAVE,0,1,1,nil,e,tp)

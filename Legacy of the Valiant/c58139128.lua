@@ -21,6 +21,11 @@ function s.initial_effect(c)
 	e2:SetTarget(aux.TRUE)
 	e2:SetCode(EFFECT_DISABLE)
 	c:RegisterEffect(e2)
+	--immune to necro valley
+	local e4=Effect.CreateEffect(c)
+	e4:SetType(EFFECT_TYPE_SINGLE)
+	e4:SetCode(EFFECT_NECRO_VALLEY_IM)
+	c:RegisterEffect(e4)
 end
 function s.cn(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_TRIBUTE)

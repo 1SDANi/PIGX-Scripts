@@ -29,8 +29,8 @@ function s.filter(c)
 	return c:IsFaceup() and c:IsType(TYPE_SPELL) and not c:IsType(TYPE_FIELD)
 end
 function s.actlimit1(e,te,tp)
-	return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_MZONE,0,1,nil) and te:IsActiveType(TYPE_MONSTER)
+	return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_MZONE,0,1,e:GetHandler()) and te:IsActiveType(TYPE_MONSTER)
 end
 function s.actlimit2(e,te,tp)
-	return Duel.IsExistingMatchingCard(s.filter,tp,0,LOCATION_MZONE,1,nil) and te:IsActiveType(TYPE_MONSTER)
+	return Duel.IsExistingMatchingCard(s.filter,tp,0,LOCATION_MZONE,1,e:GetHandler()) and te:IsActiveType(TYPE_MONSTER)
 end

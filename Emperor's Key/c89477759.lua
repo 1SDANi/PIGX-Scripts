@@ -2,7 +2,7 @@
 --Chaos Number 1000: Numeronius Delusion
 local s,id=GetID()
 function s.initial_effect(c)
-	Fusion.AddProcMixN(c,false,true,true,s.fusfilter,7)
+	Fusion.AddProcMixN(c,false,true,true,s.fusfilter,5)
 	local xyz=Effect.CreateEffect(c)
 	xyz:SetDescription(6666)
 	xyz:SetCategory(CATEGORY_COUNTER)
@@ -128,8 +128,10 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.descs(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,COUNTER_XYZ,1,REASON_COST) end
-	e:GetHandler():RemoveCounter(tp,COUNTER_XYZ,1,REASON_COST)
+	if chk==0 then return Duel.IsPlayerAffectedByEffect(tp,CARD_NUMERON_NETWORK) or e:GetHandler():IsCanRemoveCounter(tp,COUNTER_XYZ,1,REASON_COST) end
+	if not Duel.IsPlayerAffectedByEffect(tp,CARD_NUMERON_NETWORK) then
+		e:GetHandler():RemoveCounter(tp,COUNTER_XYZ,1,REASON_COST)
+	end
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(1-tp) end

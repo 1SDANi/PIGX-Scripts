@@ -35,7 +35,7 @@ function s.spcs(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.DiscardHand(tp,s.cfilter,1,1,REASON_COST+REASON_DISCARD)
 end
 function s.filter(c,e,tp)
-	return c:IsFaceup() and c:IsType(TYPE_FUSION) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsFaceup() and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_REMOVED) and chkc:IsControler(tp) and s.filter(chkc,e,tp) end

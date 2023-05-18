@@ -35,6 +35,7 @@ end
 function s.rmop(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
 	if Duel.GetFieldGroupCount(tp,0,LOCATION_DECK)==0 then return end
+	local ct=eg:FilterCount(s.cfilter,nil)
 	Duel.DiscardDeck(1-tp,ct,REASON_EFFECT)
 	Duel.DiscardDeck(tp,ct,REASON_EFFECT)
 end

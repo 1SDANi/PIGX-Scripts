@@ -63,6 +63,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x40,0x302}
 s.material_setcode={0x302}
+s.listed_names={1000009}
 function s.fusfilter(c)
 	return c:IsSetCard(0x302) and c:IsType(TYPE_MONSTER+TYPE_UNION) and c:IsType(TYPE_FUSION)
 end
@@ -114,7 +115,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION)
 end
 function s.filter(c,e,tp)
-	return c:IsCode(1000009) and Duel.GetLocationCountFromEx(tp,tp,nil,c)>0 and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_FUSION,tp,true,false)
+	return c:IsCode(1000009) and Duel.GetLocationCountFromEx(tp,tp,nil,c)>0 and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_FUSION,tp,true,true)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_EXTRA) and s.filter(chkc,e,tp) end
@@ -124,7 +125,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local sc=Duel.GetFirstMatchingCard(s.filter,tp,LOCATION_EXTRA,0,nil,e,tp)
-	Duel.SpecialSummon(sc,SUMMON_TYPE_FUSION,tp,1-tp,true,false,POS_FACEUP)
+	Duel.SpecialSummon(sc,SUMMON_TYPE_FUSION,tp,1-tp,true,true,POS_FACEUP)
 end
 function s.effcon(e)
 	return e:GetHandler():GetSummonType()==SUMMON_TYPE_FUSION

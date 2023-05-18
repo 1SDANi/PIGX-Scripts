@@ -31,13 +31,14 @@ function s.initial_effect(c)
 	e6:SetCondition(s.cn)
 	e6:SetTarget(s.tg)
 	e6:SetOperation(s.op)
+	c:RegisterEffect(e6)
 end
 s.listed_series={0x80}
 function s.cn(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsReason(REASON_EFFECT) and e:GetHandler():IsLocation(LOCATION_GRAVE)
 end
 function s.filter(c)
-	return c:IsSetCard(0x80) and c:IsMonster() and c:IsAbleToHand()
+	return c:IsSetCard(0x80) and c:IsType(TYPE_MONSTER) and c:IsAbleToHand()
 end
 function s.tg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil) end

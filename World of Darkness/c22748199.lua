@@ -14,8 +14,11 @@ function s.initial_effect(c)
 	e1:SetOperation(s.disop)
 	c:RegisterEffect(e1)
 end
+function s.filter(c,lv)
+	return c:IsFaceup() and c:IsAttribute(ATTRIBUTE_WATER)
+end
 function s.discon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsAttribute,ATTRIBUTE_WATER),tp,LOCATION_MZONE,LOCATION_MZONE,2,nil)
+	return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_MZONE,LOCATION_MZONE,2,nil)
 end
 function s.distg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(1-tp) and chkc:IsFaceup() end

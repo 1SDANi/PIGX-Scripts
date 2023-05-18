@@ -44,6 +44,9 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,COUNTER_XYZ,1,REASON_COST) end
 	e:GetHandler():RemoveCounter(tp,COUNTER_XYZ,1,REASON_COST)
 end
+function s.filter(c)
+	return c:IsPosition(POS_ATTACK) and c:IsFaceup() and c:GetLevel()~=c:GetOriginalLevel()
+end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(1-tp) and chkc:IsLocation(LOCATION_MZONE) and s.filter(chkc,e) end
 	if chk==0 then

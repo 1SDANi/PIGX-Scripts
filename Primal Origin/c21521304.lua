@@ -54,13 +54,13 @@ s.xyz_number=39
 s.counter_place_list={COUNTER_XYZ}
 s.listed_series={0x48}
 s.listed_names={84013237}
-function s.spfilter(c)
+function s.csfilter(c)
 	return c:IsSetCard(0x48) and c:IsAbleToRemoveAsCost()
 end
 function s.spcs(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_MZONE,0,1,e:GetHandler()) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.csfilter,tp,LOCATION_MZONE,0,1,e:GetHandler()) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local cg=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_MZONE,0,1,1,e:GetHandler())
+	local cg=Duel.SelectMatchingCard(tp,s.csfilter,tp,LOCATION_MZONE,0,1,1,e:GetHandler())
 	Duel.Remove(cg,POS_FACEUP,REASON_COST)
 end
 function s.spfilter(c,e,tp)
