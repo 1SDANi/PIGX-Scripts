@@ -3,7 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableCounterPermit(0x3)
-	c:SetCounterLimit(0x3,1)
+	c:SetCounterLimit(0x3)
 	--summon success
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))

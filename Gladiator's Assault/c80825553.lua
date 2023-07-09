@@ -5,6 +5,7 @@ function s.initial_effect(c)
 	--battle indestructable
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_SINGLE)
+	e0:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e0:SetCode(EFFECT_INDESTRUCTABLE_BATTLE)
 	e0:SetCondition(aux.IsGeminiState)
 	e0:SetValue(1)

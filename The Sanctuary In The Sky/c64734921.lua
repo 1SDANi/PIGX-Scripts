@@ -56,8 +56,11 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 	end
 end
+function s.envfilter(c)
+	return c:IsFaceup() and c:IsCode(CARD_SANCTUARY_SKY)
+end
 function s.econ(e)
-	return Duel.IsEnvironment(CARD_SANCTUARY_SKY)
+	return (Duel.IsExistingMatchingCard(s.envfilter,e:GetHandlerPlayer(),LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil) or Duel.IsEnvironment(CARD_SANCTUARY_SKY))
 end
 function s.target(e,c)
 	return c:IsRace(RACE_FAIRY) and (c:IsType(TYPE_NORMAL) or (c:IsType(TYPE_GEMINI) and c:IsLocation(LOCATION_DECK)))

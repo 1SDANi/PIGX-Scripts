@@ -19,7 +19,7 @@ end
 s.listed_series={0x37}
 function s.discon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return not c:IsStatus(STATUS_BATTLE_DESTROYED) and Duel.IsChainNegatable(ev)
+	return Duel.IsChainNegatable(ev) and not c:IsStatus(STATUS_BATTLE_DESTROYED)
 end
 function s.filter(c)
 	return c:IsFaceup() and c:IsSetCard(0x37) and c:IsType(TYPE_MONSTER) and c:IsAbleToHand()

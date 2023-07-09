@@ -40,7 +40,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local t1=g:GetFirst()
 	local t2=g:GetNext()
 	Duel.SpecialSummonStep(t1,0,tp,tp,false,false,POS_FACEUP)
-	--Cannot be used as synchro material
+	--negate effects
 	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_DISABLE)

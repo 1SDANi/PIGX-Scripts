@@ -877,7 +877,7 @@ function Fusion.SelectMixRepUnfix(c,tp,mg,sg,mustg,fc,sub,sub2,minc,maxc,chkf,..
 	mg:Merge(rg)
 	return res
 end
-function Fusion.AddContactProc(c,group,op,sumcon,condition,sumtype,settype,setcode,opc,desc,cannotBeLizard,protected)
+function Fusion.AddContactProc(c,group,op,sumcon,condition,sumtype,settype,setcode,opc,desc,cannotBeLizard,protected,location)
 	if c:IsStatus(STATUS_COPYING_EFFECT) then return end
 	local mt=c.__index
 	local t={}
@@ -903,7 +903,11 @@ function Fusion.AddContactProc(c,group,op,sumcon,condition,sumtype,settype,setco
 	else
 		e1:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_DAMAGE_STEP)
 	end
-	e1:SetRange(LOCATION_EXTRA)
+	if location then
+		e1:SetRange(location)
+	else
+		e1:SetRange(LOCATION_EXTRA)
+	end
 	if sumtype then
 		e1:SetValue(sumtype)
 	end

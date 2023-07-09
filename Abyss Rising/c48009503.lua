@@ -39,8 +39,7 @@ function s.filter(c,e,tp)
 	return c:IsFaceup() and c:IsControler(1-tp) and (not e or c:IsRelateToEffect(e))
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return eg:IsExists(s.filter,1,nil,nil,tp) end
-	Duel.SetTargetCard(eg)
+	if chk==0 then return eg:IsExists(s.filter,1,nil,nil,e,tp) end
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,eg,#eg,0,0)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)

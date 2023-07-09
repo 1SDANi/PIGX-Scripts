@@ -30,8 +30,7 @@ function s.tg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 end
 function s.op(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	if c:IsRelateToEffect(e) and c:IsFaceup() then
-		Duel.GetControl(c,1-tp)
+	if c:IsRelateToEffect(e) and c:IsFaceup() and Duel.GetControl(c,1-tp) then
 		--Cannot be tributed
 		local e3=Effect.CreateEffect(c)
 		e3:SetDescription(3303)

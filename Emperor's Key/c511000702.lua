@@ -52,8 +52,13 @@ end
 function s.nofieldcon(e)
 	return not Duel.IsExistingMatchingCard(Card.IsFaceup,0,LOCATION_FZONE,LOCATION_FZONE,1,nil)
 end
-function s.spcon(e,tp,eg,ep,ev,re,r,rp,chk)
-	return Duel.IsEnvironment(511000706)
+function s.envfilter(c)
+	return c:IsFaceup() and c:IsCode(511000706)
+end
+function s.spcon(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and
+		(Duel.IsExistingMatchingCard(s.envfilter,e:GetHandlerPlayer(),LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil) or Duel.IsEnvironment(511000706))
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()

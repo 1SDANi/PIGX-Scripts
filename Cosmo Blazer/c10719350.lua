@@ -30,7 +30,7 @@ function s.tg(e,c)
 	return c:IsRace(RACE_BEAST)
 end
 function s.filter(c)
-	return c:IsSummonable(true,nil) or c:IsMSetable(true,nil) and c:IsRace(RACE_BEAST)
+	return (c:IsSummonable(true,nil) or c:IsMSetable(true,nil)) and c:IsRace(RACE_BEAST)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then

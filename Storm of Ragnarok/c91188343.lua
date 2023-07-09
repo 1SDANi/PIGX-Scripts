@@ -43,7 +43,11 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 		Duel.ConfirmCards(1-tp,g)
 	end
 end
+function s.envfilter(c)
+	return c:IsFaceup() and c:IsCode(CARD_SANCTUARY_SKY)
+end
 function s.ntcon(e,c,minc)
 	if c==nil then return true end
-	return minc==0 and c:GetLevel()>4 and Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0 and Duel.IsEnvironment(CARD_SANCTUARY_SKY)
+	return minc==0 and c:GetLevel()>4 and Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0 and
+		(Duel.IsExistingMatchingCard(s.envfilter,e:GetHandlerPlayer(),LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil) or Duel.IsEnvironment(CARD_SANCTUARY_SKY))
 end

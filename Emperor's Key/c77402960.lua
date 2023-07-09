@@ -23,7 +23,7 @@ function s.filter(c)
 	return c:IsFaceup() and c:IsCode(CARD_NUMERON_NETWORK)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil) and Duel.GetFieldGroupCount(tp,LOCATION_MZONE,0)==0
+	return (Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil) or Duel.IsEnvironment(CARD_NUMERON_NETWORK)) and Duel.GetFieldGroupCount(tp,LOCATION_MZONE,0)==0
 end
 function s.sumlimit(e,c,sump,sumtype,sumpos,targetp,se)
 	return not c:IsSetCard(0x14b)

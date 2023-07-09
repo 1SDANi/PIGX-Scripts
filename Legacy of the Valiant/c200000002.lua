@@ -2,6 +2,12 @@
 --ZEXAL III
 local s,id=GetID()
 function s.initial_effect(c)
+	--Activate
+	local e0=Effect.CreateEffect(c)
+	e0:SetType(EFFECT_TYPE_ACTIVATE)
+	e0:SetCode(EVENT_FREE_CHAIN)
+	e0:SetHintTiming(0,TIMING_END_PHASE)
+	c:RegisterEffect(e0)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_CHANGE_DAMAGE)

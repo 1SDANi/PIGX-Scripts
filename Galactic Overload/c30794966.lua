@@ -28,7 +28,7 @@ function s.initial_effect(c)
 end
 function s.negcn(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return not c:IsStatus(STATUS_BATTLE_DESTROYED) and Duel.IsChainNegatable(ev)
+	return Duel.IsChainNegatable(ev) and not c:IsStatus(STATUS_BATTLE_DESTROYED)
 end
 function s.cfilter(c,tp)
 	return c:IsRace(RACE_DRAGON) and c:IsFaceup()

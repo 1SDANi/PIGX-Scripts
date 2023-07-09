@@ -13,14 +13,11 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 s.listed_series={0x56}
-function s.cfilter(c)
-	return c:IsFaceup() and c:IsSetCard(0x56) and c:IsAbleToGraveAsCost()
+function s.confilter(c) 
+	return c:IsSetCard(0x56) and c:IsFaceup()
 end
-function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_ONFIELD,0,2,nil) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
-	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_ONFIELD,0,2,2,nil)
-	Duel.SendtoGrave(g,REASON_COST)
+function s.condition(e,tp,eg,ep,ev,re,r,rp)
+	return Duel.IsExistingMatchingCard(s.confilter,tp,LOCATION_ONFIELD,0,2,nil)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(aux.TRUE,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,e:GetHandler()) end

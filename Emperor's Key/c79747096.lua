@@ -15,16 +15,6 @@ function s.initial_effect(c)
 	chaos:SetTarget(s.chaostg)
 	chaos:SetOperation(s.chaosop)
 	c:RegisterEffect(chaos)
-	local xyz=Effect.CreateEffect(c)
-	xyz:SetDescription(6666)
-	xyz:SetCategory(CATEGORY_COUNTER)
-	xyz:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
-	xyz:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_DAMAGE_STEP)
-	xyz:SetCode(EVENT_SPSUMMON_SUCCESS)
-	xyz:SetCondition(s.xyzcn)
-	xyz:SetTarget(s.xyztg)
-	xyz:SetOperation(s.xyzop)
-	c:RegisterEffect(xyz)
 	--battle indestructable
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_SINGLE)
@@ -43,8 +33,8 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 s.xyz_number=1
-s.counter_place_list={COUNTER_XYZ}
 s.listed_series={0x48,0x114b}
+s.listed_names={CARD_NUMERON_NETWORK}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION)
 end
@@ -60,7 +50,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		local dam=dg:GetSum(Card.GetPreviousAttackOnField)
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetDescription(aux.Stringid(id,1))
-		e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
+		e1:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_DAMAGE)
 		e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
 		e1:SetCode(EVENT_PHASE+PHASE_STANDBY)
 		e1:SetCountLimit(1)
@@ -68,7 +58,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetLabel(dam)
 		e1:SetTarget(s.sptg)
 		e1:SetOperation(s.spop)
-		e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_STANDBY)
+		e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_STANDBY,2)
 		e:GetHandler():RegisterEffect(e1)
 	end
 end
@@ -81,7 +71,8 @@ function s.filter(c)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
-	if e:GetHandler():IsRelateToEffect(e) and Duel.SpecialSummon(e:GetHandler(),0,tp,tp,false,false,POS_FACEUP) and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil) then
+	if e:GetHandler():IsRelateToEffect(e) and Duel.SpecialSummon(e:GetHandler(),0,tp,tp,false,false,POS_FACEUP) and
+		(Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil) or Duel.IsEnvironment(CARD_NUMERON_NETWORK)) then
 		local dam=e:GetLabel()
 		if dam and dam>0 then
 			Duel.Damage(1-tp,dam,REASON_EFFECT,true)
@@ -113,20 +104,6 @@ function s.chaosop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.indes(e,c)
 	return not c:IsSetCard(0x48)
-end
-function s.xyzcn(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION)
-end
-function s.xyztg(e,tp,eg,ep,ev,re,r,rp,chk)
-	local ct=e:GetHandler():GetMaterialCount()
-	if chk==0 then return ct and ct>0 end
-	Duel.SetOperationInfo(0,CATEGORY_COUNTER,nil,ct,0,COUNTER_XYZ)
-end
-function s.xyzop(e,tp,eg,ep,ev,re,r,rp)
-	local ct=e:GetHandler():GetMaterialCount()
-	if e:GetHandler():IsRelateToEffect(e) and ct and ct>0 then
-		e:GetHandler():AddCounter(COUNTER_XYZ,ct)
-	end
 end
 function s.fusionfilter(c,fc,sumtype,sp,sub,mg,sg)
 	local lv=fc:GetLevel()

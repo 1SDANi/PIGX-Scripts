@@ -35,8 +35,11 @@ s.listed_names={CARD_SANCTUARY_SKY}
 function s.etarget(e,c)
 	return c:IsRace(RACE_FAIRY)
 end
+function s.envfilter(c)
+	return c:IsFaceup() and c:IsCode(CARD_SANCTUARY_SKY)
+end
 function s.econ(e)
-	return Duel.IsExistingMatchingCard(Card.IsCode,e:GetHandlerPlayer(),LOCATION_ONFIELD,0,1,nil,CARD_SANCTUARY_SKY)
+	return (Duel.IsExistingMatchingCard(s.envfilter,e:GetHandlerPlayer(),LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil) or Duel.IsEnvironment(CARD_SANCTUARY_SKY))
 end
 function s.efilter(e,re,tp)
 	return re:GetHandler():IsType(TYPE_FIELD) and re:IsHasType(EFFECT_TYPE_ACTIVATE)

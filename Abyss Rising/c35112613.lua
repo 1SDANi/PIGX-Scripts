@@ -1,5 +1,5 @@
 --クリフォトン
---Kuribhoton
+--Kuribphoton
 local s,id=GetID()
 function s.initial_effect(c)
 	--no damage
@@ -33,23 +33,6 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 s.listed_series={0x55}
-function s.costfilter(c)
-	return c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsType(TYPE_MONSTER) and c:IsDiscardable()
-end
-function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_HAND,0,1,nil) end
-	Duel.DiscardHand(tp,s.costfilter,1,1,REASON_COST+REASON_DISCARD,nil)
-end
-function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToHand() end
-	Duel.SetOperationInfo(0,CATEGORY_TOHAND,e:GetHandler(),1,0,0)
-end
-function s.thop(e,tp,eg,ep,ev,re,r,rp)
-	local c=e:GetHandler()
-	if c:IsRelateToEffect(e) then
-		Duel.SendtoHand(c,nil,REASON_EFFECT)
-	end
-end
 function s.cost1(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsDiscardable() end
 	Duel.SendtoGrave(e:GetHandler(),REASON_COST+REASON_DISCARD)
@@ -86,7 +69,7 @@ function s.damval(e,re,val,r,rp,rc)
 	else return val end
 end
 function s.cfilter(c)
-	return c:IsSetCard(0x55) and c:IsMonster() and c:GetCode()~=id and c:IsAbleToGraveAsCost()
+	return c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsMonster() and c:GetCode()~=id and c:IsDiscardable()
 end
 function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND,0,1,nil) end

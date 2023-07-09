@@ -17,7 +17,7 @@ function s.cfilter(c)
 	return c:IsFaceup() and c:IsCode(15259703)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil)
+	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil) or Duel.IsEnvironment(15259703)
 end
 function s.filter(c)
 	return c:IsFaceup() and c:GetAttack()>0

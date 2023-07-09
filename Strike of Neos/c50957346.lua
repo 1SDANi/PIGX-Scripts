@@ -21,8 +21,8 @@ function s.filter(c)
 	return not (c:IsFaceup() and c:IsAttribute(ATTRIBUTE_EARTH))
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return true end
 	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_MZONE,LOCATION_MZONE,nil)
+	if chk==0 then return g and #g>0 end
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,#g,0,0)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)

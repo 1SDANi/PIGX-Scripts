@@ -9,6 +9,9 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 s.listed_names={CARD_UMI}
+function s.envfilter(c)
+	return c:IsFaceup() and c:IsCode(CARD_UMI)
+end
 function s.dircon(e)
-	return Duel.IsEnvironment(CARD_UMI)
+	return (Duel.IsExistingMatchingCard(s.envfilter,e:GetHandlerPlayer(),LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil) or Duel.IsEnvironment(CARD_UMI))
 end

@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 function s.rfilter(c)
-	return c:IsType(TYPE_MONSTER) and c:IsAbleToRemove() and aux.SpElimFilter(c,true)
+	return c:IsAbleToRemove() and aux.SpElimFilter(c,true)
 end
 function s.tg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)>0 and Duel.IsExistingMatchingCard(s.rfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,nil) end

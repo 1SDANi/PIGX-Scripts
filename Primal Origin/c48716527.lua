@@ -10,7 +10,7 @@ function s.initial_effect(c)
 	--pos
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
-	e2:SetCategory(CATEGORY_POSITION)
+	e2:SetCategory(CATEGORY_NEGATE)
 	e2:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_DAMAGE_STEP)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
 	e2:SetCode(EVENT_SUMMON_SUCCESS)
@@ -28,7 +28,7 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=eg:Filter(Card.IsFaceup,nil)
 	if chk==0 then return e:GetHandler():IsRelateToEffect(e) and g and #g>0 end
-	Duel.SetOperationInfo(0,CATEGORY_POSITION,eg,#eg,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_NEGATE,eg,#eg,0,0)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

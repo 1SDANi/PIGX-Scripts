@@ -64,8 +64,8 @@ end
 s.listed_series={0x40,0x302}
 s.material_setcode={0x302}
 s.listed_names={1000009}
-function s.fusfilter(c)
-	return c:IsSetCard(0x302) and c:IsType(TYPE_MONSTER+TYPE_UNION) and c:IsType(TYPE_FUSION)
+function s.fusfilter(c,fc,sumtype,tp,sub,mg,sg)
+	return c:IsSetCard(0x302) and c:IsType(TYPE_MONSTER+TYPE_UNION) and c:IsType(TYPE_FUSION) and (not sg or not sg:IsExists(Card.IsCode,1,c,c:GetCode()))
 end
 function s.valcon(e,re,r,rp)
 	return (r&REASON_BATTLE)~=0 or (r&REASON_EFFECT)~=0

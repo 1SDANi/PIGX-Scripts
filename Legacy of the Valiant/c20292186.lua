@@ -1,5 +1,5 @@
 --アーティファクト－デスサイズ
---Artifact Scythe
+--Artifact Harpe
 local s,id=GetID()
 function s.initial_effect(c)
 	--set

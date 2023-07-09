@@ -42,8 +42,11 @@ function s.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 s.listed_names={CARD_SANCTUARY_SKY}
+function s.envfilter(c)
+	return c:IsFaceup() and c:IsCode(CARD_SANCTUARY_SKY)
+end
 function s.cn(e,tp,eg,ep,ev,re,r,rp,chk)
-	return Duel.IsEnvironment(CARD_SANCTUARY_SKY)
+	return (Duel.IsExistingMatchingCard(s.envfilter,e:GetHandlerPlayer(),LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil) or Duel.IsEnvironment(CARD_SANCTUARY_SKY))
 end
 function s.costfilter(c)
 	return c:IsRace(RACE_FAIRY) and c:IsAbleToRemoveAsCost()

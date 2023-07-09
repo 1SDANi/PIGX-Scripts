@@ -27,16 +27,16 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if tc and tc:IsRelateToEffect(e) then
 		local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 		local th=tc:IsAbleToHand()
-		local sp=ft>0 and g:GetFirst():IsCanBeSpecialSummoned(e,0,tp,false,false)
+		local sp=ft>0 and tc:IsCanBeSpecialSummoned(e,0,tp,false,false)
 		local op=0
 		if th and sp then op=Duel.SelectOption(tp,aux.Stringid(id,0),aux.Stringid(id,1))
 		elseif th then op=0
 		else op=1 end
 		if op==0 then
-			Duel.SendtoHand(g,nil,REASON_EFFECT)
-			Duel.ConfirmCards(1-tp,g)
+			Duel.SendtoHand(tc,nil,REASON_EFFECT)
+			Duel.ConfirmCards(1-tp,tc)
 		else
-			Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
+			Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)
 		end
 	end
 end

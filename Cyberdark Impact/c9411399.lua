@@ -41,12 +41,12 @@ function s.filter(c,e,tp)
 	return c:IsCode(id) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil,e,tp)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK+LOCATION_HAND,0,1,nil,e,tp)
 		and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_DECK)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_DECK+LOCATION_HAND)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
-	local sc=Duel.GetFirstMatchingCard(s.filter,tp,LOCATION_DECK,0,nil,e,tp)
+	local sc=Duel.GetFirstMatchingCard(s.filter,tp,LOCATION_DECK+LOCATION_HAND,0,nil,e,tp)
 	if sc~=nil then
 		if Duel.GetLocationCount(tp,LOCATION_MZONE)>0 then
 			Duel.SpecialSummon(sc,0,tp,tp,false,false,POS_FACEUP)

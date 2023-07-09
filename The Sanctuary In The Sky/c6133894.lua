@@ -16,8 +16,11 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 s.listed_names={94585852}
+function s.envfilter(c)
+	return c:IsFaceup() and c:IsCode(94585852)
+end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION) and Duel.IsEnvironment(94585852)
+	return e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION) and (Duel.IsExistingMatchingCard(s.envfilter,e:GetHandlerPlayer(),LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil) or Duel.IsEnvironment(94585852))
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetFieldGroup(tp,0,LOCATION_HAND)>0 end

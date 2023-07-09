@@ -22,11 +22,14 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 s.listed_names={CARD_UMI}
+function s.envfilter(c)
+	return c:IsFaceup() and c:IsCode(CARD_UMI)
+end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsEnvironment(CARD_UMI)
+	return (Duel.IsExistingMatchingCard(s.envfilter,e:GetHandlerPlayer(),LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil) or Duel.IsEnvironment(CARD_UMI))
 end
 function s.filter(c)
-	return not c:IsCode(CARD_UMI)
+	return c:IsFacedown() or not c:IsCode(CARD_UMI)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(1-tp) and chkc:IsOnField() and s.filter(chkc) end

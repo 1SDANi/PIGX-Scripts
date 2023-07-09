@@ -25,8 +25,11 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 s.listed_names={CARD_SANCTUARY_SKY}
+function s.envfilter(c)
+	return c:IsFaceup() and c:IsCode(CARD_SANCTUARY_SKY)
+end
 function s.con(e,tp,eg,ep,ev,re,r,rp,chk)
-	return Duel.IsEnvironment(CARD_SANCTUARY_SKY)
+	return (Duel.IsExistingMatchingCard(s.envfilter,e:GetHandlerPlayer(),LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil) or Duel.IsEnvironment(CARD_SANCTUARY_SKY))
 end
 function s.val(e,c)
 	return Duel.GetMatchingGroupCount(aux.FilterFaceupFunction(Card.IsRace,RACE_FAIRY),c:GetControler(),LOCATION_MZONE,0,nil)*500

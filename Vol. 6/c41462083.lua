@@ -25,7 +25,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 s.material_setcode={0xa2}
-s.material_race={RACE_REPTILE}
+s.material_race={RACE_DRAGON}
 s.listed_names={CARD_METAMORPHOSIS}
 function s.tarcon(e,tp,eg,ep,ev,re,r,rp)
 	if e==re or not re:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then return false end

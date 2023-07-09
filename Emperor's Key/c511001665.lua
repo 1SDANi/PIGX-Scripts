@@ -16,8 +16,11 @@ s.listed_names={CARD_NUMERON_NETWORK}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return re:IsActiveType(TYPE_SPELL) and re:IsHasType(EFFECT_TYPE_ACTIVATE) and Duel.IsChainNegatable(ev)
 end
+function s.filter(c)
+	return c:IsFaceup() and c:IsCode(CARD_NUMERON_NETWORK)
+end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsEnvironment(CARD_NUMERON_NETWORK) end
+	if chk==0 then return Duel.IsEnvironment(CARD_NUMERON_NETWORK) or Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_NEGATE,eg,1,0,0)
 	if re:GetHandler():IsDestructable() and re:GetHandler():IsRelateToEffect(re) then
 		Duel.SetOperationInfo(0,CATEGORY_DESTROY,eg,1,0,0)

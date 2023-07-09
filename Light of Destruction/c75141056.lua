@@ -15,7 +15,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x08}
 function s.tgfilter(c)
-	return c:IsFaceup() and Duel.IsExistingMatchingCard(s.cfilter,c:GetControler(),LOCATION_DECK,0,1,nil,c)
+	return c:IsFaceup() and Duel.IsExistingMatchingCard(s.cfilter,c:GetControler(),LOCATION_DECK+LOCATION_HAND,0,1,nil,c)
 end
 function s.cfilter(c,tc)
 	return c:IsSetCard(0x08) and not c:IsCode(tc:GetCode()) and c:IsType(TYPE_MONSTER) and c:IsAbleToGrave()
@@ -33,7 +33,7 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
-	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_DECK,0,1,1,nil,tc)
+	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_DECK+LOCATION_HAND,0,1,1,nil,tc)
 	if #g>0 then
 		local gc=g:GetFirst()
 		if Duel.SendtoGrave(gc,REASON_EFFECT)~=0 and gc:IsLocation(LOCATION_GRAVE) and tc:IsRelateToEffect(e) and tc:IsFaceup() then

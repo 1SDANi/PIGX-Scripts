@@ -25,8 +25,6 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local tc=eg:GetFirst()
 	local bc=Duel.GetAttacker()
 	if chk==0 then return bc:IsCanBeEffectTarget(e) end
-	local lv=tc:GetLevel()
-	e:SetLabel(lv)
 	Duel.SetTargetCard(bc)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,bc,1,0,0)
 	if lv~=0 then

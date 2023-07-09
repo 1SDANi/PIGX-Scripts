@@ -28,7 +28,7 @@ function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetTargetPlayer(1-tp)
 	Duel.SetTargetParam(2)
 	Duel.SetOperationInfo(0,CATEGORY_HANDES,nil,0,1-tp,2)
-	if c:GetMaterial():IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_EARTH) then
+	if c:GetMaterial():IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_FIRE) then
 		Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,2000)
 	end
 end

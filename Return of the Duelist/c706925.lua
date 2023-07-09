@@ -13,9 +13,13 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 s.listed_names={CARD_UMI}
+function s.envfilter(c)
+	return c:IsFaceup() and c:IsCode(CARD_UMI)
+end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.IsEnvironment(CARD_UMI)
+	return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and
+		(Duel.IsExistingMatchingCard(s.envfilter,e:GetHandlerPlayer(),LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil) or Duel.IsEnvironment(CARD_UMI))
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()

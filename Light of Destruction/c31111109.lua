@@ -33,8 +33,8 @@ function s.effcon(e)
 	return e:GetHandler():GetSummonType()==SUMMON_TYPE_FUSION
 end
 function s.ffilter(c,fc,sumtype,tp,sub,mg,sg)
-	return (c:IsSetCard(0x1f,fc,sumtype,tp) and c:IsType(TYPE_MONSTER+TYPE_UNION)) and (c:GetAttribute(fc,sumtype,tp)~=0 or c:IsCode(CARD_NEOS)) and
-		(not sg or not (not sg or sg:IsExists(Card.IsCode,1,c,CARD_NEOS)))
+	return (c:IsSetCard(0x1f,fc,sumtype,tp) and c:IsType(TYPE_MONSTER+TYPE_UNION)) and (c:GetAttribute()~=0 or c:IsCode(CARD_NEOS)) and
+		(not sg or not (not sg or sg:IsExists(Card.IsCode,1,c,CARD_NEOS) or (not sg or not sg:IsExists(Card.IsAttribute,1,c,c:GetAttribute()))))
 end
 function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION)

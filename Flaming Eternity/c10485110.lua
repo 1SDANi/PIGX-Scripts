@@ -19,9 +19,13 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 s.listed_names={CARD_UMI}
+function s.envfilter(c)
+	return c:IsFaceup() and c:IsCode(CARD_UMI)
+end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	local g=e:GetHandler():GetMaterial()
-	return Duel.IsEnvironment(CARD_UMI) and e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION) and g and #g==1 and
+	return (Duel.IsExistingMatchingCard(s.envfilter,e:GetHandlerPlayer(),LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil) or Duel.IsEnvironment(CARD_UMI)) and
+		e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION) and g and #g==1 and
 		g:GetFirst():IsPreviousLocation(LOCATION_ONFIELD) and g:GetFirst():IsPreviousControler(tp) and g:GetFirst():IsPreviousPosition(POS_FACEUP)
 end
 function s.filter(c)

@@ -92,7 +92,7 @@ function s.tg2(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 end
 function s.op2(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetAttacker()
-	if tc:CanAttack() and not tc:IsStatus(STATUS_ATTACK_CANCELED) then
+	if tc:CanAttack() and not tc:IsStatus(STATUS_ATTACK_CANCELED) and Duel.NegateAttack() then
 		Duel.Destroy(tc,REASON_EFFECT)
 		Duel.BreakEffect()
 		Duel.Damage(1-tp,1000,REASON_EFFECT)
