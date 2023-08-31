@@ -27,6 +27,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetDecktopGroup(tp,1)
 	local tc=g:GetFirst()
 	Duel.Draw(tp,1,REASON_EFFECT)
+	Duel.ConfirmCards(1-tp,tc)
 	if tc and tc:IsType(TYPE_TRAP) and tc:IsSSetable() and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 		Duel.BreakEffect()
 		Duel.SSet(tp,tc)

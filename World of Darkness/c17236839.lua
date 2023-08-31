@@ -1,5 +1,5 @@
 --瞬間融合
---Instant Fusion
+--Flash Fusion
 local s,id=GetID()
 function s.initial_effect(c)
 	Fusion.RegisterSummonEff(c)

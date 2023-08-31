@@ -11,18 +11,17 @@ function s.initial_effect(c)
 	c:RegisterEffect(e0)
 	--draw
 	local e4=Effect.CreateEffect(c)
-	e4:SetDescription(aux.Stringid(id,0))
-	e4:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_DAMAGE_STEP)
-	e4:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
+	e4:SetDescription(aux.Stringid(id,1))
+	e4:SetProperty(EFFECT_FLAG_DELAY)
+	e4:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e4:SetCode(EVENT_BATTLE_DAMAGE)
 	e4:SetCondition(s.condition)
 	e4:SetTarget(s.target)
 	e4:SetOperation(s.operation)
-	e4:SetLabelObject(e0)
 	c:RegisterEffect(e4)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return ep~=tp
+	return ep~=tp and eg:GetFirst():GetControler()==tp and eg:GetFirst():IsType(TYPE_SPIRIT)
 end
 function s.filter(c,e)
 	return c:IsType(TYPE_SPIRIT) and c:IsSummonable(true,e)

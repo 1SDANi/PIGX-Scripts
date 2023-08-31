@@ -65,7 +65,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.matfilter(c,lc,sumtype,tp)
-	return c:IsAttribute(ATTRIBUTE_WIND,lc,sumtype,tp)
+	return c:IsAttribute(ATTRIBUTE_LIGHT,lc,sumtype,tp)
 end
 function s.contactfil(tp)
 	return Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)

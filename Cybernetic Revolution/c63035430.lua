@@ -23,11 +23,13 @@ function s.initial_effect(c)
 	--extra summon
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,0))
-	e4:SetType(EFFECT_TYPE_FIELD)
+	e4:SetCategory(CATEGORY_SUMMON)
+	e4:SetType(EFFECT_TYPE_IGNITION)
 	e4:SetRange(LOCATION_FZONE)
-	e4:SetCode(EFFECT_EXTRA_SUMMON_COUNT)
-	e4:SetTargetRange(LOCATION_HAND+LOCATION_MZONE,LOCATION_HAND+LOCATION_MZONE)
-	e4:SetTarget(aux.TargetBoolFunction(Card.IsSetCard,0x08))
+	e4:SetProperty(EFFECT_FLAG_BOTH_SIDE)
+	e4:SetCountLimit(1)
+	e4:SetTarget(Auxiliary.ExtraNormalTarget{summon=true,archetype=0x08})
+	e4:SetOperation(Auxiliary.ExtraNormalOperation{summon=true,archetype=0x08})
 	c:RegisterEffect(e4)
 end
 s.listed_series={0x08}

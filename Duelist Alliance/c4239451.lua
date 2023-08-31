@@ -1,5 +1,5 @@
 --EMヒックリカエル
---Performapal Turn Toad
+--Performapal Invertoad
 local s,id=GetID()
 function s.initial_effect(c)
 	--union place
@@ -13,12 +13,13 @@ function s.initial_effect(c)
 	c:RegisterEffect(eUnionPlace)
 	--union summon
 	local eUnionSummon=Effect.CreateEffect(c)
-	eUnionSummon:SetType(EFFECT_TYPE_FIELD)
-	eUnionSummon:SetRange(LOCATION_SZONE)
-	eUnionSummon:SetTargetRange(LOCATION_HAND+LOCATION_MZONE,0)
-	eUnionSummon:SetCode(EFFECT_EXTRA_SUMMON_COUNT)
 	eUnionSummon:SetDescription(aux.Stringid(id,1))
-	eUnionSummon:SetTarget(aux.TargetBoolFunction(Card.IsType,TYPE_UNION))
+	eUnionSummon:SetCategory(CATEGORY_SUMMON)
+	eUnionSummon:SetType(EFFECT_TYPE_IGNITION)
+	eUnionSummon:SetRange(LOCATION_SZONE)
+	eUnionSummon:SetCountLimit(1)
+	eUnionSummon:SetTarget(Auxiliary.ExtraNormalTarget{summon=true,typing=TYPE_UNION})
+	eUnionSummon:SetOperation(Auxiliary.ExtraNormalOperation{summon=true,typing=TYPE_UNION})
 	c:RegisterEffect(eUnionSummon)
 	--swap1
 	local e2=Effect.CreateEffect(c)

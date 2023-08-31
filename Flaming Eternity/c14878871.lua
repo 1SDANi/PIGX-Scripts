@@ -29,6 +29,9 @@ end
 function s.filter(c,e,tp)
 	return c:IsLevelBelow(3) and c:IsRace(RACE_BEAST) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
+function s.filter2(c,g)
+	return g:IsExists(Card.IsCode,1,c,c:GetCode())
+end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	if e:GetHandler():GetSequence()<5 then ft=ft+1 end
@@ -41,13 +44,15 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<2 then return end
 	local c=e:GetHandler()
 	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_HAND+LOCATION_DECK,0,nil,e,tp)
-	if #g>=2 then
-		local fid=e:GetHandler():GetFieldID()
+	local dg=g:Filter(s.filter2,nil,g)
+	if #dg>=2 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local sg=g:Select(tp,2,2,nil)
-		Duel.SpecialSummon(sg,0,tp,tp,false,false,POS_FACEUP)
 		local tc=sg:GetFirst()
-		for tc in aux.Next(sg) do
+		local sg=dg:Select(tp,1,1,nil)
+		local ng=g:Filter(Card.IsCode,nil,sg:GetFirst():GetCode())
+		local dg=ng:Select(tp,1,1,nil)
+		local cg=Group.Merge(sg,dg)
+		for tc in aux.Next(cg) do
 			local e1=Effect.CreateEffect(c)
 			e1:SetType(EFFECT_TYPE_SINGLE)
 			e1:SetCode(EFFECT_DISABLE)
@@ -58,7 +63,6 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 			e2:SetCode(EFFECT_DISABLE_EFFECT)
 			e2:SetReset(RESET_EVENT+RESETS_STANDARD)
 			tc:RegisterEffect(e2)
-			tc:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD,0,1,fid)
 			local e3=Effect.CreateEffect(e:GetHandler())
 			e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 			e3:SetCode(EVENT_PHASE+PHASE_END)
@@ -67,6 +71,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 			e3:SetLabelObject(tc)
 			e3:SetCondition(s.descon)
 			e3:SetOperation(s.desop)
+			e3:SetReset(RESET_EVENT+RESETS_STANDARD)
 			tc:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD,0,1)
 			Duel.RegisterEffect(e3,tp)
 		end

@@ -3,7 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
-	c:RegisterEffect(Fusion.CreateSummonEff(c,aux.FilterBoolFunction(Card.IsSetCard,0x9d),Fusion.OnFieldMat,s.fextra)
+	c:RegisterEffect(Fusion.CreateSummonEff(c,aux.FilterBoolFunction(Card.IsSetCard,0x9d),Fusion.OnFieldMat,s.fextra))
 end
 s.listed_series={0x9d}
 function s.fextra(e,tp,mg)

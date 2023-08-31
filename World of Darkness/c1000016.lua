@@ -68,9 +68,10 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetTargetCards(e)
+	local tg=g:Filter(Card.IsRelateToEffect,nil,e)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)+1
-	if #g==0 or ft<#g then return end
-	Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
+	if #tg==0 or ft<#tg then return end
+	Duel.SpecialSummon(tg,0,tp,tp,false,false,POS_FACEUP)
 end
 function s.contactfil(tp)
 	return Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)

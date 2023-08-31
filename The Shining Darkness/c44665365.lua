@@ -10,6 +10,7 @@ function s.initial_effect(c)
 	e1:SetCode(EVENT_CHAINING)
 	e1:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DAMAGE_CAL)
 	e1:SetRange(LOCATION_MZONE)
+	e1:SetCountLimit(1)
 	e1:SetCondition(s.discon)
 	e1:SetCost(s.discost)
 	e1:SetTarget(s.distg)
@@ -27,7 +28,7 @@ function s.filter(c)
 end
 function s.discost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_HAND,0,1,nil) end
-	Duel.DiscardHand(tp,s.filter,1,1,REASON_COST+REASON_DISCARD)
+	Duel.DiscardHand(tp,s.filter,2,2,REASON_COST+REASON_DISCARD)
 end
 function s.distg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

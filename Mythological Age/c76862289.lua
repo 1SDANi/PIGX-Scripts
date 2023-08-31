@@ -7,16 +7,17 @@ function s.initial_effect(c)
 	--draw
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,1))
+	e4:SetCategory(CATEGORY_DRAW)
 	e4:SetProperty(EFFECT_FLAG_DELAY)
-	e4:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
+	e4:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
 	e4:SetCode(EVENT_BATTLE_DAMAGE)
-	e4:SetCondition(s.drcon)
+	e4:SetCondition(s.drcn)
 	e4:SetTarget(s.drtg)
 	e4:SetOperation(s.drop)
 	c:RegisterEffect(e4)
 end
-function s.drcon(e,tp,eg,ep,ev,re,r,rp)
-	return ep~=tp
+function s.drcn(e,tp,eg,ep,ev,re,r,rp)
+	return ep~=tp and eg:GetFirst():GetControler()==tp and eg:GetFirst():IsType(TYPE_SPIRIT)
 end
 function s.drtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

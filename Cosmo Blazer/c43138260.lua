@@ -72,9 +72,11 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local ct=e:GetLabel()+1
-	if Duel.GetLocationCount(tp,LOCATION_MZONE)<#g or (#g>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT)) then return end
-	local tc=g:GetFirst()
-	for tc in aux.Next(g) do
+	local g=Duel.GetTargetCards(e)
+	local tg=g:Filter(Card.IsRelateToEffect,nil,e)
+	if Duel.GetLocationCount(tp,LOCATION_MZONE)<#tg or (#tg>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT)) then return end
+	local tc=tg:GetFirst()
+	for tc in aux.Next(tg) do
 		if Duel.SpecialSummonStep(tc,0,tp,tp,false,false,POS_FACEUP) then
 			local e1=Effect.CreateEffect(e:GetHandler())
 			e1:SetType(EFFECT_TYPE_SINGLE)

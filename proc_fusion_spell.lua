@@ -359,6 +359,24 @@ function Fusion.ShuffleMaterial(e,tc,tp,sg)
 	Duel.SendtoDeck(sg,nil,2,REASON_EFFECT+REASON_MATERIAL+REASON_FUSION)
 	sg:Clear()
 end
+function Fusion.DualMat(filter,...)
+	if type(filter) == "Card" then
+		--filter is actually the card parameter
+		return filter:IsOnField() or filter:IsLocation(LOCATION_HAND)
+	end
+	local funs={filter,...}
+	return function (c,...)
+		local res = c:IsOnField() or filter:IsLocation(LOCATION_HAND)
+		if res then
+			for i,fil in ipairs(funs) do
+				if not fil(c,...) then
+					return false
+				end
+			end
+		end
+		return res
+	end
+end
 function Fusion.OnFieldMat(filter,...)
 	if type(filter) == "Card" then
 		--filter is actually the card parameter

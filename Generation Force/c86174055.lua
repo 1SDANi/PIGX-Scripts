@@ -34,11 +34,12 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetTargetCards(e)
+	local tg=g:Filter(Card.IsRelateToEffect,nil,e)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)+1
 	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then c=1 end
-	if #g==0 or ft<#g then return end
-	local t1=g:GetFirst()
-	local t2=g:GetNext()
+	if #tg==0 or ft<#tg then return end
+	local t1=tg:GetFirst()
+	local t2=tg:GetNext()
 	Duel.SpecialSummonStep(t1,0,tp,tp,false,false,POS_FACEUP)
 	--negate effects
 	local e1=Effect.CreateEffect(e:GetHandler())

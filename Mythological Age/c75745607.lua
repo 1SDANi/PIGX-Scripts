@@ -7,14 +7,16 @@ function s.initial_effect(c)
 	--tograve
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,1))
-	e4:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
+	e4:SetCategory(CATEGORY_HANDES)
+	e4:SetProperty(EFFECT_FLAG_DELAY)
+	e4:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
 	e4:SetCode(EVENT_BATTLE_DAMAGE)
 	e4:SetCondition(s.hdcon)
 	e4:SetOperation(s.hdreg)
 	c:RegisterEffect(e4)
 end
 function s.hdcon(e,tp,eg,ep,ev,re,r,rp)
-	return ep~=tp
+	return ep~=tp and eg:GetFirst():GetControler()==tp and eg:GetFirst():IsType(TYPE_SPIRIT)
 end
 function s.hdreg(e,tp,eg,ep,ev,re,r,rp)
 	local e1=Effect.CreateEffect(e:GetHandler())

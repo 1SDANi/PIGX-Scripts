@@ -7,8 +7,9 @@ function s.initial_effect(c)
 	--destroy
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,1))
-	e4:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
+	e4:SetCategory(CATEGORY_TOHAND)
 	e4:SetProperty(EFFECT_FLAG_DELAY)
+	e4:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
 	e4:SetCode(EVENT_BATTLE_DAMAGE)
 	e4:SetCondition(s.hdcn)
 	e4:SetTarget(s.hdtg)
@@ -16,7 +17,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 function s.hdcn(e,tp,eg,ep,ev,re,r,rp)
-	return ep~=tp
+	return ep~=tp and eg:GetFirst():GetControler()==tp and eg:GetFirst():IsType(TYPE_SPIRIT)
 end
 function s.tgfilter(c)
 	return c:IsType(TYPE_MONSTER) and c:IsAbleToHand() and c:IsType(TYPE_SPIRIT)

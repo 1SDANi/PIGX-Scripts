@@ -1550,6 +1550,54 @@ function Auxiliary.PlayFieldSpell(c,e,tp,eg,ep,ev,re,r,rp)
 	end
 	return false
 end
+
+function Auxiliary.ExtraNormalFilter(c,summon,set,typing,attribute,race,archetype,code)
+	return ((c:IsSummonable(true,nil) and summon) or (c:IsMSetable(true,nil) and set)) and
+		(c:IsType(typing) or typing<=0) and (c:IsAttribute(attribute) or attribute<=0) and (c:IsRace(race) or race<=0) and
+		(c:IsSetCard(archetype) or archetype<=0) and (c:IsCode(code) or code<=0)
+end
+
+Auxiliary.ExtraNormalTarget = Auxiliary.FunctionWithNamedArgs(
+function (summon,set,typing,attribute,race,archetype,code)
+	return function(e,tp,eg,ep,ev,re,r,rp,chk)
+		if not summon then summon=false end
+		if not set then set=false end
+		if not typing then typing=0 end
+		if not attribute then attribute=0 end
+		if not race then race=0 end
+		if not archetype then archetype=0 end
+		if not code then code=0 end
+		if chk==0 then return Duel.GetMatchingGroupCount(Auxiliary.ExtraNormalFilter,tp,LOCATION_HAND+LOCATION_MZONE,0,nil,summon,set,typing,attribute,race,archetype,code)>0 end
+		Duel.SetOperationInfo(0,CATEGORY_SUMMON,nil,1,0,0)
+	end
+end,"summon","set","typing","attribute","race","archetype","code")
+
+Auxiliary.ExtraNormalOperation = Auxiliary.FunctionWithNamedArgs(
+function (summon,set,typing,attribute,race,archetype,code)
+	return function(e,tp,eg,ep,ev,re,r,rp,chk)
+		if not e:GetHandler():IsRelateToEffect(e) then return end
+		if not summon then summon=true end
+		if not set then set=false end
+		if not typing then typing=0 end
+		if not attribute then attribute=0 end
+		if not race then race=0 end
+		if not archetype then archetype=0 end
+		if not code then code=0 end
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SUMMON)
+		local g=Duel.SelectMatchingCard(tp,Auxiliary.ExtraNormalFilter,tp,LOCATION_HAND+LOCATION_MZONE,0,1,1,nil,summon,set,typing,attribute,race,archetype,code)
+		local tc=g:GetFirst()
+		if tc then
+			local s1=tc:IsSummonable(true,nil) and summon
+			local s2=tc:IsMSetable(true,nil) and set
+			if (s1 and s2 and Duel.SelectPosition(tp,tc,POS_FACEUP_ATTACK+POS_FACEDOWN_DEFENSE)==POS_FACEUP_ATTACK) or not s2 then
+				Duel.Summon(tp,tc,true,nil)
+			else
+				Duel.MSet(tp,tc,true,nil)
+			end
+		end
+	end
+end,"summon","set","typing","attribute","race","archetype","code")
+
 function Duel.IsMainPhase()
 	local phase=Duel.GetCurrentPhase()
 	return phase==PHASE_MAIN1 or phase==PHASE_MAIN2

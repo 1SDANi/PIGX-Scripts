@@ -47,19 +47,14 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	at:RegisterEffect(e2)
 end
 function s.dfilter(c,tp)
-	return c:IsLocation(LOCATION_MZONE) and c:IsFaceup() and c:IsRace(RACE_WARRIOR)
-		and not c:IsReason(REASON_REPLACE) and c:IsControler(tp)
+	return c:IsLocation(LOCATION_MZONE) and c:IsFaceup() and c:IsRace(RACE_WARRIOR) and c:IsControler(tp) and not c:IsReason(REASON_REPLACE)
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return not eg:IsContains(e:GetHandler())
-		and eg:IsExists(s.dfilter,1,nil,tp) end
-	if Duel.SelectEffectYesNo(tp,e:GetHandler(),96) then
-		return true
-	else return false end
+	if chk==0 then return not eg:IsContains(e:GetHandler()) and eg:IsExists(s.dfilter,1,nil,tp) end
+	if Duel.SelectEffectYesNo(tp,e:GetHandler(),96) then return true else return false end
 end
 function s.value(e,c)
-	return c:IsLocation(LOCATION_MZONE) and c:IsFaceup() and c:IsRace(RACE_WARRIOR)
-		and not c:IsReason(REASON_REPLACE) and c:IsControler(e:GetHandlerPlayer())
+	return c:IsLocation(LOCATION_MZONE) and c:IsFaceup() and c:IsRace(RACE_WARRIOR) and c:IsControler(e:GetHandlerPlayer()) and not c:IsReason(REASON_REPLACE)
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Destroy(e:GetHandler(),REASON_EFFECT+REASON_REPLACE)

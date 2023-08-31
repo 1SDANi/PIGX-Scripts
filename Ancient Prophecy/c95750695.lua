@@ -5,6 +5,8 @@ function s.initial_effect(c)
 	aux.AddEquipProcedure(c,nil,aux.FilterBoolFunction(Card.IsType,TYPE_GEMINI))
 	--Gemini Status
 	local e1=Effect.CreateEffect(c)
+	e1:SetCategory(CATEGORY_GEMINI)
+	e1:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE)
 	e1:SetType(EFFECT_TYPE_EQUIP)
 	e1:SetCode(EFFECT_GEMINI_STATUS)
 	c:RegisterEffect(e1)

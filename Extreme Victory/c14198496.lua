@@ -26,7 +26,8 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetDecktopGroup(tp,1)
 	local tc=g:GetFirst()
 	Duel.Draw(tp,1,REASON_EFFECT)
-	if tc and tc:IsLevel(1) and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
+	Duel.ConfirmCards(1-tp,tc)
+	if tc and tc:IsType(TYPE_MONSTER) and tc:IsLevel(1) and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 		Duel.BreakEffect()
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_FIELD)

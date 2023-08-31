@@ -25,25 +25,7 @@ function s.initial_effect(c)
 	e3:SetTargetRange(LOCATION_MZONE,LOCATION_MZONE)
 	e3:SetCode(EFFECT_CHANGE_RACE)
 	e3:SetValue(RACE_PLANT)
-	e3:SetTarget(s.tg)
 	c:RegisterEffect(e3)
-end
-function s.tg(e,c)
-	if c:GetFlagEffect(1)==0 then
-		c:RegisterFlagEffect(1,0,0,0)
-		local eff
-		if c:IsLocation(LOCATION_MZONE) then
-			eff={Duel.GetPlayerEffect(c:GetControler(),EFFECT_NECRO_VALLEY)}
-		else
-			eff={c:GetCardEffect(EFFECT_NECRO_VALLEY)}
-		end
-		c:ResetFlagEffect(1)
-		for _,te in ipairs(eff) do
-			local op=te:GetOperation()
-			if not op or op(e,c) then return false end
-		end
-	end
-	return true
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsPreviousPosition(POS_FACEUP) and e:GetHandler():IsPreviousLocation(LOCATION_ONFIELD)

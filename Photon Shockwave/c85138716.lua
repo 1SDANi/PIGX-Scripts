@@ -25,7 +25,7 @@ function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST+REASON_DISCARD,eg)
 end
 function s.filter(c,e,tp)
-	return c:IsType(TYPE_NORMAL) and c:IsLevelBelow(4) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return (c:IsType(TYPE_NORMAL) or (c:IsType(TYPE_GEMINI) and c:IsLocation(LOCATION_DECK))) and c:IsLevelBelow(4) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.filter2(c,g)
 	return g:IsExists(Card.IsCode,1,c,c:GetCode())
@@ -66,6 +66,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetLabelObject(sg)
 		e1:SetCondition(s.descon)
 		e1:SetOperation(s.desop)
+		e1:SetReset(RESET_EVENT+RESETS_STANDARD)
 		Duel.RegisterEffect(e1,tp)
 	end
 end

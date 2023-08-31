@@ -14,12 +14,13 @@ function s.initial_effect(c)
 	c:RegisterEffect(eUnionPlace)
 	--union summon
 	local eUnionSummon=Effect.CreateEffect(c)
-	eUnionSummon:SetType(EFFECT_TYPE_FIELD)
-	eUnionSummon:SetRange(LOCATION_SZONE)
-	eUnionSummon:SetTargetRange(LOCATION_HAND+LOCATION_MZONE,0)
-	eUnionSummon:SetCode(EFFECT_EXTRA_SUMMON_COUNT)
 	eUnionSummon:SetDescription(aux.Stringid(id,1))
-	eUnionSummon:SetTarget(aux.TargetBoolFunction(Card.IsType,TYPE_UNION))
+	eUnionSummon:SetCategory(CATEGORY_SUMMON)
+	eUnionSummon:SetType(EFFECT_TYPE_IGNITION)
+	eUnionSummon:SetRange(LOCATION_SZONE)
+	eUnionSummon:SetCountLimit(1)
+	eUnionSummon:SetTarget(Auxiliary.ExtraNormalTarget{summon=true,typing=TYPE_UNION})
+	eUnionSummon:SetOperation(Auxiliary.ExtraNormalOperation{summon=true,typing=TYPE_UNION})
 	c:RegisterEffect(eUnionSummon)
 	--salvage
 	local e1=Effect.CreateEffect(c)
@@ -35,7 +36,8 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.filter(c)
-	return c:IsType(TYPE_MONSTER) and c:IsType(TYPE_MONSTER) and c:IsAbleToHand()
+	return c:IsType(TYPE_MONSTER) and c:IsAbleToHand() and
+		(c:IsType(TYPE_NORMAL) or (c:IsType(TYPE_GEMINI) and c:IsLocation(LOCATION_DECK)))
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil) end

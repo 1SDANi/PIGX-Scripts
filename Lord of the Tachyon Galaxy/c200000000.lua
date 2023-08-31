@@ -32,13 +32,13 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	if ep~=tp or not Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,#g,nil) then return end
 	local g=eg:Filter(Card.IsLocation,nil,LOCATION_HAND)
 	if #g==0 then return end
-	Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)
-	Duel.ShuffleDeck(p)
-	Duel.BreakEffect()
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_DECK,0,#g,#g,nil)
-	if #g>0 then
-		Duel.SendtoHand(g,nil,REASON_EFFECT)
-		Duel.ConfirmCards(1-tp,g)
+	if Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)>0 then
+		Duel.ShuffleDeck(p)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
+		local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_DECK,0,#g,#g,nil)
+		if #g>0 then
+			Duel.SendtoHand(g,nil,REASON_EFFECT)
+			Duel.ConfirmCards(1-tp,g)
+		end
 	end
 end
