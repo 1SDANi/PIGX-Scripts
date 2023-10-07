@@ -20,9 +20,9 @@ function s.initial_effect(c)
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,1))
 	e4:SetCategory(CATEGORY_SEARCH+CATEGORY_SPECIAL_SUMMON)
-	e4:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
+	e4:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
 	e4:SetRange(LOCATION_FZONE)
-	e4:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_EVENT_PLAYER+EFFECT_FLAG_DELAY)
+	e4:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY)
 	e4:SetCode(EVENT_CUSTOM+id)
 	e4:SetTarget(s.target)
 	e4:SetOperation(s.operation)
@@ -38,26 +38,46 @@ function s.initial_effect(c)
 end
 function s.regfilter(c)
 	return c:IsReason(REASON_DESTROY) and c:IsReason(REASON_EFFECT+REASON_BATTLE) and c:IsLocation(LOCATION_GRAVE) and
-		(c:IsPreviousLocation(LOCATION_MZONE) or (not c:IsPreviousLocation(LOCATION_MZONE) and c:IsType(TYPE_MONSTER)))
+		(c:IsPreviousLocation(LOCATION_MZONE) or (c:IsType(TYPE_MONSTER) and not c:IsPreviousLocation(LOCATION_MZONE)))
 end
 function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=eg:GetFirst()
-	if not s.regfilter(tc) then return end
-	Duel.RaiseEvent(tc,EVENT_CUSTOM+id,re,r,rp,tc:GetOwner(),tc:GetLevel())
+	if eg and #eg==1 and s.regfilter(tc) then
+		Duel.RaiseEvent(tc,EVENT_CUSTOM+id,re,r,rp,tc:GetOwner(),tc:GetLevel())
+	end
 end
 function s.filter(c,e,tp)
 	return c:IsLevelBelow(3) and c:IsRace(RACE_AQUATIC+RACE_BEAST) and c:IsType(TYPE_MONSTER) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEDOWN_DEFENSE)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():GetFlagEffect(id+tp)==0 and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK+LOCATION_HAND,0,1,nil,e,tp) end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,0,tp,LOCATION_DECK+LOCATION_HAND)
-	e:GetHandler():RegisterFlagEffect(id+tp,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,0,1)
+	local c1=eg:IsExists(Card.IsControler,1,nil,tp) and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK+LOCATION_HAND,0,1,nil,e,tp) and e:GetHandler():GetFlagEffect(id+tp)==0
+	local c2=eg:IsExists(Card.IsControler,1,nil,1-tp) and Duel.IsExistingMatchingCard(s.filter,1-tp,LOCATION_DECK+LOCATION_HAND,0,1,nil,e,1-tp) and e:GetHandler():GetFlagEffect(id+1-tp)==0
+	if chk==0 then return c1 or c2 end
+	if c1 then
+		if Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
+			e:SetLabel(tp)
+			e:GetHandler():RegisterFlagEffect(id+tp,RESET_EVENT+RESETS_STANDARD,0,1)
+			Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,0,tp,LOCATION_DECK+LOCATION_HAND)
+		else
+			e:SetLabel(-1)
+		end
+	else
+		if Duel.SelectYesNo(1-tp,aux.Stringid(id,1)) then
+			e:SetLabel(1-tp)
+			e:GetHandler():RegisterFlagEffect(id+1-tp,RESET_EVENT+RESETS_STANDARD,0,1)
+			Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,0,1-tp,LOCATION_DECK+LOCATION_HAND)
+		else
+			e:SetLabel(-1)
+		end
+	end
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_DECK+LOCATION_HAND,0,1,1,nil,e,tp)
+	local p=e:GetLabel()
+	if p==-1 then return end
+	Duel.Hint(HINT_SELECTMSG,p,HINTMSG_SPSUMMON)
+	local g=Duel.SelectMatchingCard(p,s.filter,p,LOCATION_DECK+LOCATION_HAND,0,1,1,nil,e,p)
 	if #g>0 then
-		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEDOWN_DEFENSE)
+		Duel.SpecialSummon(g,0,p,p,false,false,POS_FACEDOWN_DEFENSE)
 	end
 end
 function s.val(e,c)

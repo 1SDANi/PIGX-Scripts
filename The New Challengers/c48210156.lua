@@ -2,6 +2,15 @@
 --D/D Minion Hellhound
 local s,id=GetID()
 function s.initial_effect(c)
+	--union place
+	local eUnionPlace=Effect.CreateEffect(c)
+	eUnionPlace:SetDescription(aux.Stringid(id,0))
+	eUnionPlace:SetType(EFFECT_TYPE_IGNITION)
+	eUnionPlace:SetRange(LOCATION_HAND)
+	eUnionPlace:SetCountLimit(1)
+	eUnionPlace:SetTarget(s.settg)
+	eUnionPlace:SetOperation(s.setop)
+	c:RegisterEffect(eUnionPlace)
 	--union summon
 	local eUnionSummon=Effect.CreateEffect(c)
 	eUnionSummon:SetDescription(aux.Stringid(id,1))

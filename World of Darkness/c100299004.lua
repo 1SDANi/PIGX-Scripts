@@ -52,7 +52,7 @@ function s.godfil(c)
 end
 function s.fil(c,fc,sumtype,tp,sub,mg,sg,contact)
 	if contact then sumtype=0 end
-	return c:IsSetCard(0x6,fc,sumtype,tp) and (not contact or c:IsType(TYPE_MONSTER,fc,sumtype,tp)) and (s.godfil(c) or (not sg or sg:IsExists(s.godfil,1,c)))
+	return c:IsSetCard(0x6,fc,sumtype,tp) and c:IsType(TYPE_MONSTER+TYPE_UNION,fc,sumtype,tp) and (s.godfil(c) or (not sg or sg:IsExists(s.godfil,1,c)))
 end
 function s.contactfil1(tp)
 	return Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)

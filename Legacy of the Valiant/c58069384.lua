@@ -2,7 +2,7 @@
 --Cyber Dragon Nova
 local s,id=GetID()
 function s.initial_effect(c)
-	Fusion.AddProcMixN(c,false,true,true,CARD_CYBER_DRAGON,1)
+	Fusion.AddProcMixN(c,false,true,true,s.fusfilter,1)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,nil,nil,SUMMON_TYPE_FUSION)
 	--change name
 	local e1=Effect.CreateEffect(c)
@@ -25,6 +25,9 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 s.listed_names={52875873}
+function s.fusfilter(c)
+	return c:IsCode(CARD_CYBER_DRAGON) and c:IsType(TYPE_MONSTER+TYPE_UNION) and not c:IsType(TYPE_FUSION)
+end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION)
 end

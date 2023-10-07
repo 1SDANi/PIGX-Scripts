@@ -101,10 +101,9 @@ function s.filter2(c)
 	return c:IsFaceup() and c:IsType(TYPE_UNION) and c:IsDestructable()
 end
 function s.distg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.filter2,1-rp,LOCATION_ONFIELD,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.filter2,1-rp,LOCATION_ONFIELD,0,1,nil) and e:GetHandler():GetFlagEffect(id+1-rp)==0 and Duel.SelectYesNo(1-rp,aux.Stringid(id,0)) end
 	Duel.SetOperationInfo(0,CATEGORY_NEGATE,eg,1,0,0)
-	if e:GetHandler():GetFlagEffect(id+1-rp)==0 and Duel.SelectYesNo(1-rp,aux.Stringid(id,0)) and
-		re:GetHandler():IsDestructable() and re:GetHandler():IsRelateToEffect(re) then
+	if re:GetHandler():IsDestructable() and re:GetHandler():IsRelateToEffect(re) then
 		Duel.SetOperationInfo(0,CATEGORY_DESTROY,eg,1,0,0)
 		e:GetHandler():RegisterFlagEffect(id+1-rp,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,0,1)
 	end

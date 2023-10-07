@@ -31,7 +31,8 @@ function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if c1 then
 		e:SetLabel(tp)
 		return Duel.SelectEffectYesNo(tp,e:GetHandler(),96)
-	else
+	end
+	if c2 then
 		e:SetLabel(1-tp)
 		return Duel.SelectEffectYesNo(1-tp,e:GetHandler(),96)
 	end

@@ -22,5 +22,5 @@ function s.contactfil(tp)
 	return Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)
 end
 function s.contactop(g)
-	Duel.Destroy(g,REASON_COST+REASON_MATERIAL+REASON_FUSION)
+	Duel.Destroy(g,REASON_EFFECT+REASON_MATERIAL+REASON_FUSION)
 end
